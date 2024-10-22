@@ -1,21 +1,29 @@
+import 'dotenv/config';
 import getPool from './getPool.js';
+
+
+console.log('Variables de entorno cargadas:');
+console.log(`DB_USER: ${process.env.DB_USER}`);
+console.log(`DB_PASSWORD: ${process.env.DB_PASSWORD}`);
+console.log(`DB_HOST: ${process.env.DB_HOST}`);
+console.log(`DB_PORT: ${process.env.DB_PORT}`);
+console.log(`DB_NAME: ${process.env.DB_NAME}`);
 
 const initDB = async () => {
     try {
         let pool = await getPool();
 
-        console.log('Eliminando base de datos...');
-
+        
         await pool.query('DROP DATABASE IF EXISTS planificador_vuelos');
+        console.log('Eliminando base de datos...');
+        
         
         console.log('Creando base de datos planificador_vuelos...');
-
         await pool.query('CREATE DATABASE planificador_vuelos');
 
         await pool.query('USE planificador_vuelos');
         
         console.log('Borrando tablas...');
-
         await pool.query(
             'DROP TABLE IF EXISTS tokens_recuperacion, ratings, favoritos, vuelos, usuarios'
         );
@@ -95,7 +103,7 @@ const initDB = async () => {
         console.log('Tablas creadas!');
         process.exit(0);
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
