@@ -19,11 +19,11 @@ server.use(express.json());
 
 //Middleware para upload de files
 
-app.use(fileUpload());
+server.use(fileUpload());
 
 //Middleware para definición directorio recursos estáticos (imágenes)
 
-app.use('/uploads', express.static('./uploads'));
+server.use('/uploads', express.static('./uploads'));
 
 // Middleware de manejo de errores.
 server.use((err, req, res, next) => {
