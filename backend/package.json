@@ -3,7 +3,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "initDb": "node ./src/db/initDb.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
