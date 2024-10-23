@@ -1,6 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
+import fileUpload from 'express-fileupload';
 import cors from 'cors';
+
 
 
 // Creamos el servidor.
@@ -14,6 +16,14 @@ server.use(cors());
 
 // Middleware parseo del body en formato JSON
 server.use(express.json());
+
+//Middleware para upload de files
+
+app.use(fileUpload());
+
+//Middleware para definición directorio recursos estáticos (imágenes)
+
+app.use('/uploads', express.static('./uploads'));
 
 // Middleware de manejo de errores.
 server.use((err, req, res, next) => {
