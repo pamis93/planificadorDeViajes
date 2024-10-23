@@ -1,21 +1,22 @@
 import express from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 
 
 // Creamos el servidor.
 const server = express();
 
 // Middleware de peticiones entrantes.
-app.use(morgan('dev'));
+server.use(morgan('dev'));
 
 // Middleware conexión entre cliente y servidor.
-app.use(cors());
+server.use(cors());
 
 // Middleware parseo del body en formato JSON
-app.use(express.json());
+server.use(express.json());
 
 // Middleware de manejo de errores.
-app.use((err, req, res, next) => {
+server.use((err, req, res, next) => {
     
   res.status(err.httpStatus || 500).send({
       status: 'error',
@@ -26,7 +27,7 @@ app.use((err, req, res, next) => {
 
 // Middleware 404 not found.
 
-app.use((req, res) => {
+server.use((req, res) => {
   res.status(404).send({
       status: 'error',
       message: 'Ruta no encontrada',

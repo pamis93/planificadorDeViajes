@@ -11,6 +11,7 @@
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.11.0",
+    "nodemon": "^3.1.7",
     "prettier": "^3.3.3"
   },
   "dependencies": {
