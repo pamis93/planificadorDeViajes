@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
 
-
+import { userRouter } from './routes/userRouter.js'
 
 // Creamos el servidor.
 const server = express();
@@ -24,6 +24,9 @@ server.use(fileUpload());
 //Middleware para definición directorio recursos estáticos (imágenes)
 
 server.use('/uploads', express.static('./uploads'));
+
+// Middleware que indica a express donde están las rutas.
+server.use(userRouter);
 
 // Middleware de manejo de errores.
 server.use((err, req, res, next) => {
