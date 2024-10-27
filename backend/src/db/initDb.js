@@ -43,6 +43,8 @@ const initDB = async () => {
                 es_administrador BOOLEAN DEFAULT FALSE,
                 habilitado BOOLEAN DEFAULT TRUE,
                 email_verificado BOOLEAN DEFAULT FALSE,
+                registrationCode VARCHAR(100),
+                recoverPassCode VARCHAR(100),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )

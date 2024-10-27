@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 
 import getPool from '../../db/getPool.js';
+import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
 
 export const insertUserService = async ( 
   email,
@@ -8,7 +9,8 @@ export const insertUserService = async (
   password,
   nombre,
   apellidos,
-  avatar
+  avatar, 
+  registrationCode
 ) => {
   try {
     // Obtenemos la conexión con la base de datos.
@@ -18,17 +20,15 @@ export const insertUserService = async (
       'SELECT * FROM usuarios WHERE email=?',
       [email]
     );
-    if (userExists.length > 0) {
-      console.log('El usuario ya está registrado');
-      return; //salimos de la función si el usuario ya existe.
-    }
+    if (userExists.length > 0) throw generateErrorsUtils('El usuario ya está registrado', 409);
+    
     // Hasheamos la contraseña.
     const hashedPass = await bcrypt.hash(password, 10);
 
     //Insertamos el usuario en la base de datos.
     const [result] = await pool.query(
       `
-            INSERT INTO usuarios(email, username, password, nombre, apellidos, avatar) VALUES(?,?,?,?,?,?)
+            INSERT INTO usuarios(email, username, password, nombre, apellidos, avatar, registrationCode) VALUES(?,?,?,?,?,?,?)
             `,
       [
         email,
@@ -36,7 +36,8 @@ export const insertUserService = async (
         hashedPass,
         nombre,
         apellidos,
-        avatar
+        avatar,
+        registrationCode
       ]
     );
     console.log('Usuario guardado en la base de datos', result);
