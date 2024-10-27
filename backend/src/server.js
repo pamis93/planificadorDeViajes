@@ -3,7 +3,8 @@ import morgan from 'morgan';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
 
-import { userRouter } from './routes/userRouter.js'
+import { userRouter } from './routes/userRouter.js';
+import { flightRouter } from './routes/flightRoutes.js';
 
 // Creamos el servidor.
 const server = express();
@@ -27,23 +28,22 @@ server.use('/uploads', express.static('./uploads'));
 
 // Middleware que indica a express donde están las rutas.
 server.use(userRouter);
+server.use(flightRouter);
 
 // Middleware de manejo de errores.
 server.use((err, req, res, next) => {
-    
   res.status(err.httpStatus || 500).send({
-      status: 'error',
-      message: err.message,
+    status: 'error',
+    message: err.message,
   });
-
 });
 
 // Middleware 404 not found.
 
 server.use((req, res) => {
   res.status(404).send({
-      status: 'error',
-      message: 'Ruta no encontrada',
+    status: 'error',
+    message: 'Ruta no encontrada',
   });
 });
 
