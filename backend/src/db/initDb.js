@@ -1,7 +1,5 @@
-
 import 'dotenv/config';
 import getPool from './getPool.js';
-
 
 console.log('Variables de entorno cargadas:');
 console.log(`DB_USER: ${process.env.DB_USER}`);
@@ -11,27 +9,25 @@ console.log(`DB_PORT: ${process.env.DB_PORT}`);
 console.log(`DB_NAME: ${process.env.DB_NAME}`);
 
 const initDB = async () => {
-    try {
-        let pool = await getPool();
+  try {
+    let pool = await getPool();
 
-        
-        await pool.query('DROP DATABASE IF EXISTS planificador_vuelos');
-        console.log('Eliminando base de datos...');
-        
-        
-        console.log('Creando base de datos planificador_vuelos...');
-        await pool.query('CREATE DATABASE planificador_vuelos');
+    await pool.query('DROP DATABASE IF EXISTS planificador_vuelos');
+    console.log('Eliminando base de datos...');
 
-        await pool.query('USE planificador_vuelos');
-        
-        console.log('Borrando tablas...');
-        await pool.query(
-            'DROP TABLE IF EXISTS tokens_recuperacion, ratings, favoritos, vuelos, usuarios'
-        );
-        
-        console.log('Creando tablas...');
+    console.log('Creando base de datos planificador_vuelos...');
+    await pool.query('CREATE DATABASE planificador_vuelos');
 
-        await pool.query(`
+    await pool.query('USE planificador_vuelos');
+
+    console.log('Borrando tablas...');
+    await pool.query(
+      'DROP TABLE IF EXISTS tokens_recuperacion, ratings, favoritos, vuelos, usuarios'
+    );
+
+    console.log('Creando tablas...');
+
+    await pool.query(`
             CREATE TABLE IF NOT EXISTS usuarios (
                 id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 email VARCHAR(100) NOT NULL UNIQUE,
@@ -48,7 +44,7 @@ const initDB = async () => {
             )
         `);
 
-        await pool.query(`
+    await pool.query(`
             CREATE TABLE IF NOT EXISTS vuelos (
                 id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 origen TEXT NOT NULL,
@@ -63,21 +59,24 @@ const initDB = async () => {
             )
         `);
 
-        await pool.query(`
+    await pool.query(`
             CREATE TABLE IF NOT EXISTS favoritos (
                 id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 usuario_id BIGINT,
-                vuelo_id BIGINT,
+                origen TEXT NOT NULL,
+                destino TEXT NOT NULL,
+                fecha_salida DATE NOT NULL,
+                fecha_llegada DATE NOT NULL,
+                duracion TEXT NOT NULL,
                 nota VARCHAR(250),
                 fecha_guardado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE,
-                FOREIGN KEY (vuelo_id) REFERENCES vuelos (id) ON DELETE CASCADE
+                FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE
             )
         `);
 
-        await pool.query(`
+    await pool.query(`
             CREATE TABLE IF NOT EXISTS ratings (
                 id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 usuario_id BIGINT,
@@ -91,7 +90,7 @@ const initDB = async () => {
             )
         `);
 
-        await pool.query(`
+    await pool.query(`
             CREATE TABLE IF NOT EXISTS tokens_recuperacion (
                 id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 usuario_id BIGINT,
@@ -101,11 +100,11 @@ const initDB = async () => {
             )
         `);
 
-        console.log('Tablas creadas!');
-        process.exit(0);
-    } catch (error) {
-        console.error(error);
-    }
-}
+    console.log('Tablas creadas!');
+    process.exit(0);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 initDB();
