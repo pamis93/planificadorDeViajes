@@ -6,6 +6,7 @@ import express from 'express';
 // middlewares
 import authUser from '../middlewares/authUser.js';
 import newFavoriteFlightController from '../controllers/newFavoriteFlightController.js';
+import amadeusController from '../controllers/amadeusController.js';
 
 // router
 export const flightRouter = express.Router();
@@ -14,3 +15,5 @@ export const flightRouter = express.Router();
 
 // ruta para marcar un vuelo como favorito con posibilidad de crear una nota
 flightRouter.post('/flights/favoritos', authUser, newFavoriteFlightController);
+
+flightRouter.get(`/city-and-airport-search/:parameter`, amadeusController);
