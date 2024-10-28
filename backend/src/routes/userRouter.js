@@ -1,8 +1,10 @@
 import express from 'express';
 import { newUserController } from '../controllers/newUserController.js';
 import loginUserController from '../controllers/loginUserController.js';
-import { validateUserController } from '../controllers/validateUserController.js';
+import { validateUserController } from '../controllers/validateUserController.js'
 import { editUserPasswordController } from '../controllers/editUserPasswordControllers.js';
+
+
 
 //Creamos un router.
 export const userRouter = express.Router();

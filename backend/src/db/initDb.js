@@ -37,7 +37,7 @@ const initDB = async () => {
                 apellidos VARCHAR(100),
                 avatar TEXT,
                 es_administrador BOOLEAN DEFAULT FALSE,
-                habilitado BOOLEAN DEFAULT TRUE,
+                habilitado BOOLEAN DEFAULT FALSE,
                 email_verificado BOOLEAN DEFAULT FALSE,
                 registrationCode VARCHAR(100),
                 recoverPassCode VARCHAR(100),
