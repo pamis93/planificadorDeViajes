@@ -14,6 +14,7 @@ const userSchema = joi.object({
   registrationCode: joi.string().max(100)
 });
 
+
 export const insertUserService = async ( 
   email,
   username,
