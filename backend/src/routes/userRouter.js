@@ -2,7 +2,9 @@ import express from 'express';
 import { newUserController } from '../controllers/newUserController.js';
 import loginUserController from '../controllers/loginUserController.js';
 import { validateUserController } from '../controllers/validateUserController.js'
+import recoverPasswordController from '../controllers/recoverPasswordController.js';
 import { editUserPassController } from '../controllers/editUserPassController.js';
+
 
 
 
@@ -21,3 +23,7 @@ userRouter.get('/users/login', loginUserController);
 
 // Endpoint cambio de contraseña
 userRouter.put('/users/password', editUserPassController);
+
+//Endpoint recuperacion de contraseña
+userRouter.post('/users/password/recover', recoverPasswordController)
+
