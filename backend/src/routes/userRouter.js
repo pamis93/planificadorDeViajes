@@ -14,7 +14,7 @@ export const userRouter = express.Router();
 userRouter.post('/users/register', newUserController);
 
 // Endpoint de validación de usuario
-//userRouter.get('/users/validate/:registrationCode', validateUserController);
+userRouter.get('/users/validate/:registrationCode', validateUserController);
 
 // endpoint de login del usuario
 userRouter.get('/users/login', loginUserController);
