@@ -26,8 +26,9 @@ const recoverPasswordController = async (req, res, next) => {
             return res.send({
                 status: 'ok',
                 message:
-                    'Si existe una cuenta con tu email recibirás un código de recuperación',
+                    'No existe una cuenta con tu email',
             });
+            
 
         const recoverPassCode = randomstring.generate(10);
 

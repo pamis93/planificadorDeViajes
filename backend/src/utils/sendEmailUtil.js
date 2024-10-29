@@ -33,6 +33,8 @@ const sendMailUtils = async (email, subject, body) => {
         };
 
         await transport.sendMail(mailOptions);
+        
+        
     } catch {
         generateErrorsUtils('Error al intentar enviar email', 500);
     }
