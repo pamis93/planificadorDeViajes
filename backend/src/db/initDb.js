@@ -63,11 +63,11 @@ const initDB = async () => {
             )
         `);
 
+        // esta tabla es para que valoren la web, no para valorar vuelos
     await pool.query(`
             CREATE TABLE IF NOT EXISTS ratings (
                 id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 usuario_id BIGINT,
-                vuelo_id BIGINT,
                 rating INT NOT NULL,
                 comentario VARCHAR(500),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
