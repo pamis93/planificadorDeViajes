@@ -47,21 +47,6 @@ const initDB = async () => {
         `);
 
     await pool.query(`
-            CREATE TABLE IF NOT EXISTS vuelos (
-                id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                origen TEXT NOT NULL,
-                destino TEXT NOT NULL,
-                fecha_salida TIMESTAMP NOT NULL,
-                fecha_llegada TIMESTAMP NOT NULL,
-                duracion TIME NOT NULL,
-                numero_paradas INT NOT NULL,
-                precio NUMERIC NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-    await pool.query(`
             CREATE TABLE IF NOT EXISTS favoritos (
                 id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 usuario_id BIGINT,
@@ -78,11 +63,11 @@ const initDB = async () => {
             )
         `);
 
+        // esta tabla es para que valoren la web, no para valorar vuelos
     await pool.query(`
             CREATE TABLE IF NOT EXISTS ratings (
                 id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 usuario_id BIGINT,
-                vuelo_id BIGINT,
                 rating INT NOT NULL,
                 comentario VARCHAR(500),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -92,15 +77,6 @@ const initDB = async () => {
             )
         `);
 
-    await pool.query(`
-            CREATE TABLE IF NOT EXISTS tokens_recuperacion (
-                id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                usuario_id BIGINT,
-                token TEXT NOT NULL,
-                expiracion TIMESTAMP NOT NULL,
-                FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE
-            )
-        `);
 
     console.log('Tablas creadas!');
     process.exit(0);
