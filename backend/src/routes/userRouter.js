@@ -2,7 +2,7 @@ import express from 'express';
 import { newUserController } from '../controllers/newUserController.js';
 import loginUserController from '../controllers/loginUserController.js';
 import { validateUserController } from '../controllers/validateUserController.js'
-import { editUserPasswordController } from '../controllers/editUserPasswordControllers.js';
+import { editUserPassController } from '../controllers/editUserPassController.js';
 
 
 
@@ -19,4 +19,4 @@ userRouter.get('/users/validate/:registrationCode', validateUserController);
 userRouter.get('/users/login', loginUserController);
 
 // Endpoint cambio de contraseña
-userRouter.put('/users/password', editUserPasswordController);
+userRouter.put('/users/password', editUserPassController);
