@@ -1,46 +1,8 @@
-import "dotenv/config";
 import Amadeus from 'amadeus';
-
-const amadeus = new Amadeus({
-    clientId: process.env.AMADEUS_API_KEY,
-    clientSecret: process.env.AMADEUS_API_SECRET,
-});
-
-// Controlador para buscar ciudades o aeropuertos
-export const cityAndAirportSearch = async (req, res) => {
-    try {
-        const parameter = req.params.parameter;
-        const response = await amadeus.referenceData.locations.get({
-            keyword: parameter,
-            subType: Amadeus.location.any,
-        });
-        res.send(response.result);
-    } catch (error) {
-        res.status(500).send({ error: error.message });
-    }
-};
-
-// Controlador para buscar vuelos
-export const flightSearch = async (req, res) => {
-    try {
-        const { originCode, destinationCode, dateOfDeparture } = req.query;
-        const response = await amadeus.shopping.flightOffersSearch.get({
-            originLocationCode: originCode,
-            destinationLocationCode: destinationCode,
-            departureDate: dateOfDeparture,
-            adults: '1',
-            max: '7',
-        });
-        res.send(response.result);
-    } catch (error) {
-        res.status(500).send({ error: error.message });
-    }
-};
-
-// Controlador combinado para buscar ciudades/aeropuertos y vuelos
+import amadeus from "./amadeusApiKey.js";
 export const combinedSearch = async (req, res) => {
     try {
-        const { originCode, destinationCode, dateOfDeparture, keyword } = req.query;
+        const { originCode, destinationCode, dateOfDeparture, keyword, adults, totalResults } = req.query;
 
         const locationPromise = amadeus.referenceData.locations.get({
             keyword: keyword,
@@ -51,8 +13,8 @@ export const combinedSearch = async (req, res) => {
             originLocationCode: originCode,
             destinationLocationCode: destinationCode,
             departureDate: dateOfDeparture,
-            adults: '1',
-            max: '7',
+            adults: adults, 
+            max: totalResults, // cantidad máx de vuelos que se muestran
         });
 
         const [locationResponse, flightResponse] = await Promise.all([locationPromise, flightPromise]);
