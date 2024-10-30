@@ -79,5 +79,4 @@ crea un archivo .env en la carpetan "backend" y define las variables necesarias 
 - Carlos Cue
 - Emanuel Gomez
 - Lara Rodriguez
-- Jose de la Flor
 - Gustavo Bolivar
