@@ -8,8 +8,8 @@ import { combinedSearch } from '../controllers/amadeus/search.js';
 
 
 // middlewares
-import authUser from '../middlewares/authUser.js';
-import newFavoriteFlightController from '../controllers/newFavoriteFlightController.js';
+/* import authUser from '../middlewares/authUser.js';
+import newFavoriteFlightController from '../controllers/newFavoriteFlightController.js'; */
 
 
 
@@ -19,7 +19,7 @@ export const flightRouter = express.Router();
 // Rutas
 
 // ruta para marcar un vuelo como favorito con posibilidad de crear una nota
-flightRouter.post('/flights/favoritos', authUser, newFavoriteFlightController);
+//flightRouter.post('/flights/:id/favorite', authUser, newFavoriteFlightController);
 
 
 // ruta para buscar ciudad y aeropuerto

@@ -22,23 +22,23 @@ const initDB = async () => {
 
     console.log('Borrando tablas...');
     await pool.query(
-      'DROP TABLE IF EXISTS tokens_recuperacion, ratings, favoritos, vuelos, usuarios'
+      'DROP TABLE IF EXISTS recoverTokens, ratings, fav, flight, users'
     );
 
     console.log('Creando tablas...');
 
     await pool.query(`
-            CREATE TABLE IF NOT EXISTS usuarios (
+            CREATE TABLE IF NOT EXISTS users (
                 id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 email VARCHAR(100) NOT NULL UNIQUE,
                 username VARCHAR(100) NOT NULL UNIQUE,
                 password TEXT NOT NULL,
-                nombre VARCHAR(100),
-                apellidos VARCHAR(100),
+                name VARCHAR(100),
+                lastName VARCHAR(100),
                 avatar TEXT,
-                es_administrador BOOLEAN DEFAULT FALSE,
-                habilitado BOOLEAN DEFAULT FALSE,
-                email_verificado BOOLEAN DEFAULT FALSE,
+                is_admin BOOLEAN DEFAULT FALSE,
+                enable BOOLEAN DEFAULT FALSE,
+                emailVerificted BOOLEAN DEFAULT FALSE,
                 registrationCode VARCHAR(100),
                 recoverPassCode VARCHAR(100),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -47,19 +47,21 @@ const initDB = async () => {
         `);
 
     await pool.query(`
-            CREATE TABLE IF NOT EXISTS favoritos (
+            CREATE TABLE IF NOT EXISTS fav (
                 id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                usuario_id BIGINT,
-                origen TEXT NOT NULL,
-                destino TEXT NOT NULL,
-                fecha_salida DATE NOT NULL,
-                fecha_llegada DATE NOT NULL,
-                duracion TEXT NOT NULL,
-                nota VARCHAR(250),
-                fecha_guardado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                user_id BIGINT,
+                origin TEXT NOT NULL,
+                destination TEXT NOT NULL,
+                departureDate DATE NOT NULL,
+                arrivalDate DATE NOT NULL,
+                aeroline TEXT,
+                price TEXT ,
+                duration TEXT NOT NULL,
+                note VARCHAR(250),
+                dateOfSaved TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE
+                FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
             )
         `);
 
@@ -67,13 +69,12 @@ const initDB = async () => {
     await pool.query(`
             CREATE TABLE IF NOT EXISTS ratings (
                 id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                usuario_id BIGINT,
+                user_id BIGINT,
                 rating INT NOT NULL,
-                comentario VARCHAR(500),
+                comment VARCHAR(500),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE,
-                FOREIGN KEY (vuelo_id) REFERENCES vuelos (id) ON DELETE CASCADE
+                FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
             )
         `);
 

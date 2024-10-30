@@ -6,15 +6,15 @@ export const updateUserRegCodeService = async (registrationCode) => {
 
   const [user] = await pool.query(
     `
-          SELECT id FROM usuarios WHERE registrationCode=?
+          SELECT id FROM users WHERE registrationCode=?
           `, [registrationCode]
   );
 
   if (!user.length) throw generateErrorsUtils('No existe ese código de registro', 400);
   await pool.query(
         `
-          UPDATE usuarios
-          SET habilitado=true, registrationCode=null WHERE registrationCode=?
+          UPDATE users
+          SET enable=true, registrationCode=null WHERE registrationCode=?
         `,
     [registrationCode]
   );
