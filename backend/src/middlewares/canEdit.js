@@ -1,4 +1,5 @@
-import generateErrorsUtils from '../utils/generateErrorsUtils';
+import selectFavoriteFlightByIdService from '../services/flights/selectFavoriteFlightByIdService.js';
+import generateErrorsUtils from '../utils/generateErrorsUtils.js';
 
 const canEdit = async (req, res, next) => {
   try {
@@ -6,7 +7,10 @@ const canEdit = async (req, res, next) => {
 
     const favorito = await selectFavoriteFlightByIdService(flightId);
 
-    if (favorito.usuario_id !== req.user.id)
+    console.log('favorito es', favorito);
+    console.log('id es', req.user.id);
+
+    if (favorito.user_id !== req.user.id)
       throw generateErrorsUtils('No puedes realizar esta operación', 409);
 
     next();

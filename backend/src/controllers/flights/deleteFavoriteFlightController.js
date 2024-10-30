@@ -1,12 +1,12 @@
 // importar el servicio
 
-import deleteFavoriteFlight from '../../services/flights/deleteFavoriteFlightService';
+import deleteFavoriteFlightService from '../../services/flights/deleteFavoriteFlightService.js';
 
 const deleteFavoriteFlightController = async (req, res, next) => {
   try {
     const { flightId } = req.params;
 
-    const response = await deleteFavoriteFlight(flightId);
+    const response = await deleteFavoriteFlightService(flightId);
 
     res.send({
       status: 'ok',

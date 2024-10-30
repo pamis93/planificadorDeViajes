@@ -1,5 +1,5 @@
-import getPool from '../db/getPool';
-import generateErrorsUtils from '../utils/generateErrorsUtils';
+import getPool from '../db/getPool.js';
+import generateErrorsUtils from '../utils/generateErrorsUtils.js';
 
 const flightExists = async (req, res, next) => {
   try {
@@ -10,7 +10,7 @@ const flightExists = async (req, res, next) => {
     const [favorite] = await pool.query(
       `
             
-            SELECT id FROM favoritos WHERE id=?
+            SELECT id FROM fav WHERE id=?
             
             `,
       [flightId]

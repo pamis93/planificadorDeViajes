@@ -1,16 +1,16 @@
-import getPool from '../../db/getPool';
+import getPool from '../../db/getPool.js';
 
 const deleteFavoriteFlightService = async (flightId) => {
   const pool = await getPool();
 
   await pool.query(
     `
-        DELETE FROM favoritos 
-        WHERE flightId =?
+        DELETE FROM fav 
+        WHERE id=?
 
         `,
     [flightId]
   );
 };
 
-export default deleteFavoriteFlight;
+export default deleteFavoriteFlightService;
