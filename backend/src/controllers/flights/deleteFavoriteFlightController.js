@@ -1,6 +1,6 @@
 // importar el servicio
 
-import deleteFavoriteFlight from '../services/flights/deleteFavoriteFlightService';
+import deleteFavoriteFlight from '../../services/flights/deleteFavoriteFlightService';
 
 const deleteFavoriteFlightController = async (req, res, next) => {
   try {

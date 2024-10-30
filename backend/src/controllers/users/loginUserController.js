@@ -1,8 +1,10 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
-import generateErrorsUtils from '../utils/generateErrorsUtils.js';
-import selectUserByEmailService from '../services/users/selectUserByEmailService.js';
+
+
+import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
+import selectUserByEmailService from '../../services/users/selectUserByEmailService.js';
 
 const loginUserController = async (req, res, next) => {
   try {
