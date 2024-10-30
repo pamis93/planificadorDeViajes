@@ -1,4 +1,4 @@
-import { updateUserPassService } from "../services/users/updateUserPassService.js";
+import { updateUserPassService } from '../../services/users/updateUserPassService.js'
 
 
 export const editUserPassController = async (req, res, next) => {

@@ -1,11 +1,13 @@
 import express from 'express';
-import { newUserController } from '../controllers/newUserController.js';
-import loginUserController from '../controllers/loginUserController.js';
-import { validateUserController } from '../controllers/validateUserController.js'
-import recoverPasswordController from '../controllers/recoverPasswordController.js';
-import { editUserPassController } from '../controllers/editUserPassController.js';
-import FavoritosController from '../controllers/FavoritosController.js';
+import { newUserController } from '../controllers/users/newUserController.js';
+import loginUserController from '../controllers/users/loginUserController.js';
+import { validateUserController } from '../controllers/users/validateUserController.js';
+import recoverPasswordController from '../controllers/users/recoverPasswordController.js';
+import { editUserPassController } from '../controllers/users/editUserPassController.js';
+import favoritosController from '../controllers/users/favoritosController.js';
 import authUser from '../middlewares/authUser.js';
+import newFavoriteFlightController from '../controllers/flights/newFavoriteFlightController.js';
+
 
 
 
@@ -28,6 +30,11 @@ userRouter.put('/users/password', editUserPassController);
 //Endpoint recuperacion de contraseña
 userRouter.post('/users/password/recover', recoverPasswordController);
 
-//Endpoint lista favoritos
-userRouter.get('/users/:usuario_id/favoritos', authUser, FavoritosController);
 
+//PREGUNTAR POSICIÓN CORRECTA DE ESTOS DOS ENDPOINT:
+
+//Endpoint lista favoritos
+userRouter.get('/users/:usuario_id/favoritos', authUser, favoritosController);
+
+//prueba addFav
+userRouter.post('/users/favorite', authUser, newFavoriteFlightController);

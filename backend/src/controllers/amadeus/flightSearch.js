@@ -1,4 +1,3 @@
-import Amadeus from 'amadeus';
 import amadeus from "./amadeusApiKey.js";
 
 
@@ -28,7 +27,7 @@ const flightSearch = async (req, res) => {
             departureDate: flight.itineraries[0]?.segments[0]?.departure?.at,
             arrivalDate: flight.itineraries[0]?.segments[0]?.arrival?.at,
             aeroline: flight.itineraries[0]?.segments[0]?.carrierCode,
-            duration: flight.itineraries[0]?.segments[0]?.duration,
+            duration: flight.itineraries[0]?.duration,
             price: flight.price?.total,
         }));
 
