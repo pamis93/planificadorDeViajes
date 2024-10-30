@@ -1,4 +1,3 @@
-import Amadeus from 'amadeus';
 import amadeus from "./amadeusApiKey.js";
 
 
