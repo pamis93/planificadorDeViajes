@@ -71,5 +71,4 @@
 - Carlos Cue
 - Emanuel Gomez
 - Lara Rodriguez
-- Jose de la Flor
 - Gustavo Bolivar
