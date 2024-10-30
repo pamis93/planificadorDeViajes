@@ -72,8 +72,7 @@ const initDB = async () => {
                 comentario VARCHAR(500),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE,
-                FOREIGN KEY (vuelo_id) REFERENCES vuelos (id) ON DELETE CASCADE
+                FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE
             )
         `);
 

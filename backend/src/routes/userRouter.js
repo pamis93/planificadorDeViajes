@@ -4,7 +4,8 @@ import loginUserController from '../controllers/loginUserController.js';
 import { validateUserController } from '../controllers/validateUserController.js'
 import recoverPasswordController from '../controllers/recoverPasswordController.js';
 import { editUserPassController } from '../controllers/editUserPassController.js';
-
+import FavoritosController from '../controllers/FavoritosController.js';
+import authUser from '../middlewares/authUser.js';
 
 
 
@@ -25,5 +26,8 @@ userRouter.get('/users/login', loginUserController);
 userRouter.put('/users/password', editUserPassController);
 
 //Endpoint recuperacion de contraseña
-userRouter.post('/users/password/recover', recoverPasswordController)
+userRouter.post('/users/password/recover', recoverPasswordController);
+
+//Endpoint lista favoritos
+userRouter.get('/users/:usuario_id/favoritos', authUser, FavoritosController);
 
