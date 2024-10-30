@@ -18,7 +18,7 @@ const flightSearch = async (req, res) => {
 
 /** cosas que añadir a la descripción:
  * - paradas/escala
-- escala: condicional, si el numero de areo linea es diferente en cada segmento, cuenta como parada, si es la misma aparece el valor de paradas que devuelve la api.
+- escala: condicional, si el numero de aerolinea es diferente en cada segmento, cuenta como parada, si es la misma aparece el valor de paradas que devuelve la api.( o si un vuelo tiene dos segmentos que cuente como escala, yo(ale) y gustavo hemos visto que no siempre se aplica lo que hable con carlos)
  */
 
         const flights = response.result.data.map(flight => ({
