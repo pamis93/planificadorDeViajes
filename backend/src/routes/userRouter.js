@@ -8,10 +8,6 @@ import favoritosController from '../controllers/users/favoritosController.js';
 import authUser from '../middlewares/authUser.js';
 import newFavoriteFlightController from '../controllers/flights/newFavoriteFlightController.js';
 
-
-
-
-
 //Creamos un router.
 export const userRouter = express.Router();
 
@@ -29,7 +25,6 @@ userRouter.put('/users/password', editUserPassController);
 
 //Endpoint recuperacion de contraseña
 userRouter.post('/users/password/recover', recoverPasswordController);
-
 
 //PREGUNTAR POSICIÓN CORRECTA DE ESTOS DOS ENDPOINT:
 
