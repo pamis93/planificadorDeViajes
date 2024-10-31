@@ -52,10 +52,14 @@
 ## Pasos :
 
 ##   1. Clona el repositorio
-          `git clone https://github.com/pamis93/planificadorDeViajes.git` 
+   `git clone https://github.com/pamis93/planificadorDeViajes.git` 
 ##   2. instala las dependencias para el backend
-         - para ir a la carpeta principal `cd backend ` 
-         - para instalar todas las dependencias  `npm install ` 
+- para ir a la carpeta principal `cd backend ` 
+- para instalar todas las dependencias  `npm install `
+## no te olvide de :
+- registrarse en  https://developers.amadeus.com/
+- Una vez registrado hay que pulsar arriba a la derecha donde aparece su nombre y seleccionamos My-Self-Service workspace
+- Clicamos en "CREATE APP" le añadimos el nombre que queramos y luego la API-KEY y la API-SECRET copiamos esa info y la pegamos en nuestro archivo .env en los campos correspondientes.
 ##  3. Configura las variables de entorno:
   - crea un archivo .env en la carpetan "backend" y define las variables necesarias para la conexión a la base de datos y otros servicios.
 ### Variables para Conexión con la Base de Datos:
@@ -93,7 +97,8 @@
   - `AMADEUS_API_SECRET=`: Clave secreta de la API de Amadeus para autenticar las solicitudes.
 ---  
 ## 4. ejecuta la aplicacion:
-  - para ir a la carpeta principal  `cd backend` 
+  - para ir a la carpeta principal  `cd backend`
+  - para instalar la base de datos `node src/db/initDb.js`
   - para arrancar el servidor  `npm run dev` 
 ---  
 # Desarrolado por :
