@@ -22,7 +22,7 @@ const recoverPasswordController = async (req, res, next) => {
     if (!user)
       return res.send({
         status: 'ok',
-        message: 'No existe una cuenta con tu email',
+        message: 'No existe una cuenta con este email',
       });
 
     const recoverPassCode = randomstring.generate(10);
@@ -32,7 +32,7 @@ const recoverPasswordController = async (req, res, next) => {
     res.send({
       status: 'ok',
       message:
-        'Si existe una cuenta con tu email recibirás un código de recuperación',
+        'Pronto recibirás un código de recuperación, comprueba tu email',
     });
   } catch (error) {
     next(error);
