@@ -6,6 +6,12 @@ const favoritosController = async (req, res) => {
 
     const { usuario_id } = req.params;
 
+    if (usuario_id != req.user.id) {
+      const error = new Error('No tienes autorización para ver estos favoritos');
+      error.statusCode = 403; 
+      throw error;
+    }
+
     const [favoritos] = await pool.query(
       'SELECT * FROM fav WHERE user_id = ?',
       [usuario_id]
@@ -19,7 +25,7 @@ const favoritosController = async (req, res) => {
     console.error('Error al obtener la lista de vuelos favoritos:', error);
     res.status(500).json({
       status: 'error',
-      message: 'Error al obtener la lista de vuelos favoritos',
+      message: 'No tienes autorización para ver estos favoritos',
     });
   }
 };
