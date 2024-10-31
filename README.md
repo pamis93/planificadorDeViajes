@@ -1,9 +1,9 @@
-# ✈️ SkyRoutes - Buscador de Vuelos
+# ✈️ WonderFly - Buscador de Vuelos
 
 ## Descripción:
- - SkyRoutes es una aplicación web diseñada desde "cero", pensada para que los usuarios encuentren y comparen vuelos de manera rápida y sencilla.
+ - WonderFly es una aplicación web diseñada desde "cero", pensada para que los usuarios encuentren y comparen vuelos de manera rápida y sencilla.
  - Este proyecto es nuestro trabajo final de bootcamp, en el que combinamos todo lo aprendido de desarrollo tanto de frontend como de backend, diseño de bases de datos y uso de APIs.
- - Con SkyRoutes, los usuarios pueden realizar búsquedas detalladas de vuelos,aplicar filtros personalizados, guardar sus vuelos favoritos y acceder a una interfaz clara e intuitiva.
+ - Con WonderFly, los usuarios pueden realizar búsquedas detalladas de vuelos,aplicar filtros personalizados, guardar sus vuelos favoritos y acceder a una interfaz clara e intuitiva.
 
 ## Objetivo:
 - Crear una plataforma accesible y fácil de usar que permita a los usuarios buscar vuelos y gestionar sus favoritos de manera sencilla y segura.
