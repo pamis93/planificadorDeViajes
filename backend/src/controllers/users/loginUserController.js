@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 
-
 import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
 import selectUserByEmailService from '../../services/users/selectUserByEmailService.js';
 
@@ -30,10 +29,12 @@ const loginUserController = async (req, res, next) => {
 
     // TODO
     // validar que el usuario este activo
+    // console.log(user);
 
     const tokenInfo = {
       id: user.id,
-      role: user.role,
+      isAdmin: user.is_admin,
+      enable: user.enable,
     };
 
     const token = jwt.sign(tokenInfo, process.env.SECRET, {
