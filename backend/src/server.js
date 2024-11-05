@@ -6,6 +6,7 @@ import cors from 'cors';
 import { userRouter } from './routes/userRouter.js';
 import { flightRouter } from './routes/flightRoutes.js';
 import { adminRouter } from './routes/adminRouter.js';
+import { ratingsRouter } from './routes/ratingsRouter.js';
 
 // Creamos el servidor.
 const server = express();
@@ -31,6 +32,7 @@ server.use('/uploads', express.static('./uploads'));
 server.use(userRouter);
 server.use(flightRouter);
 server.use(adminRouter);
+server.use(ratingsRouter);
 
 // Middleware de manejo de errores.
 server.use((err, req, res, next) => {
