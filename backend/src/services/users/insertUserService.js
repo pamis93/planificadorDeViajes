@@ -10,7 +10,6 @@ const userSchema = joi.object({
   password: joi.string().min(8).required(),
   name: joi.string().max(50).required(),
   lastName: joi.string().max(50).required(),
-  avatar: joi.string().uri().optional(),
   registrationCode: joi.string().max(100)
 });
 
@@ -21,12 +20,11 @@ export const insertUserService = async (
   password,
   name,
   lastName,
-  avatar,
   registrationCode
 ) => {
   try {
     //Validamos los datos de entrada.
-    const { error } =userSchema.validate({ email, username, password, name, lastName, avatar,registrationCode});
+    const { error } =userSchema.validate({ email, username, password, name, lastName,registrationCode});
     if(error){
       throw generateErrorsUtils(`Error de validación: ${error.details[0].message}`, 400);
     }
@@ -46,15 +44,14 @@ export const insertUserService = async (
     //Insertamos el usuario en la base de datos.
     const [result] = await pool.query(
       `
-            INSERT INTO users(email, username, password, name, lastName, avatar, registrationCode) VALUES(?,?,?,?,?,?,?)
+            INSERT INTO users(email, username, password, name, lastName, registrationCode) VALUES(?,?,?,?,?,?)
             `,
       [
         email,
         username,
         hashedPass,
         name,
-        lastName,
-        avatar, 
+        lastName, 
         registrationCode
       ]
     );
