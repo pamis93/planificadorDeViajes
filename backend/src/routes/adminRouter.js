@@ -3,6 +3,7 @@ import authUser from '../middlewares/authUser.js';
 import authAdmin from '../middlewares/authAdmin.js';
 import listAllUsersController from '../controllers/admin/listAllUsersController.js';
 import toggleUserStatusController from '../controllers/admin/toggleUserStatusController.js';
+import deleteUserController from '../controllers/admin/deleteUserController.js';
 
 //Creamos un router.
 export const adminRouter = express.Router();
@@ -17,3 +18,6 @@ adminRouter.patch(
   authAdmin,
   toggleUserStatusController
 );
+
+// ruta de administrado para borrar un un usuario especifico. he has been naughty
+adminRouter.delete('/admin/:id', authUser, authAdmin, deleteUserController);
