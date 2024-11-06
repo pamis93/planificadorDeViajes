@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import joi from 'joi';
+import { v4 as uuidv4 } from 'uuid';
 
 import getPool from '../../db/getPool.js';
 import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
@@ -21,10 +22,12 @@ export const insertUserService = async (
   username,
   password,
   name,
-  lastName,
-  registrationCode
+  lastName
 ) => {
   try {
+    //Generamos código de registro único
+    const registrationCode = uuidv4()
+
     //Validamos los datos de entrada.
     const { error } =userSchema.validate({ email, username, password, name, lastName,registrationCode});
     if(error){
@@ -41,7 +44,7 @@ export const insertUserService = async (
     throw generateErrorsUtils('El usuario ya está registrado', 409);
     }
     //Creamos el asunto del email
-    const subject = 'Activación de tu cuenta de WonderFlifht';
+    const subject = 'Activación de tu cuenta de WonderFly';
 
     //Creamos el cuerpo del email
     const body = `
