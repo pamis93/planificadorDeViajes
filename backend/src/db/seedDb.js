@@ -93,6 +93,9 @@ const seedDB = async () => {
     await pool.query('DELETE FROM fav');
     await pool.query('DELETE FROM users');
 
+    // Reiniciar el auto-increment
+    await pool.query('ALTER TABLE users AUTO_INCREMENT = 1');
+
     // Insertar usuarios
     const users = generateUsers(20);
     await pool.query(
