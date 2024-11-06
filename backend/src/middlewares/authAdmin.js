@@ -28,7 +28,7 @@ const authAdmin = (req, res, next) => {
       throw generateErrorsUtils('No tienes permisos de administrador', 403);
     }
 
-    console.log('pase el middleware de authadmin');
+    // console.log('pase el middleware de authadmin');
     next();
   } catch (error) {
     next(error);
