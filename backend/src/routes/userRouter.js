@@ -8,6 +8,7 @@ import favoritosController from '../controllers/users/favoritosController.js';
 import authUser from '../middlewares/authUser.js';
 import newFavoriteFlightController from '../controllers/flights/newFavoriteFlightController.js';
 import { editUserAvatarController } from '../controllers/users/editUserAvatarController.js';
+import { editUserController } from '../controllers/users/editUserController.js';
 
 //Creamos un router.
 export const userRouter = express.Router();
@@ -29,6 +30,9 @@ userRouter.post('/users/password/recover', recoverPasswordController);
 
 //Endpoint cambio de Avatar
 userRouter.put("/users/avatar", authUser, editUserAvatarController);
+
+//Endpoint de editar los datos del Usuario
+userRouter.put('/users/edit/:userId', authUser, editUserController);
 
 //PREGUNTAR POSICIÓN CORRECTA DE ESTOS DOS ENDPOINT:
 

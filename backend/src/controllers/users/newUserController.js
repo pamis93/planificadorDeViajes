@@ -6,7 +6,7 @@ import { insertUserService } from '../../services/users/insertUserService.js';
 export const newUserController = async (req, res, next) => {
   try {
     //Obtenemos el body de la petición
-    const { email, username, password, name, lastName, avatar } = req.body;
+    const { email, username, password, name, lastName } = req.body;
 
     //Creamos la uuid para el código de registro.
     const registrationCode = crypto.randomUUID();
@@ -18,7 +18,6 @@ export const newUserController = async (req, res, next) => {
       password,
       name,
       lastName,
-      avatar,
       registrationCode
     );
 
