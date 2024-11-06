@@ -7,6 +7,7 @@ import cors from 'cors';
 
 import { userRouter } from './routes/userRouter.js';
 import { flightRouter } from './routes/flightRoutes.js';
+import { adminRouter } from './routes/adminRouter.js';
 
 // Creamos el servidor.
 const server = express();
@@ -38,6 +39,7 @@ server.use('/uploads', express.static(uploadsDir));
 // Middleware que indica a express donde están las rutas.
 server.use(userRouter);
 server.use(flightRouter);
+server.use(adminRouter);
 
 // Middleware de manejo de errores.
 server.use((err, req, res, next) => {

@@ -3,6 +3,8 @@ import joi from 'joi';
 
 import getPool from '../../db/getPool.js';
 import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
+import sendMailUtils from '../../utils/sendEmailUtil.js';
+
 
 const userSchema = joi.object({
   email: joi.string().email().required(),
@@ -38,6 +40,31 @@ export const insertUserService = async (
     if (userExists.length > 0) {
     throw generateErrorsUtils('El usuario ya está registrado', 409);
     }
+    //Creamos el asunto del email
+    const subject = 'Activación de tu cuenta de WonderFlifht';
+
+    //Creamos el cuerpo del email
+    const body = `
+       <html>
+          <body>
+            <h2>!!Bienvenid@ ${email}</h2>
+              <p>
+                Gracias por registrarte con nosotros. 
+                Estás a un paso de encontrar las mejores ofertas para tus futuros viajes e inolvidables aventuras. 
+                Activa tu cuenta
+                haciendo click en el siguiente enlace:
+              </p>
+              <p>
+                <a href="http://localhost:3001/users/validate/${registrationCode}">Activar Cuenta</a>
+                        
+                Ya Puedes empezar a disfrutar de nuestros servicios y 🛩️ por el mundo entero.
+              </p>
+          </body>
+      </html>
+        `;
+    //Llamamos a la función para enviar el email
+    await sendMailUtils(email, subject, body);
+
     // Hasheamos la contraseña.
     const hashedPass = await bcrypt.hash(password, 10);
 

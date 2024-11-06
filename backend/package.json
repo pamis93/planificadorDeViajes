@@ -4,13 +4,15 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "initDb": "node ./src/db/initDb.js"
+    "initDb": "node ./src/db/initDb.js",
+    "seedDb": "node ./src/db/seedDb.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.11.0",
+    "jsdoc": "^4.0.4",
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3"
   },
