@@ -6,7 +6,8 @@ import cors from 'cors';
 import { userRouter } from './routes/userRouter.js';
 import { flightRouter } from './routes/flightRoutes.js';
 import { adminRouter } from './routes/adminRouter.js';
-import { ratingsRouter } from './routes/ratingsRouter.js';
+import ratingsRouter from './routes/ratingsRouter.js';  
+
 
 // Creamos el servidor.
 const server = express();
