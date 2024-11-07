@@ -4,13 +4,13 @@ import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
 export const updateUserRegCodeService = async (registrationCode) => {
   const pool = await getPool();
 
-  const [user] = await pool.query(
+  const [users] = await pool.query(
     `
           SELECT id FROM users WHERE registrationCode=?
           `, [registrationCode]
   );
 
-  if (!user.length) throw generateErrorsUtils('No existe ese código de registro', 400);
+  if (!users.length) throw generateErrorsUtils('No existe ese código de registro', 400);
   await pool.query(
         `
           UPDATE users
