@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* estilo de el contenedor*/
+.login-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../../assets/fondoLogin.png');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 20px;
+    width: 770px;
+    height: 820px;
+    display: flex;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* boton cerrar */
+.close-btn {
+    position: absolute;
+    background: none;
+    top: 35px;
+    right: 15px;
+    color: red;
+    cursor: pointer;
+    font-size: 50px;
+}
+/* titulo */
+.ttle {
+    font-size: 32px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+/* subtitulos */
+.login-container label {
+    font-size: 18px;
+    font-weight: bolder;
+    color: #ccc;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Inputs */
+.login-container input[type="text"],
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    width: 80%;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 30px;
+    background-color: #686E9E;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* placeholder del input  */
+.login-container input::placeholder {
+    color: #ccc;
+}
+
+/* nombre y apellido en la misma linea  */
+.name-surname {
+    display: flex;
+}
+.name-surname .input-group {
+    width: 50%;
+}
+
+/* registrate */
+.login-button {
+    background-color: #F66136;
+    color: black;
+    border: solid 1px white;
+    border-radius: 20px;
+    padding: 10px 0;
+    width: 50%;
+    font-size: 20px;
+    font-weight: bolder;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* para loguearse */
+.register-text {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.register-link {
+    color: #046EF8;
+    text-decoration: none;
+}
