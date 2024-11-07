@@ -1,9 +1,13 @@
+//import { Route } from 'react-router-dom';
 import Routes from './router/Routes';
+//import AccountActivation from './components/AccountActivation/AccountActivation';
 
 function App() {
   return (
     <div>
-      <Routes />
+      <Routes>
+      {/* <Route path="/users/validate/:registrationCode" element={<AccountActivation/>} /> */}
+      </Routes>
     </div>
   );
 }

@@ -1,11 +1,9 @@
 import bcrypt from 'bcrypt';
 import joi from 'joi';
-import { v4 as uuidv4 } from 'uuid';
 
 import getPool from '../../db/getPool.js';
 import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
 import sendMailUtils from '../../utils/sendEmailUtil.js';
-
 
 const userSchema = joi.object({
   email: joi.string().email().required(),
@@ -13,35 +11,41 @@ const userSchema = joi.object({
   password: joi.string().min(8).required(),
   name: joi.string().max(50).required(),
   lastName: joi.string().max(50).required(),
-  registrationCode: joi.string().max(100)
+  registrationCode: joi.string().max(100),
 });
 
-
-export const insertUserService = async ( 
+export const insertUserService = async (
   email,
   username,
   password,
   name,
-  lastName
+  lastName,
+  registrationCode
 ) => {
   try {
-    //Generamos código de registro único
-    const registrationCode = uuidv4()
-
     //Validamos los datos de entrada.
-    const { error } =userSchema.validate({ email, username, password, name, lastName,registrationCode});
-    if(error){
-      throw generateErrorsUtils(`Error de validación: ${error.details[0].message}`, 400);
+    const { error } = userSchema.validate({
+      email,
+      username,
+      password,
+      name,
+      lastName,
+      registrationCode,
+    });
+    if (error) {
+      throw generateErrorsUtils(
+        `Error de validación: ${error.details[0].message}`,
+        400
+      );
     }
     // Obtenemos la conexión con la base de datos.
     const pool = await getPool();
     //Comprobamos si existe el usuario previamente.
-    const [userExists] = await pool.query(
-      'SELECT * FROM users WHERE email=?',
-      [email]
-    );
+    const [userExists] = await pool.query('SELECT * FROM users WHERE email=?', [
+      email,
+    ]);
     if (userExists.length > 0) {
-    throw generateErrorsUtils('El usuario ya está registrado', 409);
+      throw generateErrorsUtils('El usuario ya está registrado', 409);
     }
     //Creamos el asunto del email
     const subject = 'Activación de tu cuenta de WonderFly';
@@ -58,7 +62,7 @@ export const insertUserService = async (
                 haciendo click en el siguiente enlace:
               </p>
               <p>
-                <a href="http://localhost:3001/users/validate/${registrationCode}">Activar Cuenta</a>
+                <a href="http://localhost:5173/users/validate/${registrationCode}">Activar Cuenta</a>
                         
                 Ya Puedes empezar a disfrutar de nuestros servicios y 🛩️ por el mundo entero.
               </p>
@@ -76,14 +80,7 @@ export const insertUserService = async (
       `
             INSERT INTO users(email, username, password, name, lastName, registrationCode) VALUES(?,?,?,?,?,?)
             `,
-      [
-        email,
-        username,
-        hashedPass,
-        name,
-        lastName, 
-        registrationCode
-      ]
+      [email, username, hashedPass, name, lastName, registrationCode]
     );
     console.log('Usuario guardado en la base de datos', result);
   } catch (error) {
