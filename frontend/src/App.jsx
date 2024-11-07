@@ -1,10 +1,16 @@
-import Routes from './router/Routes';
+import { Route, Routes } from "react-router-dom";
+import FlightSearch from "./components/FlightSearch/FlightSearch";
+import "./App.css";
+
+// import AppRouter from './router/Routes';
 
 function App() {
   return (
-    <div>
-      <Routes />
-    </div>
+    <>
+      <Routes>
+        <Route path="/search" element={<FlightSearch />} />
+      </Routes>
+    </>
   );
 }
 
