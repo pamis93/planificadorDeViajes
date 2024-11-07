@@ -1,10 +1,13 @@
 import express from 'express';
 import morgan from 'morgan';
 import fileUpload from 'express-fileupload';
+import fs from 'fs';
+import path from 'path';
 import cors from 'cors';
 
 import { userRouter } from './routes/userRouter.js';
 import { flightRouter } from './routes/flightRoutes.js';
+import { adminRouter } from './routes/adminRouter.js';
 
 // Creamos el servidor.
 const server = express();
@@ -22,13 +25,21 @@ server.use(express.json());
 
 server.use(fileUpload());
 
+// Abrir el directorioUploads al iniciar el servidor.
+
+const uploadsDir = path.join(process.cwd(), './src/uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
 //Middleware para definición directorio recursos estáticos (imágenes)
 
-server.use('/uploads', express.static('./uploads'));
+server.use('/uploads', express.static(uploadsDir));
 
 // Middleware que indica a express donde están las rutas.
 server.use(userRouter);
 server.use(flightRouter);
+server.use(adminRouter);
 
 // Middleware de manejo de errores.
 server.use((err, req, res, next) => {

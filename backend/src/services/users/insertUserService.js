@@ -1,18 +1,19 @@
 import bcrypt from 'bcrypt';
-import Joi from 'joi';
+import joi from 'joi';
+import { v4 as uuidv4 } from 'uuid';
 
 import getPool from '../../db/getPool.js';
 import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
 import sendMailUtils from '../../utils/sendEmailUtil.js';
 
-const userSchema = Joi.object({
-  email: Joi.string().email().required(),
-  username: Joi.string().alphanum().min(3).max(30).required(),
-  password: Joi.string().min(8).required(),
-  name: Joi.string().max(50).required(),
-  lastName: Joi.string().max(50).required(),
-  avatar: Joi.string().uri().optional(),
-  registrationCode: Joi.string().max(100)
+
+const userSchema = joi.object({
+  email: joi.string().email().required(),
+  username: joi.string().alphanum().min(3).max(30).required(),
+  password: joi.string().min(8).required(),
+  name: joi.string().max(50).required(),
+  lastName: joi.string().max(50).required(),
+  registrationCode: joi.string().max(100)
 });
 
 
@@ -21,13 +22,14 @@ export const insertUserService = async (
   username,
   password,
   name,
-  lastName,
-  avatar,
-  registrationCode
+  lastName
 ) => {
   try {
+    //Generamos código de registro único
+    const registrationCode = uuidv4()
+
     //Validamos los datos de entrada.
-    const { error } =userSchema.validate({ email, username, password, name, lastName, avatar,registrationCode});
+    const { error } =userSchema.validate({ email, username, password, name, lastName,registrationCode});
     if(error){
       throw generateErrorsUtils(`Error de validación: ${error.details[0].message}`, 400);
     }
@@ -42,7 +44,7 @@ export const insertUserService = async (
     throw generateErrorsUtils('El usuario ya está registrado', 409);
     }
     //Creamos el asunto del email
-    const subject = 'Activación de tu cuenta de WonderFlifht';
+    const subject = 'Activación de tu cuenta de WonderFly';
 
     //Creamos el cuerpo del email
     const body = `
@@ -72,15 +74,14 @@ export const insertUserService = async (
     //Insertamos el usuario en la base de datos.
     const [result] = await pool.query(
       `
-            INSERT INTO users(email, username, password, name, lastName, avatar, registrationCode) VALUES(?,?,?,?,?,?,?)
+            INSERT INTO users(email, username, password, name, lastName, registrationCode) VALUES(?,?,?,?,?,?)
             `,
       [
         email,
         username,
         hashedPass,
         name,
-        lastName,
-        avatar, 
+        lastName, 
         registrationCode
       ]
     );

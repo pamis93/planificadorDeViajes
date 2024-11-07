@@ -1,3 +1,20 @@
+/**
+ * Middleware de autenticación de usuarios para validar el token JWT de un usuario.
+ *
+ * Este middleware verifica si existe un token de autorización en los headers de la solicitud,
+ * lo valida usando el paquete `jsonwebtoken`, y adjunta la información decodificada del token
+ * al objeto `req.user` si es válido.
+ *
+ * @function authUser
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} req.headers - Headers de la solicitud, donde se espera que esté el token de autorización.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @param {Function} next - Función para pasar al siguiente middleware o manejador de errores.
+ *
+ * @throws {Error} Si no se encuentra el token en los headers o si el token es inválido.
+ * @returns {void}
+ *
+ */
 import jwt from 'jsonwebtoken';
 import generateErrorsUtils from '../utils/generateErrorsUtils.js';
 import 'dotenv/config';
