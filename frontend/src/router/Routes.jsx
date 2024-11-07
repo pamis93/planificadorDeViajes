@@ -1,15 +1,14 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import PasswordResetPage from '../pages/PasswordResetPage';
 
 
-
-const AppRoutes = () => (
-  <Router>
+function AppRoutes() {
+  return (
     <Routes>
-      
-      <Route/>
-     
+      {/* Otras rutas */}
+      <Route path="/recuperacion" element={<PasswordResetPage />} />
     </Routes>
-  </Router>
-);
+  );
+}
 
 export default AppRoutes;
