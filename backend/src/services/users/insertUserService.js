@@ -22,12 +22,10 @@ export const insertUserService = async (
   username,
   password,
   name,
-  lastName
+  lastName,
+  registrationCode
 ) => {
   try {
-    //Generamos código de registro único
-    const registrationCode = uuidv4()
-
     //Validamos los datos de entrada.
     const { error } =userSchema.validate({ email, username, password, name, lastName,registrationCode});
     if(error){
