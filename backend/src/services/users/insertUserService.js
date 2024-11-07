@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
 import joi from 'joi';
-import { v4 as uuidv4 } from 'uuid';
 
 import getPool from '../../db/getPool.js';
 import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
@@ -22,12 +21,12 @@ export const insertUserService = async (
   username,
   password,
   name,
-  lastName,
+  lastName, 
   registrationCode
 ) => {
   try {
-    //Validamos los datos de entrada.
-    const { error } =userSchema.validate({ email, username, password, name, lastName,registrationCode});
+   //Validamos los datos de entrada.
+    const { error } = userSchema.validate({ email, username, password, name, lastName,registrationCode});
     if(error){
       throw generateErrorsUtils(`Error de validación: ${error.details[0].message}`, 400);
     }
