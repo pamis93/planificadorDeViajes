@@ -14,13 +14,7 @@ const flightSearch = async (req, res) => {
         });
 
 
-
-/** cosas que añadir a la descripción:
- * - paradas/escala
-- escala: condicional, si el numero de aerolinea es diferente en cada segmento, cuenta como parada, si es la misma aparece el valor de paradas que devuelve la api.( o si un vuelo tiene dos segmentos que cuente como escala, yo(ale) y gustavo hemos visto que no siempre se aplica lo que hable con carlos)
- */
-
-        const flights = response.result.data.map(flight => ({
+       /*  const flights = response.result.data.map(flight => ({
             id: flight.id,
             origin: flight.itineraries[0]?.segments[0]?.departure?.iataCode, 
             destination: flight.itineraries[0]?.segments.slice(-1)[0]?.arrival?.iataCode, 
@@ -29,9 +23,9 @@ const flightSearch = async (req, res) => {
             aeroline: flight.itineraries[0]?.segments[0]?.carrierCode,
             duration: flight.itineraries[0]?.duration,
             price: flight.price?.total,
-        }));
+        })); */
 
-        res.send(flights);
+        res.send(response?.result);
     } catch (error) {
         res.status(500).send({ error: error.message });
     }

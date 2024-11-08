@@ -1,3 +1,4 @@
+
 import './Header.css'; // Importa el archivo CSS
 
 function Header() {
@@ -24,3 +25,4 @@ function Header() {
 }
 
 export default Header;
+
