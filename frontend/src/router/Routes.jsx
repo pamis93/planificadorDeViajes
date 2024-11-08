@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import PasswordResetPage from '../pages/PasswordResetPage';
 import AccountActivation from '../components/AccountActivation/AccountActivation';
 import Header from '../components/Header/Header';
-import '../output.css'
+
 
 
 
