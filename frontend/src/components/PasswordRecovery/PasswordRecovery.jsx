@@ -1,20 +1,20 @@
-import { useState } from "react";
-import "../App.css";
+import { useState } from 'react';
+import '../../App.css';
 
 function PasswordRecovery() {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await fetch(
-        "http://localhost:3001/users/password/recover",
+        'http://localhost:3001/users/password/recover',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({ email }),
         }
@@ -22,12 +22,12 @@ function PasswordRecovery() {
 
       if (response.ok) {
         const data = await response.json();
-        setMessage(data.message || "Correo de recuperación enviado.");
+        setMessage(data.message || 'Correo de recuperación enviado.');
       } else {
-        setMessage("Error al enviar la solicitud de recuperación.");
+        setMessage('Error al enviar la solicitud de recuperación.');
       }
     } catch (error) {
-      setMessage("Ocurrió un error: " + error.message);
+      setMessage('Ocurrió un error: ' + error.message);
     }
   };
 
