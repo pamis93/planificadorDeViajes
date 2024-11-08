@@ -1,5 +1,7 @@
 //import { Route } from 'react-router-dom';
 import Routes from './router/Routes';
+import './output.css';
+
 //import AccountActivation from './components/AccountActivation/AccountActivation';
 
 function App() {
