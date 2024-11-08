@@ -1,4 +1,104 @@
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Estilo principal del header */
+
+
+.header {
+    background-color: #2563eb; /* bg-blue-600 */
+    color: white;
+    padding: 1rem; /* p-4 */
+    width: 100%; /* Asegura que el header ocupe todo el ancho */
+    position: absolute; /* Fija el header en la parte superior */
+    top: 0; /* Lo coloca en la parte superior */
+    left: 0; /* Lo coloca en el borde izquierdo */
+    z-index: 100; /* Asegura que esté por encima de otros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añadir una sombra para un mejor contraste */
+}
+
+
+/* Contenedor centralizado con margen y espacio entre los elementos */
+.container {
+    display: flex;
+    justify-content: space-between; /* justify-between */
+    align-items: center; /* items-center */
+    max-width: 80%; /* max-w-7xl */
+    margin: 0 auto; /* mx-auto */
+    gap: 2rem; /* gap-8 */
+}
+
+/* Estilo del título */
+.title {
+    font-size: 2rem; /* text-3xl */
+    font-weight: bold; /* font-bold */
+}
+
+/* Estilos para la lista de navegación */
+.nav-list {
+    display: flex;
+    gap: 1.5rem; /* gap-6 */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilo para los enlaces */
+.nav-link {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease; /* Transición suave al pasar el mouse */
+}
+
+/* Efecto hover para los enlaces */
+.nav-link:hover {
+    color: #d1d5db; /* hover:text-gray-300 */
+}
+
+
+
+/* Fondo translúcido que ocupa toda la pantalla */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro translúcido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+/* Estilos del modal */
+.modal-content {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Estilo del título */
+.modal-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Estilo del botón de cerrar */
+.modal-close-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.modal-close-button:hover {
+    background-color: #0056b3;
+}

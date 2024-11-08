@@ -1,25 +1,20 @@
-import '../../output.css';
+import './Header.css'; // Importa el archivo CSS
+
 function Header() {
     return (
-        <header className="bg-blue-600 text-white p-4 w-full">
-            <div className="flex justify-between items-center max-w-7xl mx-auto gap-8">
-                <h1 className="text-3xl font-bold">Mi Aplicación</h1>
+        <header className="header">
+            <div className="container">
+                <h1 className="title">Mi Aplicación</h1>
                 <nav>
-                    <ul className="flex gap-6">
+                    <ul className="nav-list">
                         <li>
-                            <a href="/" className="hover:text-gray-300">
-                                Inicio
-                            </a>
+                            <a href="/" className="nav-link">Inicio</a>
                         </li>
                         <li>
-                            <a href="/about" className="hover:text-gray-300">
-                                Acerca de
-                            </a>
+                            <a href="/about" className="nav-link">Acerca de</a>
                         </li>
                         <li>
-                            <a href="/contact" className="hover:text-gray-300">
-                                Contacto
-                            </a>
+                            <a href="/contact" className="nav-link">Contacto</a>
                         </li>
                     </ul>
                 </nav>

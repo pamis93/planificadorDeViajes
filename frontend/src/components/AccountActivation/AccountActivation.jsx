@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function AccountActivation() {
     const { registrationCode } = useParams();
     const [status, setStatus] = useState("");
+    const navigate = useNavigate();
 
     const activateAccount = async () => {
         try {
@@ -34,9 +35,18 @@ function AccountActivation() {
         activateAccount();
     }, []);
 
+    const closeModal = ()=>{
+        navigate("/");
+    }
+
     return (
-        <div>
-            <h2>{status ? status : null }</h2>
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <h2 className="modal-header">{status ? status : "Cargando..."}</h2>
+                <button onClick={closeModal} className="modal-close-button">
+                    X
+                </button>
+            </div>
         </div>
     );
 }
