@@ -1,7 +1,7 @@
-import { Routes, Route } from 'react-router-dom';
-import PasswordResetPage from '../pages/PasswordResetPage';
-import AccountActivation from '../components/AccountActivation/AccountActivation';
+/* import { Routes, Route } from 'react-router-dom';
+import PasswordResetPage from '../components/PasswordResetPage/PasswordResetPage';
 import Header from '../components/Header/Header';
+import AccountActivation from '../components/AccountActivation/AccountActivation';
 
 
 
@@ -11,7 +11,7 @@ function AppRoutes() {
     <>
     <Header/>
       <Routes>
-        {/* Otras rutas */}
+        <Route path='/' element={<Header/>}/>
         <Route path="/recuperacion" element={<PasswordResetPage />} />
         <Route path="/users/validate/:registrationCode" element={<AccountActivation/>} />
       </Routes>
@@ -20,3 +20,4 @@ function AppRoutes() {
 }
 
 export default AppRoutes;
+ */
