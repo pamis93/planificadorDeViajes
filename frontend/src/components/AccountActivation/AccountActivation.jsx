@@ -41,13 +41,14 @@ function AccountActivation() {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-xl w-11/12 max-w-sm text-center">
+            <div className="bg-custom-blue text-white p-6 rounded-lg shadow-xl w-11/12 max-w-sm text-center relative">
                 <h2 className="text-2xl font-semibold mb-4">
                     {status ? status : "Cargando..."}
                 </h2>
+                
                 <button
                     onClick={closeModal}
-                    className="bg-blue-600 text-white py-2 px-4 rounded-full w-full mt-4 hover:bg-blue-700 transition-colors"
+                    className= "top-1 right-2 absolute text-white py-2 px-3 rounded-full mt-0 hover:text-orange-500 transition-colors"
                 >
                     X
                 </button>

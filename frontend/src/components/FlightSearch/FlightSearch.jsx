@@ -11,14 +11,8 @@ function FlightSearch() {
         origin: "",
         destination: "",
         departureDate: "",
-        adults: 1
+        adults: 1,
     });
-
-    const {
-        content: flights,
-        loading,
-        error,
-    } = useFlightSearch(searchParams);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -71,20 +65,15 @@ function FlightSearch() {
                 <button type="submit">Buscar vuelos</button>
             </form>
 
-            {loading && <p>Cargando vuelos...</p>}
-            {error && <p>Error: {error}</p>}
-
             <ul>
-                {flights?.data?.map((flight) => (
-                    <li key={flight.id}>
-                        <h3>
-                            Vuelo de {flight.itineraries[0].segments[0].departure.iataCode} a {flight.itineraries[0].segments[0].arrival.iataCode}
-                        </h3>
-                        <p>Fecha de salida: {flight.itineraries[0].segments[0].departure.at}</p>
-                        <p>Precio: {flight.price.grandTotal} €</p>
-                        <p>Duración: {flight.itineraries[0].duration.replace("PT", "").toLowerCase()}</p>
-                    </li>
-                ))}
+                <li>
+                    <h3>
+                        Vuelo de {origin} a {destination}
+                    </h3>
+                    <p>Fecha de salida:{departureDate} </p>
+                    <p>Precio: €</p>
+                    <p>Duración: </p>
+                </li>
             </ul>
         </div>
     );
