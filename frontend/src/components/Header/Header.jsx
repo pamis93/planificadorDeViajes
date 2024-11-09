@@ -1,3 +1,6 @@
+
+import './Header.css'; // Importa el archivo CSS
+
 function Header() {
     return (
         <header className="bg-blue-600 text-white p-4 w-full fixed top-0 left-0 z-50 shadow-md">
@@ -28,3 +31,4 @@ function Header() {
 }
 
 export default Header;
+

@@ -1,16 +1,18 @@
-//import { Route } from 'react-router-dom';
-import Routes from './router/Routes';
-import './index.css';
 
-//import AccountActivation from './components/AccountActivation/AccountActivation';
+import { Route, Routes } from "react-router-dom";
+import FlightSearch from "./components/FlightSearch/FlightSearch";
+import "./App.css";
+
+// import AppRouter from './router/Routes';
 
 function App() {
   return (
-    <div>
+    <>
       <Routes>
-      {/* <Route path="/users/validate/:registrationCode" element={<AccountActivation/>} /> */}
+        <Route path="/search" element={<FlightSearch />} />
       </Routes>
-    </div>
+    </>
+
   );
 }
 
