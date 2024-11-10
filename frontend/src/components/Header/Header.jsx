@@ -4,8 +4,8 @@ import LanguageNav from "./LanguageNav/LanguageNav";
 
 function Header() {
     return (
-        <header className="bg-custom-blue text-white p-4 w-full position-absolute top-0 left-0 z-50 shadow-md">
-            <div className="flex justify-between items-center max-w-7xl gap-8">
+        <header className="bg-custom-blue text-white p-2 w-full h-20 position-absolute top-0 left-0 z-50 shadow-md mt-">
+            <div className="flex justify-between items-center w-full gap-8">
 
                 <div className="flex justify-start items-center gap-1">
                     <img className="w-10 rounded-xl" src="../../../public/witch2.svg" alt="ico" />

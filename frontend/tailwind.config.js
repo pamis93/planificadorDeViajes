@@ -7,7 +7,7 @@ export default {
     extend: {
       colors: {
         'custom-blue': '#42486A', // color azul-moradito
-      }
+      },
     },
   },
   plugins: [flowbite.plugin()],

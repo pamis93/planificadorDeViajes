@@ -1,81 +1,62 @@
 import { useState } from "react";
-import { useFlightSearch } from "../../hooks/api";
+import FlightForm from "./FormSearch/FormSearch";
 
 function FlightSearch() {
     const [origin, setOrigin] = useState("");
     const [destination, setDestination] = useState("");
     const [departureDate, setDepartureDate] = useState("");
+    const [arrivalDate, setArrivalDate] = useState("");
     const [adults, setAdults] = useState(1);
-
-    const [searchParams, setSearchParams] = useState({
-        origin: "",
-        destination: "",
-        departureDate: "",
-        adults: 1,
-    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (origin && destination && departureDate) {
-            setSearchParams({ origin, destination, departureDate, adults });
+            // Aquí podrías llamar la búsqueda de vuelos directamente o manejar la lógica con los valores actuales
+            console.log("Buscando vuelos desde:", origin, "hasta:", destination);
         } else {
             alert("Por favor, completa todos los campos antes de buscar.");
         }
     };
+    
 
     return (
-        <div>
-            <h2>Buscar vuelos</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Origen:
-                    <input
-                        type="text"
-                        value={origin}
-                        onChange={(e) => setOrigin(e.target.value)}
-                        placeholder="Ciudad de origen"
-                    />
-                </label>
-                <label>
-                    Destino:
-                    <input
-                        type="text"
-                        value={destination}
-                        onChange={(e) => setDestination(e.target.value)}
-                        placeholder="Ciudad de destino"
-                    />
-                </label>
-                <label>
-                    Fecha de salida:
-                    <input
-                        type="date"
-                        value={departureDate}
-                        onChange={(e) => setDepartureDate(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Adultos:
-                    <input
-                        type="number"
-                        value={adults}
-                        onChange={(e) => setAdults(e.target.value)}
-                        min="1"
-                    />
-                </label>
-                <button type="submit">Buscar vuelos</button>
-            </form>
-
-            <ul>
-                <li>
-                    <h3>
-                        Vuelo de {origin} a {destination}
-                    </h3>
-                    <p>Fecha de salida:{departureDate} </p>
-                    <p>Precio: €</p>
-                    <p>Duración: </p>
-                </li>
-            </ul>
-        </div>
+        <>
+            <div className="relative w-full h-[500px]">
+                <img
+                    className="w-full h-full object-cover"
+                    src="../../../public/fondo-header.jfif"
+                    alt="Fondo"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="z-10 max-w-5xl w-full mx-auto px-4 py-8 bg-white rounded-lg shadow-lg">
+                        <FlightForm
+                            origin={origin}
+                            setOrigin={setOrigin}
+                            destination={destination}
+                            setDestination={setDestination}
+                            departureDate={departureDate}
+                            setDepartureDate={setDepartureDate}
+                            arrivalDate={arrivalDate}
+                            setArrivalDate={setArrivalDate}
+                            adults={adults}
+                            setAdults={setAdults}
+                            handleSubmit={handleSubmit}
+                        />
+                        <ul className="mt-8">
+                            <li className="border-t border-gray-200 pt-6">
+                                <h3 className="text-xl font-semibold text-gray-800">
+                                    Vuelo de {origin} a {destination}
+                                </h3>
+                                <p className="text-gray-600">Fecha de salida: {departureDate}</p>
+                                <p className="text-gray-600">Fecha de vuelta: {arrivalDate}</p>
+                                <p className="text-gray-600">Precio: €</p>
+                                <p className="text-gray-600">Duración: </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 }
 
