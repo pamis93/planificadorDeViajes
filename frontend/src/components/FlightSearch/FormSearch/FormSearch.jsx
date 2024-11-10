@@ -1,6 +1,10 @@
 
 
-function FormSearch({ origin, setOrigin, destination, setDestination, departureDate, setDepartureDate, arrivalDate, setArrivalDate, adults, setAdults, handleSubmit }) {
+
+function FormSearch({ origin, setOrigin, destination, setDestination, departureDate, setDepartureDate, arrivalDate, setArrivalDate, adults, setAdults, handleSubmit, }) 
+    
+
+{
     return (
         <form onSubmit={handleSubmit} className="flex items-center space-x-4">
             <div className="w-1/5">

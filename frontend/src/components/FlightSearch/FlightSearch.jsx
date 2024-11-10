@@ -7,17 +7,24 @@ function FlightSearch() {
     const [departureDate, setDepartureDate] = useState("");
     const [arrivalDate, setArrivalDate] = useState("");
     const [adults, setAdults] = useState(1);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (origin && destination && departureDate) {
-            // Aquí podrías llamar la búsqueda de vuelos directamente o manejar la lógica con los valores actuales
-            console.log("Buscando vuelos desde:", origin, "hasta:", destination);
+            setErrorMessage(""); // Limpiar mensaje de error
+            console.log(
+                "Buscando vuelos desde:",
+                origin,
+                "hasta:",
+                destination
+            );
         } else {
-            alert("Por favor, completa todos los campos antes de buscar.");
+            setErrorMessage(
+                "Por favor, completa todos los campos antes de buscar."
+            );
         }
     };
-    
 
     return (
         <>
@@ -42,13 +49,22 @@ function FlightSearch() {
                             setAdults={setAdults}
                             handleSubmit={handleSubmit}
                         />
+                        {errorMessage && (
+                            <p className="text-red-500 text-sm mt-2">
+                                {errorMessage}
+                            </p>
+                        )}
                         <ul className="mt-8">
                             <li className="border-t border-gray-200 pt-6">
                                 <h3 className="text-xl font-semibold text-gray-800">
                                     Vuelo de {origin} a {destination}
                                 </h3>
-                                <p className="text-gray-600">Fecha de salida: {departureDate}</p>
-                                <p className="text-gray-600">Fecha de vuelta: {arrivalDate}</p>
+                                <p className="text-gray-600">
+                                    Fecha de salida: {departureDate}
+                                </p>
+                                <p className="text-gray-600">
+                                    Fecha de vuelta: {arrivalDate}
+                                </p>
                                 <p className="text-gray-600">Precio: €</p>
                                 <p className="text-gray-600">Duración: </p>
                             </li>
