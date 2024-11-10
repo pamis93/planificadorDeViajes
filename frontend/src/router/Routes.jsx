@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import PasswordResetPage from '../pages/PasswordResetPage';
-import Login from '../components/login/login';
 import Register from '../components/Register/Register';
+import Login from '../components/Login/Login';
 
 function AppRoutes() {
   return (

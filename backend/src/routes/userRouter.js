@@ -20,7 +20,7 @@ userRouter.post('/users/register', newUserController);
 userRouter.get('/users/validate/:registrationCode', validateUserController);
 
 // endpoint de login del usuario
-userRouter.get('/users/login', loginUserController);
+userRouter.post('/users/login', loginUserController);
 
 // Endpoint cambio de contraseña
 userRouter.put('/users/password', editUserPassController);
