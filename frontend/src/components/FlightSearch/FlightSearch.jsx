@@ -28,14 +28,15 @@ function FlightSearch() {
 
     return (
         <>
-            <div className="relative w-full h-[500px]">
+            <div className="relative w-full h-[500px] z-0">
                 <img
                     className="w-full h-full object-cover"
                     src="../../../public/fondo-header.jfif"
                     alt="Fondo"
+                    style={{ zIndex: -1 }}
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="z-10 max-w-5xl w-full mx-auto px-4 py-8 bg-white rounded-lg shadow-lg">
+                    <div className="z-10 max-w-5xl w-full mx-auto mt-10 px-4 py-8 bg-white rounded-lg shadow-lg">
                         <FlightForm
                             origin={origin}
                             setOrigin={setOrigin}

@@ -6,7 +6,7 @@ function FormSearch({ origin, setOrigin, destination, setDestination, departureD
 
 {
     return (
-        <form onSubmit={handleSubmit} className="flex items-center space-x-4">
+        <form onSubmit={handleSubmit} className="flex items-center space-x-4" >
             <div className="w-1/5">
                 <label htmlFor="origin" className="block text-sm font-medium text-gray-700">
                     Origen
