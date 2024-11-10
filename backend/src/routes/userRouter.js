@@ -9,6 +9,7 @@ import authUser from '../middlewares/authUser.js';
 import newFavoriteFlightController from '../controllers/flights/newFavoriteFlightController.js';
 import { editUserAvatarController } from '../controllers/users/editUserAvatarController.js';
 import { editUserController } from '../controllers/users/editUserController.js';
+import { getAvatarController } from '../controllers/users/getAvatarController.js';
 
 //Creamos un router.
 export const userRouter = express.Router();
@@ -20,7 +21,7 @@ userRouter.post('/users/register', newUserController);
 userRouter.get('/users/validate/:registrationCode', validateUserController);
 
 // endpoint de login del usuario
-userRouter.get('/users/login', loginUserController);
+userRouter.post('/users/login', loginUserController);
 
 // Endpoint cambio de contraseña
 userRouter.put('/users/password', editUserPassController);
@@ -33,6 +34,9 @@ userRouter.put("/users/avatar", authUser, editUserAvatarController);
 
 //Endpoint de editar los datos del Usuario
 userRouter.put('/users/edit/:userId', authUser, editUserController);
+
+//Ruta para poder acceder a los recursos estáticos.
+userRouter.get('/users/getAvatar/:avatar', authUser, getAvatarController);
 
 //PREGUNTAR POSICIÓN CORRECTA DE ESTOS DOS ENDPOINT:
 
