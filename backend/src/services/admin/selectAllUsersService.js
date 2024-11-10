@@ -20,6 +20,6 @@ const selectAllUsersService = async () => {
         `);
 
   //   console.log(users);
-  return [users];
+  return users;
 };
 export default selectAllUsersService;
