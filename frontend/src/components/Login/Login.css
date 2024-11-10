@@ -1,0 +1,134 @@
+/* Background and container styling */
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    
+}
+
+/* estilo de el contenedor*/
+.login-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),  url('../../assets/fondoLogin.png');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 20px;
+    width: 770px;
+    height: 820px;
+    display: flex;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* boton cerrar */
+.login-container .close-btn {
+    position: absolute;
+    background: none;
+    top: 35px;
+    right: 15px;
+    color: red;
+    cursor: pointer;
+    font-size: 50px;
+}
+/* titulo */
+.login-container h2 {
+    font-size: 32px; 
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* subtitulos */
+.login-container label {
+    font-size: 18px;
+    font-weight: bolder;
+    text-align: center;
+    color: #ccc;
+    display: block;
+    margin-top: 5px;
+}
+
+/* inputs */
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border: 2px solid black;
+    border-radius: 30px;
+    background-color: #686E9E;
+    color: white;
+    font-size: 20px ;
+}
+/* placeholder del input  */
+.login-container input::placeholder {
+    color: #ccc;
+}
+/*casilla del checkbox*/
+input[type="checkbox"] {
+    width: 20px; 
+    height: 20px; 
+    margin-right: 5px;
+  }
+  
+/* remember me */
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    font-size: 20px;
+    color: #ccc;
+}
+/*olvidaste ka contraseña*/
+.options .forgot-password {
+    color: #046EF8;
+    text-decoration: none;
+}
+
+/* iniciar sesion */
+.login-button {
+    background-color: #F66136; /* Color del botón */
+    color: black;
+    border: solid 1px white;
+    border-radius: 20px;
+    padding: 10px 0;
+    width: 100%;
+    font-size: 20px;
+    font-weight:bolder;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* para registrarte */
+.register-text {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.register-link {
+    color: #046EF8;
+    text-decoration: none;
+}
+
+/*mensajes*/
+
+.message {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    font-size: 25px;
+    text-align: center;
+}
+
+.message.error {
+    color: #e80505;
+}
+
+.message.success {
+    color: #0beb16;
+}
