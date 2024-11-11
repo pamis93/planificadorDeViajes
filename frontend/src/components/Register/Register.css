@@ -9,7 +9,7 @@ body {
 }
 
 /* estilo de el contenedor*/
-.login-container {
+.register-container {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../../assets/fondoLogin.png');
     background-size: cover;
     background-position: center;
@@ -27,21 +27,21 @@ body {
 .close-btn {
     position: absolute;
     background: none;
-    top: 35px;
-    right: 15px;
+    top: 25px;
+    right: 65px;
     color: red;
     cursor: pointer;
     font-size: 50px;
 }
 /* titulo */
-.ttle {
+.register-container h2 {
     font-size: 32px;
-    margin-top: 100px;
-    margin-bottom: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* subtitulos */
-.login-container label {
+.register-container label {
     font-size: 18px;
     font-weight: bolder;
     color: #ccc;
@@ -49,9 +49,9 @@ body {
 }
 
 /* Inputs */
-.login-container input[type="text"],
-.login-container input[type="email"],
-.login-container input[type="password"] {
+.register-container input[type="text"],
+.register-container input[type="email"],
+.register-container input[type="password"] {
     width: 447px;
     padding: 10px;
     border: 2px solid black;
@@ -63,7 +63,7 @@ body {
 }
 
 /* placeholder del input  */
-.login-container input::placeholder {
+.register-container input::placeholder {
     color: #ccc;
 }
 
@@ -73,7 +73,7 @@ body {
     justify-content: space-between; 
 }
 .name-surname .input-group input {
-    width: calc(70% - 0.1rem); 
+    width: calc(60% - 0.1rem); 
     padding: 10px;
     border: 2px solid black;
     border-radius: 30px;
