@@ -71,11 +71,12 @@ function Login() {
         <div className="login-container">
             <div className="login-content">
                 <h2 className='ttle'>BIENVENIDO/A DE VUELTA</h2>
-                <button className='close-btn'>X</button>
+                <button className='closse-btn'>X</button>
                 
                 <form onSubmit={handleSubmit}>
                     <label>EMAIL</label>
                     <input 
+                        className='email'
                         type="email" 
                         name="email"
                         placeholder="Enter Your Email..." 

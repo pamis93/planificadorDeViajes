@@ -3,8 +3,11 @@ import { useUser } from '../../context/UserContext';
 import './Register.css';
 
 function Register() {
-    const [message, setMessage] = useState('');
     const [user, setUser] = useUser();
+    const [message, setMessage] = useState({ 
+      text: '',  
+      type: ''   
+  });
 
 
     const handleSubmit = async (e) => {
@@ -18,9 +21,12 @@ function Register() {
 
         // Validación de que las contraseñas coincidan
         if (password !== confirmPassword) {
-            setMessage('Las contraseñas no coinciden');
-            return;
-        }
+          setMessage({
+              text: 'Las contraseñas no coinciden',
+              type: 'error'
+          });
+          return;
+      }
 
         try {
             const response = await fetch('http://localhost:3001/users/register', {
@@ -49,10 +55,16 @@ function Register() {
                     email,
                     // Puedes agregar más detalles del usuario si es necesario
                 });
-                setMessage(data.message); // Mensaje de éxito
-            } else {
-                setMessage(data.message); // Mensaje de error
-            }
+                setMessage({
+                  text: data.message,
+                  type: 'success' 
+              });
+          } else {
+              setMessage({
+                  text: data.message,
+                  type: 'error'
+              });
+          }
         } catch (error) {
             console.error('Error:', error);
             setMessage('Error al conectar con el servidor');
@@ -65,7 +77,7 @@ function Register() {
                 <h2 className="ttle">CREAR CUENTA</h2>
                 <button className="close-btn">X</button>
 
-                <form onSubmit={handleSubmit}>
+                <form className='form' onSubmit={handleSubmit}>
                     <div className="name-surname">
                         <div className="input-group">
                             <label>NOMBRE</label>
@@ -123,10 +135,9 @@ function Register() {
                         Registrarse
                     </button>
                 </form>
-
-                {message && (
-                    <p className={`message ${message.includes('error') ? 'error' : 'success'}`}>
-                        {message}
+                {message.text && (
+                    <p className={`message ${message.type}`}>
+                        {message.text}
                     </p>
                 )}
 
