@@ -40,7 +40,7 @@ function Register() {
 
         <button className="login-button">Registrate</button>
         <p className="register-text">
-          ¿Ya tienes una cuenta? <a href="#" className="register-link">Inicia Sesión</a>
+          ¿Ya tienes una cuenta? <a href="/login" className="register-link">Inicia Sesión</a>
         </p>
       </div>
     </div>
