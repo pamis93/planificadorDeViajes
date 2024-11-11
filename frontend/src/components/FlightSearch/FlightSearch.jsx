@@ -1,33 +1,60 @@
-import { useState } from "react";
-import { useFlightSearch } from "../../hooks/api";
-
+import { useCallback, useState } from 'react';
+import _debounce from 'lodash/debounce';
+import FlightSearchDropdown from './FlightSearchDropdown';
+// import { useFlightSearch } from "../../hooks/api";
+// import { useCityAndAirportSearch } from '../../hooks/api';
 function FlightSearch() {
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
-  const [departureDate, setDepartureDate] = useState("");
+  const [origin, setOrigin] = useState('');
+  const [destination, setDestination] = useState('');
+  const [departureDate, setDepartureDate] = useState('');
   const [adults, setAdults] = useState(1);
 
-  // const [searchParams, setSearchParams] = useState({
-  //     origin: "",
-  //     destination: "",
-  //     departureDate: "",
-  //     adults: 1
-  // });
+  // estado para guardar lo que retorna la api
+  const [originResults, setOriginResults] = useState([]);
+  const [destinationResults, setDestinationResults] = useState([]);
 
-  // const {
-  //     content: flights,
-  //     loading,
-  //     error,
-  // } = useFlightSearch(searchParams);
+  const searchCityOrAirport = async (searchTerm, resultSeterFn) => {
+    if (searchTerm !== '') {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/city-and-airport-search/${searchTerm}`
+        );
+        const data = await response.json();
+        console.log(data);
 
-  // const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     if (origin && destination && departureDate) {
-  //         setSearchParams({ origin, destination, departureDate, adults });
-  //     } else {
-  //         alert("Por favor, completa todos los campos antes de buscar.");
-  //     }
-  // };
+        if (data) {
+          resultSeterFn(data);
+        }
+      } catch (error) {
+        console.error('Error searching cities and airports:', error);
+      }
+    }
+  };
+
+  const debounceOrigin = useCallback(
+    _debounce(
+      (searchTerm) => searchCityOrAirport(searchTerm, setOriginResults),
+      1000
+    ),
+    []
+  );
+  const debounceDestination = useCallback(
+    _debounce(
+      (searchTerm) => searchCityOrAirport(searchTerm, setDestinationResults),
+      1000
+    ),
+    []
+  );
+
+  const handleOriginChange = (event) => {
+    setOrigin(event.target.value);
+    debounceOrigin(event.target.value);
+  };
+
+  const handleDestinationChange = (event) => {
+    setDestination(event.target.value);
+    debounceDestination(event.target.value);
+  };
 
   return (
     <div>
@@ -38,18 +65,20 @@ function FlightSearch() {
           <input
             type="text"
             value={origin}
-            onChange={(e) => setOrigin(e.target.value)}
+            onChange={handleOriginChange}
             placeholder="Ciudad de origen"
           />
+          <FlightSearchDropdown results={originResults} />
         </label>
         <label>
           Destino:
           <input
             type="text"
             value={destination}
-            onChange={(e) => setDestination(e.target.value)}
+            onChange={handleDestinationChange}
             placeholder="Ciudad de destino"
           />
+          <FlightSearchDropdown results={destinationResults} />
         </label>
         <label>
           Fecha de salida:
