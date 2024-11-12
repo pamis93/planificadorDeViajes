@@ -1,210 +1,230 @@
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  font-family: Arial, sans-serif;
 }
 
 /* Estilo del contenedor */
 .register-container {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../../assets/fondoLogin.png');
-    background-size: cover;
-    background-position: center;
-    padding: 20px;
-    border-radius: 20px;
-    width: 90vw;
-    max-width: 600px;
-    height: 100%;
-    color: white;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+    url('../../assets/fondoLogin.png');
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+  border-radius: 20px;
+  width: 90vw;
+  max-width: 600px;
+  height: 100%;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 /* Botón cerrar */
 .close-btn {
-    position: absolute;
-    background: none;
-    top: 15px;
-    right: 20px;
-    color: red;
-    cursor: pointer;
-    font-size: 30px;
+  position: absolute;
+  background: none;
+  top: 15px;
+  right: 20px;
+  color: red;
+  cursor: pointer;
+  font-size: 30px;
 }
 
 /* Título */
 .register-container h2 {
-    font-size: 24px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+  font-size: 24px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 /* Subtítulos */
 .register-container label {
-    font-size: 16px;
-    font-weight: bold;
-    color: #ccc;
-    display: block;
-    margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ccc;
+  display: block;
+  margin-top: 10px;
 }
 
 /* Inputs */
-.register-container input[type="text"],
-.register-container input[type="email"],
-.register-container input[type="password"] {
-    width: 80%;
-    padding: 12px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 2px solid black;
-    border-radius: 20px;
-    background-color: #686E9E;
-    color: white;
-    font-size: 16px;
+.register-container input[type='text'],
+.register-container input[type='email'],
+.register-container input[type='password'] {
+  width: 80%;
+  padding: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 20px;
+  background-color: #686e9e;
+  color: white;
+  font-size: 16px;
 }
 
 /* Placeholder del input */
 .register-container input::placeholder {
-    color: #ccc;
+  color: #ccc;
 }
 
 /* Nombre y apellido en la misma línea */
 .name-surname {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+}
+.input-group input {
+  width: 70%;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 20px;
+  background-color: #686e9e;
+  color: white;
+  font-size: 16px;
 }
 
-.name-surname .input-group input {
-    width: calc(48% - 0.1rem);
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 20px;
-    background-color: #686E9E;
-    color: white;
-    font-size: 16px;
+.password-input {
+  position: relative;
+  align-items: center;
+}
+
+.password-input {
+  width: 100%;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 70px;
+  top: 13px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #ccc;
 }
 
 /* Botón de registro */
 .login-button {
-    background-color: #F66136;
-    color: black;
-    border: solid 1px white;
-    border-radius: 20px;
-    padding: 12px 0;
-    width: 100%;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
+  background-color: #f66136;
+  color: black;
+  border: solid 1px white;
+  border-radius: 20px;
+  padding: 12px 0;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
 }
 
 /* Texto para loguearse */
 .register-text {
-    font-size: 16px;
-    margin-top: 10px;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
 .register-link {
-    color: #046EF8;
-    text-decoration: none;
-    margin-left: 20px;
+  color: #046ef8;
+  text-decoration: none;
+  margin-left: 20px;
 }
 
 /* Mensajes de éxito o error */
 .message {
-    margin-top: 1rem;
-    padding: 0.5rem;
-    font-size: 20px;
-    text-align: center;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  font-size: 20px;
+  text-align: center;
 }
 
 .message.error {
-    color: #e80505;
+  color: #e80505;
 }
 
 .message.success {
-    color: #0beb16;
+  color: #0beb16;
 }
 
 /* Media queries para pantallas grandes */
 @media (min-width: 768px) {
+  /* Estilo del contenedor */
+  .register-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+      url('../../assets/fondoLogin.png');
+    background-size: cover;
+    background-position: center;
+    width: 600px;
+    padding: 40px;
+  }
 
-    /* Estilo del contenedor */
-    .register-container {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../../assets/fondoLogin.png');
-        background-size: cover;
-        background-position: center;
-        width: 600px;
-        padding: 40px;
-    }
+  /* Título */
+  h2 .ttle {
+    font-size: 32px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
 
-    /* Título */
-    h2 .ttle {
-        font-size: 32px;
-        margin-top: 30px;
-        margin-bottom: 50px;
-    }
+  /* Subtítulos */
+  .register-container label {
+    font-size: 18px;
+  }
 
-    /* Subtítulos */
-    .register-container label {
-        font-size: 18px;
-    }
+  /* Botón cerrar */
+  .close-btn {
+    position: absolute;
+    background: none;
+    top: 25px;
+    right: 55px;
+    color: red;
+    cursor: pointer;
+    font-size: 50px;
+  }
+  .closse-btn:hover {
+    transform: scale(1.1);
+    color: #980c0c;
+  }
 
-    /* Botón cerrar */
-    .close-btn {
-        position: absolute;
-        background: none;
-        top: 25px;
-        right: 55px;
-        color: red;
-        cursor: pointer;
-        font-size: 50px;
-    }
+  /* Inputs */
+  .register-container input[type='text'],
+  .register-container input[type='email'],
+  .register-container input[type='password'] {
+    width: 80%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 18px;
+  }
 
-    /* Inputs */
-    .register-container input[type="text"],
-    .register-container input[type="email"],
-    .register-container input[type="password"] {
-        width: 80%;
-        padding: 10px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        font-size: 18px;
-    }
+  /* Nombre y apellido en la misma línea */
+  .name-surname .input-group input {
+    width: 60%;
+    padding: 10px;
+    font-size: 18px;
+  }
 
-    /* Nombre y apellido en la misma línea */
-    .name-surname .input-group input {
-        width: 48%;
-        padding: 15px;
-        font-size: 18px;
-    }
+  /* Botón de registro */
+  .login-button {
+    padding: 12px 0;
+    font-size: 20px;
+  }
 
-    /* Botón de registro */
-    .login-button {
-        padding: 12px 0;
-        font-size: 20px;
-    }
+  /* Texto para loguearse */
+  .register-text {
+    font-size: 15px;
+    margin: 0;
+  }
 
-    /* Texto para loguearse */
-    .register-text {
-        font-size: 15px;
-        margin: 0;
-    }
-
-    /* Mensajes */
-    .message {
-        font-size: 15px;
-        margin: 0;
-    }
-    .message.error {
-        color: #e80505;
-    }
-    .message.success {
-        color: #0beb16;
-    }
+  /* Mensajes */
+  .message {
+    font-size: 15px;
+    margin: 0;
+  }
+  .message.error {
+    color: #e80505;
+  }
+  .message.success {
+    color: #0beb16;
+  }
 }
-
