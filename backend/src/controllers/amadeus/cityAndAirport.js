@@ -12,6 +12,7 @@ const buildResponse = (response) => {
   const responseData = locations.map((airport) => ({
     name: airport.name,
     detailedName: airport.detailedName,
+    city: airport.detailedName.split('/')[0],
     id: airport.id,
     iataCode: airport.iataCode,
     latitude: airport.geoCode.latitude,
