@@ -1,0 +1,511 @@
+[33mcommit 4b3c62ca93dadd65dd5a0213abf55d3a8c0b7dc9[m[33m ([m[1;36mHEAD -> [m[1;32mpagina-validacion-usuario[m[33m)[m
+Merge: 7b3d3d0 38434e3
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Fri Nov 8 23:04:26 2024 +0100
+
+    resuelto conflicto
+
+[33mcommit 7b3d3d03d15623fd520ed9e93290ac9dfb1d2e97[m
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Fri Nov 8 22:58:57 2024 +0100
+
+    boceto de estilo con implementación de tailwind
+
+[33mcommit 38434e31201dbf813c0506e2d5d1406a3f3cfb3d[m[33m ([m[1;31morigin/pagina-validacion-usuario[m[33m)[m
+Merge: c4ca1c5 fbd7f0c
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Fri Nov 8 22:32:05 2024 +0100
+
+    actualizando cambios con main
+
+[33mcommit c4ca1c57ca83348ee9191e9b2b28ea26d047711c[m
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Fri Nov 8 22:24:23 2024 +0100
+
+    añadido boceto de estilos
+
+[33mcommit f8c2c7fd84399b67a8b50ab1afb9206ecc9b70d9[m
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Fri Nov 8 22:07:31 2024 +0100
+
+    pagina validación
+
+[33mcommit fbd7f0cec53cf3910f9de711d92012e3a44e253e[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 84ef920 d41cac6
+Author: Carlos Cue <46687878+carloscuepuente@users.noreply.github.com>
+Date:   Fri Nov 8 11:44:01 2024 +0100
+
+    Merge pull request #28 from pamis93/search-flight-component
+    
+    Search flight component
+
+[33mcommit d41cac661e9da687446da17ba83851459fb96fb3[m
+Author: Carlos Cue <cacp892@gmail.com>
+Date:   Fri Nov 8 11:40:54 2024 +0100
+
+    added tailwinds and tailwinds component library to app changed app icon and name
+
+[33mcommit e58c05260c85175e003c0459d1f4577b8fba598a[m
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Thu Nov 7 21:32:53 2024 +0100
+
+    pagina validación, idea establecida, falta que funcione bien el codigo
+
+[33mcommit 84ef920a2f251404efb0a917d734c5bea3ca4b47[m
+Merge: 5fa0b63 6723e2d
+Author: Lara Rodríguez Herrero <lararh393@gmail.com>
+Date:   Thu Nov 7 21:32:21 2024 +0100
+
+    Merge pull request #27 from pamis93/getRecursosEstaticos
+    
+    resolucion de fallo en registrationCode
+
+[33mcommit 6723e2dc6a6f95dfa09ff65e5bc32e72fa30e9c9[m[33m ([m[1;31morigin/getRecursosEstaticos[m[33m)[m
+Merge: 1e2e092 5fa0b63
+Author: Lara Rodríguez Herrero <lararh393@gmail.com>
+Date:   Thu Nov 7 21:32:10 2024 +0100
+
+    Merge branch 'main' into getRecursosEstaticos
+
+[33mcommit 5fa0b638b07ed705e58792de196945f9f2c8870b[m
+Merge: 29ff125 fe2c707
+Author: Lara Rodríguez <lararh393@gmail.com>
+Date:   Thu Nov 7 21:29:07 2024 +0100
+
+    Merge branch 'main' of github.com:pamis93/planificadorDeViajes
+
+[33mcommit 29ff12511f72169558591a2021443c85de2c51a1[m
+Author: Lara Rodríguez <lararh393@gmail.com>
+Date:   Thu Nov 7 21:28:45 2024 +0100
+
+    arreglado registerCode
+
+[33mcommit 1e2e0924f041f5caddca075e5881ac00542e1d8f[m
+Author: Lara Rodríguez <lararh393@gmail.com>
+Date:   Thu Nov 7 21:19:16 2024 +0100
+
+    resolucion de fallo en registrationCode
+
+[33mcommit fe2c707dcd694366dd6d04064ac55e1d25c07635[m
+Merge: 099001b a10278d
+Author: Lara Rodríguez Herrero <lararh393@gmail.com>
+Date:   Thu Nov 7 20:26:55 2024 +0100
+
+    Merge pull request #26 from pamis93/getRecursosEstaticos
+    
+    recursoEstatico para col postman. Joi en edituserpass
+
+[33mcommit a10278d1b10929a34c64d1bc00551b20c4ee04b7[m
+Author: Lara Rodríguez <lararh393@gmail.com>
+Date:   Thu Nov 7 20:25:51 2024 +0100
+
+    recursoEstatico para col postman. Joi en edituserpass
+
+[33mcommit 099001b10c857d606b2eb5d2b0a08969a658719f[m
+Merge: d75b83e ad85113
+Author: Gustavo Bolivar <gusta_bolivar@hotmail.com>
+Date:   Thu Nov 7 14:53:30 2024 +0100
+
+    Merge pull request #25 from pamis93/ratings
+    
+    Ratings
+
+[33mcommit 4cb788b91beecaae5323ea1a8eb8b1e340e7e29e[m
+Merge: d75b83e 696b514
+Author: Carlos Cue <cacp892@gmail.com>
+Date:   Thu Nov 7 14:38:21 2024 +0100
+
+    conflict resolution of alejandro and my branch
+
+[33mcommit 696b5143b934bc9ae8f81206ea2400bf61794612[m[33m ([m[1;31morigin/endpoint-detalle-vuelo[m[33m, [m[1;32mendpoint-detalle-vuelo[m[33m)[m
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Thu Nov 7 14:17:45 2024 +0100
+
+    Comenzado tarea de buscador
+
+[33mcommit d75b83ecc446722be49ae40bf9800aaae36b4996[m
+Merge: 4d84213 389e875
+Author: vascogomez <162234805+vascogomez@users.noreply.github.com>
+Date:   Thu Nov 7 12:46:12 2024 +0100
+
+    Merge pull request #24 from pamis93/recoverPassPage
+    
+    pagina recuperacion
+
+[33mcommit 389e8751de04a2dafcf3f6efc4ebce7b86e89c05[m
+Author: Emanuel Gómez <vascogomez247@gmail.com>
+Date:   Thu Nov 7 12:44:46 2024 +0100
+
+    pagina recuperacion
+
+[33mcommit 4d8421385ecb544c3a14fd7211ae1512d3bc4573[m
+Merge: 901ac65 c4fc9ec
+Author: vascogomez <162234805+vascogomez@users.noreply.github.com>
+Date:   Thu Nov 7 03:12:00 2024 +0100
+
+    Merge pull request #23 from pamis93/recoverPassPage
+    
+    pagina de recuperación de contraseña
+
+[33mcommit c4fc9ec85dd9bb92d2269f10792a13e4c30d93d9[m
+Merge: ef8d0b5 901ac65
+Author: vascogomez <162234805+vascogomez@users.noreply.github.com>
+Date:   Thu Nov 7 03:09:13 2024 +0100
+
+    Merge pull request #22 from pamis93/main
+    
+    pagina de recuperación de contraseña
+
+[33mcommit 901ac65d83c2582b7e4c3bcf6bf0d514aa7c76a7[m
+Merge: 86ca7ce e3c533d
+Author: Carlos Cue <46687878+carloscuepuente@users.noreply.github.com>
+Date:   Wed Nov 6 22:14:43 2024 +0100
+
+    Merge pull request #21 from pamis93/admin-delete-user
+    
+    added feacture for delete users by admin
+
+[33mcommit e3c533d7dcdc9330d0a0d0ab90f8293606407abf[m
+Author: Carlos Cue <cacp892@gmail.com>
+Date:   Wed Nov 6 22:12:05 2024 +0100
+
+    added feacture for delete users by admin
+
+[33mcommit ad851135545a79c940658f6dea07c368fb1f8655[m[33m ([m[1;31morigin/ratings[m[33m)[m
+Author: Gustavo Bolivar <gusta_bolivar@hotmail.com>
+Date:   Wed Nov 6 19:50:55 2024 +0100
+
+    mejor modularizado
+
+[33mcommit 86ca7ce4a260c3a60b24b9609dcec1f24ac80ad5[m
+Merge: 60a4a59 0c66d84
+Author: Lara Rodríguez Herrero <lararh393@gmail.com>
+Date:   Wed Nov 6 19:19:33 2024 +0100
+
+    Merge pull request #20 from pamis93/revision_mejora
+    
+    brevo ya activa el usuario, joi del avatar
+
+[33mcommit 0c66d845ded1eb2ddd041e1cccebabe951e2037d[m
+Author: Lara Rodríguez <lararh393@gmail.com>
+Date:   Wed Nov 6 19:18:59 2024 +0100
+
+    brevo ya activa el usuario, joi del avatar
+
+[33mcommit 60a4a59fe67c5457b2b324845895f376ed225d41[m
+Merge: bdd47f2 c981e44
+Author: Lara Rodríguez Herrero <lararh393@gmail.com>
+Date:   Wed Nov 6 18:28:47 2024 +0100
+
+    Merge pull request #19 from pamis93/editUser
+    
+    endpoint editUser, ruta en userRouter, avatar eliminado de la solicit…
+
+[33mcommit c981e447486d1ef52769dc1c38d4e7a2cbb0d602[m[33m ([m[1;31morigin/editUser[m[33m)[m
+Merge: 8af3426 bdd47f2
+Author: Lara Rodríguez Herrero <lararh393@gmail.com>
+Date:   Wed Nov 6 18:28:31 2024 +0100
+
+    Merge branch 'main' into editUser
+
+[33mcommit 8af34260c2301933a273f5b829f4417a8ea91682[m
+Author: Lara Rodríguez <lararh393@gmail.com>
+Date:   Wed Nov 6 18:25:02 2024 +0100
+
+    endpoint editUser, ruta en userRouter, avatar eliminado de la solicitud de registro
+
+[33mcommit bdd47f26c11ea3482ebf4654ed68e0a43e4c1b0a[m
+Merge: 18683d0 b5ca537
+Author: Alejandro Garcia Gomez <pamis93@users.noreply.github.com>
+Date:   Wed Nov 6 14:34:26 2024 +0100
+
+    Merge pull request #18 from pamis93/userContext
+    
+    UserContext ok
+
+[33mcommit b5ca5378ca2ac364c26d6310f94df1b652f0e341[m[33m ([m[1;31morigin/userContext[m[33m, [m[1;32muserContext[m[33m)[m
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Wed Nov 6 14:33:51 2024 +0100
+
+    UserContext ok
+
+[33mcommit 18683d0e4af4982f66d0f7535f32960562c07185[m
+Merge: 85aca8d ceac6ca
+Author: Carlos Cue <46687878+carloscuepuente@users.noreply.github.com>
+Date:   Wed Nov 6 13:43:17 2024 +0100
+
+    Merge pull request #17 from pamis93/admin-able-enable-user
+    
+    added feacture for toggle the user status admin only route also a min…
+
+[33mcommit ceac6ca767e4715eadea498728d926985e977c45[m[33m ([m[1;31morigin/admin-able-enable-user[m[33m)[m
+Author: Carlos Cue <cacp892@gmail.com>
+Date:   Wed Nov 6 13:40:07 2024 +0100
+
+    added feacture for toggle the user status admin only route also a minor change to seedDb script
+
+[33mcommit e24cf2ac897712679e1690337c37f6fdcb80f03f[m
+Author: Gustavo Bolivar <gusta_bolivar@hotmail.com>
+Date:   Tue Nov 5 21:34:22 2024 +0100
+
+    ratings
+
+[33mcommit 85aca8dbbd0e929ce5d247d2a373a28f319a9861[m
+Author: Emanuel Gómez <vascogomez247@gmail.com>
+Date:   Tue Nov 5 20:42:58 2024 +0100
+
+    Colección de Postman
+
+[33mcommit e5305f837cfa885df275418b2d5ec3e30d1416bc[m
+Merge: 3605410 3a55375
+Author: Lara Rodríguez Herrero <lararh393@gmail.com>
+Date:   Tue Nov 5 18:20:53 2024 +0100
+
+    Merge pull request #16 from pamis93/avatar
+    
+    implementUpdateAvetar
+
+[33mcommit 3a55375dbce9e7e2f86f91c44e5dadadc7795dfd[m
+Author: Lara Rodríguez <lararh393@gmail.com>
+Date:   Tue Nov 5 18:19:44 2024 +0100
+
+    implementUpdateAvetar
+
+[33mcommit 3605410efb9ae7359a5e81f312a313e67f4116f0[m
+Merge: ef8d0b5 6db7e39
+Author: Carlos Cue <46687878+carloscuepuente@users.noreply.github.com>
+Date:   Tue Nov 5 17:00:03 2024 +0100
+
+    Merge pull request #15 from pamis93/admin-lista-de-usuarios
+    
+    added feacture to list all users as an admin also several minor chang…
+
+[33mcommit 6db7e395065936509819b7c901ef97c42ecfddb3[m
+Author: Carlos Cue <cacp892@gmail.com>
+Date:   Tue Nov 5 16:58:12 2024 +0100
+
+    added feacture to list all users as an admin also several minor changes to the backend
+
+[33mcommit ef8d0b5a4202adc9c0eb72d62cc54dd2fdc1e127[m
+Author: Emanuel Gómez <vascogomez247@gmail.com>
+Date:   Tue Nov 5 02:44:59 2024 +0100
+
+    Gestión de las rutas
+
+[33mcommit 8d76052c637033f0941feab2ee5474dd2c6651a6[m
+Author: Emanuel Gómez <vascogomez247@gmail.com>
+Date:   Tue Nov 5 00:57:26 2024 +0100
+
+    estructura Inicial
+
+[33mcommit 92c51bc96a3588daef92f35d53cd0b433dd060e5[m
+Merge: 1e978ee b62651e
+Author: Lara Rodríguez Herrero <lararh393@gmail.com>
+Date:   Fri Nov 1 21:18:04 2024 +0100
+
+    Merge pull request #14 from pamis93/implementJoiAndMail
+    
+    implementJoiAndMail
+
+[33mcommit b62651e6962abbcf90d932cecaaf5a19ba6fe1b8[m
+Author: Lara Rodríguez <lararh393@gmail.com>
+Date:   Fri Nov 1 21:17:16 2024 +0100
+
+    implementJoiAndMail
+
+[33mcommit 1e978ee64a48cdf178d95336d7a78cf264f13d20[m
+Author: Gustavo Bolivar <gusta_bolivar@hotmail.com>
+Date:   Thu Oct 31 17:52:26 2024 +0100
+
+    Update README.md
+
+[33mcommit fcd0fde2e469d2984cdd1a3ee47229f49af9bf66[m
+Merge: cd59146 ef17833
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Thu Oct 31 14:58:07 2024 +0100
+
+    Merge branch 'main' of https://github.com/pamis93/planificadorDeViajes
+
+[33mcommit cd59146bef3c6d56305239d55132e356322e35fd[m
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Thu Oct 31 14:57:39 2024 +0100
+
+    Mod de texto de recuperacion contraseña
+
+[33mcommit ef178338b14d0fa2d1f1b3e3f3989aa3d1b9ef69[m
+Author: Gustavo Bolivar <gusta_bolivar@hotmail.com>
+Date:   Thu Oct 31 14:24:34 2024 +0100
+
+    Cambio el nombre la app a WonderFly
+
+[33mcommit 63a4917808ab3b4b629ed62bb341b72b6661b6ec[m
+Author: Gustavo Bolivar <gusta_bolivar@hotmail.com>
+Date:   Thu Oct 31 14:15:20 2024 +0100
+
+    validacion lista de favoritos
+
+[33mcommit 8bef0da959616fcc5ecc36fafbbedc80b413383e[m
+Author: Gustavo Bolivar <gusta_bolivar@hotmail.com>
+Date:   Thu Oct 31 13:45:50 2024 +0100
+
+    Update README.md
+
+[33mcommit 300e868bf6c2a36610cc728068101377c480f056[m[33m ([m[1;32mrama-pruebas[m[33m)[m
+Author: Carlos Cue <cacp892@gmail.com>
+Date:   Thu Oct 31 10:26:52 2024 +0100
+
+    fixed recoveryPasswordService and updateUserPassService
+
+[33mcommit 8d5da88c7f6524892ca50e66ab579223b691ce31[m
+Merge: 3f97a73 f210b59
+Author: Carlos Cue <46687878+carloscuepuente@users.noreply.github.com>
+Date:   Wed Oct 30 22:04:04 2024 +0100
+
+    Merge pull request #13 from pamis93/endpoint-eliminar-vuelo-como-favorito
+    
+    Endpoint eliminar vuelo como favorito
+
+[33mcommit f210b5943802e1d5df902f0c380889d646132d94[m
+Author: Carlos Cue <cacp892@gmail.com>
+Date:   Wed Oct 30 22:02:09 2024 +0100
+
+    added functionality for the delete fav endpoint
+
+[33mcommit d18974d0f56881f9fc1a5e240221e452ac669aaf[m
+Merge: 470e2d7 3f97a73
+Author: Carlos Cue <cacp892@gmail.com>
+Date:   Wed Oct 30 19:54:17 2024 +0100
+
+    mergin my branch and main
+
+[33mcommit 470e2d7d444131f8ea1b3f19196c318006b2c757[m
+Author: Carlos Cue <cacp892@gmail.com>
+Date:   Wed Oct 30 19:29:23 2024 +0100
+
+    half way through
+
+[33mcommit 3f97a736aad0748b6c8513b1735f8d95d4c65528[m
+Merge: 667c493 97ce83f
+Author: Alejandro Garcia Gomez <pamis93@users.noreply.github.com>
+Date:   Wed Oct 30 19:09:07 2024 +0100
+
+    Merge pull request #12 from pamis93/modFavService
+    
+    Modificación de backend
+
+[33mcommit 97ce83f4ef63a23ec981b05b172013c17fd69f6d[m[33m ([m[1;31morigin/modFavService[m[33m, [m[1;32mmodFavService[m[33m)[m
+Merge: 5e3bb80 667c493
+Author: Alejandro Garcia Gomez <pamis93@users.noreply.github.com>
+Date:   Wed Oct 30 19:08:38 2024 +0100
+
+    Merge branch 'main' into modFavService
+
+[33mcommit 5e3bb808904b78af106b26bef7ec47ddd7a44c69[m
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Wed Oct 30 19:07:02 2024 +0100
+
+    Backend modificado
+
+[33mcommit cbbd424a390521fe55620bbdbc0d349be2b66e81[m[33m ([m[1;31morigin/Favoritos[m[33m, [m[1;32mFavoritos[m[33m)[m
+Author: Gustavo Bolivar <gusta_bolivar@hotmail.com>
+Date:   Wed Oct 30 13:57:27 2024 +0100
+
+    creando lista favoritos
+
+[33mcommit 667c493211f2e33b1b1929809ed649f7ff50cd09[m
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Wed Oct 30 12:42:28 2024 +0100
+
+    Correccion importacion flighSearch que no se estaba usando
+
+[33mcommit a5b83430de9507b6b85ab4f3da17a4156555ad11[m
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Wed Oct 30 12:41:14 2024 +0100
+
+    Se añade en .env.example campos Amadeus
+
+[33mcommit 4c8f68c2a5325d9859e0d2facb44cab86cf49dc4[m
+Author: Alejandro Garcia <pamis93@gmail.com>
+Date:   Wed Oct 30 12:38:05 2024 +0100
+
+    cambio descripcion en fightSearch sobre las escalas
+
+[33mcommit 26e24d467e0366016feea096148f7b7569c37426[m
+Author: Alejandro Garcia Gomez <pamis93@users.noreply.github.com>
+Date:   Wed Oct 30 11:07:28 2024 +0100
+
+    Update README.md
+    
+    He quitado a josu como desarrollador del grupo
+
+[33mcommit 79bc3f89aedecad2ddf9ee2b6b800143e0819eba[m
+Author: Emanuel Gómez <vascogomez247@gmail.com>
+Date:   Wed Oct 30 00:22:09 2024 +0100
+
+    variables SMTP
+
+[33mcommit 5020d9624434550e02b107b77a6c3eca85604a05[m
+Merge: 83769a9 9831ba2
+Author: Lara Rodríguez <lararh393@gmail.com>
+Date:   Tue Oct 29 21:05:00 2024 +0100
+
+    Merge branch 'main' of github.com:pamis93/planificadorDeViajes
+
+[33mcommit 83769a9178765f8d87ad225fe430b72682548158[m
+Author: Lara Rodríguez <lararh393@gmail.com>
+Date:   Tue Oct 29 21:04:51 2024 +0100
+
+    descomentEndpoint
+
+[33mcommit 9831ba27b38524bae0d851b27ac4db6acc75f91f[m
+Merge: a991d4f 02ec916
+Author: vascogomez <162234805+vascogomez@users.noreply.github.com>
+Date:   Tue Oct 29 21:04:27 2024 +0100
+
+    Merge pull request #11 from pamis93/recoverPassword
+    
+    Recover password y envio de email
+
+[33mcommit 02ec9163906b56ef2f0ad056551fe19db454920f[m
+Merge: 2bbfae3 a991d4f
+Author: vascogomez <162234805+vascogomez@users.noreply.github.com>
+Date:   Tue Oct 29 21:03:30 2024 +0100
+
+    Merge branch 'main' into recoverPassword
+
+[33mcommit a991d4fcc43db64a84a6e75046eea39dbe25a3f2[m
+Merge: 60c6372 4d9fbd7
+Author: Lara Rodríguez Herrero <lararh393@gmail.com>
+Date:   Tue Oct 29 20:59:24 2024 +0100
+
+    Merge pull request #10 from pamis93/endpointPassEdit
+    
+    endpointCambioContraseña
+
+[33mcommit 4d9fbd75fad833cb6fcee45fd7b0c9eec8845675[m
+Merge: 84566cc 60c6372
+Author: Lara Rodríguez Herrero <lararh393@gmail.com>
+Date:   Tue Oct 29 20:59:11 2024 +0100
+
+    Merge branch 'main' into endpointPassEdit
+
+[33mcommit 84566cc21bdb613598fd82bca778a354a87e8a77[m
+Author: Lara Rodríguez <lararh393@gmail.com>
+Date:   Tue Oct 29 20:57:42 2024 +0100
+
+    endpointCambioContraseña
+
+[33mcommit 2bbfae34bd742707ca400e88f78101f2ace41ce5[m
+Author: Emanuel Gómez <vascogomez247@gmail.com>
+Date:   Tue Oct 29 20:56:28 2024 +0100
+
+    recoverpassword
+
+[33mcommit 60c6372b5e8404d42d21f869ee18d8a24ae134f0[m
+Merge: 7c32d15 f5eb15e
+Author: Alejandro Garcia Gomez <pamis93@users.noreply.github.com>
+Date:   Tue Oct 29 20:51:10 2024 +0100
+
+    Merge pull request #9 from pamis93/modBackendConAmadeus
+    
+    Modifacion backend con amadeus

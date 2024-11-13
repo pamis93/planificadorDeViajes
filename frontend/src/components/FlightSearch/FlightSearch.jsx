@@ -9,6 +9,7 @@ import { useFlightSearchParams } from '../../context/FlightSearchParamsContext';
 // import useFetch from '../../hooks/useFetch';
 import { useSearchParams } from 'react-router-dom';
 
+
 function FlightSearch() {
   const [origin, setOrigin] = useState('');
   const [iataOriginCode, setIataOriginCode] = useState('');
