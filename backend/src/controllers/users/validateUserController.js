@@ -6,7 +6,8 @@ export const validateUserController = async (req, res, next) => {
 
     await updateUserRegCodeService(registrationCode);
 
-    res.send({
+    //esto asegura que siempre se devolvera un json.
+    res.status(200).json({
       status: 'ok',
       message: 'Usuario activado!',
     });
@@ -14,3 +15,5 @@ export const validateUserController = async (req, res, next) => {
     next(error);
   }
 };
+
+

@@ -1,17 +1,23 @@
-import { Routes, Route } from 'react-router-dom';
-import PasswordResetPage from '../pages/PasswordResetPage';
-import Register from '../components/Register/Register';
-import Login from '../components/Login/Login';
+/* import { Routes, Route } from 'react-router-dom';
+import PasswordResetPage from '../components/PasswordResetPage/PasswordResetPage';
+import Header from '../components/Header/Header';
+import AccountActivation from '../components/AccountActivation/AccountActivation';
+
+
+
 
 function AppRoutes() {
   return (
-    <Routes>
-      {/* Otras rutas */}
-      <Route path="/recuperacion" element={<PasswordResetPage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-    </Routes>
+    <>
+    <Header/>
+      <Routes>
+        <Route path='/' element={<Header/>}/>
+        <Route path="/recuperacion" element={<PasswordResetPage />} />
+        <Route path="/users/validate/:registrationCode" element={<AccountActivation/>} />
+      </Routes>
+    </>
   );
 }
 
 export default AppRoutes;
+ */
