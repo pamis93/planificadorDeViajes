@@ -1,27 +1,30 @@
-import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header/Header";
-import PasswordResetPage from "../src/components/PasswordResetPage/PasswordResetPage";
-import AccountActivation from "../src/components/AccountActivation/AccountActivation";
-/* import FlightSerach from '../src/components/FlightSearch/FlightSearch'; */
-import "./index.css";
+import { Route, Routes } from 'react-router-dom';
 
-// import AppRouter from './router/Routes';
+// importaciones desde componentes
+import FlightSearch from './components/FlightSearch/FlightSearch';
+import { Layout } from './components/Layout/Layout';
+import PasswordRecovery from './components/PasswordRecovery/PasswordRecovery';
+import Home from './components/Home/Home';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+
+// css;
+import './App.css';
 
 function App() {
-    return (
-        <>
-            <Header />
-            <Routes>
-                {/* Otras rutas */}
-                {/* <Route path="/" element={<FlightSerach/>}/> */}
-                <Route path="/recuperacion" element={<PasswordResetPage/>} />
-                <Route
-                    path="/users/validate/:registrationCode"
-                    element={<AccountActivation />}
-                />
-            </Routes>
-        </>
-    );
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/recuperacion" element={<PasswordRecovery />} />
+          <Route path="/search" element={<FlightSearch />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+      </Routes>
+    </>
+  );
 }
 
 export default App;
