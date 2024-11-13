@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useUser } from '../../context/UserContext';
 import LanguageNav from "./LanguageNav/LanguageNav";
+import LogoutButton from "../Logout/LogoutButton";
 
 function Header() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [user] = useUser(); // Obtén el estado del usuario
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -38,18 +41,33 @@ function Header() {
                         {/* Menú desplegable */}
                         {isDropdownOpen && (
                             <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
-                                <a
-                                    href="/login"
-                                    className="block px-4 py-2 hover:bg-gray-100"
-                                >
-                                    Iniciar sesión
-                                </a>
-                                <a
-                                    href="/register"
-                                    className="block px-4 py-2 hover:bg-gray-100"
-                                >
-                                    Registrarse
-                                </a>
+                                {/* Mostrar solo si el usuario no está logueado */}
+                                {!user ? (
+                                    <>
+                                        <a
+                                            href="/login"
+                                            className="block px-4 py-2 hover:bg-gray-100"
+                                        >
+                                            Iniciar sesión
+                                        </a>
+                                        <a
+                                            href="/register"
+                                            className="block px-4 py-2 hover:bg-gray-100"
+                                        >
+                                            Registrarse
+                                        </a>
+                                    </>
+                                ) : (
+                                    <>
+                                        <a
+                                            href="/register"
+                                            className="block px-4 py-2 hover:bg-gray-100"
+                                        >
+                                            editar usuario
+                                        </a>
+                                        <LogoutButton /> 
+                                    </>
+                                )}
                             </div>
                         )}
                     </div>
@@ -60,5 +78,6 @@ function Header() {
 }
 
 export default Header;
+
 
 
