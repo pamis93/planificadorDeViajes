@@ -7,6 +7,7 @@ import PasswordRecovery from './components/PasswordRecovery/PasswordRecovery';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import { UsersList } from './components/UsersList/UsersList';
 
 // css;
 import './App.css';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/search" element={<FlightSearch />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/admin/users" element={<UsersList />} />
         </Route>
       </Routes>
     </>
