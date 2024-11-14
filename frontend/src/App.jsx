@@ -11,7 +11,6 @@ import Register from './components/Register/Register';
 import { UsersList } from './components/UsersList/UsersList';
 import AccountActivation from './components/AccountActivation/AccountActivation';
 
-
 // css;
 import './App.css';
 
