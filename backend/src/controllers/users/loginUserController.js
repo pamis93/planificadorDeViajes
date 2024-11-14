@@ -1,35 +1,42 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
+import Joi from 'joi';
 
 import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
 import selectUserByEmailService from '../../services/users/selectUserByEmailService.js';
 
 const loginUserController = async (req, res, next) => {
   try {
+    const schema = Joi.object({
+      email: Joi.string().email().required(),
+      password: Joi.string().min(8).max(50).required(),
+    });
+
+    const { error } = schema.validate(req.body);
+
+    if (error) {      
+      throw generateErrorsUtils(error.message, 400);
+    }
+
     const { email, password } = req.body;
-
-    // todo
-    // validar el body con JOI
-
-    if (!email || !password)
-      throw generateErrorsUtils('se require de email o contraseña', 400);
 
     const user = await selectUserByEmailService(email);
 
-    let validPassword;
-
-    if (user) {
-      validPassword = await bcrypt.compare(password, user.password);
-    }
-
-    if (!user || !validPassword) {
+    if (!user) {
       throw generateErrorsUtils('Usuario o contraseña incorrecta', 401);
     }
 
-    // TODO
-    // validar que el usuario este activo
-    // console.log(user);
+    const validPassword = await bcrypt.compare(password, user.password);
+
+    if (!validPassword) {
+      throw generateErrorsUtils('Usuario o contraseña incorrecta', 401);
+    }
+
+    
+    if (!user.enable) {
+      throw generateErrorsUtils('Usuario no activo', 403);
+    }
 
     const tokenInfo = {
       id: user.id,

@@ -1,33 +1,93 @@
-import { useState } from "react";
-// import { useFlightSearch } from "../../hooks/api";
+import { useCallback, useState } from 'react';
+import _debounce from 'lodash/debounce';
+import FlightSearchDropdown from './FlightSearchDropdown';
+import { useAddParamsToSearch } from '../../hooks/api';
+
+import { useFlightSearchParams } from '../../context/FlightSearchParamsContext';
+
+// para construir la query
+// import useFetch from '../../hooks/useFetch';
+import { useSearchParams } from 'react-router-dom';
+
 
 function FlightSearch() {
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
-  const [departureDate, setDepartureDate] = useState("");
+  const [origin, setOrigin] = useState('');
+  const [iataOriginCode, setIataOriginCode] = useState('');
+  const [destination, setDestination] = useState('');
+  const [iataDestinationCode, setIataDestinationCode] = useState('');
+  const [departureDate, setDepartureDate] = useState('');
   const [adults, setAdults] = useState(1);
 
-  // const [searchParams, setSearchParams] = useState({
-  //     origin: "",
-  //     destination: "",
-  //     departureDate: "",
-  //     adults: 1
-  // });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [flightSearchParams] = useFlightSearchParams();
 
-  // const {
-  //     content: flights,
-  //     loading,
-  //     error,
-  // } = useFlightSearch(searchParams);
+  useAddParamsToSearch({
+    departureDate,
+    iataOriginCode,
+    iataDestinationCode,
+    adults,
+  });
 
-  // const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     if (origin && destination && departureDate) {
-  //         setSearchParams({ origin, destination, departureDate, adults });
-  //     } else {
-  //         alert("Por favor, completa todos los campos antes de buscar.");
-  //     }
-  // };
+  // estado para guardar lo que retorna la api
+  const [originResults, setOriginResults] = useState([]);
+  const [destinationResults, setDestinationResults] = useState([]);
+
+  const searchCityOrAirport = async (searchTerm, resultSeterFn) => {
+    if (searchTerm !== '') {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/city-and-airport-search/${searchTerm}`
+        );
+        const data = await response.json();
+        console.log(data);
+
+        if (data) {
+          resultSeterFn(data);
+        }
+      } catch (error) {
+        console.error('Error searching cities and airports:', error);
+      }
+    }
+  };
+
+  const debounceOrigin = useCallback(
+    _debounce(
+      (searchTerm) => searchCityOrAirport(searchTerm, setOriginResults),
+      1000
+    ),
+    []
+  );
+  const debounceDestination = useCallback(
+    _debounce(
+      (searchTerm) => searchCityOrAirport(searchTerm, setDestinationResults),
+      1000
+    ),
+    []
+  );
+
+  const handleOriginChange = (event) => {
+    setOrigin(event.target.value);
+    debounceOrigin(event.target.value);
+  };
+
+  const handleDestinationChange = (event) => {
+    setDestination(event.target.value);
+    debounceDestination(event.target.value);
+  };
+
+  const handleButtonClick = async () => {
+    setSearchParams(flightSearchParams);
+    console.log(searchParams);
+    try {
+      const response = await fetch(
+        `http://localhost:3001/flight-search/?${{ ...searchParams }}`
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -38,8 +98,15 @@ function FlightSearch() {
           <input
             type="text"
             value={origin}
-            onChange={(e) => setOrigin(e.target.value)}
+            onChange={handleOriginChange}
             placeholder="Ciudad de origen"
+          />
+          <FlightSearchDropdown
+            seter={setOrigin}
+            results={originResults}
+            isOrigin={true}
+            setIataOriginCode={setIataOriginCode}
+            setIataDestinationCode={setIataDestinationCode}
           />
         </label>
         <label>
@@ -47,8 +114,15 @@ function FlightSearch() {
           <input
             type="text"
             value={destination}
-            onChange={(e) => setDestination(e.target.value)}
+            onChange={handleDestinationChange}
             placeholder="Ciudad de destino"
+          />
+          <FlightSearchDropdown
+            seter={setDestination}
+            results={destinationResults}
+            isOrigin={false}
+            setIataOriginCode={setIataOriginCode}
+            setIataDestinationCode={setIataDestinationCode}
           />
         </label>
         <label>
@@ -68,7 +142,7 @@ function FlightSearch() {
             min="1"
           />
         </label>
-        <button type="submit">Buscar vuelos</button>
+        <button onClick={handleButtonClick}>Buscar vuelos</button>
       </form>
 
       {/* {loading && <p>Cargando vuelos...</p>}
