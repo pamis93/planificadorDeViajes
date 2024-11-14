@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import FlightSearch from './components/FlightSearch/FlightSearch';
 import { Layout } from './components/Layout/Layout';
 import PasswordRecovery from './components/PasswordRecovery/PasswordRecovery';
+import PasswordReset from './components/PasswordReset/PasswordReset';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/recuperacion" element={<PasswordRecovery />} />
+          <Route path="/reset" element={<PasswordReset />} />
           <Route path="/search" element={<FlightSearch />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

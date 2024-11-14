@@ -9,7 +9,7 @@ function Header() {
   };
 
   return (
-    <header className="bg-custom-blue text-white p-2 w-full h-20 fixed top-0 left-0 z-50 shadow-md">
+    <header className="bg-custom-blue bg-opacity-75 text-white p-2 w-full h-20 fixed top-0 left-0 z-50 shadow-md">
       <div className="flex justify-between items-center w-full gap-8">
         <div className="flex justify-start items-center gap-1">
           <img className="w-10 rounded-xl" src="/witch2.svg" alt="ico" />
