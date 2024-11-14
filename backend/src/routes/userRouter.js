@@ -23,14 +23,14 @@ userRouter.get('/users/validate/:registrationCode', validateUserController);
 // endpoint de login del usuario
 userRouter.post('/users/login', loginUserController);
 
-// Endpoint cambio de contraseña
+// Endpoint cambio de contraseña para cuando te la olvidas y pasas por el recoverPasswordController
 userRouter.put('/users/password', editUserPassController);
 
-//Endpoint recuperacion de contraseña
+//Endpoint de envío de código de recuperación de contraseña
 userRouter.post('/users/password/recover', recoverPasswordController);
 
 //Endpoint cambio de Avatar
-userRouter.put("/users/avatar", authUser, editUserAvatarController);
+userRouter.put('/users/avatar', authUser, editUserAvatarController);
 
 //Endpoint de editar los datos del Usuario
 userRouter.put('/users/edit/:userId', authUser, editUserController);

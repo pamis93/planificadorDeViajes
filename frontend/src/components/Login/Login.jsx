@@ -39,7 +39,7 @@ function Login() {
           // NUEVO: Log de login exitoso
           console.log('✅ Login exitoso - Token recibido');
 
-          localStorage.setItem('token', data.data.token);
+         // localStorage.setItem('token', data.data.token);
 
           setUser({
             token: data.data.token,
