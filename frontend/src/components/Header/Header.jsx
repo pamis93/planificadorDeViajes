@@ -1,5 +1,6 @@
 import { useState } from "react";
 import LanguageNav from "./LanguageNav/LanguageNav";
+import { Link } from "react-router-dom";
 
 function Header() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -18,7 +19,7 @@ function Header() {
                     </h1>
 
                     <div className="flex justify-center gap-6 ml-10">
-                        <a href="/" className="text-white hover:text-orange-500 transition-colors">Vuelos</a>
+                        <Link to="/search" className="text-white hover:text-orange-500 transition-colors">Vuelos</Link>
                         <a href="/about" className="text-white hover:text-orange-500 transition-colors">Favoritos</a>
                     </div>
                 </div>

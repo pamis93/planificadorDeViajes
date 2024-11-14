@@ -9,7 +9,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 
 // css;
-import './App.css';
+/* import './App.css'; */
 
 function App() {
   return (
