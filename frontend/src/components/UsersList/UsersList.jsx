@@ -9,7 +9,7 @@ export const UsersList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+ 
     const getList = async () => {
       try {
         //console.log('user:', user);
@@ -36,9 +36,20 @@ export const UsersList = () => {
         setLoading(false);
       }
     };
-  
-    getList();
-  }, []);
+    useEffect(() => {
+      if (user && user.token) {
+      getList();
+      } else {
+      setLoading(false);
+      setError("Usuario no autorizado");
+      }
+     }, [user]);
+
+     useEffect(() => {
+      if (userList.length > 0) {
+        console.log("Updated user list:", userList);
+      }
+    }, [userList]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -48,9 +59,9 @@ export const UsersList = () => {
     <div id="panel">
       <article>
       <img id="mdi_users" src={logoUsers} alt="icono de personas" />
-      <h2>Gestion de usuarios</h2>
+      <h2 className="gestion">Gestion de usuarios</h2>
       </article>
-      <UsersPanel userList={userList}/>
+      <UsersPanel userList={userList} setUserList={setUserList} />
     </div>
   );
 };
