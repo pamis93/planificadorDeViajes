@@ -8,6 +8,9 @@ export default {
       colors: {
         'custom-blue': '#42486A', // color azul-moradito
       },
+      backgroundImage: {
+        'img-login': "url('./src/assets/fondoLogin.png')",
+      },
     },
   },
   plugins: [flowbite.plugin()],
