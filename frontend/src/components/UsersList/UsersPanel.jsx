@@ -1,15 +1,14 @@
-import logoTrash from '../../assets/logoTrash.png';
+import { UserDelete } from './UserDelete';
+import { UserPanelStatus } from './UserPanelStatus';
 
 
-export const UsersPanel = ({userList}) => {
-  
-  const handletoggleActive= (userId)=>{
-    console.log(`Toggle active status for user with id: ${userId}`);
+export const UsersPanel = ({userList, setUserList}) => {
+  const updateUserStatus = (userId, active) => {
+    setUserList(prevList =>
+      prevList.map(user => (user.id === userId ? { ...user, enable: active } : user))
+    );
   };
 
-  const handleDeleteUser= (userId)=>{
-    console.log(`Delete user with id:${userId}`); 
-  };
   return (
     <div>
       <table>
@@ -23,11 +22,11 @@ export const UsersPanel = ({userList}) => {
         </thead>
         <tbody>{userList.map((user) => (
 
-          <tr key={userList.id}>
+          <tr key={user.id}>
             <td className="text">{user.username}</td>
             <td className="text">{user.email}</td>
-            <td><button id="state" onClick={() => handletoggleActive(user.id)}>{userList.enable ? 'Activo' : 'Inactivo'}</button></td>
-            <td className='papelera'><button onClick= {() => handleDeleteUser(user.id)}> <img id="trash" src={logoTrash} alt="papelera" /> </button></td>
+            <td><UserPanelStatus userId={user.id} active={user.enable} updateUserStatus={updateUserStatus} /></td>
+            <td className='papelera'><UserDelete userId={user.id} setUserList={setUserList} /></td>
           </tr>
           ))}
         </tbody>
