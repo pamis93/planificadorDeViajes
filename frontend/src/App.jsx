@@ -13,6 +13,7 @@ import AccountActivation from './components/AccountActivation/AccountActivation'
 
 // css;
 import './App.css';
+import EditUser from './components/EditUser/EditUser';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin/users" element={<UsersList />} />
+          <Route path="/edituser" element={<EditUser />} />
           <Route
             path="/users/validate/:registrationCode"
             element={<AccountActivation />}
