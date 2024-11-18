@@ -92,7 +92,7 @@ function Login() {
                         <label className="flex items-center text-white">
                             <input 
                                 type="checkbox" 
-                                className="mr-2 w-4 h-4 text-white"
+                                className="mr-2 w-4 h-4 text-black"
                                 name="remember"
                             /> Remember Me
                         </label>

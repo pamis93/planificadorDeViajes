@@ -108,9 +108,10 @@ function FlightSearch() {
                   value={origin}
                   onChange={handleOriginChange}
                   placeholder="Ciudad de origen"
-                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black"
                 />
                 <FlightSearchDropdown
+                  className="text-black"
                   seter={setOrigin}
                   results={originResults}
                   isOrigin={true}
@@ -131,7 +132,7 @@ function FlightSearch() {
                   value={destination}
                   onChange={handleDestinationChange}
                   placeholder="Ciudad de destino"
-                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 "
                 />
                 <FlightSearchDropdown
                   seter={setDestination}
@@ -155,7 +156,7 @@ function FlightSearch() {
                   type="date"
                   value={departureDate}
                   onChange={(e) => setDepartureDate(e.target.value)}
-                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black"
                 />
               </div>
               <div>
@@ -171,7 +172,7 @@ function FlightSearch() {
                   value={adults}
                   onChange={(e) => setAdults(e.target.value)}
                   min="1"
-                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500  text-black"
                 />
               </div>
             </div>
