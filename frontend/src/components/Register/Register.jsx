@@ -11,6 +11,7 @@ function Register() {
     text: '',
     type: '',
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,47 +78,31 @@ function Register() {
     navigate('/');
   };
 
+  const handlePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
   return (
-    <div className="flex items-center justify-center h-screen w-screen mt-8"> 
-      {/* Contenedor del modal */}
-      <div className="relative w-[90vw] max-w-[500px] p-5 rounded-lg text-white text-center bg-cover bg-center bg-no-repeat bg-img-login">
-        
-        {/* Fondo oscuro solo dentro del tamaño del modal */}
-        <div className="absolute inset-0 bg-black opacity-50 rounded-lg z-0"></div>
+    <div className="register-container">
+      <div className="register-content">
+        <h2 className="ttle">CREAR CUENTA</h2>
+        <button className="close-btn">X</button>
 
-        {/* Contenido del modal */}
-        <div className="relative z-10">
-          <h2 className="text-xl md:text-3xl mb-4">CREAR CUENTA</h2> 
-          <button
-            onClick={closeModal}
-            className="top-1 right-2 absolute text-red-700 py-2 px-3 rounded-full mt-0 hover:text-orange-500 transition-colors bg-transparent border-none"
-          >
-            X
-          </button>
-
-          <form className="form" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-2 gap-4"> 
-              <div className="input-group">
-                <label className="block mt-4 text-sm md:text-base font-bold text-white">NOMBRE</label>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Nombre..."
-                  required
-                  className="w-full p-3 my-2 rounded-lg bg-[#686E9E] border-2 border-black text-white text-sm md:text-base placeholder-white"
-                />
-              </div>
-              <div className="input-group">
-                <label className="block mt-4 text-sm md:text-base font-bold text-white">APELLIDO</label>
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Apellido..."
-                  required
-                  className="w-full p-3 my-2 rounded-lg bg-[#686E9E] border-2 border-black text-white text-sm md:text-base placeholder-white"
-                />
-              </div>
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="name-surname">
+            <div className="input-group">
+              <label>NOMBRE</label>
+              <input type="text" name="name" placeholder="Nombre..." required />
             </div>
+            <div className="input-group">
+              <label>APELLIDO</label>
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Apellido..."
+                required
+              />
+            </div>
+          </div>
 
             <label className="block mt-4 text-sm md:text-base font-bold text-white">NOMBRE DE USUARIO</label>
             <input
@@ -137,23 +122,37 @@ function Register() {
               className="w-full p-3 my-2 rounded-lg bg-[#686E9E] border-2 border-black text-white text-sm md:text-base placeholder-white"
             />
 
-            <label className="block mt-4 text-sm md:text-base font-bold text-white">CONTRASEÑA</label>
+          <label>CONTRASEÑA</label>
+          <div className="password-input">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Contraseña..."
               required
-              className="w-full p-3 my-2 rounded-lg bg-[#686E9E] border-2 border-black text-white text-sm md:text-base placeholder-white"
             />
+            <span
+              className={`eye-icon ${showPassword ? 'open' : 'closed'}`}
+              onClick={handlePasswordVisibility}
+            >
+              {showPassword ? '🙉' : '🙈'}
+            </span>
+          </div>
 
-            <label className="block mt-4 text-sm md:text-base font-bold text-white">CONFIRMAR CONTRASEÑA</label>
+          <label>CONFIRMAR CONTRASEÑA</label>
+          <div className="password-input">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               name="confirmPassword"
               placeholder="Confirmar Contraseña..."
               required
-              className="w-full p-3 my-2 rounded-lg bg-[#686E9E] border-2 border-black text-white text-sm md:text-base placeholder-white"
             />
+            <span
+              className={`eye-icon ${showPassword ? 'open' : 'closed'}`}
+              onClick={handlePasswordVisibility}
+            >
+              {showPassword ? '🙉' : '🙈'}
+            </span>
+          </div>
 
             <button
               type="submit"
@@ -177,7 +176,7 @@ function Register() {
           </p>
         </div>
       </div>
-    </div>
+  
   );
 }
 
