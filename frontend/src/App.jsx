@@ -12,7 +12,7 @@ import { UsersList } from './components/UsersList/UsersList';
 import AccountActivation from './components/AccountActivation/AccountActivation';
 
 // css;
-import './App.css';
+/* import './App.css'; */
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path='/users/validate/:registrationCode' element={<AccountActivation/>} />
           <Route path="/recuperacion" element={<PasswordRecovery />} />
           <Route path="/reset" element={<PasswordReset />} />
           <Route path="/search" element={<FlightSearch />} />
