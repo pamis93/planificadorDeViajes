@@ -7,8 +7,7 @@ export const UserPanelStatus = ({ userId, active, updateUserStatus }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   
-  useEffect(() => {
-    setIsActive(active); 
+  useEffect(() => { 
   }, [active]);
 
   const changeStatus = async () => {
@@ -21,15 +20,15 @@ export const UserPanelStatus = ({ userId, active, updateUserStatus }) => {
           'Content-Type': 'application/json',
           Authorization: `${user.token}`,
         },
-        body: JSON.stringify({ active: !isActive }),
+        //body: JSON.stringify({ active: !isActive }),
       });
 
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
       const result = await res.json();
-      setIsActive(result.data.active);
-      updateUserStatus(userId, result.data.active);
+      setIsActive(result.data.response.enable);
+      updateUserStatus(userId, result.data.enable);
     } catch (error) {
       console.error('Fetch error:', error);
       setError(error.message);

@@ -7,17 +7,15 @@ import selectUserByEmailService from './selectUserByEmailService.js';
 
 const passSchema = Joi.object({
     email:Joi.string().email().required(),
-    recoverPassCode: Joi.string().required(),
-    newPassword: Joi.string().min(8).required()
+    newPassword: Joi.string().min(8).required(),
   })
 
 export const updateUserPassService = async (
   email,
-  recoverPassCode,
   newPassword
 ) => {
  
-  const { error } = passSchema.validate({email, recoverPassCode, newPassword});
+  const { error } = passSchema.validate({email, newPassword});
     if(error){
       throw generateErrorsUtils(`Validation error: ${error.details[0].message}`, 400);
     }   
@@ -26,18 +24,25 @@ export const updateUserPassService = async (
 
   const user = await selectUserByEmailService(email);
 
-  if (!user || user.recoverPassCode !== recoverPassCode) {
-    throw generateErrorsUtils('Email o codigo de recuperación incorrecto', 409);
+  if (!user || user.email !== email) {
+    throw generateErrorsUtils('Error de autenticación, acción denegada', 409);
   }
 
   const hashPassword = await bcrypt.hash(newPassword, 10);
 
-  await pool.query(
-    `
-            UPDATE users
-            SET password=?, recoverPassCode=null
-            WHERE recoverPassCode=?
-        `,
-    [hashPassword, recoverPassCode]
-  );
+  try {
+
+    await pool.query(
+      `
+              UPDATE users
+              SET password=?,
+              WHERE email=?
+          `,
+      [hashPassword, email]
+    );
+  } catch (error) {
+    throw generateErrorsUtils('Error al actualizar la base de datos', 500);
+  }
+
+  return {message: 'Contraseña actualizada'};
 };
