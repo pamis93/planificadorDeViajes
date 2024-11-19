@@ -27,12 +27,11 @@ export const updateUserPassService = async (recoverPassCode, newPassword) => {
   );
 
   if (!user) {
-    throw generateErrorsUtils('Código de recuperación incorrecto', 409);
+    throw generateErrorsUtils('Error de autenticación, acción denegada', 409);
+
   }
 
-  
   const hashPassword = await bcrypt.hash(newPassword, 10);
-
   
   await pool.query(
     `
@@ -42,4 +41,5 @@ export const updateUserPassService = async (recoverPassCode, newPassword) => {
     `,
     [hashPassword, user.id]
   );
+
 };
