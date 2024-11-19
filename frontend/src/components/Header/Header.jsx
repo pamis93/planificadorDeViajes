@@ -71,7 +71,7 @@ function Header() {
                 ) : (
                   <>
                     <a
-                      href="/register"
+                      href="/edituser"
                       className="block px-4 py-2 hover:bg-gray-100"
                     >
                       editar usuario

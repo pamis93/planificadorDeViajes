@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import avatar from '../../assets/avatar.png';
+import avatar from '../../assets/avatar.png'; 
+import AvatarUpload from './AvatarUpload';
 
 const EditUser = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,10 @@ const EditUser = () => {
     console.log(formData);
   };
 
+  const handleAvatarUpdate = (newAvatarUrl) => {
+    console.log('Avatar actualizado:', newAvatarUrl);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-black text-2xl font-bold mb-8">
@@ -30,34 +35,19 @@ const EditUser = () => {
       <div className="flex flex-row justify-center items-start gap-8">
         {/* Contenedor Foto de perfil */}
         <div className="flex flex-col items-center bg-[#686E9E] p-6 rounded-lg w-[350px] h-[500px]">
-        <p className="text-white text-10 font-bold mb-4">Foto de perfil</p>
-        <div className="w-50px] h-[290px] rounded-full overflow-hidden bg-white flex justify-center items-center">
-  <img
-    src={avatar}
-    alt="Default Avatar"
-    style={{
-      width: '440px',
-      height: '440px',
-      objectFit: 'cover',
-    }}
-  />
-</div>
+          <p className="text-white text-10 font-bold mb-4">Foto de perfil</p>
+          <AvatarUpload 
+            currentAvatar={avatar}
+            onAvatarUpdate={handleAvatarUpdate}
+          />
           <p className="text-white text-sm font-bold mt-10 text-center">
             Agrega tu foto de perfil o avatar favorito
           </p>
-          <div className="mt-4 flex gap-2">
-            <button className="px-4 py-2 rounded-full text-sm font-bold text-white bg-[#F66136] hover:bg-[#e25630]">
-              SUBIR...
-            </button>
-            <button className="px-4 py-2 rounded-full text-sm font-bold text-white bg-[#F20D11] hover:bg-[#d10b0e]">
-              BORRAR
-            </button>
-          </div>
         </div>
 
         {/* Contenedor Datos personales */}
         <div className="flex flex-col bg-[#686E9E] p-8 rounded-lg w-[350px] h-[500px]">
-        <h3 className="text-white text-lg font-bold mb-8 text-center">Datos personales</h3>
+          <h3 className="text-white text-lg font-bold mb-8 text-center">Datos personales</h3>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="text-white text-sm font-bold">
@@ -73,10 +63,7 @@ const EditUser = () => {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label
-                htmlFor="username"
-                className="text-white text-sm font-bold"
-              >
+              <label htmlFor="username" className="text-white text-sm font-bold">
                 Nombre de Usuario
               </label>
               <input
@@ -102,10 +89,7 @@ const EditUser = () => {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label
-                htmlFor="password"
-                className="text-white text-sm font-bold"
-              >
+              <label htmlFor="password" className="text-white text-sm font-bold">
                 Contraseña
               </label>
               <input
@@ -117,9 +101,7 @@ const EditUser = () => {
                 className="px-4 py-2 bg-[#9AA5BC] text-black font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-[#000000]"
               />
             </div>
-            
           </form>
-          
         </div>
       </div>
       <button
