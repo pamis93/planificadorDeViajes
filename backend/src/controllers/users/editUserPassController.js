@@ -7,7 +7,7 @@ const newPassSchema = joi.object({
 
 export const editUserPassController = async (req, res, next) => {
   try {
-    const { email, recoverPassCode, newPassword } = req.body;
+    const { recoverPassCode, newPassword } = req.body;
 
     //Validamos los datos de entrada.
     const { error } =newPassSchema.validate({ newPassword });
@@ -15,7 +15,7 @@ export const editUserPassController = async (req, res, next) => {
       throw generateErrorsUtils(`Error al introducir los datos: ${error.details[0].message}`, 400);
     }
 
-    await updateUserPassService(email, recoverPassCode, newPassword);
+    await updateUserPassService(recoverPassCode, newPassword);
 
     res.send({
       status: "ok",

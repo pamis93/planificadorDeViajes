@@ -24,7 +24,7 @@ userRouter.get('/users/validate/:registrationCode', validateUserController);
 userRouter.post('/users/login', loginUserController);
 
 // Endpoint cambio de contraseña para cuando te la olvidas y pasas por el recoverPasswordController
-userRouter.put('/users/password', editUserPassController);
+userRouter.put('/users/password/:code', editUserPassController);
 
 //Endpoint de envío de código de recuperación de contraseña
 userRouter.post('/users/password/recover', recoverPasswordController);
