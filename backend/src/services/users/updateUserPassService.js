@@ -3,46 +3,43 @@ import Joi from 'joi';
 
 import getPool from '../../db/getPool.js';
 import generateErrorsUtils from '../../utils/generateErrorsUtils.js';
-import selectUserByEmailService from './selectUserByEmailService.js';
-
 const passSchema = Joi.object({
-    email:Joi.string().email().required(),
-    newPassword: Joi.string().min(8).required(),
-  })
+  recoverPassCode: Joi.string().required(),
+  newPassword: Joi.string().min(8).required(),
+});
 
-export const updateUserPassService = async (
-  email,
-  newPassword
-) => {
- 
-  const { error } = passSchema.validate({email, newPassword});
-    if(error){
-      throw generateErrorsUtils(`Validation error: ${error.details[0].message}`, 400);
-    }   
+export const updateUserPassService = async (recoverPassCode, newPassword) => {
+  const { error } = passSchema.validate({ recoverPassCode, newPassword });
+    if (error) {
+    throw generateErrorsUtils(`Validation error: ${error.details[0].message}`, 400);
+  }
 
   const pool = await getPool();
 
-  const user = await selectUserByEmailService(email);
+  // Buscar al usuario por recoverPassCode
+  const [[user]] = await pool.query(
+    `
+    SELECT id, recoverPassCode
+    FROM users
+    WHERE recoverPassCode = ?
+    `,
+    [recoverPassCode]
+  );
 
-  if (!user || user.email !== email) {
+  if (!user) {
     throw generateErrorsUtils('Error de autenticación, acción denegada', 409);
+
   }
 
   const hashPassword = await bcrypt.hash(newPassword, 10);
+  
+  await pool.query(
+    `
+    UPDATE users
+    SET password = ?, recoverPassCode = NULL
+    WHERE id = ?
+    `,
+    [hashPassword, user.id]
+  );
 
-  try {
-
-    await pool.query(
-      `
-              UPDATE users
-              SET password=?,
-              WHERE email=?
-          `,
-      [hashPassword, email]
-    );
-  } catch (error) {
-    throw generateErrorsUtils('Error al actualizar la base de datos', 500);
-  }
-
-  return {message: 'Contraseña actualizada'};
 };

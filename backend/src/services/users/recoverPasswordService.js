@@ -6,10 +6,10 @@ const recoverPasswordService = async (email, recoverPassCode) => {
 
   await pool.query(
     `
-		UPDATE users
-        SET recoverPassCode = ?
-        WHERE email = ?
-		`,
+    UPDATE users
+    SET recoverPassCode = ?
+    WHERE email = ?
+    `,
     [recoverPassCode, email]
   );
 
@@ -27,10 +27,8 @@ const recoverPasswordService = async (email, recoverPassCode) => {
                   </p>
                   <p style="margin: 0 0 5px; font-size: 16px; color: white;">Se ha solicitado la recuperación de la contraseña para el siguiente email:</p>
                   <p style="margin: 0 0 15px; font-size: 20px; color: #046EF8;">${email}</p>
-                  <p style="margin: 35px 0 5px; font-size: 16px; color: white;">Utilice el siguiente código de recuperación para crear una nueva contraseña:</p>
-                  <p style="margin: 0 0 15px; font-size: 20px; color: #F66136; font-weight: bold">${recoverPassCode}</p>
                   <p style="margin: 20px 0 5px; font-size: 16px; color: #ccc;">Haz clic en el siguiente enlace para restablecer tu contraseña:</p>
-                  <a href="http://localhost:5173/reset" style="color: #046EF8; font-size: 18px; font-weight: bold; text-decoration: none;">Restablecer contraseña</a>
+                  <a href="http://localhost:5173/reset/${recoverPassCode}" style="color: #046EF8; font-size: 18px; font-weight: bold; text-decoration: none;">Restablecer contraseña</a>
                   <p style="margin: 70px 0 2px; color: #fff;">Gracias por volar con nosotros.</p>
                   <p style="margin: 0 0 10px; color: #fff;">&copy; WonderFly ✈️ 2024</p>
                 </td>
@@ -39,7 +37,7 @@ const recoverPasswordService = async (email, recoverPassCode) => {
           </table>
         </body>
     </html>
-	`;
+  `;
 
   await sendMailUtil(email, subject, body);
 };

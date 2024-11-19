@@ -22,7 +22,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='/users/validate/:registrationCode' element={<AccountActivation/>} />
           <Route path="/recuperacion" element={<PasswordRecovery />} />
-          <Route path="/reset" element={<PasswordReset />} />
+          <Route path="/reset/:code" element={<PasswordReset />} />
           <Route path="/search" element={<FlightSearch />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

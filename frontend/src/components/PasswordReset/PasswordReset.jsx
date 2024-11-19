@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import './PasswordReset.css';
 
 function PasswordReset() {
-  const [email, setEmail] = useState('');
-  const [code, setCode] = useState('');
+  const { code } = useParams(); // Obtén el código desde los parámetros de la URL
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -17,16 +17,13 @@ function PasswordReset() {
     }
 
     try {
-      const response = await fetch(
-        'http://localhost:3001/users/password',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, recoverPassCode: code, newPassword }),
-        }
-      );
+      const response = await fetch('http://localhost:3001/users/password/${code}', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ recoverPassCode: code, newPassword }),
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -44,24 +41,6 @@ function PasswordReset() {
     <div className="container">
       <h2>Restablecer Contraseña</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Correo Electrónico:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Código de Verificación:
-          <input
-            type="text"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            required
-          />
-        </label>
         <label>
           Nueva Contraseña:
           <input
