@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useUser } from "../../context/UserContext";
+import { useUser } from '../../context/UserContext';
 
 const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,7 +49,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
         method: 'PUT',
         body: formData,
         headers: {
-            Authorization: `${user.token}`,
+          Authorization: `${user.token}`,
         },
       });
 
@@ -64,7 +64,6 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
         setIsModalOpen(false);
         setSelectedFile(null);
       }
-      
     } catch (error) {
       console.error('Error:', error);
       alert(error.message);
@@ -81,7 +80,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
       const response = await fetch('http://localhost:3001/users/avatar', {
         method: 'PUT',
         headers: {
-            Authorization: `${user.token}`,
+          Authorization: `${user.token}`,
         },
         body: JSON.stringify({ avatar: null }),
       });
