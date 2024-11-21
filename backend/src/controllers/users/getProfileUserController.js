@@ -1,4 +1,4 @@
-import selectUserByEmailService from '../../services/users/selectUserByEmailService.js'; 
+import selectUserByEmailService from '../../services/users/selectUserByEmailService.js';
 
 const getProfileUserController = async (req, res, next) => {
   try {
@@ -17,11 +17,20 @@ const getProfileUserController = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
+    // Filtra los campos requeridos
+    const filteredUser = {
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      password: user.password,
+      name: user.name,
+      lastName: user.lastName,
+      avatar: user.avatar,
+    };
 
-    // Devolvemos los datos del usuario si la consulta fue exitosa
-    res.status(200).json(user); 
+    res.status(200).json(filteredUser);
   } catch (error) {
-    next(error); // Manejo de errores
+    next(error);
   }
 };
 
