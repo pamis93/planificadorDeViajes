@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState } from 'react';
 import { useUser } from '../../context/UserContext';
-import LanguageNav from "./LanguageNav/LanguageNav";
-import LogoutButton from "../Logout/LogoutButton";
+import LanguageNav from './LanguageNav/LanguageNav';
+import LogoutButton from '../Logout/LogoutButton';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -23,11 +23,23 @@ function Header() {
             <span className="text-orange-500">F</span>ly
           </h1>
 
-                    <div className="flex justify-center gap-6 ml-10">
-                        <Link to="/search" className="text-white hover:text-orange-500 transition-colors">Vuelos</Link>
-                        <a href="/about" className="text-white hover:text-orange-500 transition-colors">Favoritos</a>
-                    </div>
-                </div>
+          <div className="flex justify-center gap-6 ml-10">
+            <Link
+              to="/search"
+              className="text-white hover:text-orange-500 transition-colors"
+            >
+              Vuelos
+            </Link>
+            {user && (
+              <Link
+                to={`/users/${user.id}/favoritos`}  // Ruta dinámica
+                className="text-white hover:text-orange-500 transition-colors"
+              >
+                Favoritos
+              </Link>
+            )}
+          </div>
+        </div>
 
         {/* Menú de idiomas y opciones de cuenta */}
         <nav className="flex justify-center items-center relative">
@@ -36,48 +48,48 @@ function Header() {
           <div className="relative">
             <button
               onClick={toggleDropdown}
-              className="flex font-bold h-10 text-white hover:text-gray-300 hover: transition-colors bg-orange-500 rounded-xl p-2"
+              className="flex font-bold h-10 text-white hover:text-gray-300 transition-colors bg-orange-500 rounded-xl p-2"
             >
               Mi cuenta
             </button>
 
-                        {/* Menú desplegable */}
-                        {isDropdownOpen && (
-                            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
-                                {/* Mostrar solo si el usuario no está logueado */}
-                                {!user ? (
-                                    <>
-                                        <a
-                                            href="/login"
-                                            className="block px-4 py-2 hover:bg-gray-100"
-                                        >
-                                            Iniciar sesión
-                                        </a>
-                                        <a
-                                            href="/register"
-                                            className="block px-4 py-2 hover:bg-gray-100"
-                                        >
-                                            Registrarse
-                                        </a>
-                                    </>
-                                ) : (
-                                    <>
-                                        <a
-                                            href="/register"
-                                            className="block px-4 py-2 hover:bg-gray-100"
-                                        >
-                                            editar usuario
-                                        </a>
-                                        <LogoutButton /> 
-                                    </>
-                                )}
-                            </div>
-                        )}
-                    </div>
-                </nav>
-            </div>
-        </header>
-    );
+            {/* Menú desplegable */}
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
+                {/* Mostrar solo si el usuario no está logueado */}
+                {!user ? (
+                  <>
+                    <Link
+                      to="/login"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Iniciar sesión
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Registrarse
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/edit-user"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Editar usuario
+                    </Link>
+                    <LogoutButton />
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        </nav>
+      </div>
+    </header>
+  );
 }
 
 export default Header;

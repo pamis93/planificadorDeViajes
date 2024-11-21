@@ -42,3 +42,8 @@ export const useAddParamsToSearch = (newParams) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [memoNewParams]);
 };
+
+
+/* export const useFavList = (id) => {
+  return useFetch(`http://localhost:3001/users/${id}/favoritos`);
+}; */

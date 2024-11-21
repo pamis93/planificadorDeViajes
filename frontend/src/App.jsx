@@ -10,6 +10,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import { UsersList } from './components/UsersList/UsersList';
 import AccountActivation from './components/AccountActivation/AccountActivation';
+import FavList from './components/FavList/FavList';
 
 // css;
 /* import './App.css'; */
@@ -20,17 +21,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/search" element={<FlightSearch />} />
+          <Route path="/admin/users" element={<UsersList />} />
+          <Route path="/register" element={<Register />} />
           <Route path='/users/validate/:registrationCode' element={<AccountActivation/>} />
+          <Route path="/login" element={<Login />} />
           <Route path="/recuperacion" element={<PasswordRecovery />} />
           <Route path="/reset/:code" element={<PasswordReset />} />
-          <Route path="/search" element={<FlightSearch />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/admin/users" element={<UsersList />} />
-          <Route
-            path="/users/validate/:registrationCode"
-            element={<AccountActivation />}
-          />
+          <Route path="/users/:usuario_id/favoritos" element={<FavList/>}/>
         </Route>
       </Routes>
     </>

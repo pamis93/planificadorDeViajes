@@ -23,7 +23,7 @@ function AccountActivation() {
                     setStatus("Error en la activación de la cuenta");
                 }
             } else {
-                setStatus("Error en la activación de la cuenta");
+                setStatus("Error al conectar con el servidor");
             }
         } catch (error) {
             setStatus("Error en la activación de la cuenta");
