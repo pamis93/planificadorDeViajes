@@ -13,7 +13,7 @@ const EditUser = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-black text-2xl font-bold mb-8">
+      <h1 className="text-black mt-20 text-2xl font-bold mb-8">
         Configuración de la Cuenta
       </h1>
       <div className="flex flex-row justify-center items-start gap-8">
