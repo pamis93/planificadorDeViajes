@@ -51,7 +51,7 @@ Tailwind CSS - Framework CSS para estilos modernos y responsivos.
 Amadeus API - Proveedor de datos relacionados con vuelos.
 Brevo API - Para gestión de correos electrónicos y notificaciones.
 
-**CONACTO**
+**CONTACTO**
 
 Si tienes preguntas o comentarios, no dudes en ponerte en contacto con nosotros en contacto@wonderfly.com.
 
