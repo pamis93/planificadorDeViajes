@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { useUser } from '../../context/UserContext';
 import './Register.css';
 
 function Register() {
-  const [user, setUser] = useUser();
   const [message, setMessage] = useState({
     text: '',
     type: '',
@@ -46,17 +44,13 @@ function Register() {
       const data = await response.json();
 
       if (response.ok) {
-        setUser({
-          ...user,
-          name,
-          lastName,
-          username,
-          email,
-        });
         setMessage({
           text: data.message,
           type: 'success',
         });
+        setTimeout(() => {
+          window.location.href = '/login';
+        }, 2000); // Espera 2 segundos antes de redirigir.
       } else {
         setMessage({
           text: data.message,
