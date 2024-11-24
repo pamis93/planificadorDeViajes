@@ -1,13 +1,4 @@
-body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    font-family: Arial, sans-serif;
-    color: white;
-  }
+
   /* estilo de el contenedor*/
   .login-container {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../../assets/fondoLogin.png');

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './Register.css';
 
 function Register() {
   const [message, setMessage] = useState({
@@ -50,7 +49,7 @@ function Register() {
         });
         setTimeout(() => {
           window.location.href = '/login';
-        }, 2000); // Espera 2 segundos antes de redirigir.
+        }, 2000);
       } else {
         setMessage({
           text: data.message,
@@ -59,28 +58,41 @@ function Register() {
       }
     } catch (error) {
       console.error('Error:', error);
-      setMessage('Error al conectar con el servidor');
+      setMessage({
+        text: 'Error al conectar con el servidor',
+        type: 'error',
+      });
     }
   };
 
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-  return (
-    <div className="register-container">
-      <div className="register-content">
-        <h2 className="ttle">CREAR CUENTA</h2>
-        <button className="close-btn">X</button>
 
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="name-surname">
-            <div className="input-group">
-              <label>NOMBRE</label>
-              <input type="text" name="name" placeholder="Nombre..." required />
-            </div>
-            <div className="input-group">
-              <label>APELLIDO</label>
+  return (
+    <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
+      <div
+        className="bg-black bg-opacity-50 p-10 mt-10 rounded-lg shadow-lg w-[500px] text-center"
+        style={{ backgroundImage: `url('/fondoLogin.png')` }}
+      >
+        <h2 className="text-2xl font-bold mb-6 text-center">CREAR CUENTA</h2>
+        <form onSubmit={handleSubmit}>
+          {/* Nombre y Apellido */}
+          <div className="flex justify-between gap-4 mb-6">
+            <div className="w-1/2">
+              <label className="block text-lg font-semibold mb-2 text-white">NOMBRE</label>
               <input
+                className="w-full p-3 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="text"
+                name="name"
+                placeholder="Nombre..."
+                required
+              />
+            </div>
+            <div className="w-1/2">
+              <label className="block text-lg font-semibold mb-2 text-white">APELLIDO</label>
+              <input
+                className="w-full p-3 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 name="lastName"
                 placeholder="Apellido..."
@@ -89,65 +101,85 @@ function Register() {
             </div>
           </div>
 
-          <label>NOMBRE DE USUARIO</label>
+          {/* Nombre de usuario */}
+          <label className="block text-lg font-semibold mb-2 text-white">NOMBRE DE USUARIO</label>
           <input
+            className="w-full p-3 mb-4 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
             name="username"
-            placeholder="UserName..."
+            placeholder="Nombre de usuario..."
             required
           />
 
-          <label>EMAIL</label>
+          {/* Email */}
+          <label className="block text-lg font-semibold mb-2 text-white">CORREO ELECTRONICO</label>
           <input
+            className="w-full p-3 mb-4 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="email"
             name="email"
-            placeholder="Correo Electronico..."
+            placeholder="Correo Electrónico..."
             required
           />
 
-          <label>CONTRASEÑA</label>
-          <div className="password-input">
+          {/* Contraseña */}
+          <label className="block text-lg font-semibold mb-2 text-white">CONTRASEÑA</label>
+          <div className="relative mb-4">
             <input
+              className="w-full p-3 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Contraseña..."
               required
             />
             <span
-              className={`eye-icon ${showPassword ? 'open' : 'closed'}`}
+              className="absolute right-5 top-2 text-xl text-gray-400 cursor-pointer"
               onClick={handlePasswordVisibility}
             >
               {showPassword ? '🙉' : '🙈'}
             </span>
           </div>
 
-          <label>CONFIRMAR CONTRASEÑA</label>
-          <div className="password-input">
+          {/* Confirmar contraseña */}
+          <label className="block text-lg font-semibold mb-2 text-white">CONFIRMAR CONTRASEÑA</label>
+          <div className="relative mb-4">
             <input
+              className="w-full p-3 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               type={showPassword ? 'text' : 'password'}
               name="confirmPassword"
               placeholder="Confirmar Contraseña..."
               required
             />
             <span
-              className={`eye-icon ${showPassword ? 'open' : 'closed'}`}
+              className="absolute right-5 top-2 text-xl text-gray-400 cursor-pointer"
               onClick={handlePasswordVisibility}
             >
               {showPassword ? '🙉' : '🙈'}
             </span>
           </div>
 
-          <button type="submit" className="login-button">
-            Registrarse
+          {/* Botón de registro */}
+          <button
+            type="submit"
+            className="mt-5 w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-lg transition"
+          >
+            REGISTRARSE
           </button>
         </form>
+
         {message.text && (
-          <p className={`message ${message.type}`}>{message.text}</p>
+          <p
+            className={`mt-4 text-lg ${
+              message.type === 'success' ? 'text-green-500' : 'text-red-500'
+            }`}
+          >
+            {message.text}
+          </p>
         )}
 
-        <p className="register-text">
-          ¿Ya tienes una cuenta?
-          <a href="/login" className="register-link">
+        {/* Texto de inicio de sesión */}
+        <p className="mt-6 text-sm">
+          ¿Ya tienes una cuenta?{' '}
+          <a href="/login" className="text-[#046ef8] font-semibold hover:underline">
             INICIAR SESIÓN
           </a>
         </p>
@@ -157,3 +189,4 @@ function Register() {
 }
 
 export default Register;
+
