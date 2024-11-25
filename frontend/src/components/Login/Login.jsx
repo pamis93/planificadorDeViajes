@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { useUser } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [user, setUser] = useUser();
-  console.log('👤 Estado actual del usuario:', user);
+
+    const [user, setUser] = useUser();
+    console.log('👤 Estado actual del usuario:', user);
+    
+    const navigate = useNavigate();
+
   const [message, setMessage] = useState({
     text: '',
     type: '',
