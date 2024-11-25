@@ -21,21 +21,11 @@ function Header() {
             <span className="text-orange-500">F</span>ly
           </h1>
 
-          <div className="flex justify-center gap-6 ml-10">
-            <a
-              href="/"
-              className="text-white hover:text-orange-500 transition-colors"
-            >
-              Vuelos
-            </a>
-            <a
-              href=""
-              className="text-white hover:text-orange-500 transition-colors"
-            >
-              Favoritos
-            </a>
-          </div>
-        </div>
+                    <div className="flex justify-center gap-6 ml-10">
+                        <Link to="/search" className="text-white hover:text-orange-500 transition-colors">Vuelos</Link>
+                        <a href="/about" className="text-white hover:text-orange-500 transition-colors">Favoritos</a>
+                    </div>
+                </div>
 
         {/* Menú de idiomas y opciones de cuenta */}
         <nav className="flex justify-center items-center relative">

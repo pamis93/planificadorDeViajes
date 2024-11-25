@@ -65,6 +65,10 @@ function Register() {
     }
   };
 
+  const closeModal = () => {
+    navigate('/');
+  };
+
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
