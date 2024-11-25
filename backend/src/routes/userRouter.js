@@ -10,6 +10,8 @@ import newFavoriteFlightController from '../controllers/flights/newFavoriteFligh
 import { editUserAvatarController } from '../controllers/users/editUserAvatarController.js';
 import { editUserController } from '../controllers/users/editUserController.js';
 import { getAvatarController } from '../controllers/users/getAvatarController.js';
+import getProfileUserController from '../controllers/users/getProfileUserController.js';
+
 
 //Creamos un router.
 export const userRouter = express.Router();
@@ -37,6 +39,9 @@ userRouter.put('/users/edit/:userId', authUser, editUserController);
 
 //Ruta para poder acceder a los recursos estáticos.
 userRouter.get('/users/getAvatar/:avatar', authUser, getAvatarController);
+
+//Ruta para traer el perfil del usuario
+userRouter.post('/users/profile', getProfileUserController);
 
 //PREGUNTAR POSICIÓN CORRECTA DE ESTOS DOS ENDPOINT:
 

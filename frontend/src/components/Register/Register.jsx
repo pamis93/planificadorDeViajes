@@ -64,12 +64,17 @@ function Register() {
         text: 'Error al conectar con el servidor',
         type: 'error',
       });
+      setMessage({
+        text: 'Error al conectar con el servidor',
+        type: 'error',
+      });
     }
   };
 
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+
 
   return (
     <div className="register-container">
@@ -89,9 +94,10 @@ function Register() {
                 className="text-black"
               />
             </div>
-            <div className="input-group">
-              <label>APELLIDO</label>
+            <div className="w-1/2">
+              <label className="block text-lg font-semibold mb-2 text-white">APELLIDO</label>
               <input
+                className="w-full p-3 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 name="lastName"
                 placeholder="Apellido..."
@@ -119,9 +125,11 @@ function Register() {
             className="w-full p-3 my-2 rounded-lg bg-[#686E9E] border-2 border-black text-white text-sm md:text-base placeholder-white"
           />
 
-          <label>CONTRASEÑA</label>
-          <div className="password-input">
+          {/* Contraseña */}
+          <label className="block text-lg font-semibold mb-2 text-white">CONTRASEÑA</label>
+          <div className="relative mb-4">
             <input
+              className="w-full p-3 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Contraseña..."
@@ -129,16 +137,18 @@ function Register() {
               className="text-black"
             />
             <span
-              className={`eye-icon ${showPassword ? 'open' : 'closed'}`}
+              className="absolute right-5 top-2 text-xl text-gray-400 cursor-pointer"
               onClick={handlePasswordVisibility}
             >
               {showPassword ? '🙉' : '🙈'}
             </span>
           </div>
 
-          <label>CONFIRMAR CONTRASEÑA</label>
-          <div className="password-input">
+          {/* Confirmar contraseña */}
+          <label className="block text-lg font-semibold mb-2 text-white">CONFIRMAR CONTRASEÑA</label>
+          <div className="relative mb-4">
             <input
+              className="w-full p-3 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               type={showPassword ? 'text' : 'password'}
               name="confirmPassword"
               placeholder="Confirmar Contraseña..."
@@ -146,7 +156,7 @@ function Register() {
               className="text-black"
             />
             <span
-              className={`eye-icon ${showPassword ? 'open' : 'closed'}`}
+              className="absolute right-5 top-2 text-xl text-gray-400 cursor-pointer"
               onClick={handlePasswordVisibility}
             >
               {showPassword ? '🙉' : '🙈'}
@@ -179,3 +189,4 @@ function Register() {
 }
 
 export default Register;
+
