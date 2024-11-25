@@ -7,6 +7,7 @@ export const updateUserService = async(email, username, password, name, lastName
     // Hasheamos la contraseña.
     const hashedPass = await bcrypt.hash(password, 10);
 
+
     await pool.query(
         `
         UPDATE users
@@ -16,5 +17,3 @@ export const updateUserService = async(email, username, password, name, lastName
         [email, username, hashedPass, name, lastName, userId]
     );
 } 
-
- 

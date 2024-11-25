@@ -13,7 +13,6 @@ function Login() {
     text: '',
     type: '',
   });
-
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -38,11 +37,6 @@ function Login() {
 
       if (response.ok) {
         if (data.data && data.data.token) {
-          // NUEVO: Log de login exitoso
-          console.log('✅ Login exitoso - Token recibido');
-
-         // localStorage.setItem('token', data.data.token);
-
           setUser({
             token: data.data.token,
             email: email,
@@ -67,63 +61,71 @@ function Login() {
       });
     }
   };
+
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-  return (
-    <div className="login-container">
-      <div className="login-content">
-        <h2 className="ttle">BIENVENIDO/A DE VUELTA</h2>
-        <button className="closse-btn">X</button>
 
+  return (
+    <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
+      <div className="bg-black bg-opacity-50 p-10 mt-20 rounded-lg shadow-lg w-[500px] h-[750px] text-center"
+       style={{ backgroundImage: `url('/fondoLogin.png')` }}>
+
+        <h2 className="text-2xl font-bold mb-6">BIENVENIDO/A DE VUELTA</h2>
         <form onSubmit={handleSubmit}>
-          <label>EMAIL</label>
+          <label className="block text-lg font-semibold mt-10 mb-2 text-white">EMAIL</label>
           <input
-            className="email"
+            className="placeholder:text-gray-300 w-full p-3 mb-4 border rounded-lg bg-[#686e9e] text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="email"
             name="email"
             placeholder="Enter Your Email..."
             required
           />
-
-          <label>CONTRASEÑA</label>
-          <div className="password-input">
+          <label className="block text-lg font-semibold mt-10 mb-2 text-white">CONTRASEÑA</label>
+          <div className="relative mb-4">
             <input
+              className="placeholder:text-gray-300 w-full p-3 border rounded-lg bg-[#686e9e] text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Contraseña..."
               required
             />
             <span
-              className={`eye-iconL ${showPassword ? 'open' : 'closed'}`}
+              className="absolute right-5 top-2 text-xl text-gray-400 cursor-pointer"
               onClick={handlePasswordVisibility}
             >
               {showPassword ? '🙉' : '🙈'}
             </span>
           </div>
 
-          <div className="options">
-            <label>
-              <input type="checkbox" name="remember" /> Remember Me
-            </label>
-            <a href="/recuperacion" className="forgot-password">
-              Forgot Password?
+          <p className="text-sm">
+            <a href="/recuperacion" className="text-[#046ef8] font-semibold text-lg hover:underline">
+              olvidaste la contraseña?
             </a>
-          </div>
+          </p>
 
-          <button type="submit" className="login-button">
+          <button
+            type="submit"
+            className="mt-5 w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-lg transition"
+          >
             Iniciar Sesión
           </button>
         </form>
 
         {message.text && (
-          <p className={`message ${message.type}`}>{message.text}</p>
+          <p
+            className={`mt-4 text-lg ${
+              message.type === 'success' ? 'text-green-500' : 'text-red-500'
+            }`}
+          >
+            {message.text}
+          </p>
         )}
 
-        <p className="register-text">
-          ¿Aún no tienes una cuenta?
-          <a href="/register" className="register-link">
-            REGISTRATE
+        <p className="mt-20 text-sm">
+          ¿Aún no tienes una cuenta?{' '}
+          <a href="/register" className="text-[#046ef8] font-semibold text-lg hover:underline">
+            REGÍSTRATE
           </a>
         </p>
       </div>

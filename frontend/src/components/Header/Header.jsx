@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import { useUser } from '../../context/UserContext';
 import LanguageNav from "./LanguageNav/LanguageNav";
 import LogoutButton from "../Logout/LogoutButton";
@@ -41,43 +41,43 @@ function Header() {
               Mi cuenta
             </button>
 
-                        {/* Menú desplegable */}
-                        {isDropdownOpen && (
-                            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
-                                {/* Mostrar solo si el usuario no está logueado */}
-                                {!user ? (
-                                    <>
-                                        <a
-                                            href="/login"
-                                            className="block px-4 py-2 hover:bg-gray-100"
-                                        >
-                                            Iniciar sesión
-                                        </a>
-                                        <a
-                                            href="/register"
-                                            className="block px-4 py-2 hover:bg-gray-100"
-                                        >
-                                            Registrarse
-                                        </a>
-                                    </>
-                                ) : (
-                                    <>
-                                        <a
-                                            href="/register"
-                                            className="block px-4 py-2 hover:bg-gray-100"
-                                        >
-                                            editar usuario
-                                        </a>
-                                        <LogoutButton /> 
-                                    </>
-                                )}
-                            </div>
-                        )}
-                    </div>
-                </nav>
-            </div>
-        </header>
-    );
+            {/* Menú desplegable */}
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
+                {/* Mostrar solo si el usuario no está logueado */}
+                {!user ? (
+                  <>
+                    <a
+                      href="/login"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Iniciar sesión
+                    </a>
+                    <a
+                      href="/register"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Registrarse
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <a
+                      href="/edituser"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      editar usuario
+                    </a>
+                    <LogoutButton />
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        </nav>
+      </div>
+    </header>
+  );
 }
 
 export default Header;
