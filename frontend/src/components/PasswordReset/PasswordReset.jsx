@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './PasswordReset.css';
+
 
 function PasswordReset() {
   const { code } = useParams(); // Obtén el código desde los parámetros de la URL

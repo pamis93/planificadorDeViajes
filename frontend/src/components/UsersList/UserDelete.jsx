@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useUser } from '../../context/UserContext';
-//import logoTrash from '../../assets/logoTrash.png';
 import DeleteIcon from '@mui/icons-material/Delete';
+
 export const UserDelete = ({ userId, setUserList }) => {
   const [user] = useUser();
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,6 @@ export const UserDelete = ({ userId, setUserList }) => {
       }
 
       setUserList(prevList => prevList.filter(user => user.id !== userId));
-
     } catch (error) {
       console.error('Error al eliminar el usuario', error);
       setError(error.message);
@@ -37,10 +36,14 @@ export const UserDelete = ({ userId, setUserList }) => {
 
   return (
     <div>
-      <button id="trash" onClick={deleteUser} disabled={loading}>
+      <button
+        onClick={deleteUser}
+        disabled={loading}
+        className="w-full bg-gray-600 text-gray-800 p-2 rounded-lg opacity-0 hover:bg-red-600 transition duration-300"
+      >
         <DeleteIcon />
       </button>
-      {error && <div className="error">{error}</div>}
+      {error && <div className="text-red-500 mt-2">{error}</div>}
     </div>
   );
 };

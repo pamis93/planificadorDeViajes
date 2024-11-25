@@ -30,7 +30,7 @@ function FlightSearch() {
     if (searchTerm !== '') {
       try {
         const response = await fetch(
-          `http://localhost:3001/city-and-airport-search/${searchTerm}`
+          `${import.meta.env.VITE_API_URL}/city-and-airport-search/${searchTerm}`
         );
         const data = await response.json();
 
@@ -81,7 +81,7 @@ function FlightSearch() {
   };
 
   return (
-    <div className="relative w-full h-[500px] z-0">
+    <div className="relative w-full  z-0">
       <img
         className="w-full h-full object-cover"
         src="../../../public/fondo-header.jfif"
