@@ -10,6 +10,10 @@ import Register from './components/Register/Register';
 import { UsersList } from './components/UsersList/UsersList';
 import AccountActivation from './components/AccountActivation/AccountActivation';
 import EditUser from './components/EditUser/EditUser';
+import NotFound from "./components/NotFound/NotFound";;
+
+// css;
+/* import './App.css'; */
 
 function App() {
   return (
@@ -25,6 +29,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/admin/users" element={<UsersList />} />
           <Route path="/edituser" element={<EditUser />} />
+          <Route path="*" element={<NotFound />} />
           <Route
             path="/users/validate/:registrationCode"
             element={<AccountActivation />}
