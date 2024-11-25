@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useUser } from '../../context/UserContext'; // Asegúrate de que tienes este contexto configurado
+import { useUser } from '../../context/UserContext'; 
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -13,7 +13,6 @@ function Login() {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    // Verifica si el usuario ya está autenticado
     useEffect(() => {
         if (user && user.token) {
             setMessage({
@@ -21,12 +20,11 @@ function Login() {
                 type: 'info',
             });
 
-            // Redirige a la página principal o a otra ruta después de 2 segundos
             const redirectTimeout = setTimeout(() => {
                 navigate('/');
             }, 2000);
 
-            return () => clearTimeout(redirectTimeout); // Limpia el timeout si el componente se desmonta
+            return () => clearTimeout(redirectTimeout);
         }
     }, [user, navigate]);
 
@@ -45,26 +43,22 @@ function Login() {
                 body: JSON.stringify({ email, password }),
             });
 
-            const text = await response.text(); // Leemos la respuesta como texto
-            console.log('Respuesta como texto:', text); // Muestra la respuesta en texto
+            const text = await response.text();
 
             try {
                 const data = JSON.parse(text);
-                console.log('Respuesta JSON:', data);
 
                 if (response.ok) {
                     if (data.data && data.data.token) {
-                        console.log('✅ Login exitoso - Token recibido');
-
-                        // Decodifica el token para obtener información adicional (opcional)
+                        let decodedToken;
                         try {
-                            const decodedToken = JSON.parse(atob(data.data.token.split('.')[1]));
-                            console.log('ID del usuario en el token:', decodedToken.id);
+                            decodedToken = JSON.parse(atob(data.data.token.split('.')[1]));
                         } catch (e) {
                             console.error('Error al decodificar el token:', e);
                         }
 
                         setUser({
+                            id: decodedToken.id,
                             token: data.data.token,
                             email: email,
                         });
@@ -73,7 +67,7 @@ function Login() {
                             text: data.message,
                             type: 'success',
                         });
-                        navigate('/'); // Redirige al home
+                        navigate('/');
                     }
                 } else {
                     setMessage({
@@ -82,14 +76,12 @@ function Login() {
                     });
                 }
             } catch (jsonError) {
-                console.error('Error al intentar convertir la respuesta en JSON:', jsonError);
                 setMessage({
                     text: 'Error al procesar la respuesta del servidor.',
                     type: 'error',
                 });
             }
         } catch (error) {
-            console.error('Error al conectar con el servidor:', error);
             setMessage({
                 text: 'Error al conectar con el servidor',
                 type: 'error',
@@ -108,65 +100,68 @@ function Login() {
     }, [user]);
 
     return (
-        <div className="login-container">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800">
             {user && user.token ? (
-                // Mostrar mensaje si el usuario ya está autenticado
-                <div className="login-message">
-                    <p className="message info">Ya has iniciado sesión. Redirigiendo...</p>
+                <div className="text-center bg-white p-6 rounded-lg shadow-lg">
+                    <p className="text-lg font-bold text-gray-700">Ya has iniciado sesión. Redirigiendo...</p>
                 </div>
             ) : (
-                // Mostrar formulario de inicio de sesión
-                <div className="login-content">
-                    <h2 className="ttle">BIENVENIDO/A DE VUELTA</h2>
-                    <button className="closse-btn">X</button>
-
+                <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
+                    <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">BIENVENIDO/A DE VUELTA</h2>
                     {message.text && (
-                        <p className={`message ${message.type}`}>{message.text}</p>
+                        <p className={`mb-4 text-center ${message.type === 'error' ? 'text-red-600' : 'text-green-600'}`}>
+                            {message.text}
+                        </p>
                     )}
-
-                    <form onSubmit={handleSubmit}>
-                        <label>EMAIL</label>
-                        <input
-                            className="email text-black"
-                            type="email"
-                            name="email"
-                            placeholder="Enter Your Email..."
-                            required
-                        />
-
-                        <label>CONTRASEÑA</label>
-                        <div className="password-input text-black">
+                    <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+                        <div className="flex flex-col">
+                            <label htmlFor="email" className="text-sm font-semibold text-gray-600">EMAIL</label>
                             <input
-                                type={showPassword ? 'text' : 'password'}
-                                name="password"
-                                placeholder="Contraseña..."
+                                className="mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                                type="email"
+                                name="email"
+                                placeholder="Enter Your Email..."
                                 required
                             />
-                            <span
-                                className={`eye-iconL ${showPassword ? 'open' : 'closed'}`}
-                                onClick={handlePasswordVisibility}
-                            >
-                                {showPassword ? '🙉' : '🙈'}
-                            </span>
                         </div>
-
-                        <div className="options">
-                            <label>
-                                <input type="checkbox" name="remember" /> Remember Me
+                        <div className="flex flex-col">
+                            <label htmlFor="password" className="text-sm font-semibold text-gray-600">CONTRASEÑA</label>
+                            <div className="relative">
+                                <input
+                                    className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                                    type={showPassword ? 'text' : 'password'}
+                                    name="password"
+                                    placeholder="Contraseña..."
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute inset-y-0 right-3 text-gray-600"
+                                    onClick={handlePasswordVisibility}
+                                >
+                                    {showPassword ? '🙉' : '🙈'}
+                                </button>
+                            </div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <label className="flex items-center">
+                                <input type="checkbox" className="mr-2" />
+                                <span className="text-sm text-gray-600">Remember Me</span>
                             </label>
-                            <a href="/recuperacion" className="forgot-password">
+                            <a href="/recuperacion" className="text-sm text-blue-600 hover:underline">
                                 Forgot Password?
                             </a>
                         </div>
-
-                        <button type="submit" className="login-button">
+                        <button
+                            type="submit"
+                            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
                             Iniciar Sesión
                         </button>
                     </form>
-
-                    <p className="register-text">
+                    <p className="mt-6 text-center text-sm text-gray-600">
                         ¿Aún no tienes una cuenta?{' '}
-                        <a href="/register" className="register-link">
+                        <a href="/register" className="text-blue-600 hover:underline">
                             REGÍSTRATE
                         </a>
                     </p>

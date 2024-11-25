@@ -20,7 +20,7 @@ export const UserProvider = ({ children }) => {
         return null;
       }
     }
-    return session;
+    return null;
   });
 
   const enhancedSetUser = (v) => {
