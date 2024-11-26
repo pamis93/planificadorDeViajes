@@ -1,11 +1,7 @@
 import { useState } from 'react';
-import { useUser } from '../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
 
 function Register() {
-  const [user, setUser] = useUser();
 
-  const navigate = useNavigate();
 
   const [message, setMessage] = useState({
     text: '',
@@ -71,9 +67,6 @@ function Register() {
     }
   };
 
-  const closeModal = () => {
-    navigate('/');
-  };
 
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);

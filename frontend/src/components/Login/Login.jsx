@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { useUser } from '../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
     const [user, setUser] = useUser();
     console.log('👤 Estado actual del usuario:', user);
     
-    const navigate = useNavigate();
 
   const [message, setMessage] = useState({
     text: '',
@@ -47,6 +45,9 @@ function Login() {
             type: 'success',
           });
         }
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2000);
       } else {
         setMessage({
           text: data.message,
