@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useUser } from '../../context/UserContext';
-import { UsersPanel } from './UsersPanel';
-import logoUsers from '../../assets/logoUsers.png';
-
+import { useState, useEffect } from "react";
+import { useUser } from "../../context/UserContext";
+import { UsersPanel } from "./UsersPanel";
+import logoUsers from "../../assets/logoUsers.png";
 export const UsersList = () => {
   const [user] = useUser();
   const [userList, setUserList] = useState([]);
@@ -46,10 +45,10 @@ export const UsersList = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div id="panel" className="p-6 bg-indigo-600 rounded-lg max-w-xl mx-auto text-center">
-      <article className="flex items-center gap-3">
-        <img id="mdi_users" src={logoUsers} alt="icono de personas" className="w-10 h-10" />
-        <h2 className="gestion text-white text-xl font-bold">Gestión de usuarios</h2>
+    <div id="panel" className="mt-20 top-5 p-5 rounded-2xl w-full max-w-md mx-auto text-center relative bg-[#686e9e]">
+      <article className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-4">
+      <img id="mdi_users" className="w-10 h-10" src={logoUsers} alt="icono de personas" />
+      <h2 id="gestion" className="text-lg font-bold leading-tight text-white underline">Gestion de usuarios</h2>
       </article>
       <UsersPanel userList={userList} setUserList={setUserList} />
     </div>

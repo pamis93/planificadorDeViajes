@@ -9,6 +9,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import { UsersList } from './components/UsersList/UsersList';
 import AccountActivation from './components/AccountActivation/AccountActivation';
+import { UserInfo } from './components/UsersList/UserInfo';
 import EditUser from './components/EditUser/EditUser';
 import NotFound from "./components/NotFound/NotFound";;
 import FavList from './components/FavList/FavList';
@@ -35,10 +36,9 @@ function App() {
           <Route path="/admin/users" element={<UsersList />} />
           <Route path="/edituser" element={<EditUser />} />
           <Route path="*" element={<NotFound />} />
-          <Route
-            path="/users/validate/:registrationCode"
-            element={<AccountActivation />}
-          />
+          <Route path="/admin/users/:id" element={<UserInfo />} />
+          <Route path="/users/validate/:registrationCode" element={<AccountActivation />}
+          /> 
           <Route path="/users/:usuario_id/favoritos" element={<FavList/>}/>
         </Route>
       </Routes>

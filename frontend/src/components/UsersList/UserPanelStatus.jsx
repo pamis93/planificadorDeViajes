@@ -34,12 +34,16 @@ export const UserPanelStatus = ({ userId, active, updateUserStatus }) => {
       setLoading(false);
     }
   };
-
+/*className={`status ${isActive ? 'Activo' : 'Inactivo'}`}*/
   return (
-    <div>
+    <div className='p-4'>
       <button
+      className={`w-24 h-6 p-2 flex items-center justify-center gap-2 rounded-full text-white font-manrope text-xs font-medium leading-5 text-center shadow-lg ${
+        isActive ? 'bg-[#0df20d]' : 'bg-[#757575]'
+      }`}
+        
         onClick={changeStatus}
-        className={`status w-20 h-10 p-3 rounded-full text-white text-xs font-medium ${isActive ? 'bg-green-500' : 'bg-gray-600'} transition duration-300`}
+        
       >
         {loading ? 'Actualizando...' : isActive ? 'Activo' : 'Inactivo'}
       </button>

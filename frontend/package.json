@@ -11,10 +11,7 @@
     "build:css": "tailwindcss build src/styles/tailwind.css -o src/styles/output.css"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.7",
-    "@mui/material": "^6.1.7",
+    "@heroicons/react": "^2.2.0",
     "flowbite": "^2.5.2",
     "flowbite-react": "^0.10.2",
     "jwt-decode": "^4.0.0",
