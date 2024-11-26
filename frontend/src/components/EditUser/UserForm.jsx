@@ -1,21 +1,21 @@
-import { useState, useEffect } from "react";
-import { useUser } from "../../context/UserContext";
+import { useState, useEffect } from 'react';
+import { useUser } from '../../context/UserContext';
 
-const UserForm = ({ onSubmit }) => {
+const UserForm = ({ setAvatarXXX, onSubmit }) => {
   // Obtiene el estado del contexto de usuario con useUser.
-  const [user] = useUser(); 
+  const [user] = useUser();
 
   // Estado local para almacenar los datos del formulario.
   const [formData, setFormData] = useState({
-    name: "",
-    lastName: "",
-    username: "",
-    email: "",
-    password: "",
+    name: '',
+    lastName: '',
+    username: '',
+    email: '',
+    password: '',
   });
 
   // Estado para guardar el ID del usuario.
-  const [userId, setUserId] = useState(null); 
+  const [userId, setUserId] = useState(null);
 
   // Estado para controlar qué campos son editables.
   const [editableFields, setEditableFields] = useState({});
@@ -24,7 +24,7 @@ const UserForm = ({ onSubmit }) => {
   const [loading, setLoading] = useState(true);
 
   // Estado para mostrar mensajes (éxito o error).
-  const [message, setMessage] = useState({ text: "", type: "" });
+  const [message, setMessage] = useState({ text: '', type: '' });
 
   // useEffect para cargar los datos del usuario al montar el componente.
   useEffect(() => {
@@ -35,17 +35,17 @@ const UserForm = ({ onSubmit }) => {
 
       // Si no hay token o email, muestra un mensaje de error y detiene la carga.
       if (!token || !email) {
-        setMessage({ text: "Usuario no autenticado", type: "error" });
+        setMessage({ text: 'Usuario no autenticado', type: 'error' });
         setLoading(false);
         return;
       }
 
       try {
         // Llama a la API para obtener los datos del perfil del usuario.
-        const response = await fetch("http://localhost:3001/users/profile", {
-          method: "POST",
+        const response = await fetch('http://localhost:3001/users/profile', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: token,
           },
           body: JSON.stringify({ email }), // Envia el email en el cuerpo de la solicitud.
@@ -56,22 +56,29 @@ const UserForm = ({ onSubmit }) => {
           const userData = await response.json();
           setUserId(userData.id); // Guarda el ID del usuario.
           setFormData({
-            name: userData.name || "",
-            lastName: userData.lastName || "",
-            username: userData.username || "",
-            email: userData.email || "",
-            password: "", // Nunca se muestra la contraseña por seguridad.
+            name: userData.name || '',
+            lastName: userData.lastName || '',
+            username: userData.username || '',
+            email: userData.email || '',
+            password: '', // Nunca se muestra la contraseña por seguridad.
           });
+          setAvatarXXX('http://localhost:3001/uploads/' + userData.avatar);
           setLoading(false); // Detiene la carga.
         } else {
           // Maneja errores de la API.
           const errorData = await response.json();
-          setMessage({ text: errorData.message || "Error al obtener datos", type: "error" });
+          setMessage({
+            text: errorData.message || 'Error al obtener datos',
+            type: 'error',
+          });
           setLoading(false);
         }
       } catch {
         // Maneja errores de conexión.
-        setMessage({ text: "Error al conectar con el servidor", type: "error" });
+        setMessage({
+          text: 'Error al conectar con el servidor',
+          type: 'error',
+        });
         setLoading(false);
       }
     };
@@ -101,7 +108,7 @@ const UserForm = ({ onSubmit }) => {
 
     if (!userId) {
       // Si no hay un ID de usuario, muestra un error.
-      setMessage({ text: "Usuario no autenticado", type: "error" });
+      setMessage({ text: 'Usuario no autenticado', type: 'error' });
       return;
     }
 
@@ -109,32 +116,44 @@ const UserForm = ({ onSubmit }) => {
       const token = user?.token;
       if (!token) {
         // Si no hay un token válido, muestra un error.
-        setMessage({ text: "Token no disponible, vuelva a iniciar sesión", type: "error" });
+        setMessage({
+          text: 'Token no disponible, vuelva a iniciar sesión',
+          type: 'error',
+        });
         return;
       }
 
       // Llama a la API para actualizar los datos del usuario.
-      const response = await fetch(`http://localhost:3001/users/edit/${userId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-        body: JSON.stringify(formData), // Envía los datos del formulario como JSON.
-      });
+      const response = await fetch(
+        `http://localhost:3001/users/edit/${userId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token,
+          },
+          body: JSON.stringify(formData), // Envía los datos del formulario como JSON.
+        }
+      );
 
       if (response.ok) {
         // Si la respuesta es exitosa, muestra un mensaje de éxito.
-        setMessage({ text: "Datos actualizados correctamente", type: "success" });
+        setMessage({
+          text: 'Datos actualizados correctamente',
+          type: 'success',
+        });
         onSubmit(formData); // Llama a la función onSubmit si se pasa desde el padre.
       } else {
         // Maneja errores de la API.
         const errorData = await response.json();
-        setMessage({ text: errorData.message || "Error al actualizar los datos", type: "error" });
+        setMessage({
+          text: errorData.message || 'Error al actualizar los datos',
+          type: 'error',
+        });
       }
     } catch {
       // Maneja errores de conexión.
-      setMessage({ text: "Error al conectar con el servidor", type: "error" });
+      setMessage({ text: 'Error al conectar con el servidor', type: 'error' });
     }
   };
 
@@ -146,21 +165,24 @@ const UserForm = ({ onSubmit }) => {
   // Renderiza el formulario.
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      {["name", "lastName", "username", "email", "password"].map((field) => (
+      {['name', 'lastName', 'username', 'email', 'password'].map((field) => (
         <div key={field} className="flex flex-col gap-2">
           <label htmlFor={field} className="text-white text-sm font-bold">
-            {field.charAt(0).toUpperCase() + field.slice(1)} {/* Capitaliza el nombre del campo */}
+            {field.charAt(0).toUpperCase() + field.slice(1)}{' '}
+            {/* Capitaliza el nombre del campo */}
           </label>
           <div className="flex items-center">
             <input
-              type={field === "password" ? "password" : "text"} // El campo password es de tipo "password".
+              type={field === 'password' ? 'password' : 'text'} // El campo password es de tipo "password".
               id={field}
               name={field}
               value={formData[field]} // Muestra el valor del estado.
               onChange={handleInputChange} // Maneja los cambios del input.
               readOnly={!editableFields[field]} // Solo es editable si está habilitado.
               className={`px-12 py-2 bg-[#9AA5BC] text-black font-bold rounded-lg focus:outline-none ${
-                editableFields[field] ? "focus:ring-2 focus:ring-[#000000]" : "cursor-not-allowed"
+                editableFields[field]
+                  ? 'focus:ring-2 focus:ring-[#000000]'
+                  : 'cursor-not-allowed'
               }`}
             />
             <button
@@ -185,7 +207,7 @@ const UserForm = ({ onSubmit }) => {
       {message.text && (
         <p
           className={`text-sm font-bold mt-2 ${
-            message.type === "success" ? "text-green-400" : "text-red-400"
+            message.type === 'success' ? 'text-green-400' : 'text-red-400'
           }`}
         >
           {message.text}

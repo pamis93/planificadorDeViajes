@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { useUser } from "../../context/UserContext";
+import { useState, useRef } from 'react';
+import { useUser } from '../../context/UserContext';
 
 const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
   // Estado para controlar si el modal está abierto.
@@ -18,7 +18,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
   const [user] = useUser();
 
   // Estado para mostrar mensajes al usuario (éxito o error).
-  const [message, setMessage] = useState({ text: "", type: "" });
+  const [message, setMessage] = useState({ text: '', type: '' });
 
   // Función para abrir el modal al hacer clic en el avatar.
   const handleAvatarClick = () => {
@@ -30,8 +30,11 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
     const file = event.target.files[0]; // Obtiene el archivo seleccionado.
     if (file) {
       // Verifica si el archivo es una imagen.
-      if (!file.type.match("image.*")) {
-        setMessage({ text: "Por favor selecciona una imagen válida (jpg, jpeg, png)", type: "error" });
+      if (!file.type.match('image.*')) {
+        setMessage({
+          text: 'Por favor selecciona una imagen válida (jpg, jpeg, png)',
+          type: 'error',
+        });
         return;
       }
 
@@ -50,23 +53,29 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
   // Maneja la subida del avatar al servidor.
   const handleUpload = async () => {
     if (!selectedFile) {
-      setMessage({ text: "Por favor selecciona una imagen primero", type: "error" });
+      setMessage({
+        text: 'Por favor selecciona una imagen primero',
+        type: 'error',
+      });
       return;
     }
 
     const formData = new FormData(); // Crea un FormData para enviar el archivo.
-    formData.append("avatar", selectedFile);
+    formData.append('avatar', selectedFile);
 
     try {
       const token = user?.token; // Obtiene el token del contexto de usuario.
       if (!token) {
-        setMessage({ text: "No se encontró el token de autenticación", type: "error" });
+        setMessage({
+          text: 'No se encontró el token de autenticación',
+          type: 'error',
+        });
         return;
       }
 
       // Realiza la solicitud para subir el avatar.
-      const response = await fetch("http://localhost:3001/users/avatar", {
-        method: "PUT",
+      const response = await fetch('http://localhost:3001/users/avatar', {
+        method: 'PUT',
         body: formData,
         headers: {
           Authorization: token,
@@ -74,24 +83,27 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
       });
 
       if (!response.ok) {
-        setMessage({ text: "Error al subir el avatar", type: "error" });
+        setMessage({ text: 'Error al subir el avatar', type: 'error' });
         return;
       }
 
       const data = await response.json();
-      console.log("Respuesta del servidor:", data);
+      console.log('Respuesta del servidor:', data);
+      console.log('>>>>>>>>>>>>>', data.data.avatar);
 
-      if (data.status === "ok") {
-        setMessage({ text: "Avatar actualizado exitosamente", type: "success" });
+      if (data.status === 'ok') {
+        setMessage({
+          text: 'Avatar actualizado exitosamente',
+          type: 'success',
+        });
         setPreviewUrl(URL.createObjectURL(selectedFile));
         setIsModalOpen(false);
         setSelectedFile(null);
-        onAvatarUpdate && onAvatarUpdate(data.avatar); // Notifica al componente padre.
+        onAvatarUpdate && onAvatarUpdate(data.data.avatar); // Notifica al componente padre.
       }
-      
     } catch (error) {
-      console.error("Error:", error);
-      setMessage({ text: "Error al conectar con el servidor", type: "error" });
+      console.error('Error:', error);
+      setMessage({ text: 'Error al conectar con el servidor', type: 'error' });
     }
   };
 
@@ -100,32 +112,35 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
     try {
       const token = user?.token; // Obtiene el token del contexto de usuario.
       if (!token) {
-        setMessage({ text: "No se encontró el token de autenticación", type: "error" });
+        setMessage({
+          text: 'No se encontró el token de autenticación',
+          type: 'error',
+        });
         return;
       }
 
       // Realiza la solicitud para eliminar el avatar.
-      const response = await fetch("http://localhost:3001/users/avatar", {
-        method: "PUT",
+      const response = await fetch('http://localhost:3001/users/avatar', {
+        method: 'PUT',
         headers: {
           Authorization: token,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ avatar: null }), // Envía un body vacío para eliminar.
       });
 
       if (!response.ok) {
-        setMessage({ text: "Error al eliminar el avatar", type: "error" });
+        setMessage({ text: 'Error al eliminar el avatar', type: 'error' });
         return;
       }
 
-      setMessage({ text: "Avatar eliminado exitosamente", type: "success" });
+      setMessage({ text: 'Avatar eliminado exitosamente', type: 'success' });
       setPreviewUrl(null); // Limpia la imagen de vista previa.
       setSelectedFile(null); // Limpia el archivo seleccionado.
       onAvatarUpdate && onAvatarUpdate(null); // Notifica al componente padre.
     } catch (error) {
-      console.error("Error:", error);
-      setMessage({ text: "Error al conectar con el servidor", type: "error" });
+      console.error('Error:', error);
+      setMessage({ text: 'Error al conectar con el servidor', type: 'error' });
     }
   };
 
@@ -210,7 +225,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
       {message.text && (
         <p
           className={`text-sm font-bold mt-2 ${
-            message.type === "success" ? "text-green-400" : "text-red-400"
+            message.type === 'success' ? 'text-green-400' : 'text-red-400'
           }`}
         >
           {message.text}
@@ -221,4 +236,3 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
 };
 
 export default AvatarUpload;
-

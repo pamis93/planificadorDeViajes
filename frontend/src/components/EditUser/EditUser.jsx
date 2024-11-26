@@ -1,8 +1,10 @@
 import AvatarUpload from './AvatarUpload';
 import UserForm from './UserForm';
 import avatar from '../../assets/avatar.png';
+import { useState } from 'react';
 
 const EditUser = () => {
+  const [avatarXXX, setAvatarXXX] = useState(avatar)
   const handleFormSubmit = (formData) => {
     console.log('Datos del usuario:', formData);
   };
@@ -21,7 +23,7 @@ const EditUser = () => {
         <div className="flex flex-col items-center bg-[#686E9E] p-6 rounded-lg w-[350px] h-[650px]">
           <p className="text-white text-10 font-bold mb-4">Foto de perfil</p>
           <AvatarUpload
-            currentAvatar={avatar}
+            currentAvatar={avatarXXX}
             onAvatarUpdate={handleAvatarUpdate}
           />
           <p className="text-white text-sm font-bold mt-10 text-center">
@@ -34,7 +36,7 @@ const EditUser = () => {
           <h3 className="text-white text-lg font-bold mb-8 text-center">
             Datos personales
           </h3>
-          <UserForm onSubmit={handleFormSubmit} />
+          <UserForm setAvatarXXX={setAvatarXXX} onSubmit={handleFormSubmit} />
         </div>
       </div>
     
