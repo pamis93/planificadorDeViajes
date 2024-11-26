@@ -88,9 +88,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
       }
 
       const data = await response.json();
-      console.log('Respuesta del servidor:', data);
-      console.log('>>>>>>>>>>>>>', data.data.avatar);
-
+      
       if (data.status === 'ok') {
         setMessage({
           text: 'Avatar actualizado exitosamente',

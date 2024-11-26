@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useUser } from '../../context/UserContext';
 //import logoTrash from '../../assets/logoTrash.png';
-import DeleteIcon from '@mui/icons-material/Delete';
+// import DeleteIcon from '@mui/icons-material/Delete';
 export const UserDelete = ({ userId, setUserList }) => {
   const [user] = useUser();
   const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ export const UserDelete = ({ userId, setUserList }) => {
   return (
     <div>
       <button id="trash" onClick={deleteUser} disabled={loading}>
-        <DeleteIcon />
+        {/* <DeleteIcon /> */}
       </button>
       {error && <div className="error">{error}</div>}
     </div>
