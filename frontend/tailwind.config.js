@@ -10,6 +10,7 @@ export default {
       },
       backgroundImage: {
         'img-login': "url('./src/assets/fondoLogin.png')",
+        'fondoFav': "url('./src/assets/fondoFav.svg')"
       },
     },
   },

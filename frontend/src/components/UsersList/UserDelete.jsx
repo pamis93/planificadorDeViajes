@@ -25,7 +25,6 @@ export const UserDelete = ({ userId, setUserList }) => {
       }
 
       setUserList(prevList => prevList.filter(user => user.id !== userId));
-
     } catch (error) {
       console.error('Error al eliminar el usuario', error);
       setError(error.message);

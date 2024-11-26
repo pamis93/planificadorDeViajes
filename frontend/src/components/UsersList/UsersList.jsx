@@ -8,51 +8,41 @@ export const UsersList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
- 
-    const getList = async () => {
-      try {
-        //console.log('user:', user);
-        
-        const res = await fetch("http://localhost:3001/admin/users", {
-          method: "GET",
-          headers: { 
-            'Content-Type': 'application/json',
-           Authorization: `${user.token}` 
-          }, 
-        });
+  const getList = async () => {
+    try {
+      const res = await fetch("http://localhost:3001/admin/users", {
+        method: "GET",
+        headers: { 
+          'Content-Type': 'application/json',
+          Authorization: `${user.token}` 
+        }, 
+      });
 
-          if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-          }
-
-          const content = await res.json();
-          
-        setUserList(content.data.users || []); 
-      } catch (error) {
-        console.error("Fetch error:", error);
-        setError(error.message);
-      } finally {
-        setLoading(false);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
-    };
-    useEffect(() => {
-      if (user && user.token) {
+
+      const content = await res.json();
+      setUserList(content.data.users || []); 
+    } catch (error) {
+      console.error("Fetch error:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user && user.token) {
       getList();
-      } else {
+    } else {
       setLoading(false);
       setError("Usuario no autorizado");
-      }
-     }, [user]);
-
-     useEffect(() => {
-      if (userList.length > 0) {
-        console.log("Updated user list:", userList);
-      }
-    }, [userList]);
+    }
+  }, [user]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
-
 
   return (
     <div id="panel" className="mt-20 top-5 p-5 rounded-2xl w-full max-w-md mx-auto text-center relative bg-[#686e9e]">

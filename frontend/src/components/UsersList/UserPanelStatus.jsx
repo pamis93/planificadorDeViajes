@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUser } from '../../context/UserContext';
 
 export const UserPanelStatus = ({ userId, active, updateUserStatus }) => {
@@ -6,9 +6,8 @@ export const UserPanelStatus = ({ userId, active, updateUserStatus }) => {
   const [isActive, setIsActive] = useState(active);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  
-  useEffect(() => { 
-  }, [active]);
+
+  useEffect(() => {}, [active]);
 
   const changeStatus = async () => {
     setLoading(true);
@@ -20,7 +19,6 @@ export const UserPanelStatus = ({ userId, active, updateUserStatus }) => {
           'Content-Type': 'application/json',
           Authorization: `${user.token}`,
         },
-        //body: JSON.stringify({ active: !isActive }),
       });
 
       if (!res.ok) {
@@ -45,10 +43,11 @@ export const UserPanelStatus = ({ userId, active, updateUserStatus }) => {
       }`}
         
         onClick={changeStatus}
+        
       >
         {loading ? 'Actualizando...' : isActive ? 'Activo' : 'Inactivo'}
       </button>
-      {error && <div className="error">{error}</div>}
+      {error && <div className="text-red-500 mt-2">{error}</div>}
     </div>
   );
 };
