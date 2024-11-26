@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useUser } from "../../context/UserContext";
 import { UsersPanel } from "./UsersPanel";
 import logoUsers from "../../assets/logoUsers.png";
-import './UsersList.css'
 export const UsersList = () => {
   const [user] = useUser();
   const [userList, setUserList] = useState([]);
@@ -56,10 +55,10 @@ export const UsersList = () => {
 
 
   return (
-    <div id="panel">
-      <article>
-      <img id="mdi_users" src={logoUsers} alt="icono de personas" />
-      <h2 className="gestion">Gestion de usuarios</h2>
+    <div id="panel" className="mt-20 top-5 p-5 rounded-2xl w-full max-w-md mx-auto text-center relative bg-[#686e9e]">
+      <article className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-4">
+      <img id="mdi_users" className="w-10 h-10" src={logoUsers} alt="icono de personas" />
+      <h2 id="gestion" className="text-lg font-bold leading-tight text-white underline">Gestion de usuarios</h2>
       </article>
       <UsersPanel userList={userList} setUserList={setUserList} />
     </div>
