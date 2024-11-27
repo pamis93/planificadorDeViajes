@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [user, setUser] = useUser();
-    const navigate = useNavigate();
+    /* const navigate = useNavigate(); */
 
   const [message, setMessage] = useState({
     text: '',
@@ -79,7 +79,7 @@ function Login() {
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
       <div className="bg-black bg-opacity-50 p-10 mt-20 rounded-lg shadow-lg w-[500px] h-[750px] text-center"
-       style={{ backgroundImage: `url('/fondoLogin.png')` }}>
+      style={{ backgroundImage: `url('/fondoLogin.png')` }}>
 
         <h2 className="text-2xl font-bold mb-6">BIENVENIDO/A DE VUELTA</h2>
         <form onSubmit={handleSubmit}>
