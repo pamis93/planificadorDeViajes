@@ -114,7 +114,7 @@ const EditUser = () => {
       </h1>
       <div className="flex flex-col sm:flex-row justify-center items-start gap-4 sm:gap-8 w-full max-w-4xl">
         {/* Avatar */}
-        <div className="flex flex-col items-center bg-[#686E9E] p-4 sm:p-6 rounded-lg w-full sm:w-[350px] mb-4 sm:mb-0">
+        <div className="flex flex-col items-center bg-[#686E9E] p-4 sm:p-20 rounded-lg w-full sm:w-[350px] mb-4 sm:mb-0">
           <p className="text-white text-sm sm:text-base font-bold mb-2 sm:mb-4 text-center">Foto de perfil</p>
           <AvatarUpload
             currentAvatar={avatarAct}
@@ -126,8 +126,8 @@ const EditUser = () => {
         </div>
 
         {/* Datos personales */}
-        <div className="flex flex-col bg-[#686E9E] p-4 sm:p-8 rounded-lg w-full sm:w-[450px]">
-          <h3 className="text-white text-base sm:text-lg font-bold mb-4 sm:mb-8 text-center">
+        <div className="flex flex-col bg-[#686E9E] p-4 sm:p-7 rounded-lg w-full sm:w-[450px]">
+          <h3 className="text-white text-base sm:text-lg font-bold mb-2 sm:mb-1 text-center">
             Datos personales
           </h3>
           <UserForm 

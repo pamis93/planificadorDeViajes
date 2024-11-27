@@ -38,11 +38,13 @@ function Header() {
     <header className="bg-custom-blue bg-opacity-75 text-white p-2 w-full h-20 fixed top-0 left-0 z-50 shadow-md">
       <div className="flex justify-between items-center w-full gap-8">
         <div className="flex justify-start items-center gap-1">
-          <img className="w-10 rounded-xl" src="/witch2.svg" alt="ico" />
-          <h1 className="text-3xl font-bold">
-            <span className="text-orange-500">W</span>onder
-            <span className="text-orange-500">F</span>ly
-          </h1>
+        <Link to="/" className="flex items-center gap-1">
+  <img className="w-10 rounded-xl" src="/witch2.svg" alt="ico" />
+  <h1 className="text-3xl font-bold">
+    <span className="text-orange-500">W</span>onder
+    <span className="text-orange-500">F</span>ly
+  </h1>
+</Link>
 
           <div className="flex justify-center gap-6 ml-10">
             <Link to="/search" className="text-white hover:text-orange-500 transition-colors">Vuelos</Link>
