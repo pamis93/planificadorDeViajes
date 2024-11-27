@@ -15,7 +15,7 @@ import NotFound from "./components/NotFound/NotFound";;
 import FavList from './components/FavList/FavList';
 
 // css;
-/* import './App.css'; */
+import './App.css'; 
 
 function App() {
   return (
