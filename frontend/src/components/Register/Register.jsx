@@ -1,15 +1,12 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 function Register() {
-
-
   const [message, setMessage] = useState({
     text: '',
     type: '',
   });
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,9 +48,7 @@ function Register() {
           text: data.message,
           type: 'success',
         });
-        setTimeout(() => {
-          window.location.href = '/login';
-        }, 2000);
+        setIsSuccessModalOpen(true);
       } else {
         setMessage({
           text: data.message,
@@ -66,16 +61,17 @@ function Register() {
         text: 'Error al conectar con el servidor',
         type: 'error',
       });
-      setMessage({
-        text: 'Error al conectar con el servidor',
-        type: 'error',
-      });
     }
   };
+
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
+  const handleSuccessModalClose = () => {
+    setIsSuccessModalOpen(false);
+    window.location.href = '/login';
+  };
 
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
@@ -192,6 +188,24 @@ function Register() {
           </a>
         </p>
       </div>
+
+      {/* Modal */}
+      {isSuccessModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-xl p-6 text-center w-full max-w-md mx-4">
+            <h2 className="text-2xl font-bold mb-4 text-green-600">Registro Exitoso</h2>
+            <p className="mb-6 text-gray-700 text-base">
+              Tu cuenta ha sido creada exitosamente. En breves momentos, recibirás un email para activar tu cuenta.
+            </p>
+            <button 
+              onClick={handleSuccessModalClose}
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out"
+            >
+              Ir a Iniciar Sesión
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

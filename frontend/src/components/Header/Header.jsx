@@ -48,7 +48,7 @@ function Header() {
             <Link to="/search" className="text-white hover:text-orange-500 transition-colors">Vuelos</Link>
             {user?.token && ( 
               <>
-                <a href="/about" className="text-white hover:text-orange-500 transition-colors">Favoritos</a>
+                <a href="/users/:usuario_id/favoritos" className="text-white hover:text-orange-500 transition-colors">Favoritos</a>
                 {user?.isAdmin ? (
                   <a href="/admin/users" className="text-white hover:text-orange-500 transition-colors">Lista de Usuarios</a>
                 ) : null}
