@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useUser } from '../../context/UserContext'; 
-import { useNavigate } from 'react-router-dom';
+
 
 
 function Login() {
-    const [user, setUser] = useUser();
+    const [, setUser] = useUser();
     /* const navigate = useNavigate(); */
 
   const [message, setMessage] = useState({
