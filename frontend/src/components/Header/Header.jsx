@@ -23,11 +23,19 @@ function Header() {
             <span className="text-orange-500">F</span>ly
           </h1>
 
-                    <div className="flex justify-center gap-6 ml-10">
-                        <Link to="/search" className="text-white hover:text-orange-500 transition-colors">Vuelos</Link>
-                        <a href="/about" className="text-white hover:text-orange-500 transition-colors">Favoritos</a>
-                    </div>
-                </div>
+          {/* Opciones visibles según el estado del usuario */}
+          <div className="flex justify-center gap-6 ml-10">
+            <Link to="/search" className="text-white hover:text-orange-500 transition-colors">Vuelos</Link>
+            {user?.token && ( // Solo mostrar estas opciones si el usuario tiene un token válido
+              <>
+                <a href="/about" className="text-white hover:text-orange-500 transition-colors">Favoritos</a>
+                {user?.isAdmin ? (
+  <a href="/admin/users" className="text-white hover:text-orange-500 transition-colors">Lista de Usuarios</a>
+) : null}
+              </>
+            )}
+          </div>
+        </div>
 
         {/* Menú de idiomas y opciones de cuenta */}
         <nav className="flex justify-center items-center relative">
@@ -44,8 +52,7 @@ function Header() {
             {/* Menú desplegable */}
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
-                {/* Mostrar solo si el usuario no está logueado */}
-                {!user ? (
+                {!user?.token ? ( // Mostrar estas opciones si el usuario NO está logueado
                   <>
                     <a
                       href="/login"
@@ -60,13 +67,13 @@ function Header() {
                       Registrarse
                     </a>
                   </>
-                ) : (
+                ) : ( // Mostrar estas opciones si el usuario está logueado
                   <>
                     <a
                       href="/edituser"
                       className="block px-4 py-2 hover:bg-gray-100"
                     >
-                      editar usuario
+                      Editar usuario
                     </a>
                     <LogoutButton />
                   </>
@@ -81,3 +88,4 @@ function Header() {
 }
 
 export default Header;
+
