@@ -81,7 +81,7 @@ function FlightSearch() {
   };
 
   return (
-    <div className="relative w-full  z-0">
+    <div className="relative w-full h-full z-0">
       <img
         className="w-full h-full object-cover"
         src="../../../public/fondo-header.jfif"

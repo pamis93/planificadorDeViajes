@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Register.css'
 
 function Register() {
   const [message, setMessage] = useState({
@@ -8,7 +6,7 @@ function Register() {
     type: '',
   });
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,8 +48,7 @@ function Register() {
           text: data.message,
           type: 'success',
         });
-        // Redirige a la página de login después de un registro exitoso
-        navigate('/');
+        setIsSuccessModalOpen(true);
       } else {
         setMessage({
           text: data.message,
@@ -64,10 +61,6 @@ function Register() {
         text: 'Error al conectar con el servidor',
         type: 'error',
       });
-      setMessage({
-        text: 'Error al conectar con el servidor',
-        type: 'error',
-      });
     }
   };
 
@@ -75,23 +68,29 @@ function Register() {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
+  const handleSuccessModalClose = () => {
+    setIsSuccessModalOpen(false);
+    window.location.href = '/login';
+  };
 
   return (
-    <div className="register-container">
-      <div className="register-content">
-        <h2 className="ttle">CREAR CUENTA</h2>
-        <button className="close-btn">X</button>
-
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="name-surname">
-            <div className="input-group">
-              <label>NOMBRE</label>
+    <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
+      <div
+        className="bg-black bg-opacity-50 p-10 mt-10 rounded-lg shadow-lg w-[500px] text-center"
+        style={{ backgroundImage: `url('/fondoLogin.png')` }}
+      >
+        <h2 className="text-2xl font-bold mb-6 text-center">CREAR CUENTA</h2>
+        <form onSubmit={handleSubmit}>
+          {/* Nombre y Apellido */}
+          <div className="flex justify-between gap-4 mb-6">
+            <div className="w-1/2">
+              <label className="block text-lg font-semibold mb-2 text-white">NOMBRE</label>
               <input
+                className="w-full p-3 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 name="name"
                 placeholder="Nombre..."
                 required
-                className="text-black"
               />
             </div>
             <div className="w-1/2">
@@ -102,27 +101,28 @@ function Register() {
                 name="lastName"
                 placeholder="Apellido..."
                 required
-                className="text-black"
               />
             </div>
           </div>
 
-          <label className="block mt-4 text-sm md:text-base font-bold text-white">NOMBRE DE USUARIO</label>
+          {/* Nombre de usuario */}
+          <label className="block text-lg font-semibold mb-2 text-white">NOMBRE DE USUARIO</label>
           <input
+            className="w-full p-3 mb-4 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
             name="username"
-            placeholder="UserName..."
+            placeholder="Nombre de usuario..."
             required
-            className="w-full p-3 my-2 rounded-lg bg-[#686E9E] border-2 border-black text-white text-sm md:text-base placeholder-white"
           />
 
-          <label className="block mt-4 text-sm md:text-base font-bold text-white">EMAIL</label>
+          {/* Email */}
+          <label className="block text-lg font-semibold mb-2 text-white">CORREO ELECTRONICO</label>
           <input
+            className="w-full p-3 mb-4 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="email"
             name="email"
-            placeholder="Correo Electronico..."
+            placeholder="Correo Electrónico..."
             required
-            className="w-full p-3 my-2 rounded-lg bg-[#686E9E] border-2 border-black text-white text-sm md:text-base placeholder-white"
           />
 
           {/* Contraseña */}
@@ -134,7 +134,6 @@ function Register() {
               name="password"
               placeholder="Contraseña..."
               required
-              className="text-black"
             />
             <span
               className="absolute right-5 top-2 text-xl text-gray-400 cursor-pointer"
@@ -153,7 +152,6 @@ function Register() {
               name="confirmPassword"
               placeholder="Confirmar Contraseña..."
               required
-              className="text-black"
             />
             <span
               className="absolute right-5 top-2 text-xl text-gray-400 cursor-pointer"
@@ -163,30 +161,55 @@ function Register() {
             </span>
           </div>
 
+          {/* Botón de registro */}
           <button
             type="submit"
-            className="w-full p-3 mt-4 bg-[#F66136] text-black font-bold border border-white rounded-lg text-sm md:text-base"
+            className="mt-5 w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-lg transition"
           >
-            Registrarse
+            REGISTRARSE
           </button>
         </form>
 
         {message.text && (
-          <p className={`mt-4 p-2 text-lg md:text-xl ${message.type === 'error' ? 'text-red-500' : 'text-green-500'}`}>
+          <p
+            className={`mt-4 text-lg ${
+              message.type === 'success' ? 'text-green-500' : 'text-red-500'
+            }`}
+          >
             {message.text}
           </p>
         )}
 
-        <p className="mt-4 text-sm md:text-base">
+        {/* Texto de inicio de sesión */}
+        <p className="mt-6 text-sm">
           ¿Ya tienes una cuenta?{' '}
-          <a href="/login" className="text-blue-500 ml-2">
+          <a href="/login" className="text-[#046ef8] font-semibold hover:underline">
             INICIAR SESIÓN
           </a>
         </p>
       </div>
+
+      {/* Modal */}
+      {isSuccessModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-xl p-6 text-center w-full max-w-md mx-4">
+            <h2 className="text-2xl font-bold mb-4 text-green-600">Registro Exitoso</h2>
+            <p className="mb-6 text-gray-700 text-base">
+              Tu cuenta ha sido creada exitosamente. En breves momentos, recibirás un email para activar tu cuenta.
+            </p>
+            <button 
+              onClick={handleSuccessModalClose}
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out"
+            >
+              Ir a Iniciar Sesión
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 export default Register;
+
 
