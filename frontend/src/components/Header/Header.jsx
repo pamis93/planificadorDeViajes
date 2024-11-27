@@ -58,14 +58,14 @@ function Header() {
                     <Link
                       to="/login"
                       className="block px-4 py-2 hover:bg-gray-100"
-                      onClick={closeDropdown} // Cierra el menú al hacer clic
+                      // onClick={closeDropdown} // Cierra el menú al hacer clic
                     >
                       Iniciar sesión
                     </Link>
                     <Link
                       to="/register"
                       className="block px-4 py-2 hover:bg-gray-100"
-                      onClick={closeDropdown} // Cierra el menú al hacer clic
+                      // onClick={closeDropdown} // Cierra el menú al hacer clic
                     >
                       Registrarse
                     </Link>
@@ -75,11 +75,11 @@ function Header() {
                     <Link
                       href="/edituser"
                       className="block px-4 py-2 hover:bg-gray-100"
-                      onClick={closeDropdown} // Cierra el menú al hacer clic
+                      // onClick={closeDropdown} // Cierra el menú al hacer clic
                     >
                       Editar usuario
                       </Link>
-                      <LogoutButton onClick={closeDropdown} /> {/* Cierra también aquí */}
+                      <LogoutButton  /> Cierra también aquí
                   </>
                 )}
               </div>
