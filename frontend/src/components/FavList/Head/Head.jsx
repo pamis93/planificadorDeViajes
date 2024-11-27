@@ -16,7 +16,7 @@
         {/* Contenido de la cabecera */}
         <div className="absolute inset-0 grid grid-cols-1 sm:grid-cols-1 sm:grid-rows-2 px-4 items-center">
             {/* Columna izquierda: Títulos */}
-            <div className="flex flex-col justify-center sm:col-span-1 bg-black bg-opacity-30 sm:w-[500px]">
+            <div className="flex flex-col justify-center sm:col-span-1 bg-slate-400 bg-opacity-30 sm:w-[500px]">
             <h1 className="text-base sm:text-3xl font-bold text-white ">
                 MIS VUELOS FAVORITOS
             </h1>

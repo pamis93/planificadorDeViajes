@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import DeleteFavoriteButton from './DeleteFavoriteButton/DeleteFavoriteButton';
 import Head from './Head/Head';
@@ -84,7 +84,8 @@ function FavList() {
       />
       <div className="flex justify-center h-screen ">
         <div className="mt-10 flex items-center justify-center sm:text-3xl font-bold bg-white w-[300px] sm:w-[600px] h-24 shadow-md rounded-md">
-          <p className="text-black">No tienes guardado ningún vuelo.</p>
+          <h1 className="text-black">No tienes guardado ningún vuelo.</h1>
+          <h3> Para añadir vuelos a su lista de favoritos antes debe ded buscar <Link to='/search'>pulsa aquí</Link></h3>
         </div>
       </div>
       </div>
