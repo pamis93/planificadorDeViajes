@@ -7,7 +7,7 @@
     handleSortByDate,
     }) {
     return (
-        <div className="relative w-full h-[300px] sm:h-[300px]">
+        <div className=" relative w-full h-[300px] sm:h-[300px]">
         <img
             src={fondoFav}
             alt="Cabecera"
@@ -26,7 +26,7 @@
             </div>
 
             {/* Columna derecha: Botones de filtro */}
-            <div className="flex sm:flex-row flex-col items-center gap-2 sm:items-start sm:col-span-1 mt-4">
+            <div className="flex pb-4 sm:flex-row flex-col items-center gap-2 sm:items-start sm:col-span-1 mt-4">
             <button
                 onClick={handleSortByPrice}
                 className="px-2 py-1 sm:px-4 sm:py-2 w-48 bg-white text-black rounded-lg hover:bg-orange-500 hover:text-white text-sm sm:text-base"

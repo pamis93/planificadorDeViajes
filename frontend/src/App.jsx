@@ -25,21 +25,15 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/search" element={<FlightSearch />} />
           <Route path="/admin/users" element={<UsersList />} />
+          <Route path="/admin/users/:id" element={<UserInfo />} />
           <Route path="/register" element={<Register />} />
-          <Route path='/users/validate/:registrationCode' element={<AccountActivation/>} />
           <Route path="/login" element={<Login />} />
+          <Route path="/edituser" element={<EditUser />} />
           <Route path="/recuperacion" element={<PasswordRecovery />} />
           <Route path="/reset/:code" element={<PasswordReset />} />
-          <Route path="/search" element={<FlightSearch />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/admin/users" element={<UsersList />} />
-          <Route path="/edituser" element={<EditUser />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/admin/users/:id" element={<UserInfo />} />
-          <Route path="/users/validate/:registrationCode" element={<AccountActivation />}
-          /> 
+          <Route path="/users/validate/:registrationCode" element={<AccountActivation />}/> 
           <Route path="/users/:usuario_id/favoritos" element={<FavList/>}/>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </>

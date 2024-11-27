@@ -72,15 +72,28 @@ function FavList() {
 
   if (!favoritos.length) {
     return (
-      <div className="text-gray-900 dark:text-gray-300 text-center">
-        No tienes guardado ningún vuelo.
+      <>
+      <div className="w-full h-screen flex flex-col mt-20">
+      <Head
+      favoritos={favoritos}
+      setFavoritos={setFavoritos}
+      handleSortByPrice={handleSortByPrice}
+      handleSortByCity={handleSortByCity}
+      handleSortByDate={handleSortByDate}
+      
+      />
+      <div className="flex justify-center h-screen ">
+        <div className="mt-10 flex items-center justify-center sm:text-3xl font-bold bg-white w-[300px] sm:w-[600px] h-24 shadow-md rounded-md">
+          <p className="text-black">No tienes guardado ningún vuelo.</p>
+        </div>
       </div>
+      </div>
+      </>
     );
   }
 
   return (
     <div className="w-full h-screen flex flex-col mt-20">
-      
       <Head
         favoritos={favoritos}
         setFavoritos={setFavoritos}
