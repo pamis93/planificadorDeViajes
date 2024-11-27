@@ -18,22 +18,16 @@ function AccountActivation() {
         }
       );
 
-      const data = await response.json();
-
-      if (data) {
-        console.log(data);
-        setStatus('Cuenta activada correctamente');
+      if (response.ok) {
+        const data = await response.json();
+        if (data.status === 'ok') {
+          setStatus('Cuenta activada correctamente');
+        } else {
+          setStatus('Error en la activación de la cuenta');
+        }
+      } else {
+        setStatus('Error al conectar con el servidor');
       }
-      // if (response.ok) {
-      //     const data = await response.json();
-      //     if (data.status === "ok") {
-      //         setStatus("Cuenta activada correctamente");
-      //     } else {
-      //         setStatus("Error en la activación de la cuenta");
-      //     }
-      // } else {
-      //     setStatus("Error en la activación de la cuenta");
-      // }
     } catch (error) {
       setStatus('Error en la activación de la cuenta');
       console.error(error);
