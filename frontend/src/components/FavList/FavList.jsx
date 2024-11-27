@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import DeleteFavoriteButton from "./DeleteFavoriteButton/DeleteFavoriteButton";
 import fondoFav from "../../assets/fondoFav2.png";
+import { FavButtonCard } from "./FavButtonCard";
 
 function FavList() {
+  // Estado y efectos
   const [user] = useUser();
   const navigate = useNavigate();
   const [favoritos, setFavoritos] = useState([]);
@@ -46,13 +48,11 @@ function FavList() {
     setFavoritos((prev) => prev.filter((fav) => fav.id !== flightId));
   };
 
-  // Ordenar por precio
   const handleSortByPrice = () => {
     const sorted = [...favoritos].sort((a, b) => a.price - b.price);
     setFavoritos(sorted);
   };
 
-  // Ordenar por ciudad
   const handleSortByCity = () => {
     const sorted = [...favoritos].sort((a, b) =>
       a.destination.localeCompare(b.destination)
@@ -60,7 +60,6 @@ function FavList() {
     setFavoritos(sorted);
   };
 
-  // Ordenar por fecha
   const handleSortByDate = () => {
     const sorted = [...favoritos].sort(
       (a, b) => new Date(a.departureDate) - new Date(b.departureDate)
@@ -91,7 +90,7 @@ function FavList() {
         />
 
         {/* Título de la cabecera */}
-        <h1 className="text-3xl font-bold  text-center text-white dark:text-white absolute top-1/2 bottom-1/2 z-10  px-4 py-2 rounded-lg">
+        <h1 className="text-3xl font-bold text-center text-white dark:text-white absolute top-1/2 bottom-1/2 z-10 px-4 py-2 rounded-lg">
           Lista de Favoritos
         </h1>
 
@@ -132,20 +131,18 @@ function FavList() {
                   {favorito.origin} → {favorito.destination}
                 </h5>
                 <p className="mb-3 text-gray-900 dark:text-gray-300">
-                  Fecha de salida:{" "}
-                  {new Date(favorito.departureDate).toLocaleDateString()}
+                  Fecha de salida: {new Date(favorito.departureDate).toLocaleDateString()}
                 </p>
-                <button
-                  className="px-3 py-2 text-sm text-white bg-orange-500 rounded-lg hover:bg-orange-700"
-                  onClick={() => navigate(`/flights/${favorito.id}`)}
-                >
-                  Ver detalle del vuelo
-                </button>
+                <FavButtonCard
+                  favorito={favorito}
+                  user={user}
+                  onRemove={removeFavorite}
+                />
               </div>
 
               {/* Columna 2: Nota */}
-              <div className="flex flex-col  bg-[#8c79aa]">
-                <p className=" dark:text-gray-300  text-white">
+              <div className="flex flex-col bg-[#8c79aa]">
+                <p className="dark:text-gray-300 text-white">
                   Nota: {favorito.note}
                 </p>
               </div>
@@ -168,3 +165,5 @@ function FavList() {
 }
 
 export default FavList;
+
+   

@@ -39,7 +39,7 @@ function App() {
           <Route path="/admin/users/:id" element={<UserInfo />} />
           <Route path="/users/validate/:registrationCode" element={<AccountActivation />}
           /> 
-          <Route path="/users/:usuario_id/favoritos" element={<FavList/>}/>
+          <Route path="/users/:usuario_id/favoritos" element={<FavList/>}/> 
         </Route>
       </Routes>
     </>
