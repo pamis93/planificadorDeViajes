@@ -35,7 +35,19 @@ function Login() {
 
       if (response.ok) {
         if (data.data && data.data.token) {
+
+          let decodedtoken;
+          try {
+            decodedtoken = JSON.parse(atob(data.data.token.split('.')[1]));
+            console.log('ID usuario:' , decodedtoken.id);
+            
+            
+          } catch (error) {
+            console.error(error);
+            
+          }
           setUser({
+            id: decodedtoken.id,
             token: data.data.token,
             email: email,
           });
