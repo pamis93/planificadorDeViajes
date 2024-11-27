@@ -52,30 +52,34 @@ function Header() {
             {/* Menú desplegable */}
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg">
+
                 {!user?.token ? ( // Mostrar estas opciones si el usuario NO está logueado
                   <>
-                    <a
-                      href="/login"
+                    <Link
+                      to="/login"
                       className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={closeDropdown} // Cierra el menú al hacer clic
                     >
                       Iniciar sesión
-                    </a>
-                    <a
-                      href="/register"
+                    </Link>
+                    <Link
+                      to="/register"
                       className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={closeDropdown} // Cierra el menú al hacer clic
                     >
                       Registrarse
-                    </a>
+                    </Link>
                   </>
                 ) : ( // Mostrar estas opciones si el usuario está logueado
                   <>
-                    <a
+                    <Link
                       href="/edituser"
                       className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={closeDropdown} // Cierra el menú al hacer clic
                     >
                       Editar usuario
-                    </a>
-                    <LogoutButton />
+                      </Link>
+                      <LogoutButton onClick={closeDropdown} /> {/* Cierra también aquí */}
                   </>
                 )}
               </div>

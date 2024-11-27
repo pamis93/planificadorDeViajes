@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
 
@@ -8,6 +9,7 @@ function Register() {
     type: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,13 +66,16 @@ function Register() {
         text: 'Error al conectar con el servidor',
         type: 'error',
       });
+      setMessage({
+        text: 'Error al conectar con el servidor',
+        type: 'error',
+      });
     }
   };
-
-
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+
 
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
@@ -192,4 +197,5 @@ function Register() {
 }
 
 export default Register;
+
 

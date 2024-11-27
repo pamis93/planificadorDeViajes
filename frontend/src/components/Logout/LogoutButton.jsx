@@ -1,19 +1,20 @@
 import { useUser } from '../../context/UserContext';
-import "./LogoutButton.css";
-
 
 const LogoutButton = () => {
-    const [,setUser] = useUser()
+    const [, setUser] = useUser();
 
     const handleLogout = () => {
-        setUser(null)
-    }
+        setUser(null);
+    };
 
     return (
-        <button className='cerrar' onClick={handleLogout}   
-        >Cerrar sesión</button>
-    )
-}
-
+        <button
+            onClick={handleLogout}
+            className="bg-[#a31106] text-white border-none text-sm px-4 py-2 cursor-pointer rounded-lg w-4/5 text-center transition-transform duration-300 ease-in-out hover:bg-[#790a0a] hover:scale-105"
+        >
+            Cerrar sesión
+        </button>
+    );
+};
 
 export default LogoutButton;

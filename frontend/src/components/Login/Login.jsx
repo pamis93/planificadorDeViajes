@@ -1,11 +1,13 @@
-import { useState } from 'react';
-import { useUser } from '../../context/UserContext';
+import { useEffect, useState } from 'react';
+import { useUser } from '../../context/UserContext'; 
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
-
     const [user, setUser] = useUser();
     console.log('👤 Estado actual del usuario:', user);
     
+    const navigate = useNavigate();  
 
   const [message, setMessage] = useState({
     text: '',
@@ -13,11 +15,11 @@ function Login() {
   });
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
 
     try {
       const response = await fetch('http://localhost:3001/users/login', {

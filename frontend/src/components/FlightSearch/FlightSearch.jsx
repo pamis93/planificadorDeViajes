@@ -30,7 +30,7 @@ function FlightSearch() {
     if (searchTerm !== '') {
       try {
         const response = await fetch(
-          `http://localhost:3001/city-and-airport-search/${searchTerm}`
+          `${import.meta.env.VITE_API_URL}/city-and-airport-search/${searchTerm}`
         );
         const data = await response.json();
 
