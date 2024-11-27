@@ -96,7 +96,12 @@ function Header() {
                     >
                       Editar usuario
                     </Link>
-                    <LogoutButton onClick={closeDropdown} />
+                    <Link
+                      to="/"
+                    >
+                      <LogoutButton onClick={closeDropdown} />
+                    </Link>
+                    
                   </>
                 )}
               </div>
