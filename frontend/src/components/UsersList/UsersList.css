@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
 }
 
@@ -10,7 +10,7 @@ body {
   height: 100vh;
   width: 100vw;
   background: #9aa5bc;
-}
+} */
 /*Panel de la tabla*/
 #panel {
   top: 180px;

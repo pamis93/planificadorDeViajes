@@ -32,7 +32,7 @@ function PasswordRecovery() {
   };
 
   return (
-    <div className="container">
+    <div className="container-recovery">
       <h2>Recuperación de Contraseña</h2>
       <form onSubmit={handleSubmit}>
         <label>

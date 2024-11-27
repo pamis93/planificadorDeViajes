@@ -17,13 +17,16 @@ function PasswordReset() {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/users/password/${code}', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ recoverPassCode: code, newPassword }),
-      });
+      const response = await fetch(
+        'http://localhost:3001/users/password/${code}',
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ recoverPassCode: code, newPassword }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -38,7 +41,7 @@ function PasswordReset() {
   };
 
   return (
-    <div className="container">
+    <div className="container-reset">
       <h2>Restablecer Contraseña</h2>
       <form onSubmit={handleSubmit}>
         <label>

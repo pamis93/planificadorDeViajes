@@ -10,6 +10,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import { UsersList } from './components/UsersList/UsersList';
 import AccountActivation from './components/AccountActivation/AccountActivation';
+import FlightResults from './components/FlightResults/FlightResults';
 
 // css;
 /* import './App.css'; */
@@ -20,7 +21,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path='/users/validate/:registrationCode' element={<AccountActivation/>} />
+          <Route
+            path="/users/validate/:registrationCode"
+            element={<AccountActivation />}
+          />
           <Route path="/recuperacion" element={<PasswordRecovery />} />
           <Route path="/reset/:code" element={<PasswordReset />} />
           <Route path="/search" element={<FlightSearch />} />
@@ -31,6 +35,7 @@ function App() {
             path="/users/validate/:registrationCode"
             element={<AccountActivation />}
           />
+          <Route path="/search/results/?" element={<FlightResults />} />
         </Route>
       </Routes>
     </>

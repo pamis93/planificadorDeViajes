@@ -1,3 +1,9 @@
+import FlightSearch from '../FlightSearch/FlightSearch';
+
 export default function Home() {
-  return <div>HOLA SOY la pagina de HOME Voy a renderizar </div>;
+  return (
+    <div>
+      <FlightSearch />
+    </div>
+  );
 }
