@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import DeleteFavoriteButton from './DeleteFavoriteButton/DeleteFavoriteButton';
-import fondoFav from '../../assets/fondoFav2.png';
+import Head from './Head/Head';
 
 function FavList() {
   const [user] = useUser();
@@ -46,6 +46,7 @@ function FavList() {
     setFavoritos((prev) => prev.filter((fav) => fav.id !== flightId));
   };
 
+  // Funciones de ordenación
   const handleSortByPrice = () => {
     const sorted = [...favoritos].sort((a, b) => a.price - b.price);
     setFavoritos(sorted);
@@ -79,46 +80,14 @@ function FavList() {
 
   return (
     <div className="w-full h-screen flex flex-col mt-20">
-      {/* Cabecera */}
-      <div className="relative w-full h-[200px] sm:h-[400px]">
-        <img
-          src={fondoFav}
-          alt="Cabecera"
-          className="w-full h-full object-cover"
-        />
-
-        {/* Título de la cabecera */}
-        <div className="absolute inset-0 flex flex-col justify-center ml-3 pt-20 sm:justify-center">
-          <h1 className="text-lg sm:text-3xl font-bold text-white">
-            MIS VUELOS FAVORITOS
-          </h1>
-          <h3 className="text-sm sm:text-lg text-white">
-            Gestiona Tus Destinos Preferidos Y Tus Próximos Vuelos
-          </h3>
-        </div>
-
-        {/* Botones de filtrado */}
-        <div className="absolute bottom-4 left-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-          <button
-            onClick={handleSortByPrice}
-            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-orange-500 hover:text-white"
-          >
-            Ordenar por precio
-          </button>
-          <button
-            onClick={handleSortByCity}
-            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-orange-500 hover:text-white"
-          >
-            Ordenar por ciudad
-          </button>
-          <button
-            onClick={handleSortByDate}
-            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-orange-500 hover:text-white"
-          >
-            Ordenar por fecha
-          </button>
-        </div>
-      </div>
+      
+      <Head
+        favoritos={favoritos}
+        setFavoritos={setFavoritos}
+        handleSortByPrice={handleSortByPrice}
+        handleSortByCity={handleSortByCity}
+        handleSortByDate={handleSortByDate}
+      />
 
       {/* Lista de favoritos */}
       <ul className="flex flex-col items-center space-y-4 bg-[#9AA5BC] p-4">
