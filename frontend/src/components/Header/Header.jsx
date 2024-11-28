@@ -38,6 +38,7 @@ function Header() {
     <header className="bg-custom-blue text-white p-2 w-full h-20 fixed top-0 left-0 z-50 shadow-md">
       <div className="flex justify-between sm:items-center sm:w-full sm:gap-8">
         <div className="flex justify-start items-center sm:gap-1">
+
           <img className="w-10 rounded-xl" src="/witch2.svg" alt="ico" />
           <h1 className="hidden sm:block text-3xl font-bold">
             <span className="text-orange-500">W</span>onder
@@ -54,11 +55,14 @@ function Header() {
             {user && (
               <>
                 <Link
-                  to={`/users/${user.id}/favoritos`} 
+
+                  to={`/users/${user.id}/favoritos`} // Ruta dinámica
+
                   className="text-white hover:text-orange-500 transition-colors"
                 >
                   Favoritos
                 </Link>
+
                 {user?.isAdmin && (
                   <Link
                     to="/admin/users"
@@ -142,4 +146,6 @@ function Header() {
   );
 }
 
+
 export default Header;
+

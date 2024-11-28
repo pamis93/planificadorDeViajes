@@ -4,21 +4,26 @@ const getRatingsService = async () => {
   const pool = await getPool();
 
   // Consulta para obtener todas las valoraciones
-  const [ratings] = await pool.query('SELECT * FROM ratings');
+  const [ratings] = await pool.query(`
+    SELECT r.id, r.rating, r.comment, r.created_at, r.updated_at, u.username
+    FROM ratings AS r
+    INNER JOIN users AS u ON u.id = r.user_id;
+    `);
 
-  // Si hay valoraciones, calculamos el promedio
-  let averageRating = 'No Rating Yet'; 
-  if (ratings.length > 0) {
-    const totalRatings = ratings.reduce((sum, rating) => sum + rating.rating, 0);
-    averageRating = (totalRatings / ratings.length).toFixed(1);  // Promedio con 2 decimales
-  }
+  const [result] = await pool.query(`
+    select AVG(rating) as mediaValoraciones
+    FROM ratings
+    `);
+
+  const [countResult] = await pool.query(
+    ` SELECT COUNT(*) as numVotes FROM ratings; `
+  );
 
   return {
-    averageRating,  // El promedio de las valoraciones
-    ratings,  // Las valoraciones individuales
+    averageRating: result[0].mediaValoraciones, // El promedio de las valoraciones
+    numVotes: countResult[0].numVotes,
+    ratings, // Las valoraciones individuales
   };
 };
 
 export default getRatingsService;
-
-

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { useUser } from '../../context/UserContext';
 
 const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -51,13 +50,16 @@ const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-4 w-full">
       {['name', 'lastName', 'username', 'email', 'password'].map((field) => (
-        <div key={field} className="flex flex-col gap-2">
-          <label htmlFor={field} className="text-white text-sm font-bold">
+        <div key={field} className="flex flex-col gap-1 sm:gap-2 w-full">
+          <label 
+            htmlFor={field} 
+            className="text-white text-xs sm:text-sm font-bold"
+          >
             {field.charAt(0).toUpperCase() + field.slice(1)}
           </label>
-          <div className="flex items-center">
+          <div className="flex items-center w-full">
             <input
               type={field === 'password' ? 'password' : 'text'}
               id={field}
@@ -65,16 +67,21 @@ const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
               value={formData[field]}
               onChange={handleInputChange}
               readOnly={!editableFields[field]}
-              className={`px-12 py-2 bg-[#9AA5BC] text-black font-bold rounded-lg focus:outline-none ${
-                editableFields[field]
+              className={`
+                w-full px-3 sm:px-12 py-1 sm:py-2 
+                bg-[#9AA5BC] text-black 
+                font-bold rounded-lg 
+                focus:outline-none text-xs sm:text-base
+                ${editableFields[field]
                   ? 'focus:ring-2 focus:ring-[#000000]'
                   : 'cursor-not-allowed'
-              }`}
+                }
+              `}
             />
             <button
               type="button"
               onClick={() => handleEditClick(field)}
-              className="ml-3 text-blue-500 hover:text-blue-300"
+              className="ml-2 sm:ml-3 text-blue-500 hover:text-blue-300 text-xs sm:text-base"
             >
               ✏
             </button>
@@ -84,16 +91,31 @@ const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
 
       <button
         type="submit"
-        className="px-5 py-2 bg-green-600 text-white font-bold text-sm rounded-lg hover:bg-green-400"
+        className="
+          mt-2 sm:mt-4 
+          px-4 sm:px-5 
+          py-2 
+          bg-green-600 
+          text-white 
+          font-bold 
+          text-xs sm:text-sm 
+          rounded-lg 
+          hover:bg-green-400
+          w-full
+        "
       >
         Guardar Cambios
       </button>
 
       {message.text && (
         <p
-          className={`text-sm font-bold mt-2 ${
-            message.type === 'success' ? 'text-green-400' : 'text-red-400'
-          }`}
+          className={`
+            text-xs sm:text-sm 
+            font-bold 
+            mt-1 sm:mt-2 
+            text-center 
+            ${message.type === 'success' ? 'text-green-400' : 'text-red-400'}
+          `}
         >
           {message.text}
         </p>

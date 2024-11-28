@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-
 function PasswordReset() {
   const { code } = useParams();
   const [newPassword, setNewPassword] = useState('');
@@ -17,13 +16,16 @@ function PasswordReset() {
     }
 
     try {
-      const response = await fetch(`http://localhost:3001/users/password/${code}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ recoverPassCode: code, newPassword }),
-      });
+      const response = await fetch(
+        `http://localhost:3001/users/password/${code}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ recoverPassCode: code, newPassword }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();

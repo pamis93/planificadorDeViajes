@@ -44,7 +44,6 @@ function PasswordRecovery() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#9AA5BC] text-white">
-
       <div
         className="bg-black bg-opacity-50 p-10 rounded-lg shadow-lg w-[500px] text-center bg-cover bg-center"
         style={{ backgroundImage: `url('/fondoLogin.png')` }}
@@ -95,4 +94,3 @@ function PasswordRecovery() {
 }
 
 export default PasswordRecovery;
-
