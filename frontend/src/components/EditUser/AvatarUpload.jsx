@@ -151,7 +151,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
     <>
       {/* Contenedor del avatar */}
       <div onClick={handleAvatarClick} className="cursor-pointer">
-        <div className="w-[290px] h-[290px] rounded-full overflow-hidden bg-white flex justify-center items-center">
+        <div className="w-[200px] sm:w-[290px] h-[200px] sm:h-[290px] rounded-full overflow-hidden bg-white flex justify-center items-center">
           {/* Muestra la imagen del avatar */}
           <img
             src={previewUrl || currentAvatar}
@@ -163,19 +163,19 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
 
       {/* Modal para editar el avatar */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg max-w-2xl w-full m-4 relative">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white p-4 sm:p-6 rounded-lg max-w-full sm:max-w-2xl w-full relative">
             {/* Botón para cerrar el modal */}
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl font-bold"
+              className="absolute top-2 sm:top-4 right-2 sm:right-4 text-gray-500 hover:text-gray-700 text-xl sm:text-2xl font-bold"
             >
               ✕
             </button>
 
             {/* Contenido del modal */}
-            <div className="flex flex-col items-center gap-6">
-              <div className="w-[400px] h-[400px] rounded-lg overflow-hidden bg-gray-100">
+            <div className="flex flex-col items-center gap-4 sm:gap-6">
+              <div className="w-full sm:w-[400px] h-[250px] sm:h-[400px] rounded-lg overflow-hidden bg-gray-100">
                 {/* Vista previa del avatar */}
                 <img
                   src={previewUrl || currentAvatar}
@@ -185,7 +185,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
               </div>
 
               {/* Botones de acción */}
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full justify-center">
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -195,21 +195,21 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
                 />
                 <button
                   onClick={triggerFileInput}
-                  className="px-6 py-2 bg-[#F66136] text-white font-bold rounded-full hover:bg-[#e25630]"
+                  className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-[#F66136] text-white font-bold rounded-full hover:bg-[#e25630] text-xs sm:text-base"
                 >
                   SELECCIONAR IMAGEN
                 </button>
                 {selectedFile && (
                   <button
                     onClick={handleUpload}
-                    className="px-6 py-2 bg-green-600 text-white font-bold rounded-full hover:bg-green-700"
+                    className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 text-xs sm:text-base"
                   >
                     GUARDAR
                   </button>
                 )}
                 <button
                   onClick={handleDelete}
-                  className="px-6 py-2 bg-[#F20D11] text-white font-bold rounded-full hover:bg-[#d10b0e]"
+                  className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-[#F20D11] text-white font-bold rounded-full hover:bg-[#d10b0e] text-xs sm:text-base"
                 >
                   BORRAR
                 </button>
@@ -222,7 +222,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
       {/* Muestra el mensaje si existe */}
       {message.text && (
         <p
-          className={`text-sm font-bold mt-2 ${
+          className={`text-xs sm:text-sm font-bold mt-2 text-center ${
             message.type === 'success' ? 'text-green-400' : 'text-red-400'
           }`}
         >

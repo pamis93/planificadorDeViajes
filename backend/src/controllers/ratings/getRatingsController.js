@@ -2,18 +2,20 @@ import getRatingsService from '../../services/ratings/getRatingsService.js';
 
 const getRatingsController = async (req, res) => {
   try {
-    const { averageRating, ratings } = await getRatingsService();
+    const { averageRating, ratings, numVotes } = await getRatingsService();
 
     if (ratings.length > 0) {
       return res.json({
         status: 'ok',
-        averageRating,  
-        data: ratings,  
+        averageRating,
+        data: ratings,
+        averageRating,
+        numVotes,
       });
     } else {
       return res.json({
         status: 'ok',
-        averageRating,  // Si no hay valoraciones, el promedio es 0
+        averageRating, // Si no hay valoraciones, el promedio es 0
         data: [],
         message: 'No se encontraron valoraciones',
       });
@@ -28,4 +30,3 @@ const getRatingsController = async (req, res) => {
 };
 
 export default getRatingsController;
-

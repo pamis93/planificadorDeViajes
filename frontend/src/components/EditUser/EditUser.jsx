@@ -108,26 +108,26 @@ const EditUser = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-[#9AA5BC]">
-      <h1 className="text-white mt-20 text-2xl font-bold mb-8">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#9AA5BC] p-4 sm:p-6 md:p-8">
+      <h1 className="text-white mt-20 sm:mt-10 md:mt-20 text-xl sm:text-2xl font-bold mb-4 sm:mb-8 text-center">
         Configuración de la Cuenta
       </h1>
-      <div className="flex flex-row justify-center items-start gap-8">
+      <div className="flex flex-col sm:flex-row justify-center items-start gap-4 sm:gap-8 w-full max-w-4xl">
         {/* Avatar */}
-        <div className="flex flex-col items-center bg-[#686E9E] p-6 rounded-lg w-[350px] h-[650px]">
-          <p className="text-white text-10 font-bold mb-4">Foto de perfil</p>
+        <div className="flex flex-col items-center bg-[#686E9E] p-4 sm:p-20 rounded-lg w-full sm:w-[350px] mb-4 sm:mb-0">
+          <p className="text-white text-sm sm:text-base font-bold mb-2 sm:mb-4 text-center">Foto de perfil</p>
           <AvatarUpload
             currentAvatar={avatarAct}
             onAvatarUpdate={handleAvatarUpdate}
           />
-          <p className="text-white text-sm font-bold mt-10 text-center">
+          <p className="text-white text-xs sm:text-sm font-bold mt-4 sm:mt-10 text-center">
             Agrega tu foto de perfil o avatar favorito
           </p>
         </div>
 
         {/* Datos personales */}
-        <div className="flex flex-col bg-[#686E9E] p-8 rounded-lg w-[450px] h-[650px]">
-          <h3 className="text-white text-lg font-bold mb-8 text-center">
+        <div className="flex flex-col bg-[#686E9E] p-4 sm:p-7 rounded-lg w-full sm:w-[450px]">
+          <h3 className="text-white text-base sm:text-lg font-bold mb-2 sm:mb-1 text-center">
             Datos personales
           </h3>
           <UserForm 
@@ -140,7 +140,7 @@ const EditUser = () => {
     
       <button
         type="button"
-        className="mt-8 px-6 py-2 bg-[#F20D11] text-white font-bold text-10 rounded-full hover:bg-[#d10b0e]"
+        className="mt-4 sm:mt-8 px-4 sm:px-6 py-2 bg-[#F20D11] text-white font-bold text-sm sm:text-base rounded-full hover:bg-[#d10b0e]"
       >
         ELIMINAR PERFIL
       </button>

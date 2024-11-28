@@ -1,9 +1,11 @@
 import FlightSearch from '../FlightSearch/FlightSearch';
+import TravelCarousel from './TravelCarousel';
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
-      <FlightSearch />
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#9AA5BC] text-white">
+      <FlightSearch className="w-full" />
+      <TravelCarousel />
     </div>
   );
 }

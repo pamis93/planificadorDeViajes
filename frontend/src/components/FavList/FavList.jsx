@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../../context/UserContext";
-import DeleteFavoriteButton from "./DeleteFavoriteButton/DeleteFavoriteButton";
-import fondoFav from "../../assets/fondoFav2.png";
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
+import DeleteFavoriteButton from './DeleteFavoriteButton/DeleteFavoriteButton';
+import Head from './Head/Head';
 import { FavButtonCard } from "./FavButtonCard";
 
 function FavList() {
@@ -14,7 +14,7 @@ function FavList() {
 
   useEffect(() => {
     if (!user?.id) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
 
@@ -30,14 +30,14 @@ function FavList() {
         );
 
         if (!response.ok) {
-          throw new Error("Error al obtener los datos de favoritos");
+          throw new Error('Error al obtener los datos de favoritos');
         }
 
         const data = await response.json();
         setFavoritos(data?.data || []);
       } catch (err) {
-        console.error("Error al obtener favoritos:", err);
-        setError("No se pudieron cargar tus favoritos.");
+        console.error('Error al obtener favoritos:', err);
+        setError('No se pudieron cargar tus favoritos.');
       }
     };
 
@@ -48,6 +48,7 @@ function FavList() {
     setFavoritos((prev) => prev.filter((fav) => fav.id !== flightId));
   };
 
+  // Ordenar por precio
   const handleSortByPrice = () => {
     const sorted = [...favoritos].sort((a, b) => a.price - b.price);
     setFavoritos(sorted);
@@ -73,65 +74,62 @@ function FavList() {
 
   if (!favoritos.length) {
     return (
-      <div className="text-gray-900 dark:text-gray-300 text-center">
-        No tienes guardado ningún vuelo.
-      </div>
+      <>
+        <div className="w-full h-screen flex flex-col mt-20">
+          <Head
+            favoritos={favoritos}
+            setFavoritos={setFavoritos}
+            handleSortByPrice={handleSortByPrice}
+            handleSortByCity={handleSortByCity}
+            handleSortByDate={handleSortByDate}
+          />
+          <div className="flex justify-center items-center h-screen">
+            <div className="bg-[#ffffff] w-[300px] sm:w-[600px] sm:h-auto p-6 shadow-md rounded-md flex flex-col items-center text-center">
+              <h1 className="text-black font-bold text-xl sm:text-3xl mb-4">
+                No tienes guardado ningún vuelo.
+              </h1>
+              <p className="text-gray-700 sm:text-lg">
+                Para añadir vuelos a tu lista de favoritos, primero realiza una búsqueda.
+              </p>
+              <Link
+                to="/search"
+                className="mt-6 px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition"
+              >
+                Buscar vuelos
+              </Link>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 
   return (
     <div className="w-full h-screen flex flex-col mt-20">
-      {/* Cabecera */}
-      <div className="relative w-full h-[500px]">
-        <img
-          src={fondoFav}
-          alt="Cabecera"
-          className="w-full h-full object-cover"
-        />
-
-        {/* Título de la cabecera */}
-        <h1 className="text-3xl font-bold text-center text-white dark:text-white absolute top-1/2 bottom-1/2 z-10 px-4 py-2 rounded-lg">
-          Lista de Favoritos
-        </h1>
-
-        {/* Botones de filtrado */}
-        <div className="absolute bottom-4 left-4 flex space-x-4 z-0">
-          <button
-            onClick={handleSortByPrice}
-            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-orange-500 hover:text-white"
-          >
-            Ordenar por precio
-          </button>
-          <button
-            onClick={handleSortByCity}
-            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-orange-500 hover:text-white"
-          >
-            Ordenar por ciudad
-          </button>
-          <button
-            onClick={handleSortByDate}
-            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-orange-500 hover:text-white"
-          >
-            Ordenar por fecha
-          </button>
-        </div>
-      </div>
+      <Head
+        favoritos={favoritos}
+        setFavoritos={setFavoritos}
+        handleSortByPrice={handleSortByPrice}
+        handleSortByCity={handleSortByCity}
+        handleSortByDate={handleSortByDate}
+      />
 
       {/* Lista de favoritos */}
       <ul className="flex flex-col items-center space-y-4 bg-[#9AA5BC] p-4">
         {favoritos.map((favorito) => (
           <li
             key={favorito.id}
-            className="w-full max-w-3xl p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700"
+            className="w-full p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700 sm:max-w-3xl"
           >
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-12">
               {/* Columna 1: Origen y Destino */}
-              <div className="flex flex-col">
-                <h5 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">
+              <div className="flex flex-col sm:col-span-4">
+                <h5 className="mb-2 text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                   {favorito.origin} → {favorito.destination}
                 </h5>
                 <p className="mb-3 text-gray-900 dark:text-gray-300">
-                  Fecha de salida: {new Date(favorito.departureDate).toLocaleDateString()}
+                  Fecha de salida:{' '}
+                  {new Date(favorito.departureDate).toLocaleDateString()}
                 </p>
                 <FavButtonCard
                   favorito={favorito}
@@ -141,14 +139,12 @@ function FavList() {
               </div>
 
               {/* Columna 2: Nota */}
-              <div className="flex flex-col bg-[#8c79aa]">
-                <p className="dark:text-gray-300 text-white">
-                  Nota: {favorito.note}
-                </p>
+              <div className="bg-[#8c79aa] px-4 text-white sm:col-span-6">
+                <p className="dark:text-gray-300">Nota: {favorito.note}</p>
               </div>
 
               {/* Columna 3: Precio y Eliminar */}
-              <div className="flex flex-col items-end">
+              <div className="flex flex-col items-end pl-4 sm:col-span-2">
                 <p className="mb-3 text-orange-500">{favorito.price} €</p>
                 <DeleteFavoriteButton
                   flightId={favorito.id}
@@ -166,4 +162,4 @@ function FavList() {
 
 export default FavList;
 
-   
+
