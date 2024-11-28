@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { useUser } from '../../context/UserContext';
-import LanguageNav from './LanguageNav/LanguageNav';
-import LogoutButton from '../Logout/LogoutButton';
-import { Link } from 'react-router-dom';
+import LanguageNav from "./LanguageNav/LanguageNav";
+import LogoutButton from "../Logout/LogoutButton";
+import { Link } from "react-router-dom";
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [user] = useUser(); // Obtén el estado del usuario
+  const [user] = useUser(); 
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
-    setIsDropdownOpen((prev) => !prev);
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   const closeDropdown = () => {
@@ -44,7 +44,7 @@ function Header() {
             <span className="text-orange-500">F</span>ly
           </h1>
 
-          <div className="flex justify-center p-2 gap-3 sm:gap-6 sm:ml-10">
+          <div className="flex justify-center gap-6 ml-10">
             <Link
               to="/search"
               className="text-white hover:text-orange-500 transition-colors"
@@ -52,17 +52,21 @@ function Header() {
               Vuelos
             </Link>
             {user && (
+              <>
               <Link
                 to={`/users/${user.id}/favoritos`} // Ruta dinámica
                 className="text-white hover:text-orange-500 transition-colors"
               >
                 Favoritos
               </Link>
+              {user?.isAdmin ? (
+                <a href="/admin/users" className="text-white hover:text-orange-500 transition-colors">Lista de Usuarios</a>
+              ) : null}
+              </>
             )}
           </div>
         </div>
 
-        {/* Menú de idiomas y opciones de cuenta */}
         <nav className="flex justify-center items-center relative">
           <LanguageNav />
 
@@ -91,7 +95,6 @@ function Header() {
               <span className="hidden sm:block">Mi cuenta</span>
             </button>
 
-            {/* Menú desplegable */}
             {isDropdownOpen && (
               <div className="absolute right-0  mt-2 w-40 bg-[#5f6cb4] text-white  rounded-lg shadow-lg">
                 {!user ? (
@@ -111,7 +114,7 @@ function Header() {
                       Registrarse
                     </Link>
                   </>
-                ) : (
+                ) : ( 
                   <>
                     <Link
                       to="/edituser"
@@ -120,7 +123,12 @@ function Header() {
                     >
                       Editar usuario
                     </Link>
-                    <LogoutButton onClick={closeDropdown} /> {/* Cierra también aquí */}
+                    <Link
+                      to="/"
+                    >
+                      <LogoutButton onClick={closeDropdown} />
+                    </Link>
+                    
                   </>
                 )}
               </div>
@@ -133,3 +141,4 @@ function Header() {
 }
 
 export default Header;
+

@@ -3,8 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import DeleteFavoriteButton from './DeleteFavoriteButton/DeleteFavoriteButton';
 import Head from './Head/Head';
+import { FavButtonCard } from "./FavButtonCard";
 
 function FavList() {
+  // Estado y efectos
   const [user] = useUser();
   const navigate = useNavigate();
   const [favoritos, setFavoritos] = useState([]);
@@ -46,7 +48,7 @@ function FavList() {
     setFavoritos((prev) => prev.filter((fav) => fav.id !== flightId));
   };
 
-  // Funciones de ordenación
+  // Ordenar por precio
   const handleSortByPrice = () => {
     const sorted = [...favoritos].sort((a, b) => a.price - b.price);
     setFavoritos(sorted);
@@ -120,12 +122,11 @@ function FavList() {
                   Fecha de salida:{' '}
                   {new Date(favorito.departureDate).toLocaleDateString()}
                 </p>
-                <button
-                  className="px-3 py-2 text-sm text-white bg-orange-500 rounded-lg hover:bg-orange-700"
-                  onClick={() => navigate(`/flights/${favorito.id}`)}
-                >
-                  Ver detalle del vuelo
-                </button>
+                <FavButtonCard
+                  favorito={favorito}
+                  user={user}
+                  onRemove={removeFavorite}
+                />
               </div>
 
               {/* Columna 2: Nota */}
@@ -151,3 +152,5 @@ function FavList() {
 }
 
 export default FavList;
+
+

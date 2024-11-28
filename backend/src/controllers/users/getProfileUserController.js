@@ -7,7 +7,11 @@ const getProfileUserController = async (req, res, next) => {
 
     // Asegurarnos de que el email esté presente
     if (!email) {
-      return res.status(400).json({ message: 'Se requiere un email.' });
+      return res.status(400).json({ 
+        status: 'error',
+        message: 'Se requiere un email.',
+        data: null
+      });
     }
 
     // Consultamos los datos del usuario usando el email
@@ -15,23 +19,31 @@ const getProfileUserController = async (req, res, next) => {
 
     // Si no se encuentra al usuario
     if (!user) {
-      return res.status(404).json({ message: 'Usuario no encontrado' });
+      return res.status(404).json({ 
+        status: 'error',
+        message: 'Usuario no encontrado',
+        data: null
+      });
     }
+
     // Filtra los campos requeridos
-    const filteredUser = {
+    const userData = {
       id: user.id,
       email: user.email,
       username: user.username,
-      password: user.password,
       name: user.name,
       lastName: user.lastName,
       avatar: user.avatar,
     };
 
-    res.status(200).json(filteredUser);
+    res.status(200).json({
+      status: 'ok',
+      message: 'Perfil de usuario obtenido correctamente',
+      data: userData
+    });
   } catch (error) {
     next(error);
   }
 };
 
-export default getProfileUserController;
+export default getProfileUserController; 
