@@ -1,12 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useUser } from '../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [user, setUser] = useUser();
-  console.log('👤 Estado actual del usuario:', user);
-
-  const navigate = useNavigate();
+  const [, setUser] = useUser();
 
   const [message, setMessage] = useState({
     text: '',
@@ -36,7 +32,15 @@ function Login() {
 
       if (response.ok) {
         if (data.data && data.data.token) {
+          let decodedtoken;
+          try {
+            decodedtoken = JSON.parse(atob(data.data.token.split('.')[1]));
+            console.log('ID usuario:', decodedtoken.id);
+          } catch (error) {
+            console.error(error);
+          }
           setUser({
+            id: decodedtoken.id,
             token: data.data.token,
             email: email,
           });
