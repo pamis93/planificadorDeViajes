@@ -9,84 +9,85 @@ const carouselData = [
 ];
 
 const TravelCarousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0); // Índice del primer elemento visible
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
     }, 3000);
-
     return () => clearInterval(interval);
   }, [currentIndex]);
 
   const nextSlide = () => {
-    // Si estamos en el penúltimo índice, volvemos al inicio
-    setCurrentIndex((prevIndex) => (prevIndex + 2) % carouselData.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
   };
 
   const prevSlide = () => {
-    // Si estamos en el inicio, volvemos al penúltimo conjunto
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? (carouselData.length - 2 + carouselData.length) % carouselData.length : prevIndex - 2
+      prevIndex === 0 ? carouselData.length - 1 : prevIndex - 1
     );
   };
 
   return (
     <>
-      <div className="mb-6 items-center bg-[#686E9E] w-full">
-        <h1 className="text-4xl font-bold text-white mb-2">
+      {/* Cabecera */}
+      <div className="mb-6 items-center bg-[#686E9E] w-full px-4 sm:px-8">
+        <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 text-center">
           EMPIEZA A PLANEAR TUS PROXIMAS AVENTURAS
         </h1>
-        <p className="text-xl text-gray-100 mb-4 ml-10">
+        <p className="text-base sm:text-xl text-gray-100 mb-4 text-center">
           conserva tus destinos preferidos en un solo lugar
         </p>
-        <Link
-          to="/search"
-          className="text-blue-100 hover:underline hover:text-blue-800 transition bg-[#ff5a1f] w-full"
-        >
-          prueba buscar un vuelo y guardalo en tus favoritos &gt;&gt;&gt;
-        </Link>
+        <div className="flex justify-center">
+          <Link
+            to="/search"
+            className="text-white hover:underline hover:text-blue-800 transition bg-[#ff5a1f] px-4 py-2 rounded-lg"
+          >
+            Prueba buscar un vuelo y guardalo en tus favoritos &gt;&gt;&gt;
+          </Link>
+        </div>
       </div>
 
-      <div className="relative w-[700px] mt-8 mb-10">
-        <div className="relative h-[620px] w-[900px] flex overflow-hidden space-x-5">
-          {/* Renderizar dos imágenes */}
-          {[0, 1].map((offset) => {
-            const index = (currentIndex + offset) % carouselData.length; // Cálculo para manejar el ciclo infinito
-            const slide = carouselData[index];
-            return (
-              <div key={index} className="w-1/2 h-full relative">
-                <img
-                  src={slide.image}
-                  alt={slide.alt}
-                  className="rounded-lg w-full h-full object-cover"
-                />
-                {/* Texto superpuesto */}
-                <div className="absolute bottom-4 left-4 bg-[#686E9E]/80 text-white px-4 py-2 rounded-lg shadow-lg">
-                  <p className="font-bold">{slide.title}</p>
-                  <p>{slide.description}</p>
-                </div>
+      {/* Carrusel */}
+      <div className="relative w-full max-w-4xl mx-auto mt-8 mb-10 px-4">
+        {/* Contenedor del carrusel */}
+        <div className="relative flex h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden">
+          {carouselData.map((slide, index) => (
+            <div
+              key={index}
+              className={`absolute w-full h-full transition-transform duration-500 ${
+                index === currentIndex ? "translate-x-0" : index < currentIndex ? "-translate-x-full" : "translate-x-full"
+              }`}
+            >
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                className="w-full h-full object-cover rounded-lg"
+              />
+              <div className="absolute bottom-4 left-4 bg-[#686E9E]/80 text-white px-4 py-2 rounded-lg shadow-lg">
+                <p className="font-bold">{slide.title}</p>
+                <p>{slide.description}</p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
-        {/* Flechas de navegación */}
+        {/* Botones de navegación */}
         <button
-          className="absolute -left-10 top-1/2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full hover:bg-white/75 transition"
+          className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full hover:bg-white/75 transition"
           onClick={prevSlide}
         >
           &#10094;
         </button>
         <button
-          className="absolute -right-60 top-1/2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full hover:bg-white/75 transition"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full hover:bg-white/75 transition"
           onClick={nextSlide}
         >
           &#10095;
         </button>
 
-        {/* Indicadores de puntos */}
-        <div className="absolute -bottom-5 left-[190px] right-0 flex justify-center space-x-2">
+        {/* Indicadores */}
+        <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
           {carouselData.map((_, index) => (
             <span
               key={index}
