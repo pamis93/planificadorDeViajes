@@ -1,5 +1,5 @@
-import FlightSearch from '../FlightSearch/FlightSearch'
-import TravelCarousel from './TravelCarousel'
+import FlightSearch from '../FlightSearch/FlightSearch';
+import TravelCarousel from './TravelCarousel';
 
 export default function Home() {
   return (
@@ -7,5 +7,5 @@ export default function Home() {
       <FlightSearch className="w-full" />
       <TravelCarousel />
     </div>
-  )
+  );
 }

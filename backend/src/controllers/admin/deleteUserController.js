@@ -6,6 +6,9 @@ const deleteUserController = async (req, res, next) => {
   try {
     // console.log('corri el controller');
 
+    //todo revisar el resto de tablas para borrar los datos que tenga ese usuario tambien
+
+    // considerar un borrado logico
     const { id } = req.params;
 
     const user = await selectUserByIdAdminOnlyService(id);

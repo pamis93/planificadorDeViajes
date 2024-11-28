@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { useUser } from '../../context/UserContext';
-import LanguageNav from "./LanguageNav/LanguageNav";
-import LogoutButton from "../Logout/LogoutButton";
-import { Link } from "react-router-dom";
+import LanguageNav from './LanguageNav/LanguageNav';
+import LogoutButton from '../Logout/LogoutButton';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [user] = useUser(); 
+  const [user] = useUser();
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
@@ -38,12 +38,12 @@ function Header() {
     <header className="bg-custom-blue text-white p-2 w-full h-20 fixed top-0 left-0 z-50 shadow-md">
       <div className="flex justify-between sm:items-center sm:w-full sm:gap-8">
         <div className="flex justify-start items-center sm:gap-1">
-        <Link to="/" className="flex items-center gap-1">
-          <img className="w-10 rounded-xl" src="/witch2.svg" alt="ico" />
-          <h1 className="hidden sm:block text-3xl font-bold">
-            <span className="text-orange-500">W</span>onder
-            <span className="text-orange-500">F</span>ly
-          </h1>
+          <Link to="/" className="flex items-center gap-1">
+            <img className="w-10 rounded-xl" src="/witch2.svg" alt="ico" />
+            <h1 className="hidden sm:block text-3xl font-bold">
+              <span className="text-orange-500">W</span>onder
+              <span className="text-orange-500">F</span>ly
+            </h1>
           </Link>
           <div className="flex justify-center gap-6 ml-10">
             <Link
@@ -54,15 +54,20 @@ function Header() {
             </Link>
             {user && (
               <>
-              <Link
-                to={`/users/${user.id}/favoritos`} // Ruta dinámica
-                className="text-white hover:text-orange-500 transition-colors"
-              >
-                Favoritos
-              </Link>
-              {user?.isAdmin ? (
-                <a href="/admin/users" className="text-white hover:text-orange-500 transition-colors">Lista de Usuarios</a>
-              ) : null}
+                <Link
+                  to={`/users/${user.id}/favoritos`} // Ruta dinámica
+                  className="text-white hover:text-orange-500 transition-colors"
+                >
+                  Favoritos
+                </Link>
+                {user?.isAdmin ? (
+                  <a
+                    href="/admin/users"
+                    className="text-white hover:text-orange-500 transition-colors"
+                  >
+                    Lista de Usuarios
+                  </a>
+                ) : null}
               </>
             )}
           </div>
@@ -115,7 +120,7 @@ function Header() {
                       Registrarse
                     </Link>
                   </>
-                ) : ( 
+                ) : (
                   <>
                     <Link
                       to="/edituser"
@@ -124,12 +129,9 @@ function Header() {
                     >
                       Editar usuario
                     </Link>
-                    <Link
-                      to="/"
-                    >
+                    <Link to="/">
                       <LogoutButton onClick={closeDropdown} />
                     </Link>
-                    
                   </>
                 )}
               </div>
@@ -142,4 +144,3 @@ function Header() {
 }
 
 export default Header;
-

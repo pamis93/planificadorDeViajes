@@ -3,19 +3,35 @@ import _debounce from 'lodash/debounce';
 import FlightSearchDropdown from './FlightSearchDropdown';
 import { useAddParamsToSearch } from '../../hooks/api';
 import { useFlightSearchParams } from '../../context/FlightSearchParamsContext';
+import areObjValuesTruthy from '../../utils/areObjValuesTruthy';
+import { useNavigate } from 'react-router-dom';
+// lo de react router DOM
 import { useSearchParams } from 'react-router-dom';
 
 function FlightSearch() {
-  const [origin, setOrigin] = useState('');
-  const [iataOriginCode, setIataOriginCode] = useState('');
-  const [destination, setDestination] = useState('');
-  const [iataDestinationCode, setIataDestinationCode] = useState('');
-  const [departureDate, setDepartureDate] = useState('');
-  const [adults, setAdults] = useState(1);
-
+  // lo del estado de react-router-dom
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const [origin, setOrigin] = useState(searchParams.get('originCode') || '');
+  const [iataOriginCode, setIataOriginCode] = useState(
+    searchParams.get('originCode') || ''
+  );
+  const [destination, setDestination] = useState(
+    searchParams.get('destinationCode') || ''
+  );
+  const [iataDestinationCode, setIataDestinationCode] = useState(
+    searchParams.get('destinationCode') || ''
+  );
+  const [departureDate, setDepartureDate] = useState(
+    searchParams.get('departureDate') || ''
+  );
+  const [adults, setAdults] = useState(searchParams.get('adults') || 1);
+  const [originResults, setOriginResults] = useState([]);
+  const [destinationResults, setDestinationResults] = useState([]);
+
   const [flightSearchParams] = useFlightSearchParams();
 
+  // no usar el contexto, vamos a pasar las cosas a la url
   useAddParamsToSearch({
     departureDate,
     iataOriginCode,
@@ -23,8 +39,7 @@ function FlightSearch() {
     adults,
   });
 
-  const [originResults, setOriginResults] = useState([]);
-  const [destinationResults, setDestinationResults] = useState([]);
+  let navigate = useNavigate();
 
   const searchCityOrAirport = async (searchTerm, resultSeterFn) => {
     if (searchTerm !== '') {
@@ -68,15 +83,21 @@ function FlightSearch() {
     debounceDestination(event.target.value);
   };
 
-  const handleButtonClick = async () => {
-    setSearchParams(flightSearchParams);
-    try {
-      const response = await fetch(
-        `http://localhost:3001/flight-search/?${{ ...searchParams }}`
-      );
-      const data = await response.json();
-    } catch (error) {
-      console.log(error);
+  const handleButtonClick = (event) => {
+    event.preventDefault();
+    if (areObjValuesTruthy(flightSearchParams)) {
+      const queryParams = new URLSearchParams({
+        originCode: iataOriginCode,
+        destinationCode: iataDestinationCode,
+        departureDate: departureDate,
+        adults: adults,
+      });
+      console.log('queryparams to string', queryParams);
+
+      setSearchParams(queryParams);
+      navigate(`/search/results?${queryParams.toString()}`);
+    } else {
+      alert('todo informar al usuario que tiene que completar los campos');
     }
   };
 
@@ -84,7 +105,7 @@ function FlightSearch() {
     <div className="relative w-full h-full bg-[#9AA5BC] ">
       <img
         className="w-full h-[500px] object-cover mt-20"
-        src="../../../public/fondo-header.jfif"
+        src="/public/fondo-header.jfif"
         alt="Fondo"
         style={{ zIndex: -1 }}
       />
@@ -132,7 +153,7 @@ function FlightSearch() {
                   value={destination}
                   onChange={handleDestinationChange}
                   placeholder="Ciudad de destino"
-                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 "
+                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black "
                 />
                 <FlightSearchDropdown
                   seter={setDestination}
@@ -177,7 +198,7 @@ function FlightSearch() {
               </div>
             </div>
             <button
-              type="submit"
+              onClick={handleButtonClick}
               className="w-full py-2 px-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mt-4"
             >
               Buscar vuelos
