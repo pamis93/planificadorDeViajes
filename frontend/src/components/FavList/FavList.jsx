@@ -75,22 +75,31 @@ function FavList() {
   if (!favoritos.length) {
     return (
       <>
-      <div className="w-full h-screen flex flex-col mt-20">
-      <Head
-      favoritos={favoritos}
-      setFavoritos={setFavoritos}
-      handleSortByPrice={handleSortByPrice}
-      handleSortByCity={handleSortByCity}
-      handleSortByDate={handleSortByDate}
-      
-      />
-      <div className="flex justify-center h-screen ">
-        <div className="mt-10 flex items-center justify-center sm:text-3xl font-bold bg-white w-[300px] sm:w-[600px] h-24 shadow-md rounded-md">
-          <h1 className="text-black">No tienes guardado ningún vuelo.</h1>
-          <h3> Para añadir vuelos a su lista de favoritos antes debe ded buscar <Link to='/search'>pulsa aquí</Link></h3>
+        <div className="w-full h-screen flex flex-col mt-20">
+          <Head
+            favoritos={favoritos}
+            setFavoritos={setFavoritos}
+            handleSortByPrice={handleSortByPrice}
+            handleSortByCity={handleSortByCity}
+            handleSortByDate={handleSortByDate}
+          />
+          <div className="flex justify-center items-center h-screen">
+            <div className="bg-[#ffffff] w-[300px] sm:w-[600px] sm:h-auto p-6 shadow-md rounded-md flex flex-col items-center text-center">
+              <h1 className="text-black font-bold text-xl sm:text-3xl mb-4">
+                No tienes guardado ningún vuelo.
+              </h1>
+              <p className="text-gray-700 sm:text-lg">
+                Para añadir vuelos a tu lista de favoritos, primero realiza una búsqueda.
+              </p>
+              <Link
+                to="/search"
+                className="mt-6 px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition"
+              >
+                Buscar vuelos
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
       </>
     );
   }
