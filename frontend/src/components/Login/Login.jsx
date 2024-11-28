@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useUser } from '../../context/UserContext'; 
+import { useUser } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
-
 function Login() {
-    const [user, setUser] = useUser();
-    console.log('👤 Estado actual del usuario:', user);
-    
-    const navigate = useNavigate();  
+  const [user, setUser] = useUser();
+  console.log('👤 Estado actual del usuario:', user);
+
+  const navigate = useNavigate();
 
   const [message, setMessage] = useState({
     text: '',
@@ -15,11 +14,11 @@ function Login() {
   });
   const [showPassword, setShowPassword] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        const email = e.target.email.value;
-        const password = e.target.password.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
     try {
       const response = await fetch('http://localhost:3001/users/login', {
@@ -71,12 +70,15 @@ function Login() {
 
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
-      <div className="bg-black bg-opacity-50 p-10 mt-20 rounded-lg shadow-lg w-[500px] h-[750px] text-center"
-       style={{ backgroundImage: `url('/fondoLogin.png')` }}>
-
+      <div
+        className="bg-black bg-opacity-50 p-10 mt-20 rounded-lg shadow-lg w-[500px] h-[750px] text-center"
+        style={{ backgroundImage: `url('/fondoLogin.png')` }}
+      >
         <h2 className="text-2xl font-bold mb-6">BIENVENIDO/A DE VUELTA</h2>
         <form onSubmit={handleSubmit}>
-          <label className="block text-lg font-semibold mt-10 mb-2 text-white">EMAIL</label>
+          <label className="block text-lg font-semibold mt-10 mb-2 text-white">
+            EMAIL
+          </label>
           <input
             className="placeholder:text-gray-300 w-full p-3 mb-4 border rounded-lg bg-[#686e9e] text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="email"
@@ -84,7 +86,9 @@ function Login() {
             placeholder="Enter Your Email..."
             required
           />
-          <label className="block text-lg font-semibold mt-10 mb-2 text-white">CONTRASEÑA</label>
+          <label className="block text-lg font-semibold mt-10 mb-2 text-white">
+            CONTRASEÑA
+          </label>
           <div className="relative mb-4">
             <input
               className="placeholder:text-gray-300 w-full p-3 border rounded-lg bg-[#686e9e] text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -102,7 +106,10 @@ function Login() {
           </div>
 
           <p className="text-sm">
-            <a href="/recuperacion" className="text-[#046ef8] font-semibold text-lg hover:underline">
+            <a
+              href="/recuperacion"
+              className="text-[#046ef8] font-semibold text-lg hover:underline"
+            >
               olvidaste la contraseña?
             </a>
           </p>
@@ -127,7 +134,10 @@ function Login() {
 
         <p className="mt-20 text-sm">
           ¿Aún no tienes una cuenta?{' '}
-          <a href="/register" className="text-[#046ef8] font-semibold text-lg hover:underline">
+          <a
+            href="/register"
+            className="text-[#046ef8] font-semibold text-lg hover:underline"
+          >
             REGÍSTRATE
           </a>
         </p>
