@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { useUser } from '../../context/UserContext';
-import LanguageNav from "./LanguageNav/LanguageNav";
-import LogoutButton from "../Logout/LogoutButton";
-import { Link } from "react-router-dom";
+import LanguageNav from './LanguageNav/LanguageNav';
+import LogoutButton from '../Logout/LogoutButton';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [user] = useUser(); 
+  const [user] = useUser();
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
@@ -44,24 +44,29 @@ function Header() {
             <span className="text-orange-500">F</span>ly
           </h1>
 
-          <div className="flex justify-center gap-6 ml-10">
+          <div className="flex justify-center items-center text-center gap-2 sm:gap-6 ml-3 sm:ml-20">
             <Link
               to="/search"
-              className="text-white hover:text-orange-500 transition-colors"
+              className="text-white hover:text-orange-500 transition-colors "
             >
               Vuelos
             </Link>
             {user && (
               <>
-              <Link
-                to={`/users/${user.id}/favoritos`} // Ruta dinámica
-                className="text-white hover:text-orange-500 transition-colors"
-              >
-                Favoritos
-              </Link>
-              {user?.isAdmin ? (
-                <a href="/admin/users" className="text-white hover:text-orange-500 transition-colors">Lista de Usuarios</a>
-              ) : null}
+                <Link
+                  to={`/users/${user.id}/favoritos`} 
+                  className="text-white hover:text-orange-500 transition-colors"
+                >
+                  Favoritos
+                </Link>
+                {user?.isAdmin && (
+                  <Link
+                    to="/admin/users"
+                    className="text-white hover:text-orange-500 transition-colors"
+                  >
+                    Lista de Usuarios
+                  </Link>
+                )}
               </>
             )}
           </div>
@@ -114,7 +119,7 @@ function Header() {
                       Registrarse
                     </Link>
                   </>
-                ) : ( 
+                ) : (
                   <>
                     <Link
                       to="/edituser"
@@ -123,12 +128,9 @@ function Header() {
                     >
                       Editar usuario
                     </Link>
-                    <Link
-                      to="/"
-                    >
+                    <Link to="/">
                       <LogoutButton onClick={closeDropdown} />
                     </Link>
-                    
                   </>
                 )}
               </div>
@@ -141,4 +143,3 @@ function Header() {
 }
 
 export default Header;
-
