@@ -4,10 +4,8 @@ import { useUser } from '../../context/UserContext';
 
 
 function Login() {
-    const [user, setUser] = useUser();
-    console.log('👤 Estado actual del usuario:', user);
-    
-    const navigate = useNavigate();  
+    const [, setUser] = useUser();
+  
 
   const [message, setMessage] = useState({
     text: '',
