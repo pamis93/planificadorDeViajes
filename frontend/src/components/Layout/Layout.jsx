@@ -10,6 +10,7 @@ export const Layout = () => {
   return (
     <>
       <ErrorBoundary fallback={<ErrorPage />}>
+      <Header/>
         <main>
           <Outlet />
         </main>
