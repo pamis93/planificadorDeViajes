@@ -38,36 +38,39 @@ function Header() {
     <header className="bg-custom-blue text-white p-2 w-full h-20 fixed top-0 left-0 z-50 shadow-md">
       <div className="flex justify-between sm:items-center sm:w-full sm:gap-8">
         <div className="flex justify-start items-center sm:gap-1">
-          <Link to="/" className="flex items-center gap-1">
-            <img className="w-10 rounded-xl" src="/witch2.svg" alt="ico" />
-            <h1 className="hidden sm:block text-3xl font-bold">
-              <span className="text-orange-500">W</span>onder
-              <span className="text-orange-500">F</span>ly
-            </h1>
-          </Link>
-          <div className="flex justify-center gap-6 ml-10">
+
+          <img className="w-10 rounded-xl" src="/witch2.svg" alt="ico" />
+          <h1 className="hidden sm:block text-3xl font-bold">
+            <span className="text-orange-500">W</span>onder
+            <span className="text-orange-500">F</span>ly
+          </h1>
+
+          <div className="flex justify-center items-center text-center gap-2 sm:gap-6 ml-3 sm:ml-20">
             <Link
               to="/search"
-              className="text-white hover:text-orange-500 transition-colors"
+              className="text-white hover:text-orange-500 transition-colors "
             >
               Vuelos
             </Link>
             {user && (
               <>
                 <Link
+
                   to={`/users/${user.id}/favoritos`} // Ruta dinámica
+
                   className="text-white hover:text-orange-500 transition-colors"
                 >
                   Favoritos
                 </Link>
-                {user?.isAdmin ? (
-                  <a
-                    href="/admin/users"
+
+                {user?.isAdmin && (
+                  <Link
+                    to="/admin/users"
                     className="text-white hover:text-orange-500 transition-colors"
                   >
                     Lista de Usuarios
-                  </a>
-                ) : null}
+                  </Link>
+                )}
               </>
             )}
           </div>
@@ -143,4 +146,6 @@ function Header() {
   );
 }
 
+
 export default Header;
+
