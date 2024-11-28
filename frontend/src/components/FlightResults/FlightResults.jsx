@@ -72,23 +72,41 @@ export default function FlightResults() {
   };
 
   if (loading) {
-    return <div className="text-center p-8">Cargando resultados...</div>;
+    return (
+      <div className="flex justify-center h-screen ">
+        <div className="mt-60 flex items-center justify-center sm:text-3xl font-bold bg-white w-[300px] sm:w-[600px] h-24 shadow-md rounded-md">
+          <h1 className="text-black">
+            No te vayas estamos buscando tus vuelos
+          </h1>
+        </div>
+      </div>
+    );
+
+    // <div className="text-center p-8">Cargando resultados...</div>;
   }
 
   if (error) {
-    return <div className="text-center p-8 text-red-600">Error: {error}</div>;
+    return (
+      <div className="flex justify-center h-screen ">
+        <div className="mt-60 flex items-center justify-center sm:text-3xl font-bold bg-white w-[300px] sm:w-[600px] h-24 shadow-md rounded-md">
+          <h1 className="text-black">Ha ocurrido un error - {error}</h1>
+        </div>
+      </div>
+    );
+
+    // <div className="text-center p-8 text-red-600">Error: {error}</div>;
   }
 
   return (
     <div className="w-full h-screen flex flex-col mt-20">
-      <div className=" w-full">
+      <div className=" w-full relative">
         <img
-          className="w-full h-full object-cover"
+          className="w-full h-[200px] object-cover"
           src="/ventanilla.jfif"
           alt="Fondo"
         />
-        <div className=" text-white absolute top-1/2 bottom-1/2 z-10  px-4 py-2 rounded-lg">
-          <h1 className="text-3xl font-bold  text-center text-white dark:text-white absolute top-1/2 bottom-1/2 z-10  px-4 py-2 rounded-lg">
+        <div className="bg-slate-400 bg-opacity-30 text-white z-10 px-4 py-2 absolute top-0 rounded-lg">
+          <h1 className="text-3xl font-bold text-center text-white dark:text-white z-10 px-4 py-2 rounded-lg">
             ENCUENTRA EL VUELO QUE SE AJUSTE
           </h1>
           <h2 className="text-xl">A TUS PLANES DE VIAJE</h2>
