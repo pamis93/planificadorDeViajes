@@ -67,7 +67,7 @@ function Header() {
 
                 {user?.isAdmin ? (
                 
-                    <Link href="/admin/users" className="text-white hover:text-orange-500 transition-colors">Lista de Usuarios</Link>
+                    <Link to={`/admin/users`} href="/admin/users" className="text-white hover:text-orange-500 transition-colors">Lista de Usuarios</Link>
                   ) : null}
                 
               </>
