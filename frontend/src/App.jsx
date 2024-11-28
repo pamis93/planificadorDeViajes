@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 // importaciones desde componentes
 import FlightSearch from './components/FlightSearch/FlightSearch';
+import FlightResults from './components/FlightResults/FlightResults';
 import { Layout } from './components/Layout/Layout';
 import PasswordRecovery from './components/PasswordRecovery/PasswordRecovery';
 import PasswordReset from './components/PasswordReset/PasswordReset';
