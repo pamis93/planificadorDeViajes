@@ -11,11 +11,12 @@ import { UsersList } from './components/UsersList/UsersList';
 import AccountActivation from './components/AccountActivation/AccountActivation';
 import { UserInfo } from './components/UsersList/UserInfo';
 import EditUser from './components/EditUser/EditUser';
-import NotFound from "./components/NotFound/NotFound";;
+import NotFound from './components/NotFound/NotFound';
 import FavList from './components/FavList/FavList';
+import RatingAndComments from './components/Rating/RatingAndComments';
 
 // css;
-// import './App.css'; 
+// import './App.css';
 
 function App() {
   return (
@@ -27,12 +28,16 @@ function App() {
           <Route path="/admin/users" element={<UsersList />} />
           <Route path="/admin/users/:id" element={<UserInfo />} />
           <Route path="/register" element={<Register />} />
+          <Route
+            path="/users/validate/:registrationCode"
+            element={<AccountActivation />}
+          />
+          <Route path="/users/:usuario_id/favoritos" element={<FavList />} />
           <Route path="/login" element={<Login />} />
           <Route path="/edituser" element={<EditUser />} />
           <Route path="/recuperacion" element={<PasswordRecovery />} />
           <Route path="/reset/:code" element={<PasswordReset />} />
-          <Route path="/users/validate/:registrationCode" element={<AccountActivation />}/> 
-          <Route path="/users/:usuario_id/favoritos" element={<FavList/>}/>
+          <Route path="/ratings" element={<RatingAndComments />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
