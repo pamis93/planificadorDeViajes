@@ -15,7 +15,7 @@ export default function FlightResults() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [flightsPerPage] = useState(7);
+  const [flightsPerPage] = useState(3);
 
   // const currentQuery = searchParams.get('departureDate');
   // console.log('esta es la current query', currentQuery);
@@ -61,7 +61,7 @@ export default function FlightResults() {
 
   const indexOfLastFlights = currentPage * flightsPerPage;
   const indexOfFirstFlights = indexOfLastFlights - flightsPerPage;
-  const currentFlights = flights?.resume.slice(
+  const currentFlights = flights?.processed.slice(
     indexOfFirstFlights,
     indexOfLastFlights
   );
@@ -131,7 +131,7 @@ export default function FlightResults() {
         </div>
         <div className=" flex justify-center mt-4">
           <Pagination
-            length={flights.resume.length}
+            length={flights.processed.length}
             flightsPerPage={flightsPerPage}
             handlePagination={handlePagination}
             currentPage={currentPage}
