@@ -13,7 +13,8 @@ import selectUserByIdService from '../../services/users/selectUserByIdService.js
 const imgSchema = joi.object({
   name: joi.string().pattern(/^[a-zA-Z0-9_-]+\.(jpg|jpeg|png)$/).required(),
   data: joi.any().required(),
-  mimetype: joi.string().valid('image/jpeg', 'image/png').required()
+  mimetype: joi.string().valid('image/jpeg', 'image/png').required(),
+  size: joi.number().max(5 * 1024 * 1024).messages({'number.max':'El tamaño de la foto no debe superar los 5MB',}).required()//lim 5MB
 });
 
 // Borramos la foto si ya existe una
@@ -67,7 +68,8 @@ export const editUserAvatarController = async (req, res, next) => {
     console.log('Avatar data:', avatar);
 
     //Validamos con joi
-    const { error } = imgSchema.validate({ name: avatar.name, data: avatar.data, mimetype: avatar.mimetype });
+    const { size } = avatar;
+    const { error } = imgSchema.validate({ name: avatar.name, data: avatar.data, mimetype: avatar.mimetype, size });
     if (error) {
       throw generateErrorsUtils(`Error de validación: ${error.details[0].message}`, 400);
     }
