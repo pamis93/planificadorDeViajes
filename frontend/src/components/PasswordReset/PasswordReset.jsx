@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function PasswordReset() {
   const { code } = useParams();
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState({ text: '', type: '' });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
-      setMessage({ text: 'Las contraseñas no coinciden.', type: 'error' });
+      toast.error('Las contraseñas no coinciden.', { position: "bottom-center" });
       return;
     }
 
@@ -29,22 +30,13 @@ function PasswordReset() {
 
       if (response.ok) {
         const data = await response.json();
-        setMessage({
-          text: data.message || 'Contraseña actualizada con éxito.',
-          type: 'success',
-        });
+        toast.success(data.message || 'Contraseña actualizada con éxito.', { position: "bottom-right" });
       } else {
         const errorData = await response.json();
-        setMessage({
-          text: errorData.message || 'Error al actualizar la contraseña.',
-          type: 'error',
-        });
+        toast.error(errorData.message || 'Error al actualizar la contraseña.', { position: "bottom-center" });
       }
     } catch (error) {
-      setMessage({
-        text: 'Ocurrió un error: ' + error.message,
-        type: 'error',
-      });
+      toast.error('Ocurrió un error: ' + error.message, { position: "bottom-center" });
     }
   };
 
@@ -85,27 +77,8 @@ function PasswordReset() {
             Restablecer Contraseña
           </button>
         </form>
-
-        {message.text && (
-          <p
-            className={`mt-4 text-lg ${
-              message.type === 'success' ? 'text-green-500' : 'text-red-500'
-            }`}
-          >
-            {message.text}
-          </p>
-        )}
-
-        <p className="mt-20 text-sm">
-          ¿Ya recuerdas tu contraseña?{' '}
-          <a
-            href="/login"
-            className="text-[#046ef8] font-semibold text-lg hover:underline"
-          >
-            Inicia sesión
-          </a>
-        </p>
-      </div>
+      </div>      
+      <ToastContainer/>
     </div>
   );
 }
