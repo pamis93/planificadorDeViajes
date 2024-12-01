@@ -1,13 +1,10 @@
 import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from '../../context/UserContext';
 
 function Login() {
   const [, setUser] = useUser();
-
-  const [message, setMessage] = useState({
-    text: '',
-    type: '',
-  });
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -45,25 +42,23 @@ function Login() {
             email: email,
           });
 
-          setMessage({
-            text: data.message,
-            type: 'success',
+          toast.success(data.message || 'Inicio de sesión exitoso.', {
+            position: 'bottom-center',
           });
+
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 2000);
         }
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 2000);
       } else {
-        setMessage({
-          text: data.message,
-          type: 'error',
+        toast.error(data.message || 'Credenciales incorrectas.', {
+          position: 'bottom-center',
         });
       }
     } catch (error) {
       console.error('Error:', error);
-      setMessage({
-        text: 'Error al conectar con el servidor',
-        type: 'error',
+      toast.error('Error al conectar con el servidor.', {
+        position: 'top-right',
       });
     }
   };
@@ -126,16 +121,6 @@ function Login() {
           </button>
         </form>
 
-        {message.text && (
-          <p
-            className={`mt-4 text-lg ${
-              message.type === 'success' ? 'text-green-500' : 'text-red-500'
-            }`}
-          >
-            {message.text}
-          </p>
-        )}
-
         <p className="mt-20 text-sm">
           ¿Aún no tienes una cuenta?{' '}
           <a
@@ -145,7 +130,8 @@ function Login() {
             REGÍSTRATE
           </a>
         </p>
-      </div>
+      </div>      
+      <ToastContainer />
     </div>
   );
 }
