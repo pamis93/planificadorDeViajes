@@ -45,7 +45,7 @@ export const UsersList = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div id="panel" className="mt-20 top-5 p-5 rounded-2xl w-full max-w-md mx-auto text-center relative bg-[#686e9e]">
+    <div id="panel" className="mt-20 mb-7 top-5 p-5 rounded-2xl w-full max-w-md mx-auto text-center relative bg-[#686e9e] ">
       <article className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-4">
       <img id="mdi_users" className="w-10 h-10" src={logoUsers} alt="icono de personas" />
       <h2 id="gestion" className="text-lg font-bold leading-tight text-white underline">Gestion de usuarios</h2>

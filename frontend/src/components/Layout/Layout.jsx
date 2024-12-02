@@ -8,15 +8,16 @@ import FeedbackButton from '../Rating/FeedbackButton';
 
 export const Layout = () => {
   return (
-    <>
+    <div>
       <ErrorBoundary fallback={<ErrorPage />}>
-      <Header/>
-        <main>
+        <Header />
+        <main >
           <Outlet />
         </main>
-      <Footer />
       </ErrorBoundary>
+      <Footer/>
       <FeedbackButton />
-    </>
+    </div>
   );
 };
+
