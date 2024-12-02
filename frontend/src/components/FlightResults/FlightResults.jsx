@@ -98,7 +98,7 @@ export default function FlightResults() {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col mt-20">
+    <div className="w-full min-h-screen flex flex-col mt-20">
       <div className=" w-full relative">
         <img
           className="w-full h-[200px] object-cover"
@@ -116,14 +116,14 @@ export default function FlightResults() {
         </div>
       </div>
 
-      <div className="flex flex-col w-full">
-        <div className="flex w-full">
-          <div className="w-1/4 p-4">
+      <div className="flex flex-col w-full mt-3">
+        <div className="flex flex-col md:flex-row w-full">
+          <div className="w-full md:w-1/4 p-4 order-0 md:order-1">
             <FlightResultsFilter priceRange={flights.priceRange} />
           </div>
 
           {/* cuidado con esto solo le estoy pasando el objeto resume voy a tener que cambiarlo tanto aqui como en la card si quiero usar en la card la información completa tomar decision sobre esto pronto */}
-          <div className="w-3/4 space-y-4">
+          <div className="w-full md:w-3/4 space-y-4 order-1 md:order-0 overflow-y-auto">
             {currentFlights.map((flight) => {
               return <FlightResultCard key={flight.id} flight={flight} />;
             })}

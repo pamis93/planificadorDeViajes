@@ -18,6 +18,7 @@ export default function FlightSearchDropdown({
     }
   };
 
+  // TODO considerar un tamaño fijo con un scroll para que no empuje el contenido para abajo
   return (
     <div>
       <div className="results">
