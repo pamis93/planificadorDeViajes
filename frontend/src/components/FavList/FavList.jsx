@@ -115,7 +115,7 @@ function FavList() {
       />
 
       {/* Lista de favoritos */}
-      <ul className="flex flex-col items-center space-y-4 bg-[#9AA5BC] p-4 h-screen">
+      <ul className="flex flex-col items-center space-y-4 bg-[#9AA5BC] p-4 ">
         {favoritos.map((favorito) => (
           <li
             key={favorito.id}

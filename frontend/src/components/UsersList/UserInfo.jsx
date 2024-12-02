@@ -35,7 +35,7 @@ export const UserInfo = () => {
   // };
   const avatarUrl = `http://localhost:3001/users/getAvatar/${id}`
   return (
-    <div className='mt-20 top-5 p-5 rounded-2xl w-full max-w-xs sm:max-w-md mx-auto relative bg-[#7278a4]'>
+    <div className='mt-20 mb-10 top-5 p-5 rounded-2xl w-full max-w-xs sm:max-w-md mx-auto relative bg-[#7278a4]'>
       <h1 className='text-center bg-[#515a9b] text-white font-manrope text-base sm:text-lg font-bold' >{user.username}</h1>
       <img src={avatarUrl} className="rounded-full w-24 h-24 sm:w-32 sm:h-32"/>
       <div className='mt-4 text-left text-[#252a31] font-semibold'>

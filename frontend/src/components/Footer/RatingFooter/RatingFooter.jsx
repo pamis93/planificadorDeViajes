@@ -39,7 +39,7 @@ const stars = getStars(averageRating);
 
 return (
   <>
-    <div className=" bg-[#9AA5BC] text-white py-4 flex justify-center mt-0">
+    <div className=" bg-[#9AA5BC] text-white py-10 flex justify-center mt-0">
     <div className="bg-white bg-opacity-80 text-black rounded-lg px-6 py-4 flex items-center justify-between w-auto">
         <div className="text-center">
           <p className="font-bold">

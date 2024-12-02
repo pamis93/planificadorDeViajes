@@ -9,7 +9,7 @@ export const FavCard = ({favorito}) => {
       <p>Aerolinea: {favorito.aeroline}</p>
       <p>Precio: {favorito.price} €</p>
       <p>Duracion: {favorito.duration}</p>
-      <p>Nota: {favorito.note}</p>
+      <p>Nota: {favorito.note}</p>                                      
     </div>
   )
 }

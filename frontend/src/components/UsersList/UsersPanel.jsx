@@ -14,8 +14,8 @@ export const UsersPanel = ({ userList, setUserList }) => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full bg-[#7278a4] shadow-md rounded-lg overflow-hidden">
-        <thead className='w-full bg-[#515a9b] text-white font-manrope text-xs font-bold leading-[13.66px] text-center underline decoration-skip-ink-none'>
+      <table className="min-w-full bg-[#7278a4] shadow-md rounded-lg overflow-hidden ">
+        <thead className='w-full  bg-[#515a9b] text-white font-manrope text-xs font-bold leading-[13.66px] text-center underline decoration-skip-ink-none'>
           <tr>
             <th className='py-1 px-2 text-center'>Usuario</th>
             <th className='py-1 px-2 text-center'>Email</th>
@@ -23,11 +23,11 @@ export const UsersPanel = ({ userList, setUserList }) => {
             <th className='py-1 px-2 text-center'>Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           {userList.map((user, index) => (
             <>
             <tr key={user.id} className='text-xs sm:text-sm'>
-              <td className="py-1 px-1 text-left text-xs text-[#252a31] font-bold">{user.username}</td>
+              <td className="py-1 pl-4 px-1 text-left text-xs text-[#252a31] font-bold">{user.username}</td>
               <td className="py-1 px-1 text-left text-xs text-[#252a31] font-bold">{user.email}</td>
               <td>
                 <UserPanelStatus
@@ -44,7 +44,7 @@ export const UsersPanel = ({ userList, setUserList }) => {
             {index < userList.length - 1 && (
                 <tr>
                   <td colSpan="4">
-                    <div className="my-6 border-t border-[#a19f9f]"></div>
+                    <div className="my-6  border-t border-[#a19f9f]"></div>
                   </td>
                 </tr>
               )}
