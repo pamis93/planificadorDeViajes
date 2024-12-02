@@ -35,7 +35,7 @@ export const UserDelete = ({ userId, setUserList }) => {
 
   return (
     <div>
-      <button id="trash" className=' w-6 h-6 p-1 mt-2.5 m-0 gap-0 bg-[#686e9e] text-[#252a31] rounded-full' onClick={deleteUser} disabled={loading}> 
+      <button id="trash" className=' w-6 h-6 p-1 mt-2.5 m-0 gap-0 bg-[#7278a4] text-[#252a31] rounded-full transition-transform transform hover:scale-150' onClick={deleteUser} disabled={loading}> 
         <TrashIcon className='w-5 h-5'/>
       </button>
       {error && <div className="text-red-700 text-sm mt-2">{error}</div>}

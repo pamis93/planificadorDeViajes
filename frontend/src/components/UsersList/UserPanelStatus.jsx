@@ -38,8 +38,8 @@ export const UserPanelStatus = ({ userId, active, updateUserStatus }) => {
   return (
     <div className='p-4'>
       <button
-      className={`w-24 h-6 p-2 flex items-center justify-center gap-2 rounded-full text-white font-manrope text-xs font-medium leading-5 text-center shadow-lg ${
-        isActive ? 'bg-[#0df20d]' : 'bg-[#757575]'
+      className={`w-16 h-5 sm:w-24 sm:h-6 p-1 sm:p-2 flex items-center justify-center gap-1 sm:gap-2 rounded-full text-white font-manrope text-xs font-medium leading -4 sm:leading-5 text-center shadow-lg ${
+        isActive ? 'bg-[#0df20d] hover:bg-[#45f945]' : 'bg-[#5d5d5d] hover:bg-[#454444]'
       }`}
         
         onClick={changeStatus}
