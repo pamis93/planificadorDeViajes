@@ -2,12 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { useUser } from '../../context/UserContext';
 import LanguageNav from './LanguageNav/LanguageNav';
 import LogoutButton from '../Logout/LogoutButton';
-import { Link } from 'react-router-dom';
+import { useLocation,Link } from 'react-router-dom';
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [user] = useUser();
   const dropdownRef = useRef(null);
+
+  const location = useLocation();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -50,7 +52,9 @@ function Header() {
           <div className="flex justify-center items-center text-center gap-2 sm:gap-6 ml-3 sm:ml-20">
             <Link
               to="/search"
-              className="text-white hover:text-orange-500 transition-colors "
+              className={`${
+                location.pathname === '/search' ? 'text-orange-500' : 'text-white'
+              } hover:text-orange-500 transition-colors`}
             >
               Vuelos
             </Link>
@@ -60,14 +64,22 @@ function Header() {
 
                   to={`/users/${user.id}/favoritos`} // Ruta dinámica
 
-                  className="text-white hover:text-orange-500 transition-colors"
+                  className={`${
+                    location.pathname === `/users/${user.id}/favoritos`
+                      ? 'text-orange-500'
+                      : 'text-white'
+                  } hover:text-orange-500 transition-colors`}
                 >
                   Favoritos
                 </Link>
 
                 {user?.isAdmin ? (
                 
-                    <Link to={`/admin/users`} href="/admin/users" className="text-white hover:text-orange-500 transition-colors">Lista de Usuarios</Link>
+                    <Link to={`/admin/users`} href="/admin/users" className={`${
+                      location.pathname === '/admin/users'
+                        ? 'text-orange-500'
+                        : 'text-white'
+                    } hover:text-orange-500 transition-colors`}>Lista de Usuarios</Link>
                   ) : null}
                 
               </>
