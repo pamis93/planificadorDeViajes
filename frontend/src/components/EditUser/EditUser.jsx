@@ -9,7 +9,7 @@ const EditUser = () => {
   const [avatarAct, setAvatarAct] = useState(avatar);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [ setMessage] = useState({ text: '', type: '' });
+  const [message, setMessage] = useState({ text: '', type: '' }); // Estado para el mensaje
 
   // Obtiene el usuario del contexto
   const [user] = useUser();
@@ -38,15 +38,12 @@ const EditUser = () => {
   
         const responseData = await response.json();
   
-        // Cambio principal: verificar el status
         if (responseData.status === 'ok') {
-          // Usar responseData.data en lugar de responseData directamente
           const userData = responseData.data;
           setUserData(userData);
           setAvatarAct(`http://localhost:3001/uploads/${userData.avatar}`);
           setLoading(false);
         } else {
-          // Mostrar el mensaje de error del backend
           setMessage({
             text: responseData.message || 'Error al obtener datos',
             type: 'error',
@@ -112,6 +109,14 @@ const EditUser = () => {
       <h1 className="text-white mt-20 sm:mt-10 md:mt-20 text-xl sm:text-2xl font-bold mb-4 sm:mb-8 text-center">
         Configuración de la Cuenta
       </h1>
+      
+      {/* Mostrar mensaje de éxito o error */}
+      {message.text && (
+        <div className={`alert ${message.type === 'success' ? 'alert-success' : 'alert-error'}`}>
+          {message.text}
+        </div>
+      )}
+
       <div className="flex flex-col sm:flex-row justify-center items-start gap-4 sm:gap-8 w-full max-w-4xl">
         {/* Avatar */}
         <div className="flex flex-col items-center bg-[#686E9E] p-4 sm:p-20 rounded-lg w-full sm:w-[350px] mb-4 sm:mb-0">

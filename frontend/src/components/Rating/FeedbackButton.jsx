@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const FeedbackButton = () => {
   const [averageRating, setAverageRating] = useState(null);
   const [numVotes, setNumVotes] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -21,20 +22,34 @@ const FeedbackButton = () => {
     };
     fetchStats();
   }, []);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  if (!isModalOpen) return null;
+
   return (
-    <Link
-      to="/ratings"
-      className="fixed bottom-4 right-4 bg-orange-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-orange-700 transition-colors duration-300 flex items-center"
-    >
-      <div>
+    <div className="fixed bottom-4 right-4 bg-orange-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-orange-700 transition-colors duration-300 flex items-center">
+    
+      <button
+        onClick={closeModal}
+        className="absolute top-1 right-2 text-white hover:bg-gray-600 rounded-full"
+        aria-label="Cerrar"
+      >
+        ✕
+      </button>
+
+    
+      <Link to="/ratings" className="flex flex-col">
         <p>¡Danos tu opinión!</p>
         {averageRating !== null && numVotes !== null && (
           <p className="text-sm">
             Valoración media: ⭐{averageRating.toFixed(1)} ({numVotes} votos)
           </p>
         )}
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

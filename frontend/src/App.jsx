@@ -15,6 +15,7 @@ import EditUser from './components/EditUser/EditUser';
 import NotFound from './components/NotFound/NotFound';
 import FavList from './components/FavList/FavList';
 import RatingAndComments from './components/Rating/RatingAndComments';
+import Contact from './components/Footer/Contact/Contact';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/admin/users/:id" element={<UserInfo />} />
           <Route path="/users/:usuario_id/favoritos" element={<FavList />} />
+          <Route path="/contact" element={<Contact/>}/>
         </Route>
       </Routes>
     </>

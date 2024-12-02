@@ -75,7 +75,7 @@ function FavList() {
   if (!favoritos.length) {
     return (
       <>
-        <div className="w-full h-screen flex flex-col mt-20">
+        <div className="w-full h-screen flex flex-col mt-20 ">
           <Head
             favoritos={favoritos}
             setFavoritos={setFavoritos}
@@ -105,7 +105,7 @@ function FavList() {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col mt-20">
+    <div className="w-full  flex flex-col mt-20">
       <Head
         favoritos={favoritos}
         setFavoritos={setFavoritos}
@@ -115,7 +115,7 @@ function FavList() {
       />
 
       {/* Lista de favoritos */}
-      <ul className="flex flex-col items-center space-y-4 bg-[#9AA5BC] p-4">
+      <ul className="flex flex-col items-center space-y-4 bg-[#9AA5BC] p-4 h-screen">
         {favoritos.map((favorito) => (
           <li
             key={favorito.id}
@@ -139,7 +139,7 @@ function FavList() {
               </div>
 
               {/* Columna 2: Nota */}
-              <div className="bg-[#8c79aa] px-4 text-white sm:col-span-6">
+              <div className="bg-[#8c79aa] px-4 max-h-[150px] text-white sm:col-span-6">
                 <p className="dark:text-gray-300">Nota: {favorito.note}</p>
               </div>
 
