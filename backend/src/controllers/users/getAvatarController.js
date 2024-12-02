@@ -10,7 +10,9 @@ const __dirname = dirname(__filename);
 
 export const getAvatarController = async (req, res, next) => {
   try {
-    const user = await selectUserByIdService(req.user.id);
+
+    const userId = req.params.id;
+    const user = await selectUserByIdService(userId);
 
     if (!user || !user.avatar) {
       return res.status(404).send({

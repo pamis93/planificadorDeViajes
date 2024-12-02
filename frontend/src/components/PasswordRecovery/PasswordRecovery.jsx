@@ -1,11 +1,9 @@
 import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function PasswordRecovery() {
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState({
-    text: '',
-    type: '',
-  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,20 +22,21 @@ function PasswordRecovery() {
 
       if (response.ok) {
         const data = await response.json();
-        setMessage({
-          text: data.message || 'Correo de recuperación enviado.',
-          type: 'success',
+        toast.success(data.message || 'Correo de recuperación enviado.', {
+          position: 'bottom-right',
+          autoClose: 3000,
         });
       } else {
-        setMessage({
-          text: 'Error al enviar la solicitud de recuperación.',
-          type: 'error',
+        const errorData = await response.json();
+        toast.error(errorData.message || 'Error al enviar la solicitud.', {
+          position: 'bottom-center',
+          autoClose: 3000,
         });
       }
     } catch (error) {
-      setMessage({
-        text: 'Ocurrió un error: ' + error.message,
-        type: 'error',
+      toast.error(`Ocurrió un error: ${error.message}`, {
+        position: 'bottom-center',
+        autoClose: 3000,
       });
     }
   };
@@ -69,16 +68,6 @@ function PasswordRecovery() {
           </button>
         </form>
 
-        {message.text && (
-          <p
-            className={`mt-4 text-lg ${
-              message.type === 'success' ? 'text-green-500' : 'text-red-500'
-            }`}
-          >
-            {message.text}
-          </p>
-        )}
-
         <p className="mt-20 text-sm">
           ¿Recuerdas tu contraseña?{' '}
           <a
@@ -89,6 +78,7 @@ function PasswordRecovery() {
           </a>
         </p>
       </div>
+      <ToastContainer />
     </div>
   );
 }

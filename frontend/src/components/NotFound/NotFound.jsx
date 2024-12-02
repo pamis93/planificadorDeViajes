@@ -1,6 +1,4 @@
-// import React from "react";
 import { Link } from "react-router-dom";
-import airplaneImage from "../../assets/airplane.png";
 
 const NoFound = () => {
   return (
@@ -8,11 +6,10 @@ const NoFound = () => {
       
       <div className="relative w-48 h-48 mb-8">
         <img
-          src={airplaneImage} // Imagen importada desde src/assets
+          src="/airplane.png"
           alt="Avión perdido"
           className="animate-bounce"
         />
-        
       </div>
      
       <h1 className="text-4xl font-bold mb-4">¡Ups! Vuelo perdido</h1>
