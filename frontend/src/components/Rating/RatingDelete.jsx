@@ -14,7 +14,7 @@ export const RatingDelete = ({ id }) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`http://localhost:3001/ratings/${Id}`, {
+      const res = await fetch(`http://localhost:3001/ratings/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `${user.token}`,
@@ -23,8 +23,6 @@ export const RatingDelete = ({ id }) => {
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
-
-      setUserList((prevList) => prevList.filter((user) => user.id !== userId));
     } catch (error) {
       console.error('Error al eliminar la valoracion', error);
       setError(error.message);

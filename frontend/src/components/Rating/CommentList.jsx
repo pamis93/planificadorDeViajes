@@ -1,21 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+import { useUser } from '../../context/UserContext';
 
-const CommentList = ({ comment }) => {
-  console.log(comment);
+const CommentList = ({ comment, comments, setComments }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newComment, setNewComment] = useState(comment.comment);
+  const [newRating, setNewRating] = useState(comment.rating);
+  const [user] = useUser();
+  const token = user?.token;
 
-  const renderStars = (rating) => {
+  // Función para guardar los cambios de un comentario
+  const handleSave = async () => {
+    try {
+      const res = await fetch(`http://localhost:3001/ratings/${comment.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+        body: JSON.stringify({
+          rating: newRating,
+          comment: newComment,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error('No se pudo actualizar la valoración');
+      }
+
+      // Actualizamos el comentario editado en el estado de comentarios
+      const updatedComments = comments.map((c) =>
+        c.id === comment.id
+          ? { ...c, comment: newComment, rating: newRating }
+          : c
+      );
+      setComments(updatedComments); // Actualizamos el estado de los comentarios
+
+      setIsEditing(false); // Cerramos el modal después de guardar los cambios
+    } catch (err) {
+      console.error('Error al editar el comentario:', err);
+    }
+  };
+
+  // Manejar el clic en el botón "Editar"
+  const handleEditClick = () => {
+    setNewComment(comment.comment);
+    setNewRating(comment.rating);
+    setIsEditing(true); // Abrimos el modal para editar
+  };
+
+  // Manejar el clic en las estrellas para cambiar la puntuación
+  const handleStarClick = (rating) => {
+    setNewRating(rating);
+  };
+
+  // Función para renderizar las estrellas
+  const renderStars = (currentRating) => {
     return Array.from({ length: 5 }, (_, index) => (
       <svg
         key={index}
-        className={`w-5 h-5 ${
-          rating > index
-            ? 'text-yellow-400 scale-100'
-            : 'text-gray-400 hover:text-yellow-400'
-        }`}
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
+        className={`w-6 h-6 cursor-pointer ${currentRating > index ? 'text-yellow-400' : 'text-gray-300'}`}
         fill="currentColor"
         viewBox="0 0 22 20"
+        onClick={() => handleStarClick(index + 1)} // Sumamos 1 para el valor de las estrellas (1-5)
       >
         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.433-.767l-1.302-5.006 3.91-3.505a1.53 1.53 0 0 0 .353-1.538z" />
       </svg>
@@ -24,8 +71,8 @@ const CommentList = ({ comment }) => {
 
   return (
     <div className="mt-8">
-      <div className="mb-4 p-4 bg-white border rounded shadow w-full max-w-500 mx-auto flex justify-between items-center bg-zinc-200">
-        <div className="flex flex-col mr-4">
+      <div className="mb-4 p-4 bg-white border rounded shadow w-full max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center bg-zinc-200">
+        <div className="flex flex-col mb-4 sm:mb-0 sm:mr-4 w-full sm:w-auto">
           <p>
             <strong>Usuario: </strong> {comment.username}
           </p>
@@ -41,14 +88,76 @@ const CommentList = ({ comment }) => {
             {new Date(comment.created_at).toLocaleString()}
           </p>
         </div>
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 mb-4 sm:mb-0">
           <img
             src={comment.avatar}
             alt={`${comment.username}'s avatar`}
             className="w-20 h-20 m-5 rounded-full border-4 border-white shadow-md"
           />
         </div>
+
+        {/* Mostrar el botón de editar solo si el usuario es el dueño del comentario */}
+        {comment.user_id === user.Id && (
+          <div className="flex-shrink-0 mt-2">
+            <button
+              onClick={handleEditClick}
+              className="bg-orange-500 ml-2 text-white px-4 py-2 rounded-lg hover:bg-orange-700"
+            >
+              Editar
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* Modal para editar el comentario */}
+      <Modal
+        isOpen={isEditing}
+        onRequestClose={() => setIsEditing(false)}
+        contentLabel="Editar Comentario"
+        className="fixed inset-0 flex items-center justify-center z-50"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+      >
+        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+          <h2 className="text-xl font-semibold mb-4">Editar Comentario</h2>
+          <div className="mb-4">
+            <label
+              htmlFor="rating"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Puntuación:
+            </label>
+            <div className="flex space-x-2">{renderStars(newRating)}</div>
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="comment"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Comentario:
+            </label>
+            <textarea
+              id="comment"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              className="border-2 border-gray-300 p-3 w-full rounded-md focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div className="flex justify-between">
+            <button
+              onClick={handleSave}
+              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+            >
+              Guardar
+            </button>
+            <button
+              onClick={() => setIsEditing(false)}
+              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

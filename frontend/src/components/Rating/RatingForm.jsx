@@ -23,6 +23,13 @@ const RatingForm = ({ fetchComments }) => {
           body: JSON.stringify({ rating, comment }),
         });
 
+        if (comment.length > 500) {
+          setError(
+            'Vaya! sentimos limitarte pero tenemos un maximo de 500 caracteres. Discula las molestias!'
+          );
+          return;
+        }
+
         if (!res.ok) {
           const errorData = await res.json();
           // Si falla por valoracion existente muestra esto
@@ -30,9 +37,11 @@ const RatingForm = ({ fetchComments }) => {
             res.status === 403 &&
             errorData.message === 'El usuario ya ha realizado una valoración'
           ) {
-            setError('Ya has valorado la web.');
-          } else {
             setError('Hubo un problema al agregar la valoración.');
+          } else {
+            setError(
+              'Parece que ya nos ha valorado! solo admitimos una valoracion, pero puedes modificarla o eliminarla!'
+            );
           }
           return;
         }

@@ -39,7 +39,7 @@ const FeedbackButton = () => {
         ✕
       </button>
       <Link to="/ratings" className="flex flex-col">
-        <p>¡Danos tu opinión!</p>
+        <p>¡Dejanos tu opinión!</p>
         {averageRating !== null && numVotes !== null && (
           <p className="text-sm">
             Valoración media: ⭐{averageRating.toFixed(1)} ({numVotes} votos)

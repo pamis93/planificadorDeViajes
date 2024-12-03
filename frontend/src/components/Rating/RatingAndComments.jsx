@@ -13,7 +13,7 @@ const RatingAndComments = () => {
         throw new Error('Network response was not ok');
       }
       const responseData = await response.json();
-      setComments(responseData.data);
+      setComments(responseData.data); // Guardamos los comentarios en el estado
     } catch (err) {
       console.error('Error al obtener los comentarios:', err);
       setMessage({
@@ -24,40 +24,44 @@ const RatingAndComments = () => {
   };
 
   useEffect(() => {
-    fetchComments();
+    fetchComments(); // Llamamos a la función para obtener los comentarios al cargar el componente
   }, []);
 
   const sortedComments = comments
     .slice()
-    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); // Ordenamos los comentarios por fecha
 
   return (
     <div
       className="mx-auto pt-12 p-4 sm:p-8 bg-cover bg-fixed bg-center w-full min-h-screen"
       style={{ backgroundImage: `url('/paris.jpg')` }}
     >
-      <h1 className="text-5xl sm:text-6xl text-center font-bold mt-10 mb-20 pt-20 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl text-center font-bold mt-10 mb-20 pt-20 drop-shadow-lg">
         <span className="text-orange-500">D</span>
-        <span className="text-white">éjanos tu </span>
+        <span className="text-white">ejanos tu </span>
         <span className="text-orange-500">O</span>
         <span className="text-white">pinión!</span>
       </h1>
 
       {message && (
         <div
-          className={`text-center mb-4 p-2 rounded ${
-            message.type === 'error'
-              ? 'bg-red-500 text-white'
-              : 'bg-green-500 text-white'
-          }`}
+          className={`text-center mb-4 p-2 rounded ${message.type === 'error' ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`}
         >
           {message.text}
         </div>
       )}
+
+      {/* Pasamos fetchComments como prop a RatingForm para que pueda actualizar los comentarios */}
       <RatingForm fetchComments={fetchComments} />
+
       {sortedComments && sortedComments.length > 0 ? (
         sortedComments.map((comment) => (
-          <CommentList key={comment.id} comment={comment} />
+          <CommentList
+            key={comment.id}
+            comment={comment}
+            comments={comments} // Pasamos los comentarios al componente hijo
+            setComments={setComments} // Pasamos la función setComments para actualizar el estado
+          />
         ))
       ) : (
         <p className="text-center">No hay comentarios disponibles</p>
