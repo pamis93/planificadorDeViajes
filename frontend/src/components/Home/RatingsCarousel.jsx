@@ -14,11 +14,9 @@ const RatingsCarousel = () => {
     // Mezclar el array de comentarios
     const shuffled = midToHighRatedComments.sort(() => 0.5 - Math.random());
     
-    // Devolver los primeros 6 comentarios (o menos si no hay suficientes)
     return shuffled.slice(0, count);
   };
 
-  // Fetch comments 
   const fetchComments = async () => {
     try {
       const response = await fetch('http://localhost:3001/ratings');
@@ -41,7 +39,6 @@ const RatingsCarousel = () => {
     fetchComments();
   }, []);
 
-  // Auto-slide effect
   useEffect(() => {
     const interval = comments.length > 1 ? setInterval(() => {
       nextSlide();
@@ -59,14 +56,13 @@ const RatingsCarousel = () => {
     );
   };
 
-  // Render nothing if no comments
   if (comments.length === 0) {
     return null;
   }
 
   return (
     <>
-      {/* Cabecera */}
+
       <div className="mb-6 items-center bg-[#686E9E] w-full px-4 sm:px-8">
         <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 text-center">
           COMENTARIOS DE NUESTROS VIAJEROS
@@ -77,17 +73,17 @@ const RatingsCarousel = () => {
         <div className="flex justify-center">
           <Link
             to="/comments"
-            className="text-white hover:underline hover:text-blue-800 transition bg-[#ff5a1f] px-4 py-2 rounded-lg"
+            className="text-white mb-10 hover:underline hover:text-blue-800 transition bg-[#ff5a1f] px-4 py-2 rounded-lg"
           >
             Ver todos los comentarios &gt;&gt;&gt;
           </Link>
         </div>
       </div>
 
-      {/* Carrusel de Comentarios */}
+
       <div className="relative w-full max-w-4xl mx-auto mt-8 mb-10 px-4">
-        {/* Contenedor del carrusel */}
-        <div className="relative flex h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden">
+
+        <div className="relative flex h-[250px] sm:h-[250px] md:h-[300px] overflow-hidden">
           {comments.map((comment, index) => (
             <div
               key={comment.id}
@@ -128,7 +124,6 @@ const RatingsCarousel = () => {
               &#10095;
             </button>
 
-            {/* Indicadores */}
             <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
               {comments.map((_, index) => (
                 <span
@@ -144,7 +139,6 @@ const RatingsCarousel = () => {
         )}
       </div>
 
-      {/* Error handling */}
       {error && (
         <div className="text-center text-red-500 mb-4">
           {error}

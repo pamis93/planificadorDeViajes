@@ -70,7 +70,7 @@ function Login() {
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
       <div
-        className="bg-black bg-opacity-50 p-10 mt-20 rounded-lg shadow-lg w-[500px] h-[750px] text-center"
+        className="bg-black bg-opacity-50 p-10  mt-60 sm:mt-20  rounded-lg shadow-lg w-[500px] h-[750px] text-center"
         style={{ backgroundImage: `url('/fondoLogin.png')` }}
       >
         <h2 className="text-2xl font-bold mb-6">BIENVENIDO/A DE VUELTA</h2>
@@ -104,7 +104,7 @@ function Login() {
             </span>
           </div>
 
-          <p className="text-sm">
+          <p className="text-sm mb-10">
             <a
               href="/recuperacion"
               className="text-[#046ef8] font-semibold text-lg hover:underline"
@@ -115,7 +115,7 @@ function Login() {
 
           <button
             type="submit"
-            className="mt-5 w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-lg transition"
+            className="mt-10 w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-lg transition"
           >
             Iniciar Sesión
           </button>

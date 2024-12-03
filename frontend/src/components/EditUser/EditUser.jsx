@@ -142,13 +142,6 @@ const EditUser = () => {
           />
         </div>
       </div>
-    
-      <button
-        type="button"
-        className="mt-4 sm:mt-8 px-4 sm:px-6 py-2 bg-[#F20D11] text-white font-bold text-sm sm:text-base rounded-full hover:bg-[#d10b0e]"
-      >
-        ELIMINAR PERFIL
-      </button>
     </div>
   );
 };

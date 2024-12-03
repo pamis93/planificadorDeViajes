@@ -75,7 +75,7 @@ function Register() {
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
       <div
-        className="bg-black bg-opacity-50 p-10 mt-10 rounded-lg shadow-lg w-[500px] text-center"
+        className="bg-black bg-opacity-50 p-10 mt-60 sm:mt-20 rounded-lg shadow-lg w-[500px] text-center"
         style={{ backgroundImage: `url('/fondoLogin.png')` }}
       >
         <h2 className="text-2xl font-bold mb-6 text-center">CREAR CUENTA</h2>
