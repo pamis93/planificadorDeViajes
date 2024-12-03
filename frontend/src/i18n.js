@@ -9,6 +9,7 @@ i18n
     resources: {
       en: {
         translation: {
+          logout:"Logout",
           welcome: 'Welcome',
           language: 'Language',
           flights: 'Flights',
@@ -77,22 +78,50 @@ i18n
             note: 'Note',
           },
           ratingModal: {
-            giveUsYourFeedback: 'Give us your feedback!',
+            giveFeedback: 'Give us your feedback!',
             averageRating: 'Average rating',
             votes: 'votes',
             close: 'Close',
             errorFetchingStats: 'Error fetching statistics:',
           },
-          translation: {
+          ratingComments: {
             rating: 'Rating',
             comment: 'Comment',
             user: 'User',
             date: 'Date',
           },
+          carousel: {
+            header: {
+              title: "Discover Your Next Adventure",
+              subtitle: "Explore top destinations with exclusive offers.",
+              cta: "Start Planning",
+            },
+            paris: {
+              title: "Paris",
+              description: "The city of love, art, and history.",
+              alt: "View of the Eiffel Tower at sunset",
+            },
+            london: {
+              title: "London",
+              description: "The charm of history meets modernity.",
+              alt: "View of the Big Ben and London Eye",
+            },
+            lisbon: {
+              title: "Lisbon",
+              description: "Stunning views, rich culture, and sunny weather.",
+              alt: "Colorful streets of Lisbon",
+            },
+            rome: {
+              title: "Rome",
+              description: "Discover the Eternal City and its wonders.",
+              alt: "The Colosseum at dusk",
+            },
+          },
         },
       },
       es: {
         translation: {
+          logout:"Cerrar sesión",
           welcome: 'Bienvenido',
           language: 'Idioma',
           flights: 'Vuelos',
@@ -162,23 +191,51 @@ i18n
             note: 'Nota',
           },
           ratingModal: {
-            giveUsYourFeedback: '¡Danos tu opinión!',
+            giveFeedback: '¡Danos tu opinión!',
             averageRating: 'Valoración media',
             votes: 'votos',
             close: 'Cerrar',
             errorFetchingStats: 'Error al obtener las estadísticas:',
           },
 
-          translation: {
+          ratingComments: {
             rating: 'Puntuación',
             comment: 'Comentario',
             user: 'Usuario',
             date: 'Fecha',
           },
+          carousel: {
+            header: {
+              title: "Descubre tu próxima aventura",
+              subtitle: "Explora destinos únicos con ofertas exclusivas.",
+              cta: "Empieza a planear",
+            },
+            paris: {
+              title: "París",
+              description: "La ciudad del amor, el arte y la historia.",
+              alt: "Vista de la Torre Eiffel al atardecer",
+            },
+            london: {
+              title: "Londres",
+              description: "El encanto de la historia se une con la modernidad.",
+              alt: "Vista del Big Ben y el London Eye",
+            },
+            lisbon: {
+              title: "Lisboa",
+              description: "Vistas impresionantes, rica cultura y clima soleado.",
+              alt: "Calles coloridas de Lisboa",
+            },
+            rome: {
+              title: "Roma",
+              description: "Descubre la Ciudad Eterna y sus maravillas.",
+              alt: "El Coliseo al anochecer",
+            },
+          },
         },
       },
       fr: {
         translation: {
+          logout:"Se déconnecter",
           welcome: 'Bienvenue',
           language: 'Langue',
           flights: 'Vols',
@@ -256,16 +313,44 @@ i18n
             fetchError: "Erreur lors de la récupération des statistiques :",
           },
 
-          translation: {
+          ratingComments: {
             rating: 'Note',
             comment: 'Commentaire',
             user: 'Utilisateur',
             date: 'Date',
           },
+          carousel: {
+            header: {
+              title: "Découvrez votre prochaine aventure",
+              subtitle: "Explorez des destinations uniques avec des offres exclusives.",
+              cta: "Commencez à planifier",
+            },
+            paris: {
+              title: "Paris",
+              description: "La ville de l'amour, de l'art et de l'histoire.",
+              alt: "Vue de la Tour Eiffel au coucher du soleil",
+            },
+            london: {
+              title: "Londres",
+              description: "Le charme de l'histoire rencontre la modernité.",
+              alt: "Vue du Big Ben et du London Eye",
+            },
+            lisbon: {
+              title: "Lisbonne",
+              description: "Vues magnifiques, culture riche et climat ensoleillé.",
+              alt: "Rues colorées de Lisbonne",
+            },
+            rome: {
+              title: "Rome",
+              description: "Découvrez la ville éternelle et ses merveilles.",
+              alt: "Le Colisée au crépuscule",
+            },
+          },
         },
       },
       de: {
         translation: {
+          logout:"Abmelden",
           welcome: 'Willkommen',
           language: 'Sprache',
           flights: 'Flüge',
@@ -344,11 +429,38 @@ i18n
             fetchError: 'Fehler beim Abrufen der Statistiken:',
           },
 
-          translation: {
+          ratingComments: {
             rating: 'Bewertung',
             comment: 'Kommentar',
             user: 'Benutzer',
             date: 'Datum',
+          },
+          carousel: {
+            header: {
+              title: "Entdecken Sie die besten Reiseziele",
+              subtitle: "Finden Sie Ihre nächsten Abenteuer",
+              cta: "Jetzt nach Flügen suchen",
+            },
+            paris: {
+              title: "Paris",
+              description: "Die Stadt der Lichter und Romantik wartet auf Sie.",
+              alt: "Bild von Paris mit dem Eiffelturm",
+            },
+            london: {
+              title: "London",
+              description: "Die Hauptstadt des Vereinigten Königreichs bietet Geschichte und Kultur.",
+              alt: "Bild von London mit dem Big Ben",
+            },
+            lisbon: {
+              title: "Lissabon",
+              description: "Entdecken Sie die Schönheit der portugiesischen Küste.",
+              alt: "Bild von Lissabon mit den bunten Häusern",
+            },
+            rome: {
+              title: "Rom",
+              description: "Die Ewige Stadt erwartet Sie mit Geschichte und Architektur.",
+              alt: "Bild von Rom mit dem Kolosseum",
+            },
           },
         },
       },

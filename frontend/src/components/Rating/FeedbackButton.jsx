@@ -42,7 +42,7 @@ const FeedbackButton = () => {
       </button>
 
       <Link to="/ratings" className="flex flex-col">
-        <p>{t('ratingModal.giveUsYourFeedback')}</p>
+        <p>{t('ratingModal.giveFeedback')}</p>
         {averageRating !== null && numVotes !== null && (
           <p className="text-sm">
             {t('ratingModal.averageRating')}: ⭐{averageRating.toFixed(1)} ({numVotes}{' '}

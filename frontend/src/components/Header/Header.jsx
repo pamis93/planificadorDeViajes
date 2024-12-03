@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useUser } from "../../context/UserContext";
 import LanguageNav from "./LanguageNav/LanguageNav";
-import LogoutButton from "../Logout/LogoutButton";
+import LogoutButton from "./Logout/LogoutButton";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -129,7 +129,7 @@ function Header() {
                   <>
                     <Link
                       to="/edituser"
-                      className="block px-4 py-2 hover:rounded-lg hover:bg-[#485592]"
+                      className="text-center block px-4 py-2 hover:rounded-lg hover:bg-[#485592]"
                       onClick={closeDropdown}
                     >
                       {t("editUser")} {/* Traducción para "Editar usuario" */}
