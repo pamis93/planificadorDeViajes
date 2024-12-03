@@ -1,25 +1,23 @@
 const teamMembers = [
   {
     name: 'Alejandro',
-    surname: 'García Gómez',
+    surname: 'García',
     email: 'pamis93@gmail.com',
-    linkedin: 'www.linkedin.com/in/alejandro-garcia-gomez-0603271b6',
+    linkedin: 'https://www.linkedin.com/in/alejandro-garcia-gomez-0603271b6',
     repo: 'https://github.com/pamis93',
   },
-
   {
-    name: 'Gustavo Enrique ',
-    surname: 'Bolívar Ogando',
-    email: 'gustavo@example.com',
-    linkedin: 'https://www.linkedin.com/in/gustavobolivarogando',
+    name: 'Gustavo',
+    surname: 'Bolívar',
+    email: 'gusta_bolivar@hotmail.com',
+    linkedin: 'https://www.linkedin.com/in/gustavo-bolivar/',
     repo: 'https://github.com/gustavobolivarogando',
   },
-
   {
-    name: 'Lara  ',
+    name: 'Lara',
     surname: 'Rodriguez',
-    email: 'angel@example.com',
-    linkedin: 'https://www.linkedin.com/in/angelsuarezsosa',
+    email: 'lararh393@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/lara-rodr%C3%ADguez-herrero/',
     repo: 'https://github.com/angelsuarezsosa',
   },
   {
@@ -29,7 +27,6 @@ const teamMembers = [
     linkedin: 'https://www.linkedin.com/in/carlosalbertocuepuente',
     repo: 'https://github.com/carloscuepuente',
   },
-
   {
     name: 'Emanuel',
     surname: 'Gómez',
@@ -37,13 +34,12 @@ const teamMembers = [
     linkedin: 'https://www.linkedin.com/in/emanuel-gomez-silva/',
     repo: 'https://github.com/vascogomez',
   },
-
   {
     name: 'Alex',
     surname: 'Riera',
-    email: 'gustavo@example.com',
-    linkedin: 'https://www.linkedin.com/in/gustavobolivarogando',
-    repo: 'https://github.com/gustavobolivarogando',
+    email: 'alrron14@hotmail.com',
+    linkedin: 'https://www.linkedin.com/in/alexrierahernandez/',
+    repo: 'https://github.com/AlRiera',
   },
   // Agrega más miembros del equipo aquí
 ];
@@ -52,46 +48,49 @@ const Contact = () => {
   return (
     <div className="container mx-auto p-2 mt-[100px] mb-6">
       <h1 className="text-4xl font-bold text-center text-white mb-6">
-        Nuestro Equipo
+        Nuestro Equipo de Desarrolladores:
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {teamMembers.map((member, index) => (
           <div
             key={index}
-            className="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden"
+            className="w-[300px] h-[150px] mx-auto bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:-translate-y-2 hover:shadow-xl hover:shadow-black"
           >
-            <div className="p-4">
-              <h2 className="text-xl font-semibold text-gray-800">
+            <div className="p-4 flex flex-col items-center h-full">
+              <h2 className="text-[30px] font-bold text-gray-800 text-center mb-4">
                 {member.name} {member.surname}
               </h2>
-              <p className="text-gray-600 mt-2">
-                Correo:{' '}
-                <a href={`mailto:${member.email}`} className="text-blue-500">
-                  {member.email}
+              <div className="flex justify-around w-full">
+                <a
+                  href={`mailto:${member.email}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="/icons/email.svg"
+                    alt="Email Icon"
+                    className="w-10 h-10 hover:opacity-80 hover:scale-110 transition-transform"
+                  />
                 </a>
-              </p>
-              <p className="text-gray-600 mt-2">
-                LinkedIn:{' '}
                 <a
                   href={member.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500"
                 >
-                  {member.linkedin}
+                  <img
+                    src="/icons/linkedin.svg"
+                    alt="LinkedIn Icon"
+                    className="w-10 h-10 hover:opacity-80 hover:scale-110 transition-transform"
+                  />
                 </a>
-              </p>
-              <p className="text-gray-600 mt-2">
-                Repositorio:{' '}
-                <a
-                  href={member.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500"
-                >
-                  {member.repo}
+                <a href={member.repo} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src="/icons/github.svg"
+                    alt="GitHub Icon"
+                    className="w-10 h-10 hover:opacity-80 hover:scale-110 transition-transform"
+                  />
                 </a>
-              </p>
+              </div>
             </div>
           </div>
         ))}
