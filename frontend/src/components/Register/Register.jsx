@@ -182,7 +182,7 @@ function Register() {
       {isSuccessModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg shadow-xl p-6 text-center w-full max-w-md mx-4">
-            <h2 className="text-2xl font-bold mb-4 text-green-600">Registro Exitoso</h2>
+            <h2 className="text-2xl font-bold mb-4 text-black">Registro Exitoso</h2>
             <p className="mb-6 text-gray-700 text-base">
               Tu cuenta ha sido creada exitosamente. En breves momentos, recibirás un email para activar tu cuenta.
             </p>

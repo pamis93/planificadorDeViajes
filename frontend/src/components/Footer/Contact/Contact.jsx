@@ -52,7 +52,7 @@ const Contact = () => {
         {teamMembers.map((member, index) => (
           <div
             key={index}
-            className="w-[300px] h-[150px] mx-auto bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:-translate-y-2 hover:shadow-xl"
+            className="w-[300px] h-[150px] mx-auto bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:-translate-y-2 hover:shadow-xl hover:shadow-black"
           >
             <div className="p-4 flex flex-col items-center h-full">
               <h2 className="text-[30px] font-bold text-gray-800 text-center mb-4">
