@@ -24,21 +24,30 @@ const CommentList = ({ comment }) => {
 
   return (
     <div className="mt-8">
-      <div className="mb-4 p-4 bg-white border rounded shadow w-full max-w-500 mx-auto">
-        <div className="flex items-center mb-2">
-          <strong className="mr-2">Puntuación:</strong>
-          <div className="flex">{renderStars(comment.rating)}</div>
+      <div className="mb-4 p-4 bg-white border rounded shadow w-full max-w-500 mx-auto flex justify-between items-center bg-zinc-200">
+        <div className="flex flex-col mr-4">
+          <p>
+            <strong>Usuario: </strong> {comment.username}
+          </p>
+          <div className="flex items-center">
+            <strong className="mr-2">Puntuación:</strong>
+            <div className="flex">{renderStars(comment.rating)}</div>
+          </div>
+          <p>
+            <strong>Comentario: </strong> {comment.comment}
+          </p>
+          <p>
+            <strong>Fecha: </strong>
+            {new Date(comment.created_at).toLocaleString()}
+          </p>
         </div>
-        <p>
-          <strong>Comentario:</strong> {comment.comment}
-        </p>
-        <p>
-          <strong>Usuario:</strong> {comment.username}
-        </p>
-        <p>
-          <strong>Fecha:</strong>
-          {new Date(comment.created_at).toLocaleString()}
-        </p>
+        <div className="flex-shrink-0">
+          <img
+            src={comment.avatar}
+            alt={`${comment.username}'s avatar`}
+            className="w-20 h-20 m-5 rounded-full border-4 border-white shadow-md"
+          />
+        </div>
       </div>
     </div>
   );
