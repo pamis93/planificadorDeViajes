@@ -31,7 +31,7 @@ function Footer() {
                 {t('privacyPolicy')}
               </Link>
               <Link to="#terms" className="hover:text-orange-500 transition-colors">
-                {t('termsConditions')}
+                {t('termsAndConditions')}
               </Link>
             </nav>
           </div>
