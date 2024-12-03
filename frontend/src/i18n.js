@@ -83,6 +83,12 @@ i18n
             close: 'Close',
             errorFetchingStats: 'Error fetching statistics:',
           },
+          translation: {
+            rating: 'Rating',
+            comment: 'Comment',
+            user: 'User',
+            date: 'Date',
+          },
         },
       },
       es: {
@@ -161,6 +167,13 @@ i18n
             votes: 'votos',
             close: 'Cerrar',
             errorFetchingStats: 'Error al obtener las estadísticas:',
+          },
+
+          translation: {
+            rating: 'Puntuación',
+            comment: 'Comentario',
+            user: 'Usuario',
+            date: 'Fecha',
           },
         },
       },
@@ -242,6 +255,13 @@ i18n
             close: 'Fermer',
             fetchError: "Erreur lors de la récupération des statistiques :",
           },
+
+          translation: {
+            rating: 'Note',
+            comment: 'Commentaire',
+            user: 'Utilisateur',
+            date: 'Date',
+          },
         },
       },
       de: {
@@ -322,6 +342,13 @@ i18n
             votes: 'Stimmen',
             close: 'Schließen',
             fetchError: 'Fehler beim Abrufen der Statistiken:',
+          },
+
+          translation: {
+            rating: 'Bewertung',
+            comment: 'Kommentar',
+            user: 'Benutzer',
+            date: 'Datum',
           },
         },
       },
