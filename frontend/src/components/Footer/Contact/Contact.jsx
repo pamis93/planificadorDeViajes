@@ -33,11 +33,11 @@ const teamMembers = [
   },
 
   {
-    name: 'Enmanuel',
+    name: 'Emanuel',
     surname: 'Gómez',
-    email: 'gustavo@example.com',
-    linkedin: 'https://www.linkedin.com/in/gustavobolivarogando',
-    repo: 'https://github.com/gustavobolivarogando',
+    email: 'vascogomez247@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/emanuel-gomez-silva/',
+    repo: 'https://github.com/vascogomez',
   },
 
   {
