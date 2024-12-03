@@ -1,7 +1,10 @@
 import { useState, useRef } from 'react';
 import { useUser } from '../../context/UserContext';
+import { useTranslation } from 'react-i18next'; // Importamos useTranslation
 
 const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
+  const { t } = useTranslation(); // Usamos useTranslation para obtener las traducciones
+
   // Estado para controlar si el modal está abierto.
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -32,7 +35,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
       // Verifica si el archivo es una imagen.
       if (!file.type.match('image.*')) {
         setMessage({
-          text: 'Por favor selecciona una imagen válida (jpg, jpeg, png)',
+          text: t('selectFileError'), // Utilizamos la traducción aquí
           type: 'error',
         });
         return;
@@ -54,7 +57,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
   const handleUpload = async () => {
     if (!selectedFile) {
       setMessage({
-        text: 'Por favor selecciona una imagen primero',
+        text: t('selectFile'), // Utilizamos la traducción aquí
         type: 'error',
       });
       return;
@@ -67,7 +70,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
       const token = user?.token; // Obtiene el token del contexto de usuario.
       if (!token) {
         setMessage({
-          text: 'No se encontró el token de autenticación',
+          text: t('errorAvatarUpdate'), // Utilizamos la traducción aquí
           type: 'error',
         });
         return;
@@ -83,7 +86,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
       });
 
       if (!response.ok) {
-        setMessage({ text: 'Error al subir el avatar', type: 'error' });
+        setMessage({ text: t('errorAvatarUpdate'), type: 'error' });
         return;
       }
 
@@ -91,7 +94,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
       
       if (data.status === 'ok') {
         setMessage({
-          text: 'Avatar actualizado exitosamente',
+          text: t('successAvatarUpdate'), // Utilizamos la traducción aquí
           type: 'success',
         });
         setPreviewUrl(URL.createObjectURL(selectedFile));
@@ -101,44 +104,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
       }
     } catch (error) {
       console.error('Error:', error);
-      setMessage({ text: 'Error al conectar con el servidor', type: 'error' });
-    }
-  };
-
-  // Maneja la eliminación del avatar.
-  const handleDelete = async () => {
-    try {
-      const token = user?.token; // Obtiene el token del contexto de usuario.
-      if (!token) {
-        setMessage({
-          text: 'No se encontró el token de autenticación',
-          type: 'error',
-        });
-        return;
-      }
-
-      // Realiza la solicitud para eliminar el avatar.
-      const response = await fetch('http://localhost:3001/users/avatar', {
-        method: 'PUT',
-        headers: {
-          Authorization: token,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ avatar: null }), // Envía un body vacío para eliminar.
-      });
-
-      if (!response.ok) {
-        setMessage({ text: 'Error al eliminar el avatar', type: 'error' });
-        return;
-      }
-
-      setMessage({ text: 'Avatar eliminado exitosamente', type: 'success' });
-      setPreviewUrl(null); // Limpia la imagen de vista previa.
-      setSelectedFile(null); // Limpia el archivo seleccionado.
-      onAvatarUpdate && onAvatarUpdate(null); // Notifica al componente padre.
-    } catch (error) {
-      console.error('Error:', error);
-      setMessage({ text: 'Error al conectar con el servidor', type: 'error' });
+      setMessage({ text: t('errorServerConnection'), type: 'error' }); // Utilizamos la traducción aquí
     }
   };
 
@@ -197,22 +163,16 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
                   onClick={triggerFileInput}
                   className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-[#F66136] text-white font-bold rounded-full hover:bg-[#e25630] text-xs sm:text-base"
                 >
-                  SELECCIONAR IMAGEN
+                  {t('selectImage')} {/* Traducción para el botón */}
                 </button>
                 {selectedFile && (
                   <button
                     onClick={handleUpload}
                     className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 text-xs sm:text-base"
                   >
-                    GUARDAR
+                    {t('save')} {/* Traducción para el botón */}
                   </button>
                 )}
-                <button
-                  onClick={handleDelete}
-                  className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-[#F20D11] text-white font-bold rounded-full hover:bg-[#d10b0e] text-xs sm:text-base"
-                >
-                  BORRAR
-                </button>
               </div>
             </div>
           </div>

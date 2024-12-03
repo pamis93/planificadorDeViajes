@@ -98,7 +98,7 @@ export default function FlightResults() {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col mt-20">
+    <div className="w-full min-h-screen flex flex-col mt-20">
       <div className=" w-full relative">
         <img
           className="w-full h-[200px] object-cover"

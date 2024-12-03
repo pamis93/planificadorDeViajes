@@ -4,9 +4,11 @@ import { useUser } from '../../context/UserContext';
 import DeleteFavoriteButton from './DeleteFavoriteButton/DeleteFavoriteButton';
 import Head from './Head/Head';
 import { FavButtonCard } from "./FavButtonCard";
+import { useTranslation } from 'react-i18next';
 
 function FavList() {
   // Estado y efectos
+  const { t } = useTranslation();
   const [user] = useUser();
   const navigate = useNavigate();
   const [favoritos, setFavoritos] = useState([]);
@@ -30,19 +32,19 @@ function FavList() {
         );
 
         if (!response.ok) {
-          throw new Error('Error al obtener los datos de favoritos');
+          throw new Error(t('favList.errorFetching'));
         }
 
         const data = await response.json();
         setFavoritos(data?.data || []);
       } catch (err) {
-        console.error('Error al obtener favoritos:', err);
-        setError('No se pudieron cargar tus favoritos.');
+        console.error(t('favList.errorFetchingConsole'), err);
+        setError(t('favList.errorFetching'));
       }
     };
 
     fetchData();
-  }, [user?.id, user?.token, navigate]);
+  }, [user?.id, user?.token, navigate, t]);
 
   const removeFavorite = (flightId) => {
     setFavoritos((prev) => prev.filter((fav) => fav.id !== flightId));
@@ -86,16 +88,16 @@ function FavList() {
           <div className="flex justify-center items-center h-screen">
             <div className="bg-[#ffffff] w-[300px] sm:w-[600px] sm:h-auto p-6 shadow-md rounded-md flex flex-col items-center text-center">
               <h1 className="text-black font-bold text-xl sm:text-3xl mb-4">
-                No tienes guardado ningún vuelo.
+                {t('favList.noFavoritesTitle')}
               </h1>
               <p className="text-gray-700 sm:text-lg">
-                Para añadir vuelos a tu lista de favoritos, primero realiza una búsqueda.
+                {t('favList.noFavoritesMessage')}
               </p>
               <Link
                 to="/search"
                 className="mt-6 px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition"
               >
-                Buscar vuelos
+                {t('favList.searchFlights')}
               </Link>
             </div>
           </div>
@@ -128,7 +130,7 @@ function FavList() {
                   {favorito.origin} → {favorito.destination}
                 </h5>
                 <p className="mb-3 text-gray-900 dark:text-gray-300">
-                  Fecha de salida:{' '}
+                  {t('favList.departureDate')}{' '}
                   {new Date(favorito.departureDate).toLocaleDateString()}
                 </p>
                 <FavButtonCard
@@ -140,7 +142,7 @@ function FavList() {
 
               {/* Columna 2: Nota */}
               <div className="bg-[#8c79aa] px-4 max-h-[150px] text-white sm:col-span-6">
-                <p className="dark:text-gray-300">Nota: {favorito.note}</p>
+                <p className="dark:text-gray-300">{t('favList.note')}: {favorito.note}</p>
               </div>
 
               {/* Columna 3: Precio y Eliminar */}
@@ -161,5 +163,3 @@ function FavList() {
 }
 
 export default FavList;
-
-
