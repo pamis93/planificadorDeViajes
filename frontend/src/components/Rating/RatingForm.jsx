@@ -52,7 +52,9 @@ const RatingForm = ({ fetchComments }) => {
         fetchComments(); // actualizacion de comentarios
       } catch (err) {
         console.error('Error al enviar el comentario:', err);
-        setError('Hubo un problema al enviar el comentario.');
+        setError(
+          'Debes estar registrado para poder valorar la pagina! sentimos las molestias!'
+        );
       }
     } else {
       setError('Por favor, proporciona una puntuación y un comentario.');

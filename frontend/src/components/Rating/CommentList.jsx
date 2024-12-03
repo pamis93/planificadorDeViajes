@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../../context/UserContext'; // Asegúrate de que este hook esté disponible
 
 const CommentList = ({ comment, comments, setComments }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newComment, setNewComment] = useState(comment.comment);
   const [newRating, setNewRating] = useState(comment.rating);
-  const [user] = useUser();
+  const [user] = useUser(); // Usamos el contexto de usuario
   const token = user?.token;
 
   // Función para guardar los cambios de un comentario
@@ -16,7 +16,7 @@ const CommentList = ({ comment, comments, setComments }) => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token,
+          Authorization: token, // Si el usuario está autenticado, pasa el token
         },
         body: JSON.stringify({
           rating: newRating,
@@ -88,6 +88,7 @@ const CommentList = ({ comment, comments, setComments }) => {
             {new Date(comment.created_at).toLocaleString()}
           </p>
         </div>
+
         <div className="flex-shrink-0 mb-4 sm:mb-0">
           <img
             src={comment.avatar}
@@ -97,16 +98,17 @@ const CommentList = ({ comment, comments, setComments }) => {
         </div>
 
         {/* Mostrar el botón de editar solo si el usuario es el dueño del comentario */}
-        {comment.user_id === user.Id && (
-          <div className="flex-shrink-0 mt-2">
-            <button
-              onClick={handleEditClick}
-              className="bg-orange-500 ml-2 text-white px-4 py-2 rounded-lg hover:bg-orange-700"
-            >
-              Editar
-            </button>
-          </div>
-        )}
+        {user &&
+          comment.id === user.id && ( // Solo muestra el botón de editar si el usuario está autenticado y es dueño del comentario
+            <div className="flex-shrink-0 mt-2">
+              <button
+                onClick={handleEditClick}
+                className="bg-orange-500 ml-2 text-white px-4 py-2 rounded-lg hover:bg-orange-700"
+              >
+                Editar
+              </button>
+            </div>
+          )}
       </div>
 
       {/* Modal para editar el comentario */}
