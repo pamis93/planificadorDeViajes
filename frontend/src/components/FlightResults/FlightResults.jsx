@@ -1,3 +1,6 @@
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // componentes propios
 import FlightResultsFilter from './FlightResultsFilter';
 import FlightResultCard from './FlightResultCard';
@@ -54,6 +57,10 @@ export default function FlightResults() {
       setFlights(data);
     } catch (error) {
       setError(error.message);
+      // Mostrar error como un toast
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } finally {
       setLoading(false);
     }
@@ -74,10 +81,18 @@ export default function FlightResults() {
   if (loading) {
     return (
       <div className="flex justify-center h-screen ">
-        <div className="mt-60 flex items-center justify-center sm:text-3xl font-bold bg-white w-[300px] sm:w-[600px] h-24 shadow-md rounded-md">
-          <h1 className="text-black">
-            No te vayas estamos buscando tus vuelos
-          </h1>
+        <div className="relative mt-60 w-[300px] sm:w-[600px] h-24 shadow-md rounded-md">
+          <div className="absolute top-0 left-0 w-full h-full">
+            <div
+              className="animate-fly absolute top-2/3 left-0 w-10 h-10 bg-no-repeat bg-contain"
+              style={{ backgroundImage: 'url("/plane-icon.png")' }}
+            ></div>
+          </div>
+          <div className="flex items-center justify-center sm:text-3xl font-bold bg-white w-full h-full">
+            <h1 className="text-black">
+              No te vayas, estamos buscando tus vuelos...
+            </h1>
+          </div>
         </div>
       </div>
     );
@@ -99,6 +114,7 @@ export default function FlightResults() {
 
   return (
     <div className="w-full h-screen flex flex-col mt-20">
+      <ToastContainer />
       <div className=" w-full relative">
         <img
           className="w-full h-[200px] object-cover"
@@ -122,7 +138,7 @@ export default function FlightResults() {
             <FlightResultsFilter priceRange={flights.priceRange} />
           </div>
 
-          {/* cuidado con esto solo le estoy pasando el objeto resume voy a tener que cambiarlo tanto aqui como en la card si quiero usar en la card la información completa tomar decision sobre esto pronto */}
+          {/* cuidado con esto solo le estoy pasando el objeto resume voy a tener que cambiarlo tanto aqui como en la card si quiero usar en la card la información completa tomar decisión sobre esto pronto */}
           <div className="w-3/4 space-y-4">
             {currentFlights.map((flight) => {
               return <FlightResultCard key={flight.id} flight={flight} />;

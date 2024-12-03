@@ -7,6 +7,8 @@ import areObjValuesTruthy from '../../utils/areObjValuesTruthy';
 import { useNavigate } from 'react-router-dom';
 // lo de react router DOM
 import { useSearchParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function FlightSearch() {
   // lo del estado de react-router-dom
@@ -97,12 +99,22 @@ function FlightSearch() {
       setSearchParams(queryParams);
       navigate(`/search/results?${queryParams.toString()}`);
     } else {
-      alert('todo informar al usuario que tiene que completar los campos');
+      toast.error('Por favor, completa todos los campos obligatorios.', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
     }
   };
 
   return (
     <div className="relative w-full h-full bg-[#9AA5BC] ">
+      <ToastContainer />
       <img
         className="w-full h-[500px] object-cover mt-20"
         src="/public/fondo-header.jfif"
