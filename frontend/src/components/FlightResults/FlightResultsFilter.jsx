@@ -2,15 +2,27 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 export default function FlightResultsFilter({ priceRange }) {
-  const [nonStop, setNonStop] = useState(false);
-  const [children, setChildren] = useState(0);
-  const [infants, setInfants] = useState(0);
-  const [travelClass, setTravelClass] = useState('ECONOMY');
-  const [currencyCode, setCurrencyCode] = useState('EUR');
-  const [maxPrice, setMaxPrice] = useState(50);
-  const [returnDate, setReturnDate] = useState('');
-
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const [nonStop, setNonStop] = useState(
+    searchParams.get('nonStop') === 'true' ? true : false
+  );
+  const [adults, setAdults] = useState(searchParams.get('adults') || 1);
+  const [children, setChildren] = useState(searchParams.get('children') || 0);
+  const [infants, setInfants] = useState(searchParams.get('children') || 0);
+  const [travelClass, setTravelClass] = useState(
+    searchParams.get('travelClass') || 'ECONOMY'
+  );
+  const [currencyCode, setCurrencyCode] = useState(
+    searchParams.get('currencyCode') || 'EUR'
+  );
+  const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || 100);
+  const [departureDate, setDepartureDate] = useState(
+    searchParams.get('departureDate') || ''
+  );
+  // const [returnDate, setReturnDate] = useState(
+  //   searchParams.get('returnDate') || ''
+  // );
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,6 +43,7 @@ export default function FlightResultsFilter({ priceRange }) {
       travelClass: travelClass,
       currencyCode: currencyCode,
       maxPrice: maxPrice,
+      // returnDate: returnDate,
     });
 
     setSearchParams(queryParams);
@@ -41,7 +54,7 @@ export default function FlightResultsFilter({ priceRange }) {
       travelClass,
       currencyCode,
       maxPrice,
-      returnDate,
+      // returnDate,
     });
   };
 
@@ -49,7 +62,6 @@ export default function FlightResultsFilter({ priceRange }) {
     <>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 gap-6 mt-4">
-          {/* Input para seleccionar entre "Sin escalas" y "Con escalas" */}
           <div>
             <label className="text-white dark:text-gray-200" htmlFor="stops">
               Tipo de vuelo
@@ -84,7 +96,19 @@ export default function FlightResultsFilter({ priceRange }) {
             </div>
           </div>
 
-          {/* Input para ingresar children */}
+          <div>
+            <label className="text-white dark:text-gray-200" htmlFor="adults">
+              Adultos
+            </label>
+            <input
+              id="adults"
+              type="number"
+              min="1"
+              value={adults}
+              onChange={(e) => setAdults(Number(e.target.value))}
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            />
+          </div>
           <div>
             <label className="text-white dark:text-gray-200" htmlFor="children">
               Niños (Children)
@@ -99,7 +123,6 @@ export default function FlightResultsFilter({ priceRange }) {
             />
           </div>
 
-          {/* Input para ingresar infants */}
           <div>
             <label className="text-white dark:text-gray-200" htmlFor="infants">
               Bebés (Infants)
@@ -114,7 +137,6 @@ export default function FlightResultsFilter({ priceRange }) {
             />
           </div>
 
-          {/* Select para clase de vuelo */}
           <div>
             <label
               className="text-white dark:text-gray-200"
@@ -135,7 +157,6 @@ export default function FlightResultsFilter({ priceRange }) {
             </select>
           </div>
 
-          {/* Input para seleccionar divisa */}
           <div>
             <label
               className="text-white dark:text-gray-200"
@@ -154,7 +175,6 @@ export default function FlightResultsFilter({ priceRange }) {
             </select>
           </div>
 
-          {/* Input tipo range */}
           <div>
             <label className="text-white dark:text-gray-200" htmlFor="maxPrice">
               Rango de Precio por pasajero
@@ -182,8 +202,22 @@ export default function FlightResultsFilter({ priceRange }) {
             />
           </div>
 
-          {/* Input tipo date */}
           <div>
+            <label
+              className="text-white dark:text-gray-200"
+              htmlFor="departureDate"
+            >
+              Fecha de Salida
+            </label>
+            <input
+              id="departureDate"
+              type="date"
+              value={departureDate}
+              onChange={(e) => setDepartureDate(e.target.value)}
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            />
+          </div>
+          {/* <div>
             <label
               className="text-white dark:text-gray-200"
               htmlFor="returnDate"
@@ -197,7 +231,7 @@ export default function FlightResultsFilter({ priceRange }) {
               onChange={(e) => setReturnDate(e.target.value)}
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
-          </div>
+          </div> */}
         </div>
 
         <div className="flex justify-end mt-6">

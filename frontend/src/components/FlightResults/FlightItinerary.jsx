@@ -6,7 +6,7 @@ export default function FlightItinerary({ itinerary }) {
           <div>
             <p className="font-semibold">{itinerary.departure.airport}</p>
             <p className="text-gray-400">
-              Departure: {itinerary.departure.time.date} at{' '}
+              Salida: {itinerary.departure.time.date} a las
               {itinerary.departure.time.time}UTC
             </p>
           </div>
@@ -14,9 +14,19 @@ export default function FlightItinerary({ itinerary }) {
           <div>
             <p className="font-semibold">{itinerary.arrival.airport}</p>
             <p className="text-gray-400">
-              Arrival: {itinerary.arrival.time.date} at{' '}
+              Llegada: {itinerary.arrival.time.date} a las
               {itinerary.arrival.time.time}UTC
             </p>
+          </div>
+          <div className="flex items-center">
+            {/* <img 
+              src={flight.airline.logo} 
+              alt={`${flight.airline.name} logo`} 
+              className="h-12 w-12 mr-4"
+            /> */}
+            <span className="text-gray-300">
+              Aerolínea {itinerary.carrier.code}
+            </span>
           </div>
         </div>
       </div>

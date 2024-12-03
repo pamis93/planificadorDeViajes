@@ -29,7 +29,7 @@ export default function FlightResultCard({ flight }) {
                 </span>
               </div>
               <div className="w-full sm:w-auto flex justify-center">
-                {/* aqui la logica para que el boton se muestre solo si esta logeado */}
+                {/* aquí la lógica para que el botón se muestre solo si esta logeado */}
 
                 {user?.id ? (
                   <button

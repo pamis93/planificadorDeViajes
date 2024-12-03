@@ -1,15 +1,63 @@
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useState } from 'react';
+import { useUser } from '../../context/UserContext';
+
 export default function FlightResultModal({ flight, isOpen, closeModal }) {
   const [note, setNote] = useState('');
+  const [user] = useUser();
 
-  const handleNoteChange = (e) => {
-    setNote(e.target.value);
+  // console.log(user.token);
+
+  const handleNoteChange = (event) => {
+    setNote(event.target.value);
   };
 
-  const handleSubmitNote = (e) => {
-    e.preventDefault();
-
-    console.log('Submitted Note:', note);
+  const handleSubmitNote = async (event) => {
+    event.preventDefault();
+    // console.log('nota desde el handlesubmit', note);
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/favorite`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${user.token}`,
+          },
+          body: JSON.stringify({
+            origin: `${flight.origin}`,
+            destination: `${flight.destination}`,
+            departureDate: `${flight.departureDate}`,
+            arrivalDate: `${flight.arrivalDate}`,
+            aeroline: `${flight.aeroline}`,
+            price: `${flight.price}`,
+            duration: `${flight.duration}`,
+            note: `${note}`,
+            userId: `${user.id}`,
+          }),
+        }
+      );
+      if (!res.ok) {
+        // console.log(res);
+        throw new Error('No se pudo guardar en favoritos');
+      }
+      // poner un tost aqui de que salio bien todo
+      toast.success('Vuelo Guardado en Favoritos', {
+        position: 'bottom-center',
+      });
+      setTimeout(() => {
+        setNote('');
+        closeModal();
+      }, 3000);
+    } catch (error) {
+      console.log('error en el fetch', error);
+      toast.error(error.message, {
+        position: 'top-right',
+      });
+      setNote('');
+    }
   };
 
   if (!isOpen) return null;
@@ -23,7 +71,7 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
         >
           X
         </button>
-
+        <ToastContainer />
         <div className="bg-slate-800 p-6 rounded-t-lg">
           <h2 className="text-3xl font-bold text-orange-500 text-center">
             {flight.price} {flight.details.price.currency}
@@ -47,6 +95,15 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
             <p className="mt-2 text-gray-300">
               Duración Total: {flight.duration}
             </p>
+
+            <div className="flex items-center">
+              {/* <img 
+              src={flight.airline.logo} 
+              alt={`${flight.airline.name} logo`} 
+              className="h-12 w-12 mr-4"
+            /> */}
+              <span className="text-gray-300">Aerolínea {flight.aeroline}</span>
+            </div>
           </div>
 
           <div>
@@ -59,7 +116,7 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
                       {itinerary.departure.airport}
                     </p>
                     <p className="text-gray-400">
-                      Salida: {itinerary.departure.time.date} a las{' '}
+                      Salida: {itinerary.departure.time.date} a las
                       {itinerary.departure.time.time}UTC
                     </p>
                   </div>
@@ -67,9 +124,19 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
                   <div>
                     <p className="font-semibold">{itinerary.arrival.airport}</p>
                     <p className="text-gray-400">
-                      Llegada: {itinerary.arrival.time.date} a las{' '}
+                      Llegada: {itinerary.arrival.time.date} a las
                       {itinerary.arrival.time.time}UTC
                     </p>
+                  </div>
+                  <div className="flex items-center">
+                    {/* <img 
+              src={flight.airline.logo} 
+              alt={`${flight.airline.name} logo`} 
+              className="h-12 w-12 mr-4"
+            /> */}
+                    <span className="text-gray-300">
+                      Aerolínea {flight.aeroline}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -85,11 +152,11 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
                 placeholder="Escribe una nota sobre este vuelo..."
                 className="w-full p-4 bg-slate-800 text-white rounded-lg border border-slate-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 rows="4"
-                maxLength={500}
+                maxLength={250}
               />
               <div className="flex justify-between items-center mt-2">
                 <p className="text-gray-400 text-sm">
-                  {note.length}/500 caracteres
+                  {note.length}/250 caracteres
                 </p>
                 <button
                   type="submit"
