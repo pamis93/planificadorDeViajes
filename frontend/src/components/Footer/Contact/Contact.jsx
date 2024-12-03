@@ -11,18 +11,18 @@ const teamMembers = [
     surname: 'Bolívar',
     email: 'gusta_bolivar@hotmail.com',
     linkedin: 'https://www.linkedin.com/in/gustavo-bolivar/',
-    repo: 'https://github.com/gustavobolivarogando',
+    repo: 'https://github.com/GustavoBOG',
   },
   {
     name: 'Lara',
     surname: 'Rodriguez',
     email: 'lararh393@gmail.com',
     linkedin: 'https://www.linkedin.com/in/lara-rodr%C3%ADguez-herrero/',
-    repo: 'https://github.com/angelsuarezsosa',
+    repo: 'https://github.com/larucodonosor',
   },
   {
-    name: 'Carlos Alberto',
-    surname: 'Cue Puente',
+    name: 'Carlos',
+    surname: 'Cue',
     email: 'cuepuentecarlos@gmail.com cacp892@gmail.com',
     linkedin: 'https://www.linkedin.com/in/carlosalbertocuepuente',
     repo: 'https://github.com/carloscuepuente',
@@ -41,7 +41,6 @@ const teamMembers = [
     linkedin: 'https://www.linkedin.com/in/alexrierahernandez/',
     repo: 'https://github.com/AlRiera',
   },
-  // Agrega más miembros del equipo aquí
 ];
 
 const Contact = () => {

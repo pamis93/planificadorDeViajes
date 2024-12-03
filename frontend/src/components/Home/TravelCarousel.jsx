@@ -32,7 +32,7 @@ const TravelCarousel = () => {
     <>
       {/* Cabecera */}
       <div className="mb-6 items-center bg-[#686E9E] w-full px-4 sm:px-8">
-        <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 text-center">
+        <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 mt-6 text-center">
           EMPIEZA A PLANEAR TUS PROXIMAS AVENTURAS
         </h1>
         <p className="text-base sm:text-xl text-gray-100 mb-4 text-center">
@@ -41,7 +41,7 @@ const TravelCarousel = () => {
         <div className="flex justify-center">
           <Link
             to="/search"
-            className="text-white hover:underline hover:text-blue-800 transition bg-[#ff5a1f] px-4 py-2 rounded-lg"
+            className="text-white mb-6 hover:underline hover:text-blue-800 transition bg-[#ff5a1f] px-4 py-2 rounded-lg"
           >
             Prueba buscar un vuelo y guardalo en tus favoritos &gt;&gt;&gt;
           </Link>

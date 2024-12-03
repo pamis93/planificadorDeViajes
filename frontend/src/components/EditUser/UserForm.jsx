@@ -95,12 +95,12 @@ const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
           mt-2 sm:mt-4 
           px-4 sm:px-5 
           py-2 
-          bg-green-600 
+          bg-[#ff5a1f]
           text-white 
           font-bold 
           text-xs sm:text-sm 
           rounded-lg 
-          hover:bg-green-400
+          hover:bg-orange-600
           w-full
         "
       >

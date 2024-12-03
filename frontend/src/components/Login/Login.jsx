@@ -115,7 +115,7 @@ function Login() {
 
           <button
             type="submit"
-            className="mt-10 w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-lg transition"
+            className="mt-10 w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition"
           >
             Iniciar Sesión
           </button>
