@@ -1,5 +1,3 @@
-
-
 const teamMembers = [
   {
     name: 'Alejandro',
@@ -25,11 +23,11 @@ const teamMembers = [
     repo: 'https://github.com/angelsuarezsosa',
   },
   {
-    name: 'Carlos',
-    surname: 'Cue',
-    email: 'sergio@example.com',
-    linkedin: 'https://www.linkedin.com/in/sergiomanzanoesclapez',
-    repo: 'https://github.com/sergiomanzanoesclapez',
+    name: 'Carlos Alberto',
+    surname: 'Cue Puente',
+    email: 'cuepuentecarlos@gmail.com cacp892@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/carlosalbertocuepuente',
+    repo: 'https://github.com/carloscuepuente',
   },
 
   {
@@ -53,7 +51,9 @@ const teamMembers = [
 const Contact = () => {
   return (
     <div className="container mx-auto p-2 mt-[100px] mb-6">
-      <h1 className="text-4xl font-bold text-center text-white mb-6">Nuestro Equipo</h1>
+      <h1 className="text-4xl font-bold text-center text-white mb-6">
+        Nuestro Equipo
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {teamMembers.map((member, index) => (
           <div
