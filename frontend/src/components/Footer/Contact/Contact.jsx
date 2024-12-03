@@ -21,10 +21,10 @@ const teamMembers = [
     repo: 'https://github.com/angelsuarezsosa',
   },
   {
-    name: 'Carlos',
-    surname: 'Cue',
-    email: 'cuepuentecarlos@gmail.com',
-    linkedin: 'https://linkedin.com/in/carlosalbertocuepuente',
+    name: 'Carlos Alberto',
+    surname: 'Cue Puente',
+    email: 'cuepuentecarlos@gmail.com cacp892@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/carlosalbertocuepuente',
     repo: 'https://github.com/carloscuepuente',
   },
   {
@@ -47,7 +47,9 @@ const teamMembers = [
 const Contact = () => {
   return (
     <div className="container mx-auto p-2 mt-[100px] mb-6">
-      <h1 className="text-4xl font-bold text-center text-white mb-6">Nuestro Equipo de Desarrolladores:</h1>
+      <h1 className="text-4xl font-bold text-center text-white mb-6">
+        Nuestro Equipo de Desarrolladores:
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {teamMembers.map((member, index) => (
           <div
@@ -59,14 +61,22 @@ const Contact = () => {
                 {member.name} {member.surname}
               </h2>
               <div className="flex justify-around w-full">
-                <a href={`mailto:${member.email}`} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={`mailto:${member.email}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <img
                     src="/icons/email.svg"
                     alt="Email Icon"
                     className="w-10 h-10 hover:opacity-80 hover:scale-110 transition-transform"
                   />
                 </a>
-                <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <img
                     src="/icons/linkedin.svg"
                     alt="LinkedIn Icon"
@@ -90,4 +100,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
