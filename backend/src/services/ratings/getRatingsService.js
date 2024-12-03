@@ -5,7 +5,7 @@ const getRatingsService = async () => {
 
   // Consulta para obtener todas las valoraciones
   const [ratings] = await pool.query(`
-    SELECT r.id, r.rating, r.comment, r.created_at, r.updated_at, u.username
+    SELECT r.id, r.rating, r.comment, r.created_at, r.updated_at, u.username, u.avatar
     FROM ratings AS r
     INNER JOIN users AS u ON u.id = r.user_id;
     `);

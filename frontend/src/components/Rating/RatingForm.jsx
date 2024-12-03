@@ -1,23 +1,23 @@
-import { useState } from "react";
-import { useUser } from "../../context/UserContext"; // Usamos el contexto para obtener el user
+import { useState } from 'react';
+import { useUser } from '../../context/UserContext';
 
 const RatingForm = ({ fetchComments }) => {
-  const [rating, setRating] = useState(0); // Estado para la puntuación
-  const [comment, setComment] = useState(""); // Estado para el comentario
+  const [rating, setRating] = useState(0); // Estado puntuación
+  const [comment, setComment] = useState(''); // Estado comentario
   const [user] = useUser(); // Obtenemos el usuario del contexto
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validar que haya puntuación y comentario
+    // comprueba si hay datos
     if (rating > 0 && comment) {
       try {
         // Enviar la valoración al backend
-        const res = await fetch("http://localhost:3001/ratings", {
-          method: "POST",
+        const res = await fetch('http://localhost:3001/ratings', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: user.token,
           },
           body: JSON.stringify({ rating, comment }),
@@ -25,28 +25,28 @@ const RatingForm = ({ fetchComments }) => {
 
         if (!res.ok) {
           const errorData = await res.json();
-          // Si el error es que ya valoró, mostramos el mensaje
+          // Si falla por valoracion existente muestra esto
           if (
             res.status === 403 &&
-            errorData.message === "El usuario ya ha realizado una valoración"
+            errorData.message === 'El usuario ya ha realizado una valoración'
           ) {
-            setError("Ya has valorado la web.");
+            setError('Ya has valorado la web.');
           } else {
-            setError("Hubo un problema al agregar la valoración.");
+            setError('Hubo un problema al agregar la valoración.');
           }
           return;
         }
 
-        // Si la valoración fue exitosa, limpiamos los campos
+        // Si la valoración funciona, limpia campos
         setRating(0);
-        setComment("");
-        fetchComments(); // Actualizamos los comentarios (si tienes un estado de comentarios)
+        setComment('');
+        fetchComments(); // actualizacion de comentarios
       } catch (err) {
-        console.error("Error al enviar el comentario:", err);
-        setError("Hubo un problema al enviar el comentario.");
+        console.error('Error al enviar el comentario:', err);
+        setError('Hubo un problema al enviar el comentario.');
       }
     } else {
-      setError("Por favor, proporciona una puntuación y un comentario.");
+      setError('Por favor, proporciona una puntuación y un comentario.');
     }
   };
 
@@ -62,7 +62,6 @@ const RatingForm = ({ fetchComments }) => {
       {error && (
         <p className="text-red-500 mb-4 text-center font-semibold">{error}</p>
       )}
-
       {/* Componente de estrellas */}
       <div className="mb-6 flex justify-center">
         {Array.from({ length: 5 }, (_, index) => (
@@ -70,8 +69,8 @@ const RatingForm = ({ fetchComments }) => {
             key={index}
             className={`w-8 h-8 cursor-pointer transition-transform duration-200 ease-in-out ${
               rating > index
-                ? "text-yellow-400 scale-110"
-                : "text-gray-400 hover:text-yellow-400"
+                ? 'text-yellow-400 scale-110'
+                : 'text-gray-400 hover:text-yellow-400'
             }`}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
@@ -83,14 +82,12 @@ const RatingForm = ({ fetchComments }) => {
           </svg>
         ))}
       </div>
-
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder="Escribe tu comentario aquí"
         className="border-2 border-gray-300 p-3 w-full mb-6 rounded-md focus:ring-2"
       />
-
       <button
         type="submit"
         className="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-700 transition-all"

@@ -32,10 +32,17 @@ const RatingAndComments = () => {
     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
   return (
-    <div className="container mx-auto pt-12 p-4 sm:p-8">
-      <h1 className="text-2xl sm:text-3xl text-center font-bold mb-4 pt-20">
-        Déjanos tu opinión
+    <div
+      className="mx-auto pt-12 p-4 sm:p-8 bg-cover bg-fixed bg-center w-full min-h-screen"
+      style={{ backgroundImage: `url('/paris.jpg')` }}
+    >
+      <h1 className="text-5xl sm:text-6xl text-center font-bold mt-10 mb-20 pt-20 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+        <span className="text-orange-500">D</span>
+        <span className="text-white">éjanos tu </span>
+        <span className="text-orange-500">O</span>
+        <span className="text-white">pinión!</span>
       </h1>
+
       {message && (
         <div
           className={`text-center mb-4 p-2 rounded ${
@@ -47,7 +54,7 @@ const RatingAndComments = () => {
           {message.text}
         </div>
       )}
-      <RatingForm fetchComments={fetchComments} />{' '}
+      <RatingForm fetchComments={fetchComments} />
       {sortedComments && sortedComments.length > 0 ? (
         sortedComments.map((comment) => (
           <CommentList key={comment.id} comment={comment} />
