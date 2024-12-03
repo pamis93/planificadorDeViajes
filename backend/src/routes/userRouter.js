@@ -38,7 +38,7 @@ userRouter.put('/users/avatar', authUser, editUserAvatarController);
 userRouter.put('/users/edit/:userId', authUser, editUserController);
 
 //Ruta para poder acceder a los recursos estáticos.
-userRouter.get('/users/getAvatar/:avatar', authUser, getAvatarController);
+userRouter.get('/users/getAvatar/:id',getAvatarController);
 
 //Ruta para traer el perfil del usuario
 userRouter.post('/users/profile', getProfileUserController);

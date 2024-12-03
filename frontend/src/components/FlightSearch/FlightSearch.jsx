@@ -110,7 +110,7 @@ function FlightSearch() {
         style={{ zIndex: -1 }}
       />
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="z-10 max-w-5xl w-full mx-auto mt-10 px-4 py-8 bg-white rounded-lg shadow-lg">
+        <div className=" max-w-5xl w-full mx-auto mt-10 px-4 py-8 bg-white rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
             Buscar vuelos
           </h2>
@@ -211,3 +211,5 @@ function FlightSearch() {
 }
 
 export default FlightSearch;
+
+

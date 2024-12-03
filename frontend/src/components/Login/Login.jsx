@@ -1,13 +1,10 @@
 import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from '../../context/UserContext';
 
 function Login() {
   const [, setUser] = useUser();
-
-  const [message, setMessage] = useState({
-    text: '',
-    type: '',
-  });
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -45,25 +42,23 @@ function Login() {
             email: email,
           });
 
-          setMessage({
-            text: data.message,
-            type: 'success',
+          toast.success(data.message || 'Inicio de sesión exitoso.', {
+            position: 'bottom-center',
           });
+
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 2000);
         }
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 2000);
       } else {
-        setMessage({
-          text: data.message,
-          type: 'error',
+        toast.error(data.message || 'Credenciales incorrectas.', {
+          position: 'bottom-center',
         });
       }
     } catch (error) {
       console.error('Error:', error);
-      setMessage({
-        text: 'Error al conectar con el servidor',
-        type: 'error',
+      toast.error('Error al conectar con el servidor.', {
+        position: 'top-right',
       });
     }
   };
@@ -75,7 +70,7 @@ function Login() {
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
       <div
-        className="bg-black bg-opacity-50 p-10 mt-20 rounded-lg shadow-lg w-[500px] h-[750px] text-center"
+        className="bg-black bg-opacity-50 p-10  mt-60 sm:mt-20  rounded-lg shadow-lg w-[500px] h-[750px] text-center"
         style={{ backgroundImage: `url('/fondoLogin.png')` }}
       >
         <h2 className="text-2xl font-bold mb-6">BIENVENIDO/A DE VUELTA</h2>
@@ -109,7 +104,7 @@ function Login() {
             </span>
           </div>
 
-          <p className="text-sm">
+          <p className="text-sm mb-10">
             <a
               href="/recuperacion"
               className="text-[#046ef8] font-semibold text-lg hover:underline"
@@ -120,21 +115,11 @@ function Login() {
 
           <button
             type="submit"
-            className="mt-5 w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-lg transition"
+            className="mt-10 w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-lg transition"
           >
             Iniciar Sesión
           </button>
         </form>
-
-        {message.text && (
-          <p
-            className={`mt-4 text-lg ${
-              message.type === 'success' ? 'text-green-500' : 'text-red-500'
-            }`}
-          >
-            {message.text}
-          </p>
-        )}
 
         <p className="mt-20 text-sm">
           ¿Aún no tienes una cuenta?{' '}
@@ -145,7 +130,8 @@ function Login() {
             REGÍSTRATE
           </a>
         </p>
-      </div>
+      </div>      
+      <ToastContainer />
     </div>
   );
 }

@@ -1,10 +1,8 @@
 import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Register() {
-  const [message, setMessage] = useState({
-    text: '',
-    type: '',
-  });
   const [showPassword, setShowPassword] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
@@ -19,9 +17,13 @@ function Register() {
 
     // Validación de que las contraseñas coincidan
     if (password !== confirmPassword) {
-      setMessage({
-        text: 'Las contraseñas no coinciden',
-        type: 'error',
+      toast.error('Las contraseñas no coinciden', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
       });
       return;
     }
@@ -44,22 +46,19 @@ function Register() {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage({
-          text: data.message,
-          type: 'success',
-        });
-        setIsSuccessModalOpen(true);
+        setIsSuccessModalOpen(true); // Mostrar modal en caso de éxito
       } else {
-        setMessage({
-          text: data.message,
-          type: 'error',
+        toast.error(data.message || 'Error en el registro', {
+          position: 'bottom-center',
+          autoClose: 3000,
+          hideProgressBar: true,
         });
       }
     } catch (error) {
-      console.error('Error:', error);
-      setMessage({
-        text: 'Error al conectar con el servidor',
-        type: 'error',
+      toast.error('Error al conectar con el servidor', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: true,
       });
     }
   };
@@ -76,7 +75,7 @@ function Register() {
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
       <div
-        className="bg-black bg-opacity-50 p-10 mt-10 rounded-lg shadow-lg w-[500px] text-center"
+        className="bg-black bg-opacity-50 p-10 mt-60 sm:mt-20 rounded-lg shadow-lg w-[500px] text-center"
         style={{ backgroundImage: `url('/fondoLogin.png')` }}
       >
         <h2 className="text-2xl font-bold mb-6 text-center">CREAR CUENTA</h2>
@@ -116,7 +115,7 @@ function Register() {
           />
 
           {/* Email */}
-          <label className="block text-lg font-semibold mb-2 text-white">CORREO ELECTRONICO</label>
+          <label className="block text-lg font-semibold mb-2 text-white">CORREO ELECTRÓNICO</label>
           <input
             className="w-full p-3 mb-4 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="email"
@@ -170,16 +169,6 @@ function Register() {
           </button>
         </form>
 
-        {message.text && (
-          <p
-            className={`mt-4 text-lg ${
-              message.type === 'success' ? 'text-green-500' : 'text-red-500'
-            }`}
-          >
-            {message.text}
-          </p>
-        )}
-
         {/* Texto de inicio de sesión */}
         <p className="mt-6 text-sm">
           ¿Ya tienes una cuenta?{' '}
@@ -206,10 +195,9 @@ function Register() {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }
 
 export default Register;
-
-

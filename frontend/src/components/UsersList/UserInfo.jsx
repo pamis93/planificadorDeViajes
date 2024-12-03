@@ -33,15 +33,17 @@ export const UserInfo = () => {
   // const toggleAccordion = () => {
   //   setIsOpen(!isOpen);
   // };
-
+  const avatarUrl = `http://localhost:3001/users/getAvatar/${id}`
   return (
-    <div className='mt-20 top-5 p-5 rounded-2xl w-full max-w-md mx-auto relative bg-[#686e9e]'>
-      <h1 className='text-center bg-[#515a9b] text-white font-manrope text-s font-bold' >{user.username}</h1>
-      <img src={user.avatar} />
+    <div className='mt-20 mb-10 top-5 p-5 rounded-2xl w-full max-w-xs sm:max-w-md mx-auto relative bg-[#7278a4]'>
+      <h1 className='text-center bg-[#515a9b] text-white font-manrope text-base sm:text-lg font-bold' >{user.username}</h1>
+      <img src={avatarUrl} className="rounded-full w-24 h-24 sm:w-32 sm:h-32"/>
+      <div className='mt-4 text-left text-[#252a31] font-semibold'>
       <p>Email: {user.email}</p>
       <p>Name: {user.name}</p>
       <p>Last Name: {user.lastName}</p>
-      <p>Active Since: {user.created_at}</p>
+      <p>Active Since: {new Date (user.created_at).toLocaleDateString()}</p>
+      </div>
     </div>
 
     //     <Accordion>

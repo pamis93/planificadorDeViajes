@@ -4,6 +4,7 @@
 
 body {
   background-color: #42486a;
+  
 }
 #root {
   margin: 0;
@@ -80,3 +81,17 @@ button:focus-visible {
   }
 }
  */
+ @keyframes fly {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-fly {
+  animation: fly 3s linear;
+  left: 50%;
+}
+

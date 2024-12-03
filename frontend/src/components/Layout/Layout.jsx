@@ -31,6 +31,7 @@ export const Layout = () => {
           <Footer />
         </div>
       </ErrorBoundary>
+      <Footer />
       <FeedbackButton />
     </>
   );
