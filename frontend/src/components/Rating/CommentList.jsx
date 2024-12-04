@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { useUser } from '../../context/UserContext'; // Asegúrate de que este hook esté disponible
+import { useUser } from '../../context/UserContext';
 
 const CommentList = ({ comment, comments, setComments }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false); // Nuevo estado para manejar la eliminación
   const [newComment, setNewComment] = useState(comment.comment);
   const [newRating, setNewRating] = useState(comment.rating);
-  const [user] = useUser(); // Usamos el contexto de usuario
+  const [user] = useUser();
   const token = user?.token;
 
   // Función para guardar los cambios de un comentario
@@ -16,7 +17,7 @@ const CommentList = ({ comment, comments, setComments }) => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token, // Si el usuario está autenticado, pasa el token
+          Authorization: token,
         },
         body: JSON.stringify({
           rating: newRating,
@@ -34,11 +35,33 @@ const CommentList = ({ comment, comments, setComments }) => {
           ? { ...c, comment: newComment, rating: newRating }
           : c
       );
-      setComments(updatedComments); // Actualizamos el estado de los comentarios
-
+      setComments(updatedComments);
       setIsEditing(false); // Cerramos el modal después de guardar los cambios
     } catch (err) {
       console.error('Error al editar el comentario:', err);
+    }
+  };
+
+  // Función para eliminar un comentario
+  const handleDelete = async () => {
+    try {
+      const res = await fetch(`http://localhost:3001/ratings/${comment.id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error('No se pudo eliminar la valoración');
+      }
+
+      // Eliminamos el comentario del estado de comentarios
+      const updatedComments = comments.filter((c) => c.id !== comment.id);
+      setComments(updatedComments);
+      setIsDeleting(false); // Cerramos el modal de eliminación
+    } catch (err) {
+      console.error('Error al eliminar el comentario:', err);
     }
   };
 
@@ -49,11 +72,6 @@ const CommentList = ({ comment, comments, setComments }) => {
     setIsEditing(true); // Abrimos el modal para editar
   };
 
-  // Manejar el clic en las estrellas para cambiar la puntuación
-  const handleStarClick = (rating) => {
-    setNewRating(rating);
-  };
-
   // Función para renderizar las estrellas
   const renderStars = (currentRating) => {
     return Array.from({ length: 5 }, (_, index) => (
@@ -62,7 +80,7 @@ const CommentList = ({ comment, comments, setComments }) => {
         className={`w-6 h-6 cursor-pointer ${currentRating > index ? 'text-yellow-400' : 'text-gray-300'}`}
         fill="currentColor"
         viewBox="0 0 22 20"
-        onClick={() => handleStarClick(index + 1)} // Sumamos 1 para el valor de las estrellas (1-5)
+        onClick={() => setNewRating(index + 1)}
       >
         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.433-.767l-1.302-5.006 3.91-3.505a1.53 1.53 0 0 0 .353-1.538z" />
       </svg>
@@ -97,18 +115,23 @@ const CommentList = ({ comment, comments, setComments }) => {
           />
         </div>
 
-        {/* Mostrar el botón de editar solo si el usuario es el dueño del comentario */}
-        {user &&
-          comment.id === user.id && ( // Solo muestra el botón de editar si el usuario está autenticado y es dueño del comentario
-            <div className="flex-shrink-0 mt-2">
-              <button
-                onClick={handleEditClick}
-                className="bg-orange-500 ml-2 text-white px-4 py-2 rounded-lg hover:bg-orange-700"
-              >
-                Editar
-              </button>
-            </div>
-          )}
+        {/* Mostrar los botones de editar y eliminar solo si el usuario es el dueño del comentario */}
+        {user && comment.user_id === user.id && (
+          <div className="flex-shrink-0 mt-2">
+            <button
+              onClick={handleEditClick}
+              className="bg-orange-500 ml-2 text-white px-4 py-2 rounded-lg hover:bg-orange-700"
+            >
+              Editar
+            </button>
+            <button
+              onClick={() => setIsDeleting(true)} // Abrimos el modal de eliminación
+              className="bg-red-500 ml-2 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+            >
+              Eliminar
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Modal para editar el comentario */}
@@ -154,6 +177,35 @@ const CommentList = ({ comment, comments, setComments }) => {
             <button
               onClick={() => setIsEditing(false)}
               className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Modal para confirmar la eliminación */}
+      <Modal
+        isOpen={isDeleting}
+        onRequestClose={() => setIsDeleting(false)}
+        contentLabel="Confirmar Eliminación"
+        className="fixed inset-0 flex items-center justify-center z-50"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+      >
+        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+          <h2 className="text-xl font-semibold mb-4">
+            ¿Estás seguro de eliminar este comentario?
+          </h2>
+          <div className="flex justify-between">
+            <button
+              onClick={handleDelete}
+              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+            >
+              Eliminar
+            </button>
+            <button
+              onClick={() => setIsDeleting(false)}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-700"
             >
               Cancelar
             </button>
