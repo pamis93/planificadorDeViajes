@@ -1,37 +1,79 @@
+import { useState } from 'react';
+import FlightItinerary from './FlightItinerary';
+import FlightResultModal from './FlightResultModal';
+import { useUser } from '../../context/UserContext';
+
 export default function FlightResultCard({ flight }) {
+  const [user] = useUser();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = (e) => {
+    e.stopPropagation();
+    setIsModalOpen(true);
+  };
+
+  const closeModal = (e) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    setIsModalOpen(false);
+  };
   return (
-    <div className="p-4 bg-slate-800 text-white">
-      <div className="flex justify-between items-center">
-        <div className="flex-1 ">
-          <div className="flex justify-around gap-4">
-            <div>
-              <p className="font-bold">
-                {flight.departureDate} - {flight.departureDate}
-              </p>
-              <p className="text-sm text-gray-400">{flight.origin}</p>
-              <p className="text-sm text-gray-400">
-                {flight.origin} - {flight.destination}
-              </p>
-              <p className="text-sm text-gray-400">
-                {flight.origin} - {flight.destination}
-              </p>
-            </div>
-            <div className="flex-col place-content-center gap-2">
-              <span>{flight.duration}</span>
-              {/* <div>{flight.duration}</div> */}
-              <div>
-                <p>Aerolínea {flight.aeroline}</p>
+    <>
+      <div className="max-w-full mx-auto bg-slate-800 rounded-lg shadow-md overflow-hidden ">
+        <div className="p-6 text-white">
+          <div className="mb-6">
+            <div className="flex flex-col sm:flex-row items-center justify-between text-center py-4 space-y-2 sm:space-y-0 ">
+              <div className="w-full sm:w-auto text-center">
+                <span className="text-3xl font-bold text-orange-500">
+                  {flight.price} {flight.details.price.currency}
+                </span>
+              </div>
+              <div className="w-full sm:w-auto flex justify-center">
+                {/* aquí la lógica para que el botón se muestre solo si esta logeado */}
+
+                {user?.id ? (
+                  <button
+                    className="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+                    onClick={openModal}
+                  >
+                    Guardar en Favoritos
+                  </button>
+                ) : (
+                  <span>Regístrate para guardar en Favoritos</span>
+                )}
               </div>
             </div>
+
+            <h3 className="text-2xl font-bold mb-4">Ruta</h3>
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-xl font-semibold">{flight.origin}</p>
+                <p className="text-gray-400">Aeropuerto de Salida</p>
+              </div>
+              <div className="text-orange-500 text-2xl">→</div>
+              <div>
+                <p className="text-xl font-semibold">{flight.destination}</p>
+                <p className="text-gray-400">Aeropuerto de Llegada</p>
+              </div>
+            </div>
+            <p className="mt-2 text-gray-300">
+              Duración Total: {flight.duration}
+            </p>
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold mb-4">Itinerario Detallado</h3>
+            {flight.details.itinerary.map((itinerary, index) => {
+              return <FlightItinerary key={index} itinerary={itinerary} />;
+            })}
           </div>
         </div>
-        <div className="text-right">
-          <p className="text-2xl font-bold">{flight.price}</p>
-          <button className="bg-orange-500 text-white px-4 py-2 rounded mt-2">
-            Seleccionar
-          </button>
-        </div>
+
+        <FlightResultModal
+          flight={flight}
+          isOpen={isModalOpen}
+          closeModal={closeModal}
+        />
       </div>
-    </div>
+    </>
   );
 }

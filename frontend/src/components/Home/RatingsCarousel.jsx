@@ -6,14 +6,10 @@ const RatingsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [error, setError] = useState(null);
 
-  // Función para seleccionar comentarios aleatorios
+
   const selectRandomComments = (allComments, count = 6) => {
-    // Filtrar comentarios con calificación entre 3 y 5
     const midToHighRatedComments = allComments.filter(comment => comment.rating >= 3 && comment.rating <= 5);
-    
-    // Mezclar el array de comentarios
     const shuffled = midToHighRatedComments.sort(() => 0.5 - Math.random());
-    
     return shuffled.slice(0, count);
   };
 
@@ -25,7 +21,6 @@ const RatingsCarousel = () => {
       }
       const responseData = await response.json();
       
-      // Seleccionar comentarios aleatorios
       const selectedComments = selectRandomComments(responseData.data);
       
       setComments(selectedComments);
@@ -72,7 +67,7 @@ const RatingsCarousel = () => {
         </p>
         <div className="flex justify-center">
           <Link
-            to="/comments"
+            to="/ratings"
             className="text-white mb-10 hover:underline hover:text-blue-800 transition bg-[#ff5a1f] px-4 py-2 rounded-lg"
           >
             Ver todos los comentarios &gt;&gt;&gt;
