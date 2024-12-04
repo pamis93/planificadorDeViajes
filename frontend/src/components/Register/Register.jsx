@@ -20,7 +20,7 @@ function Register() {
 
     // Validación de contraseñas
     if (password !== confirmPassword) {
-      toast.error(t('passwordMismatch'), {
+      toast.error(t('formRegister.passwordMismatch'), {
         position: 'bottom-center',
         autoClose: 3000,
         hideProgressBar: true,
@@ -45,14 +45,14 @@ function Register() {
       if (response.ok) {
         setIsSuccessModalOpen(true);
       } else {
-        toast.error(data.message || t('registrationError'), {
+        toast.error(data.message || t('formRegister.registrationError'), {
           position: 'bottom-center',
           autoClose: 3000,
           hideProgressBar: true,
         });
       }
     } catch (error) {
-      toast.error(t('serverError'), {
+      toast.error(t('formRegister.serverError'), {
         position: 'bottom-center',
         autoClose: 3000,
         hideProgressBar: true,
@@ -173,8 +173,8 @@ function Register() {
       {isSuccessModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg shadow-xl p-6 text-center w-full max-w-md mx-4">
-            <h2 className="text-2xl font-bold mb-4 text-black">{t('success')}</h2>
-            <p className="mb-6 text-gray-700 text-base">{t('successMessage')}</p>
+            <h2 className="text-2xl font-bold mb-4 text-black">{t('formRegister.success')}</h2>
+            <p className="mb-6 text-gray-700 text-base">{t('formRegister.successMessage')}</p>
             <button
               onClick={handleSuccessModalClose}
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out"

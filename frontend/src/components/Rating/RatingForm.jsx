@@ -70,7 +70,7 @@ const RatingForm = ({ fetchComments }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto bg-zinc-200"
+      className=" p-6 rounded-lg shadow-lg max-w-lg mx-auto bg-zinc-200"
     >
       {message && (
         <p className="text-red-500 mb-4 text-center font-semibold">{message}</p>

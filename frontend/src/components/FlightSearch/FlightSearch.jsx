@@ -5,29 +5,20 @@ import { useAddParamsToSearch } from '../../hooks/api';
 import { useFlightSearchParams } from '../../context/FlightSearchParamsContext';
 import areObjValuesTruthy from '../../utils/areObjValuesTruthy';
 import { useNavigate } from 'react-router-dom';
-// lo de react router DOM
 import { useSearchParams } from 'react-router-dom';
-// toast
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next';
 
 function FlightSearch() {
-  // lo del estado de react-router-dom
+  const { t } = useTranslation(); 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [origin, setOrigin] = useState(searchParams.get('originCode') || '');
-  const [iataOriginCode, setIataOriginCode] = useState(
-    searchParams.get('originCode') || ''
-  );
-  const [destination, setDestination] = useState(
-    searchParams.get('destinationCode') || ''
-  );
-  const [iataDestinationCode, setIataDestinationCode] = useState(
-    searchParams.get('destinationCode') || ''
-  );
-  const [departureDate, setDepartureDate] = useState(
-    searchParams.get('departureDate') || ''
-  );
+  const [iataOriginCode, setIataOriginCode] = useState(searchParams.get('originCode') || '');
+  const [destination, setDestination] = useState(searchParams.get('destinationCode') || '');
+  const [iataDestinationCode, setIataDestinationCode] = useState(searchParams.get('destinationCode') || '');
+  const [departureDate, setDepartureDate] = useState(searchParams.get('departureDate') || '');
   const [adults, setAdults] = useState(searchParams.get('adults') || 1);
   const [originResults, setOriginResults] = useState([]);
   const [destinationResults, setDestinationResults] = useState([]);
@@ -36,7 +27,6 @@ function FlightSearch() {
 
   const [flightSearchParams] = useFlightSearchParams();
 
-  // no usar el contexto, vamos a pasar las cosas a la url
   useAddParamsToSearch({
     departureDate,
     iataOriginCode,
@@ -99,12 +89,11 @@ function FlightSearch() {
         departureDate: departureDate,
         adults: adults,
       });
-      console.log('queryparams to string', queryParams);
 
       setSearchParams(queryParams);
       navigate(`/search/results?${queryParams.toString()}`);
     } else {
-      toast.error('Por favor, completa todos los campos obligatorios.', {
+      toast.error(t('search.completeFieldsError'), {
         position: 'top-center',
         autoClose: 3000,
         hideProgressBar: false,
@@ -127,9 +116,9 @@ function FlightSearch() {
         style={{ zIndex: -1 }}
       />
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className=" max-w-5xl w-full mx-auto mt-10 px-4 py-8 bg-white rounded-lg shadow-lg">
+        <div className="max-w-5xl w-full mx-auto mt-10 px-4 py-8 bg-white rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
-            Buscar vuelos
+            {t('search.searchFlights')}
           </h2>
           <form className="space-y-6" onSubmit={handleButtonClick}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -138,14 +127,14 @@ function FlightSearch() {
                   htmlFor="origin"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Origen
+                  {t('search.origin')}
                 </label>
                 <input
                   id="origin"
                   type="text"
                   value={origin}
                   onChange={handleOriginChange}
-                  placeholder="Ciudad de origen"
+                  placeholder={t('search.origin')}
                   className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black"
                 />
                 {showOriginResults && originResults.length > 0 ? (
@@ -165,17 +154,17 @@ function FlightSearch() {
                   htmlFor="destination"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Destino
+                  {t('search.destination')}
                 </label>
                 <input
                   id="destination"
                   type="text"
                   value={destination}
                   onChange={handleDestinationChange}
-                  placeholder="Ciudad de destino"
+                  placeholder={t('search.destination')}
                   className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black "
                 />
-                {showDestinationResults && originResults.length > 0 ? (
+                {showDestinationResults && destinationResults.length > 0 ? (
                   <FlightSearchDropdown
                     seter={setDestination}
                     results={destinationResults}
@@ -193,7 +182,7 @@ function FlightSearch() {
                   htmlFor="departureDate"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Fecha de salida
+                  {t('search.departureDate')}
                 </label>
                 <input
                   id="departureDate"
@@ -208,7 +197,7 @@ function FlightSearch() {
                   htmlFor="adults"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Adultos
+                  {t('search.adults')}
                 </label>
                 <input
                   id="adults"
@@ -216,16 +205,18 @@ function FlightSearch() {
                   value={adults}
                   onChange={(e) => setAdults(e.target.value)}
                   min="1"
-                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500  text-black"
+                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black"
                 />
               </div>
             </div>
-            <button
-              onClick={handleButtonClick}
-              className="w-full py-2 px-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mt-4"
-            >
-              Buscar vuelos
-            </button>
+            <div className="text-center mt-6">
+              <button
+                type="submit"
+                className="bg-blue-500 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-blue-600"
+              >
+                {t('search.searchFlightsButton')}
+              </button>
+            </div>
           </form>
         </div>
       </div>
