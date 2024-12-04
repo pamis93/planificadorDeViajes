@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -7,8 +8,8 @@ function AccountActivation() {
   const { registrationCode } = useParams();
   const [status, setStatus] = useState('');
   const navigate = useNavigate();
+  const { t } = useTranslation();  // Hook para traducciones
 
-  
   const activateAccount = async () => {
     try {
       const response = await fetch(
@@ -24,7 +25,7 @@ function AccountActivation() {
       if (response.ok) {
         const data = await response.json();
         if (data.status === 'ok') {
-          setStatus('Cuenta activada correctamente');        
+          setStatus(t('accountActivated'));  // Usamos la clave de traducción        
           toast.success('Cuenta activada correctamente', {
             position: 'top-center',
             autoClose: 5000,
@@ -35,13 +36,13 @@ function AccountActivation() {
             progress: undefined,
           });
         } else {
-          setStatus('Error en la activación de la cuenta');
+          setStatus(t('accountActivationError'));  // Usamos la clave de traducción
         }
       } else {
-        setStatus('Error al conectar con el servidor');
+        setStatus(t('serverConnectionError'));  // Usamos la clave de traducción
       }
     } catch (error) {
-      setStatus('Error en la activación de la cuenta');
+      setStatus(t('accountActivationError'));  // Usamos la clave de traducción
       console.error(error);
     }
   };
@@ -71,19 +72,19 @@ function AccountActivation() {
                 status
               )
             ) : (
-              'Cargando...'
+              t('loading')
             )}
           </h2>
 
-          <button
-            onClick={closeModal}
-            className="top-1 right-2 absolute text-white py-2 px-3 rounded-full mt-0 hover:text-orange-500 transition-colors"
-          >
-            X
-          </button>
-        </div>
+        <button
+          onClick={closeModal}
+          className="top-1 right-2 absolute text-white py-2 px-3 rounded-full mt-0 hover:text-orange-500 transition-colors"
+        >
+          {t('close')}
+        </button>
       </div>
-      <ToastContainer />
+    </div>
+    <ToastContainer />
     </>
   );
 }

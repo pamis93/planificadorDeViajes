@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next'; import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { useUser } from '../../context/UserContext';
 import { toast, ToastContainer } from 'react-toastify';
@@ -98,6 +98,7 @@ const CommentList = ({ comment, comments, setComments }) => {
     ));
   };
 
+  const { t } = useTranslation(); 
   return (
     <div className="mt-8">
       <div className="mb-4 p-4 bg-white border rounded shadow w-full max-w-4xl mx-auto flex flex-col sm:flex-row items-center bg-zinc-200">

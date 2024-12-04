@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const FeedbackButton = () => {
+  const { t } = useTranslation(); // Hook para usar traducciones
   const [averageRating, setAverageRating] = useState(null);
   const [numVotes, setNumVotes] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -17,11 +19,11 @@ const FeedbackButton = () => {
         setAverageRating(parseFloat(data.averageRating));
         setNumVotes(data.numVotes);
       } catch (error) {
-        console.error('Error al obtener las estadísticas:', error);
+        console.error(t('ratingModal.errorFetchingStats'), error);
       }
     };
     fetchStats();
-  }, []);
+  }, [t]);
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -34,15 +36,16 @@ const FeedbackButton = () => {
       <button
         onClick={closeModal}
         className="absolute top-1 right-2 text-white hover:bg-gray-600 rounded-full"
-        aria-label="Cerrar"
+        aria-label={t('ratingModal.close')}
       >
         ✕
       </button>
       <Link to="/ratings" className="flex flex-col">
-        <p>¡Dejanos tu opinión!</p>
+        <p>{t('ratingModal.giveFeedback')}</p>
         {averageRating !== null && numVotes !== null && (
           <p className="text-sm">
-            Valoración media: ⭐{averageRating.toFixed(1)} ({numVotes} votos)
+            {t('ratingModal.averageRating')}: ⭐{averageRating.toFixed(1)} ({numVotes}{' '}
+            {t('ratingModal.votes')})
           </p>
         )}
       </Link>

@@ -1,15 +1,37 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-const carouselData = [
-  { image: "/paris.jpg", title: "PARIS", description: "ida y vuelta desde 180€", alt: "Paris" },
-  { image: "/londres.jpg", title: "LONDRES", description: "ida y vuelta desde 120€", alt: "Londres" },
-  { image: "/lisboa.jpg", title: "LISBOA", description: "ida y vuelta desde 90€", alt: "Lisboa" },
-  { image: "/roma.jpg", title: "ROMA", description: "ida y vuelta desde 125€", alt: "Roma" },
-];
+import { useTranslation } from "react-i18next";
 
 const TravelCarousel = () => {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const carouselData = [
+    {
+      image: "/paris.jpg",
+      title: t("carousel.paris.title"),
+      description: t("carousel.paris.description"),
+      alt: t("carousel.paris.alt"),
+    },
+    {
+      image: "/londres.jpg",
+      title: t("carousel.london.title"),
+      description: t("carousel.london.description"),
+      alt: t("carousel.london.alt"),
+    },
+    {
+      image: "/lisboa.jpg",
+      title: t("carousel.lisbon.title"),
+      description: t("carousel.lisbon.description"),
+      alt: t("carousel.lisbon.alt"),
+    },
+    {
+      image: "/roma.jpg",
+      title: t("carousel.rome.title"),
+      description: t("carousel.rome.description"),
+      alt: t("carousel.rome.alt"),
+    },
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,24 +55,23 @@ const TravelCarousel = () => {
       {/* Cabecera */}
       <div className="mb-6 items-center bg-[#686E9E] w-full px-4 sm:px-8">
         <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 mt-6 text-center">
-          EMPIEZA A PLANEAR TUS PROXIMAS AVENTURAS
+          {t("carousel.header.title")}
         </h1>
         <p className="text-base sm:text-xl text-gray-100 mb-4 text-center">
-          conserva tus destinos preferidos en un solo lugar
+          {t("carousel.header.subtitle")}
         </p>
         <div className="flex justify-center">
           <Link
             to="/search"
             className="text-white mb-6 hover:underline hover:text-blue-800 transition bg-[#ff5a1f] px-4 py-2 rounded-lg"
           >
-            Prueba buscar un vuelo y guardalo en tus favoritos &gt;&gt;&gt;
+            {t("carousel.header.cta")}
           </Link>
         </div>
       </div>
 
       {/* Carrusel */}
       <div className="relative w-full max-w-4xl mx-auto mt-8 mb-10 px-4">
-        {/* Contenedor del carrusel */}
         <div className="relative flex h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden">
           {carouselData.map((slide, index) => (
             <div

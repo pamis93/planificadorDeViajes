@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
-import RatingFooter from './RatingFooter/RatingFooter'
+import RatingFooter from './RatingFooter/RatingFooter';
+import { useTranslation } from 'react-i18next';
 
 function Footer() {
+  const { t } = useTranslation();
+
   return (
     <>
       {/* Incluir el banner de valoración */}
-     <RatingFooter/>
+      <RatingFooter />
 
       <footer className=" bg-custom-blue h-[300px] mb-0 sm:h-[300px] text-white text-sm sm:text-base py-4 sm:py-8 mt-6 sm:mt-0">
         <div className="container mx-auto px-4">
@@ -19,16 +22,16 @@ function Footer() {
             {/* Enlaces de navegación */}
             <nav className="flex flex-wrap justify-center gap-4">
               <Link to="#about" className="hover:text-orange-500 transition-colors">
-                Acerca de
+                {t('about')}
               </Link>
               <Link to="/contact" className="hover:text-orange-500 transition-colors">
-                Contacto
+                {t('contact')}
               </Link>
               <Link to="#privacy" className="hover:text-orange-500 transition-colors">
-                Política de Privacidad
+                {t('privacyPolicy')}
               </Link>
               <Link to="#terms" className="hover:text-orange-500 transition-colors">
-                Términos y Condiciones
+                {t('termsAndConditions')}
               </Link>
             </nav>
           </div>
@@ -39,22 +42,22 @@ function Footer() {
           {/* Redes sociales */}
           <div className="flex justify-center gap-4">
             <Link to="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors">
-              Facebook
+              {t('facebook')}
             </Link>
             <Link to="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
-              Twitter
+              {t('twitter')}
             </Link>
             <Link to="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">
-              Instagram
+              {t('instagram')}
             </Link>
             <Link to="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-300 transition-colors">
-              LinkedIn
+              {t('linkedin')}
             </Link>
           </div>
 
           {/* Copyright */}
           <div className="mt-6 text-center text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} WonderFly. Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} WonderFly. {t('allRightsReserved')}
           </div>
         </div>
       </footer>

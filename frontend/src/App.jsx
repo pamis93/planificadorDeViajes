@@ -17,6 +17,7 @@ import FavList from './components/FavList/FavList';
 import RatingAndComments from './components/Rating/RatingAndComments';
 import Contact from './components/Footer/Contact/Contact';
 
+
 function App() {
   return (
     <>

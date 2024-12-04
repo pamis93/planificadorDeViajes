@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     name: '',
     lastName: '',
@@ -22,7 +25,7 @@ const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
         email: initialData.email || '',
         password: '', 
       });
-      
+
       // Si hay un avatar, actualiza el avatar en el padre
       if (initialData.avatar) {
         setAvatarAct(`http://localhost:3001/uploads/${initialData.avatar}`);
@@ -57,7 +60,7 @@ const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
             htmlFor={field} 
             className="text-white text-xs sm:text-sm font-bold"
           >
-            {field.charAt(0).toUpperCase() + field.slice(1)}
+            {t(field.charAt(0).toUpperCase() + field.slice(1))} {/* Traducción dinámica */}
           </label>
           <div className="flex items-center w-full">
             <input
@@ -67,16 +70,7 @@ const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
               value={formData[field]}
               onChange={handleInputChange}
               readOnly={!editableFields[field]}
-              className={`
-                w-full px-3 sm:px-12 py-1 sm:py-2 
-                bg-[#9AA5BC] text-black 
-                font-bold rounded-lg 
-                focus:outline-none text-xs sm:text-base
-                ${editableFields[field]
-                  ? 'focus:ring-2 focus:ring-[#000000]'
-                  : 'cursor-not-allowed'
-                }
-              `}
+              className="w-full px-3 sm:px-12 py-1 sm:py-2 bg-[#9AA5BC] text-black font-bold rounded-lg focus:outline-none text-xs sm:text-base"
             />
             <button
               type="button"
@@ -104,20 +98,12 @@ const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
           w-full
         "
       >
-        Guardar Cambios
+        {t('saveChanges')} {/* Traducción del botón */}
       </button>
 
       {message.text && (
-        <p
-          className={`
-            text-xs sm:text-sm 
-            font-bold 
-            mt-1 sm:mt-2 
-            text-center 
-            ${message.type === 'success' ? 'text-green-400' : 'text-red-400'}
-          `}
-        >
-          {message.text}
+        <p className={`mt-2 text-xs sm:text-sm font-bold text-center ${message.type === 'success' ? 'text-green-500' : 'text-red-500'}`}>
+          {message.type === 'success' ? t('successUpdate') : t('errorUpdate')} {/* Mensaje de éxito o error */}
         </p>
       )}
     </form>
