@@ -5,7 +5,7 @@ const RatingForm = ({ fetchComments }) => {
   const [rating, setRating] = useState(0); // Estado puntuación
   const [comment, setComment] = useState(''); // Estado comentario
   const [user] = useUser(); // Obtenemos el usuario del contexto
-  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,8 +24,8 @@ const RatingForm = ({ fetchComments }) => {
         });
 
         if (comment.length > 500) {
-          setError(
-            'Vaya! sentimos limitarte pero tenemos un maximo de 500 caracteres. Discula las molestias!'
+          setMessage(
+            'Vaya! sentimos limitarte pero tenemos un maximo de 500 caracteres por valoración (más que twitter, ojo! 😎👌). Discula las molestias!'
           );
           return;
         }
@@ -37,27 +37,29 @@ const RatingForm = ({ fetchComments }) => {
             res.status === 403 &&
             errorData.message === 'El usuario ya ha realizado una valoración'
           ) {
-            setError('Hubo un problema al agregar la valoración.');
+            setMessage('Hubo un problema al agregar la valoración.');
           } else {
-            setError(
-              'Parece que ya nos ha valorado! solo admitimos una valoracion, pero puedes modificarla o eliminarla!'
+            setMessage(
+              'Parece que ya nos has valorado! Modifica tu comentario para decirnos lo que piensas!'
             );
           }
           return;
         }
-
+        setMessage('Muchas gracias! Valoración anotada!');
         // Si la valoración funciona, limpia campos
         setRating(0);
         setComment('');
         fetchComments(); // actualizacion de comentarios
       } catch (err) {
         console.error('Error al enviar el comentario:', err);
-        setError(
+        setMessage(
           'Debes estar registrado para poder valorar la pagina! sentimos las molestias!'
         );
       }
     } else {
-      setError('Por favor, proporciona una puntuación y un comentario.');
+      setMessage(
+        'Uy, faltan datos! asegurate de poner una valoracion y un comentario 😉'
+      );
     }
   };
 
@@ -70,8 +72,8 @@ const RatingForm = ({ fetchComments }) => {
       onSubmit={handleSubmit}
       className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto bg-zinc-200"
     >
-      {error && (
-        <p className="text-red-500 mb-4 text-center font-semibold">{error}</p>
+      {message && (
+        <p className="text-red-500 mb-4 text-center font-semibold">{message}</p>
       )}
       {/* Componente de estrellas */}
       <div className="mb-6 flex justify-center">

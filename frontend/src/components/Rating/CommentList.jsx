@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { useUser } from '../../context/UserContext';
+import { toast, ToastContainer } from 'react-toastify';
 
 const CommentList = ({ comment, comments, setComments }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -36,9 +37,11 @@ const CommentList = ({ comment, comments, setComments }) => {
           : c
       );
       setComments(updatedComments);
-      setIsEditing(false); // Cerramos el modal después de guardar
+      setIsEditing(false); // Cerrar modal después de guardar
+      toast.success('Comentario actualizado con éxito!'); // Toast de éxito
     } catch (err) {
       console.error('Error al editar el comentario:', err);
+      toast.error('Vaya! parece que tenemos un problema!. Intenta de nuevo.'); // Toast de error
     }
   };
 
@@ -66,8 +69,10 @@ const CommentList = ({ comment, comments, setComments }) => {
       );
 
       setIsDeleting(false);
+      toast.success('Valoración eliminada!'); // Toast de éxito
     } catch (err) {
       console.error('Error al eliminar la valoración:', err);
+      toast.error('No hemos podido borrarlo!. Intentalo de nuevo.'); // Toast de error
     }
   };
 
@@ -95,24 +100,7 @@ const CommentList = ({ comment, comments, setComments }) => {
 
   return (
     <div className="mt-8">
-      <div className="mb-4 p-4 bg-white border rounded shadow w-full max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center bg-zinc-200">
-        <div className="flex flex-col mb-4 sm:mb-0 sm:mr-4 w-full sm:w-auto">
-          <p>
-            <strong>Usuario: </strong> {comment.username}
-          </p>
-          <div className="flex items-center">
-            <strong className="mr-2">Puntuación:</strong>
-            <div className="flex">{renderStars(comment.rating)}</div>
-          </div>
-          <p>
-            <strong>Comentario: </strong> {comment.comment}
-          </p>
-          <p>
-            <strong>Fecha: </strong>
-            {new Date(comment.created_at).toLocaleString()}
-          </p>
-        </div>
-
+      <div className="mb-4 p-4 bg-white border rounded shadow w-full max-w-4xl mx-auto flex flex-col sm:flex-row items-center bg-zinc-200">
         <div className="flex-shrink-0 mb-4 sm:mb-0">
           <img
             src={comment.avatar}
@@ -121,9 +109,26 @@ const CommentList = ({ comment, comments, setComments }) => {
           />
         </div>
 
+        <div className="flex flex-col mb-4 sm:mb-0 sm:mr-4 w-full sm:w-auto">
+          <p>
+            <strong>🧑‍💻Usuario: </strong> {comment.username}
+          </p>
+          <div className="flex items-center">
+            <strong className="mr-2">🏅Puntuación :</strong>
+            <div className="flex">{renderStars(comment.rating)}</div>
+          </div>
+          <p>
+            <strong>💬 Comentario : </strong> {comment.comment}
+          </p>
+          <p>
+            <strong>📅 Fecha : </strong>
+            {new Date(comment.created_at).toLocaleString()}
+          </p>
+        </div>
+
         {/* Mostrar los botones de editar y eliminar solo si el usuario es el dueño del comentario */}
         {user && comment.user_id === user.id && (
-          <div className="flex-shrink-0 mt-2">
+          <div className="flex-shrink-0 mt-2 ml-auto">
             <button
               onClick={handleEditClick}
               className="bg-orange-500 ml-2 text-white px-4 py-2 rounded-lg hover:bg-orange-700"
@@ -131,7 +136,7 @@ const CommentList = ({ comment, comments, setComments }) => {
               Editar
             </button>
             <button
-              onClick={() => setIsDeleting(true)} // Abrimos el modal de eliminación
+              onClick={() => setIsDeleting(true)} // Abrimos modal eliminación
               className="bg-red-500 ml-2 text-white px-4 py-2 rounded-lg hover:bg-red-700"
             >
               Eliminar

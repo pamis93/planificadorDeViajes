@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import RatingForm from './RatingForm';
 import CommentList from './CommentList';
+import { toast, ToastContainer } from 'react-toastify'; // Importar toast
 
 const RatingAndComments = () => {
   const [comments, setComments] = useState([]);
@@ -36,7 +37,8 @@ const RatingAndComments = () => {
       className="mx-auto pt-12 p-4 sm:p-8 bg-cover bg-fixed bg-center w-full min-h-screen"
       style={{ backgroundImage: `url('/paris.jpg')` }}
     >
-      <h1 className="text-4xl sm:text-5xl md:text-6xl text-center font-bold mt-10 mb-20 pt-20 drop-shadow-lg">
+      <ToastContainer />
+      <h1 className="text-4xl sm:text-5xl md:text-6xl text-center font-bold mt-10 mb-20 pt-20 drop-shadow">
         <span className="text-orange-500">D</span>
         <span className="text-white">ejanos tu </span>
         <span className="text-orange-500">O</span>
@@ -51,7 +53,7 @@ const RatingAndComments = () => {
         </div>
       )}
 
-      {/* Pasamos fetchComments como prop a RatingForm para que pueda actualizar los comentarios */}
+      {/* Pasamos fetchComments y toast como prop a RatingForm y CommentList */}
       <RatingForm fetchComments={fetchComments} />
 
       {sortedComments && sortedComments.length > 0 ? (
@@ -61,7 +63,7 @@ const RatingAndComments = () => {
             comment={comment}
             comments={comments}
             setComments={setComments}
-            o
+            toast={toast} // Pasamos la función toast como prop
           />
         ))
       ) : (
