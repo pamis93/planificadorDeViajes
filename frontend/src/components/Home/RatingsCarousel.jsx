@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';  // Importar useTranslation
 
 const RatingsCarousel = () => {
   const [comments, setComments] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [error, setError] = useState(null);
-
+  const { t } = useTranslation();  // Usar el hook para obtener la función de traducción
 
   const selectRandomComments = (allComments, count = 6) => {
     const midToHighRatedComments = allComments.filter(comment => comment.rating >= 3 && comment.rating <= 5);
@@ -20,13 +21,11 @@ const RatingsCarousel = () => {
         throw new Error('Network response was not ok');
       }
       const responseData = await response.json();
-      
       const selectedComments = selectRandomComments(responseData.data);
-      
       setComments(selectedComments);
     } catch (err) {
       console.error('Error al obtener los comentarios:', err);
-      setError('Hubo un problema al obtener los comentarios.');
+      setError(t('errorFetchingComments'));  // Usar la clave de traducción para el error
     }
   };
 
@@ -57,27 +56,24 @@ const RatingsCarousel = () => {
 
   return (
     <>
-
       <div className="mb-6 items-center bg-[#686E9E] w-full px-4 sm:px-8">
         <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 text-center">
-          COMENTARIOS DE NUESTROS VIAJEROS
+          {t('ratingCarousel.ratingsTitle')}  {/* Usar la clave de traducción */}
         </h1>
         <p className="text-base sm:text-xl text-gray-100 mb-4 text-center">
-          Lo que dicen nuestros clientes
+          {t('ratingCarousel.ratingsDescription')}  {/* Usar la clave de traducción */}
         </p>
         <div className="flex justify-center">
           <Link
             to="/ratings"
             className="text-white mb-10 hover:underline hover:text-blue-800 transition bg-[#ff5a1f] px-4 py-2 rounded-lg"
           >
-            Ver todos los comentarios &gt;&gt;&gt;
+            {t('ratingCarousel.seeAllRatings')}  {/* Usar la clave de traducción */}
           </Link>
         </div>
       </div>
 
-
       <div className="relative w-full max-w-4xl mx-auto mt-8 mb-10 px-4">
-
         <div className="relative flex h-[250px] sm:h-[250px] md:h-[300px] overflow-hidden">
           {comments.map((comment, index) => (
             <div
@@ -88,7 +84,7 @@ const RatingsCarousel = () => {
             >
               <div className="w-full h-full bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center">
                 <div className="text-center">
-                  <p className="text-xl sm:text-2xl italic mb-4 text-black">`{comment.comment}`</p>
+                  <p className="text-xl sm:text-2xl italic mb-4 text-black">{`"${comment.comment}"`}</p>
                   <div className="flex justify-center items-center space-x-2 mb-2">
                     <span className="font-bold">{comment.user_name}</span>
                     <div className="flex items-center">
@@ -136,7 +132,7 @@ const RatingsCarousel = () => {
 
       {error && (
         <div className="text-center text-red-500 mb-4">
-          {error}
+          {error}  {/* Mostrar el error traducido */}
         </div>
       )}
     </>
