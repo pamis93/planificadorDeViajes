@@ -17,7 +17,7 @@ const teamMembers = [
     name: 'Lara',
     surname: 'Rodriguez',
     email: 'lararh393@gmail.com',
-    linkedin: 'https://www.linkedin.com/in/lara-rodr%C3%ADguez-herrero/',
+    linkedin: 'https://www.linkedin.com/in/lara-rodríguez-herrero',
     repo: 'https://github.com/larucodonosor',
   },
   {

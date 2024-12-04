@@ -1,4 +1,8 @@
+import { useState } from 'react';
+import { ConfirmDeleteModal } from '../../ConfirmDeleteModal/ConfirmDeleteModal';
+
 function DeleteFavoriteButton({ flightId, user, onRemove }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
     const handleDelete = async () => {
       try {
         const response = await fetch(
@@ -22,14 +26,23 @@ function DeleteFavoriteButton({ flightId, user, onRemove }) {
         alert('No se pudo eliminar el vuelo de favoritos. Inténtalo de nuevo.');
       }
     };
+
+    const handleDeleteClick = () => {
+      setIsModalOpen(true);
+    };
+  
+    const handleCloseModal = () => {
+      setIsModalOpen(false);
+    };
   
     return (
+      <>
       <button
         className="inline-flex items-center px-3 py-2 text-sm font-medium"
-        onClick={handleDelete}
+        onClick={handleDeleteClick}
       >
         <svg
-          className="w-6 h-6 text-gray-700 dark:text-gray-200 hover:text-orange-500 transition duration-150 focus:text-red-600"
+          className="w-6 h-6 text-gray-800 dark:text-gray-200 hover:text-orange-500 transition duration-150 focus:text-red-600"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -45,6 +58,10 @@ function DeleteFavoriteButton({ flightId, user, onRemove }) {
         </svg>
 
       </button>
+      <ConfirmDeleteModal isOpen={isModalOpen} onClose={handleCloseModal} onConfirm={handleDelete}>
+        <p className='mt-0 mb-3 text-gray-900 font-bold'>El vuelo se eliminará de la lista, ¿desea continuar?</p>
+      </ConfirmDeleteModal>
+      </>
     );
   }
   
