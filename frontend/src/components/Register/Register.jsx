@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';  // Importa useNavigate
 import 'react-toastify/dist/ReactToastify.css';
 
 function Register() {
   const { t } = useTranslation();
+  const navigate = useNavigate();  // Crea la instancia de navigate
 
   const [showPassword, setShowPassword] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
@@ -20,7 +22,7 @@ function Register() {
 
     // Validación de contraseñas
     if (password !== confirmPassword) {
-      toast.error(t('formRegister.passwordMismatch'), {
+      toast.error(t('passwordMismatch'), {
         position: 'bottom-center',
         autoClose: 3000,
         hideProgressBar: true,
@@ -45,14 +47,14 @@ function Register() {
       if (response.ok) {
         setIsSuccessModalOpen(true);
       } else {
-        toast.error(data.message || t('formRegister.registrationError'), {
+        toast.error(data.message || t('registrationError'), {
           position: 'bottom-center',
           autoClose: 3000,
           hideProgressBar: true,
         });
       }
     } catch (error) {
-      toast.error(t('formRegister.serverError'), {
+      toast.error(t('serverError'), {
         position: 'bottom-center',
         autoClose: 3000,
         hideProgressBar: true,
@@ -66,7 +68,7 @@ function Register() {
 
   const handleSuccessModalClose = () => {
     setIsSuccessModalOpen(false);
-    window.location.href = '/login';
+    navigate('/login');  // Usamos navigate en lugar de history.push
   };
 
   return (
@@ -173,8 +175,8 @@ function Register() {
       {isSuccessModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg shadow-xl p-6 text-center w-full max-w-md mx-4">
-            <h2 className="text-2xl font-bold mb-4 text-black">{t('formRegister.success')}</h2>
-            <p className="mb-6 text-gray-700 text-base">{t('formRegister.successMessage')}</p>
+            <h2 className="text-2xl font-bold mb-4 text-black">{t('success')}</h2>
+            <p className="mb-6 text-gray-700 text-base">{t('successMessage')}</p>
             <button
               onClick={handleSuccessModalClose}
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out"
