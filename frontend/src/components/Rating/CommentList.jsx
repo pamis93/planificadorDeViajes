@@ -4,7 +4,7 @@ import { useUser } from '../../context/UserContext';
 
 const CommentList = ({ comment, comments, setComments }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false); // Nuevo estado para manejar la eliminación
+  const [isDeleting, setIsDeleting] = useState(false);
   const [newComment, setNewComment] = useState(comment.comment);
   const [newRating, setNewRating] = useState(comment.rating);
   const [user] = useUser();
@@ -29,14 +29,14 @@ const CommentList = ({ comment, comments, setComments }) => {
         throw new Error('No se pudo actualizar la valoración');
       }
 
-      // Actualizamos el comentario editado en el estado de comentarios
+      // Actualizamos el comentario editado
       const updatedComments = comments.map((c) =>
         c.id === comment.id
           ? { ...c, comment: newComment, rating: newRating }
           : c
       );
       setComments(updatedComments);
-      setIsEditing(false); // Cerramos el modal después de guardar los cambios
+      setIsEditing(false); // Cerramos el modal después de guardar
     } catch (err) {
       console.error('Error al editar el comentario:', err);
     }
@@ -45,7 +45,7 @@ const CommentList = ({ comment, comments, setComments }) => {
   // Función para eliminar un comentario
   const handleDelete = async () => {
     try {
-      const res = await fetch(`http://localhost:3001/ratings/${comment.id}`, {
+      const res = await fetch(`http://localhost:3001/ratings`, {
         method: 'DELETE',
         headers: {
           Authorization: token,
@@ -56,20 +56,26 @@ const CommentList = ({ comment, comments, setComments }) => {
         throw new Error('No se pudo eliminar la valoración');
       }
 
-      // Eliminamos el comentario del estado de comentarios
-      const updatedComments = comments.filter((c) => c.id !== comment.id);
-      setComments(updatedComments);
-      setIsDeleting(false); // Cerramos el modal de eliminación
+      // Confirma que el back responde
+      const result = await res.json();
+      console.log(result.message);
+
+      // Actualiza el estado
+      setComments((prevComments) =>
+        prevComments.filter((c) => c.user_id !== user.id)
+      );
+
+      setIsDeleting(false);
     } catch (err) {
-      console.error('Error al eliminar el comentario:', err);
+      console.error('Error al eliminar la valoración:', err);
     }
   };
 
-  // Manejar el clic en el botón "Editar"
+  // botón "Editar"
   const handleEditClick = () => {
     setNewComment(comment.comment);
     setNewRating(comment.rating);
-    setIsEditing(true); // Abrimos el modal para editar
+    setIsEditing(true);
   };
 
   // Función para renderizar las estrellas

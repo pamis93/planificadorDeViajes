@@ -24,7 +24,7 @@ const RatingAndComments = () => {
   };
 
   useEffect(() => {
-    fetchComments(); // Llamamos a la función para obtener los comentarios al cargar el componente
+    fetchComments(); // Llamamos a la función para obtener los comentarios al cargar
   }, []);
 
   const sortedComments = comments
@@ -59,8 +59,9 @@ const RatingAndComments = () => {
           <CommentList
             key={comment.id}
             comment={comment}
-            comments={comments} // Pasamos los comentarios al componente hijo
-            setComments={setComments} // Pasamos la función setComments para actualizar el estado
+            comments={comments}
+            setComments={setComments}
+            o
           />
         ))
       ) : (

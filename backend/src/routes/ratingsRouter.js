@@ -16,6 +16,6 @@ ratingsRouter.post('/ratings', authUser, postRatingController);
 ratingsRouter.put('/ratings/:id', authUser, updateRating);
 
 // Endpoint para eliminar una valoración existente (requiere autenticación).
-ratingsRouter.delete('/ratings/:id', authUser, deleteRatingController);
+ratingsRouter.delete('/ratings', authUser, deleteRatingController);
 
 export default ratingsRouter;
