@@ -20,9 +20,9 @@ const teamMembers = [
   {
     name: 'Lara  ',
     surname: 'Rodriguez',
-    email: 'angel@example.com',
-    linkedin: 'https://www.linkedin.com/in/angelsuarezsosa',
-    repo: 'https://github.com/angelsuarezsosa',
+    email: 'lararh393@gemail.com',
+    linkedin: 'https://www.linkedin.com/in/lara-rodríguez-herrero',
+    repo: 'https://github.com/larucodonosor',
   },
   {
     name: 'Carlos',
