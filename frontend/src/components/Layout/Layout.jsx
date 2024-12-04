@@ -5,19 +5,21 @@ import { ErrorBoundary } from 'react-error-boundary';
 import ErrorPage from './ErrorPage';
 import FeedbackButton from '../Rating/FeedbackButton';
 
-
 export const Layout = () => {
   return (
-    <div>
+    <>
       <ErrorBoundary fallback={<ErrorPage />}>
-        <Header />
-        <main >
-          <Outlet />
-        </main>
+        <div className="">
+          <Header />
+          <main className="">
+            <div className="">
+              <Outlet />
+            </div>
+          </main>
+          <Footer />
+        </div>
       </ErrorBoundary>
-      <Footer/>
       <FeedbackButton />
-    </div>
+    </>
   );
 };
-

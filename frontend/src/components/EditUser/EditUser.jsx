@@ -3,6 +3,8 @@ import { useUser } from '../../context/UserContext';
 import AvatarUpload from './AvatarUpload';
 import UserForm from './UserForm';
 import avatar from '../../assets/avatar.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';  // Importar useTranslation
 
 const EditUser = () => {
@@ -11,7 +13,6 @@ const EditUser = () => {
   const [avatarAct, setAvatarAct] = useState(avatar);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [message, setMessage] = useState({ text: '', type: '' });
 
   const [user] = useUser();
 
@@ -19,13 +20,16 @@ const EditUser = () => {
     const fetchUserData = async () => {
       const token = user?.token;
       const email = user?.email;
-  
+
       if (!token || !email) {
-        setMessage({ text: 'Usuario no autenticado', type: 'error' });
+        toast.error('Usuario no autenticado', {
+          position: "top-right",
+          autoClose: 3000,
+        });
         setLoading(false);
         return;
       }
-  
+
       try {
         const response = await fetch('http://localhost:3001/users/profile', {
           method: 'POST',
@@ -35,30 +39,30 @@ const EditUser = () => {
           },
           body: JSON.stringify({ email }),
         });
-  
+
         const responseData = await response.json();
-  
+
         if (responseData.status === 'ok') {
           const userData = responseData.data;
           setUserData(userData);
           setAvatarAct(`http://localhost:3001/uploads/${userData.avatar}`);
           setLoading(false);
         } else {
-          setMessage({
-            text: responseData.message || 'Error al obtener datos',
-            type: 'error',
+          toast.error(responseData.message || 'Error al obtener datos', {
+            position: "top-right",
+            autoClose: 3000,
           });
           setLoading(false);
         }
       } catch {
-        setMessage({
-          text: 'Error al conectar con el servidor',
-          type: 'error',
+        toast.error('Error al conectar con el servidor', {
+          position: "top-right",
+          autoClose: 3000,
         });
         setLoading(false);
       }
     };
-  
+
     fetchUserData();
   }, [user]);
 
@@ -75,21 +79,21 @@ const EditUser = () => {
       });
 
       if (response.ok) {
-        setMessage({
-          text: t('message.updatedSuccess'),  // Usar traducción
-          type: 'success',
+        toast.success(t('message.updatedSuccess'), {
+          position: "bottom-center",
+          autoClose: 3000,
         });
       } else {
         const errorData = await response.json();
-        setMessage({
-          text: errorData.message || t('message.updateError'),  // Usar traducción
-          type: 'error',
+        toast.error(errorData.message || t('message.updateError'), {
+          position: "top-right",
+          autoClose: 3000,
         });
       }
     } catch {
-      setMessage({ 
-        text: t('message.serverError'),  // Usar traducción
-        type: 'error' 
+      toast.error(t('message.serverError'), {
+        position: "top-right",
+        autoClose: 3000,
       });
     }
   };
@@ -104,16 +108,11 @@ const EditUser = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#9AA5BC] p-4 sm:p-6 md:p-8">
+      <ToastContainer />
       <h1 className="text-white mt-20 sm:mt-10 md:mt-20 text-xl sm:text-2xl font-bold mb-4 sm:mb-8 text-center">
         {t('editProfile')} {/* Usar traducción */}
       </h1>
-
-      {message.text && (
-        <div className={`alert ${message.type === 'success' ? 'alert-success' : 'alert-error'}`}>
-          {message.text}
-        </div>
-      )}
-
+      
       <div className="flex flex-col sm:flex-row justify-center items-start gap-4 sm:gap-8 w-full max-w-4xl">
         <div className="flex flex-col items-center bg-[#686E9E] p-4 sm:p-20 rounded-lg w-full sm:w-[350px] mb-4 sm:mb-0">
           <p className="text-white text-sm sm:text-base font-bold mb-2 sm:mb-4 text-center">{t('avatar')}</p>  {/* Usar traducción */}
@@ -137,13 +136,6 @@ const EditUser = () => {
           />
         </div>
       </div>
-
-      <button
-        type="button"
-        className="mt-4 sm:mt-8 px-4 sm:px-6 py-2 bg-[#F20D11] text-white font-bold text-sm sm:text-base rounded-full hover:bg-[#d10b0e]"
-      >
-        {t('deleteProfile')}  {/* Usar traducción */}
-      </button>
     </div>
   );
 };

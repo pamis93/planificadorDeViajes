@@ -85,7 +85,18 @@ const UserForm = ({ initialData, setAvatarAct, onSubmit }) => {
 
       <button
         type="submit"
-        className="w-full py-2 sm:py-3 bg-green-500 hover:bg-green-700 text-white font-bold rounded-lg focus:outline-none text-xs sm:text-base"
+        className="
+          mt-2 sm:mt-4 
+          px-4 sm:px-5 
+          py-2 
+          bg-[#ff5a1f]
+          text-white 
+          font-bold 
+          text-xs sm:text-sm 
+          rounded-lg 
+          hover:bg-orange-600
+          w-full
+        "
       >
         {t('saveChanges')} {/* Traducción del botón */}
       </button>

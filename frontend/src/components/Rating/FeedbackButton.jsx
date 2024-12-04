@@ -32,7 +32,7 @@ const FeedbackButton = () => {
   if (!isModalOpen) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 bg-orange-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-orange-700 transition-colors duration-300 flex items-center">
+    <div className="fixed bottom-4 right-4 bg-orange-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-orange-700 transition-colors duration-300 flex items-center hidden md:flex">
       <button
         onClick={closeModal}
         className="absolute top-1 right-2 text-white hover:bg-gray-600 rounded-full"
@@ -40,7 +40,6 @@ const FeedbackButton = () => {
       >
         ✕
       </button>
-
       <Link to="/ratings" className="flex flex-col">
         <p>{t('ratingModal.giveFeedback')}</p>
         {averageRating !== null && numVotes !== null && (

@@ -7,6 +7,9 @@ import areObjValuesTruthy from '../../utils/areObjValuesTruthy';
 import { useNavigate } from 'react-router-dom';
 // lo de react router DOM
 import { useSearchParams } from 'react-router-dom';
+// toast
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function FlightSearch() {
   // lo del estado de react-router-dom
@@ -28,6 +31,8 @@ function FlightSearch() {
   const [adults, setAdults] = useState(searchParams.get('adults') || 1);
   const [originResults, setOriginResults] = useState([]);
   const [destinationResults, setDestinationResults] = useState([]);
+  const [showOriginResults, setShowOriginResults] = useState(false);
+  const [showDestinationResults, setShowDestinationResults] = useState(false);
 
   const [flightSearchParams] = useFlightSearchParams();
 
@@ -76,11 +81,13 @@ function FlightSearch() {
   const handleOriginChange = (event) => {
     setOrigin(event.target.value);
     debounceOrigin(event.target.value);
+    setShowOriginResults(true);
   };
 
   const handleDestinationChange = (event) => {
     setDestination(event.target.value);
     debounceDestination(event.target.value);
+    setShowDestinationResults(true);
   };
 
   const handleButtonClick = (event) => {
@@ -97,15 +104,25 @@ function FlightSearch() {
       setSearchParams(queryParams);
       navigate(`/search/results?${queryParams.toString()}`);
     } else {
-      alert('todo informar al usuario que tiene que completar los campos');
+      toast.error('Por favor, completa todos los campos obligatorios.', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
     }
   };
 
   return (
     <div className="relative w-full h-full bg-[#9AA5BC] ">
+      <ToastContainer />
       <img
         className="w-full h-[500px] object-cover mt-20"
-        src="/public/fondo-header.jfif"
+        src="/fondo-header.jfif"
         alt="Fondo"
         style={{ zIndex: -1 }}
       />
@@ -116,7 +133,7 @@ function FlightSearch() {
           </h2>
           <form className="space-y-6" onSubmit={handleButtonClick}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
+              <div className="relative">
                 <label
                   htmlFor="origin"
                   className="block text-sm font-medium text-gray-700"
@@ -131,16 +148,19 @@ function FlightSearch() {
                   placeholder="Ciudad de origen"
                   className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black"
                 />
-                <FlightSearchDropdown
-                  className="text-black"
-                  seter={setOrigin}
-                  results={originResults}
-                  isOrigin={true}
-                  setIataOriginCode={setIataOriginCode}
-                  setIataDestinationCode={setIataDestinationCode}
-                />
+                {showOriginResults && originResults.length > 0 ? (
+                  <FlightSearchDropdown
+                    className="text-black"
+                    seter={setOrigin}
+                    results={originResults}
+                    isOrigin={true}
+                    setIataOriginCode={setIataOriginCode}
+                    setIataDestinationCode={setIataDestinationCode}
+                    setShow={setShowOriginResults}
+                  />
+                ) : null}
               </div>
-              <div>
+              <div className="relative">
                 <label
                   htmlFor="destination"
                   className="block text-sm font-medium text-gray-700"
@@ -155,13 +175,16 @@ function FlightSearch() {
                   placeholder="Ciudad de destino"
                   className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black "
                 />
-                <FlightSearchDropdown
-                  seter={setDestination}
-                  results={destinationResults}
-                  isOrigin={false}
-                  setIataOriginCode={setIataOriginCode}
-                  setIataDestinationCode={setIataDestinationCode}
-                />
+                {showDestinationResults && originResults.length > 0 ? (
+                  <FlightSearchDropdown
+                    seter={setDestination}
+                    results={destinationResults}
+                    isOrigin={false}
+                    setIataOriginCode={setIataOriginCode}
+                    setIataDestinationCode={setIataDestinationCode}
+                    setShow={setShowDestinationResults}
+                  />
+                ) : null}
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
