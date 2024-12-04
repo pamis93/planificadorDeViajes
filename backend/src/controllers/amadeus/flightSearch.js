@@ -5,38 +5,53 @@ import { parseDuration, parseTime } from '../../utils/momentParser.js';
 const processFlightOffers = (flightOffers) => {
   return flightOffers.map((flight) => ({
     id: flight.id,
-    price: {
-      total: flight.price.total,
-      currency: flight.price.currency,
+    origin: flight.itineraries[0]?.segments[0]?.departure?.iataCode,
+    destination:
+      flight.itineraries[0]?.segments.slice(-1)[0]?.arrival?.iataCode,
+    departureDate: parseTime(
+      flight.itineraries[0]?.segments[0]?.departure?.at
+    )[1],
+    arrivalDate: parseTime(
+      flight.itineraries[0]?.segments.slice(-1)[0]?.arrival?.at
+    )[1],
+    aeroline: flight.itineraries[0]?.segments[0]?.carrierCode,
+    duration: parseDuration(flight.itineraries[0]?.duration),
+    price: flight.price?.total,
+    currency: flight.price?.currency,
+    details: {
+      price: {
+        total: flight.price.total,
+        currency: flight.price.currency,
+      },
+      itinerary: flight.itineraries[0].segments.map((segment) => ({
+        departure: {
+          airport: segment.departure.iataCode,
+          terminal: segment.departure.terminal,
+          time: {
+            raw: segment.departure.at,
+            date: parseTime(segment.departure.at)[1],
+            time: parseTime(segment.departure.at)[0],
+          },
+        },
+        arrival: {
+          airport: segment.arrival.iataCode,
+          terminal: segment.arrival.terminal,
+          time: {
+            date: parseTime(segment.arrival.at)[1],
+            time: parseTime(segment.arrival.at)[0],
+          },
+        },
+        carrier: {
+          code: segment.carrierCode,
+          flightNumber: segment.number,
+        },
+        aircraft: segment.aircraft.code,
+        duration: parseDuration(segment.duration),
+        stops: segment.numberOfStops,
+      })),
+      totalDuration: parseDuration(flight.itineraries[0].duration),
+      travelClass: flight.travelerPricings[0].fareDetailsBySegment[0].cabin,
     },
-    itinerary: flight.itineraries[0].segments.map((segment) => ({
-      departure: {
-        airport: segment.departure.iataCode,
-        terminal: segment.departure.terminal,
-        time: {
-          raw: segment.departure.at,
-          date: parseTime(segment.departure.at)[1],
-          time: parseTime(segment.departure.at)[0],
-        },
-      },
-      arrival: {
-        airport: segment.arrival.iataCode,
-        terminal: segment.arrival.terminal,
-        time: {
-          date: parseTime(segment.arrival.at)[1],
-          time: parseTime(segment.arrival.at)[0],
-        },
-      },
-      carrier: {
-        code: segment.carrierCode,
-        flightNumber: segment.number,
-      },
-      aircraft: segment.aircraft.code,
-      duration: parseDuration(segment.duration),
-      stops: segment.numberOfStops,
-    })),
-    totalDuration: parseDuration(flight.itineraries[0].duration),
-    travelClass: flight.travelerPricings[0].fareDetailsBySegment[0].cabin,
   }));
 };
 
@@ -102,36 +117,16 @@ const flightSearch = async (req, res, next) => {
     const response =
       await amadeus.shopping.flightOffersSearch.get(searchParams);
 
-    const resume = response.result.data.map((flight) => ({
-      id: flight.id,
-      origin: flight.itineraries[0]?.segments[0]?.departure?.iataCode,
-      destination:
-        flight.itineraries[0]?.segments.slice(-1)[0]?.arrival?.iataCode,
-      departureDate: parseTime(
-        flight.itineraries[0]?.segments[0]?.departure?.at
-      )[1],
-      arrivalDate: parseTime(
-        flight.itineraries[0]?.segments.slice(-1)[0]?.arrival?.at
-      )[1],
-      aeroline: flight.itineraries[0]?.segments[0]?.carrierCode,
-      // duration: flight.itineraries[0]?.duration,
-      duration: parseDuration(flight.itineraries[0]?.duration),
-      price: flight.price?.total,
-      currency: flight.price?.currency,
-    }));
-
     const processed = processFlightOffers(response.result.data);
     const priceRange = extractPriceRange(response.result.data);
 
     res.send({
-      raw: response?.result,
-      resume: resume,
+      // raw: response?.result,
       processed: processed,
       priceRange: priceRange,
     });
   } catch (error) {
     next(error);
-    // res.status(500).send({ error: error.message });
   }
 };
 

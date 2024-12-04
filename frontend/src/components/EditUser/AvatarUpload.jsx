@@ -105,43 +105,6 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
     }
   };
 
-  // Maneja la eliminación del avatar.
-  const handleDelete = async () => {
-    try {
-      const token = user?.token; // Obtiene el token del contexto de usuario.
-      if (!token) {
-        setMessage({
-          text: 'No se encontró el token de autenticación',
-          type: 'error',
-        });
-        return;
-      }
-
-      // Realiza la solicitud para eliminar el avatar.
-      const response = await fetch('http://localhost:3001/users/avatar', {
-        method: 'PUT',
-        headers: {
-          Authorization: token,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ avatar: null }), // Envía un body vacío para eliminar.
-      });
-
-      if (!response.ok) {
-        setMessage({ text: 'Error al eliminar el avatar', type: 'error' });
-        return;
-      }
-
-      setMessage({ text: 'Avatar eliminado exitosamente', type: 'success' });
-      setPreviewUrl(null); // Limpia la imagen de vista previa.
-      setSelectedFile(null); // Limpia el archivo seleccionado.
-      onAvatarUpdate && onAvatarUpdate(null); // Notifica al componente padre.
-    } catch (error) {
-      console.error('Error:', error);
-      setMessage({ text: 'Error al conectar con el servidor', type: 'error' });
-    }
-  };
-
   // Dispara el selector de archivos de manera programada.
   const triggerFileInput = () => {
     fileInputRef.current.click();
@@ -207,12 +170,6 @@ const AvatarUpload = ({ currentAvatar, onAvatarUpdate }) => {
                     GUARDAR
                   </button>
                 )}
-                <button
-                  onClick={handleDelete}
-                  className="w-full sm:w-auto px-4 sm:px-6 py-2 bg-[#F20D11] text-white font-bold rounded-full hover:bg-[#d10b0e] text-xs sm:text-base"
-                >
-                  BORRAR
-                </button>
               </div>
             </div>
           </div>
