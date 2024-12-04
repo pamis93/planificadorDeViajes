@@ -185,7 +185,6 @@ function Register() {
         </div>
       )}
       <ToastContainer />
-    </div>
     </>
   );
 }
