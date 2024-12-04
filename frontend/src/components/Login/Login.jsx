@@ -34,7 +34,7 @@ function Login() {
           let decodedtoken;
           try {
             decodedtoken = JSON.parse(atob(data.data.token.split('.')[1]));
-            console.log(t('userId'), decodedtoken.id);
+            console.log(t('formLogin.userId'), decodedtoken.id);
           } catch (error) {
             console.error(error);
           }
@@ -44,7 +44,7 @@ function Login() {
             email: email,
           });
 
-          toast.success(data.message || t('loginSuccess'), {
+          toast.success(data.message || t('formLogin.loginSuccess'), {
             position: 'bottom-center',
           });
 
@@ -59,7 +59,7 @@ function Login() {
       }
     } catch (error) {
       console.error('Error:', error);
-      toast.error(t('serverError'), {
+      toast.error(t('formLogin.serverError'), {
         position: 'top-right',
       });
     }

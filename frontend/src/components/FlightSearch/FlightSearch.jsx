@@ -212,7 +212,7 @@ function FlightSearch() {
             <div className="text-center mt-6">
               <button
                 type="submit"
-                className="bg-blue-500 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-blue-600"
+                className="bg-orange-500 text-white py-2 px-6  w-full rounded-lg shadow-lg hover:bg-orange-700"
               >
                 {t('search.searchFlightsButton')}
               </button>
