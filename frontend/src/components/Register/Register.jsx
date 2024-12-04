@@ -80,7 +80,6 @@ function Register() {
       >
         <h2 className="text-2xl font-bold mb-6 text-center">CREAR CUENTA</h2>
         <form onSubmit={handleSubmit}>
-          {/* Nombre y Apellido */}
           <div className="flex justify-between gap-4 mb-6">
             <div className="w-1/2">
               <label className="block text-lg font-semibold mb-2 text-white">NOMBRE</label>
@@ -104,7 +103,6 @@ function Register() {
             </div>
           </div>
 
-          {/* Nombre de usuario */}
           <label className="block text-lg font-semibold mb-2 text-white">NOMBRE DE USUARIO</label>
           <input
             className="w-full p-3 mb-4 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -114,7 +112,6 @@ function Register() {
             required
           />
 
-          {/* Email */}
           <label className="block text-lg font-semibold mb-2 text-white">CORREO ELECTRÓNICO</label>
           <input
             className="w-full p-3 mb-4 border rounded-lg bg-[#686e9e] text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -124,7 +121,6 @@ function Register() {
             required
           />
 
-          {/* Contraseña */}
           <label className="block text-lg font-semibold mb-2 text-white">CONTRASEÑA</label>
           <div className="relative mb-4">
             <input
@@ -142,7 +138,6 @@ function Register() {
             </span>
           </div>
 
-          {/* Confirmar contraseña */}
           <label className="block text-lg font-semibold mb-2 text-white">CONFIRMAR CONTRASEÑA</label>
           <div className="relative mb-4">
             <input
@@ -160,16 +155,14 @@ function Register() {
             </span>
           </div>
 
-          {/* Botón de registro */}
           <button
             type="submit"
-            className="mt-5 w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-lg transition"
+            className="mt-5 w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition"
           >
             REGISTRARSE
           </button>
         </form>
 
-        {/* Texto de inicio de sesión */}
         <p className="mt-6 text-sm">
           ¿Ya tienes una cuenta?{' '}
           <a href="/login" className="text-[#046ef8] font-semibold hover:underline">
@@ -182,7 +175,7 @@ function Register() {
       {isSuccessModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg shadow-xl p-6 text-center w-full max-w-md mx-4">
-            <h2 className="text-2xl font-bold mb-4 text-green-600">Registro Exitoso</h2>
+            <h2 className="text-2xl font-bold mb-4 text-black">Registro Exitoso</h2>
             <p className="mb-6 text-gray-700 text-base">
               Tu cuenta ha sido creada exitosamente. En breves momentos, recibirás un email para activar tu cuenta.
             </p>

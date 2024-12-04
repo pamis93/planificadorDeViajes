@@ -7,15 +7,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const EditUser = () => {
-  // Estados del componente
   const [avatarAct, setAvatarAct] = useState(avatar);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Obtiene el usuario del contexto
   const [user] = useUser();
 
-  // Efecto para cargar los datos del usuario
   useEffect(() => {
     const fetchUserData = async () => {
       const token = user?.token;
@@ -66,7 +63,6 @@ const EditUser = () => {
     fetchUserData();
   }, [user]);
 
-  // Manejadores de eventos
   const handleFormSubmit = async (formData) => {
     try {
       const token = user?.token;
@@ -103,7 +99,6 @@ const EditUser = () => {
     setAvatarAct(`http://localhost:3001/uploads/${newAvatarUrl}`);
   };
 
-  // Renderizado condicional de carga
   if (loading) {
     return <p className="text-white text-center">Cargando datos...</p>;
   }
