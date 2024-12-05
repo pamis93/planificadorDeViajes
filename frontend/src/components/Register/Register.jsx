@@ -75,7 +75,7 @@ function Register() {
     <>
       <div className="flex items-center justify-center m-h-screen w-screen bg-cover bg-center bg-[#9AA5BC] text-white">
         <div
-          className="bg-black bg-opacity-50 p-10 mt-60 sm:mt-20 rounded-lg shadow-lg w-[500px] text-center"
+          className="bg-black bg-opacity-50 p-10 mt-[85px] sm:mt-36 rounded-lg shadow-lg w-[500px] text-center"
           style={{ backgroundImage: `url('/fondoLogin.png')` }}
         >
           <h2 className="text-2xl font-bold mb-6">{t('formRegister.createAccount')}</h2>
@@ -175,8 +175,8 @@ function Register() {
       {isSuccessModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg shadow-xl p-6 text-center w-full max-w-md mx-4">
-            <h2 className="text-2xl font-bold mb-4 text-black">{t('success')}</h2>
-            <p className="mb-6 text-gray-700 text-base">{t('successMessage')}</p>
+            <h2 className="text-2xl font-bold mb-4 text-black">{t('formRegister.success')}</h2>
+            <p className="mb-6 text-gray-700 text-base">{t('formRegister.successMessage')}</p>
             <button
               onClick={handleSuccessModalClose}
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out"
