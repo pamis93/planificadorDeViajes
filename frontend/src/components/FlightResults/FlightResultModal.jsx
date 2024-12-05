@@ -10,12 +10,15 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
   const [user] = useUser();
   const { t } = useTranslation(); // Usamos el hook useTranslation
 
+  // console.log(user.token);
+
   const handleNoteChange = (event) => {
     setNote(event.target.value);
   };
 
   const handleSubmitNote = async (event) => {
     event.preventDefault();
+    // console.log('nota desde el handlesubmit', note);
     try {
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/users/favorite`,
@@ -39,8 +42,10 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
         }
       );
       if (!res.ok) {
+        // console.log(res);
         throw new Error(t('resultModal.error.favoriteSave'));
       }
+      // poner un tost aqui de que salio bien todo
       toast.success(t('resultModal.toast.success'), {
         position: 'bottom-center',
       });
@@ -77,16 +82,22 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
 
         <div className="p-6 text-white">
           <div className="mb-6">
-            <h3 className="text-2xl font-bold mb-4">{t('resultModal.route')}</h3>
+            <h3 className="text-2xl font-bold mb-4">
+              {t('resultModal.route')}
+            </h3>
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-xl font-semibold">{flight.origin}</p>
-                <p className="text-gray-400">{t('resultModal.departureAirport')}</p>
+                <p className="text-gray-400">
+                  {t('resultModal.departureAirport')}
+                </p>
               </div>
               <div className="text-orange-500 text-2xl">→</div>
               <div>
                 <p className="text-xl font-semibold">{flight.destination}</p>
-                <p className="text-gray-400">{t('resultModal.arrivalAirport')}</p>
+                <p className="text-gray-400">
+                  {t('resultModal.arrivalAirport')}
+                </p>
               </div>
             </div>
             <p className="mt-2 text-gray-300">
@@ -94,6 +105,11 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
             </p>
 
             <div className="flex items-center">
+              {/* <img 
+              src={flight.airline.logo} 
+              alt={`${flight.airline.name} logo`} 
+              className="h-12 w-12 mr-4"
+            /> */}
               <span className="text-gray-300">
                 {t('resultModal.airline')} {flight.aeroline}
               </span>
@@ -101,7 +117,9 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
           </div>
 
           <div>
-            <h3 className="text-2xl font-bold mb-4">{t('resultModal.detailedItinerary')}</h3>
+            <h3 className="text-2xl font-bold mb-4">
+              {t('resultModal.detailedItinerary')}
+            </h3>
             {flight.details.itinerary.map((itinerary, index) => (
               <div key={index} className="mb-4 p-4 bg-slate-800 rounded-lg">
                 <div className="flex justify-between items-center mb-2">
@@ -110,7 +128,8 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
                       {itinerary.departure.airport}
                     </p>
                     <p className="text-gray-400">
-                      {t('departureTime')}: {itinerary.departure.time.date} {t('resultModal.at')}
+                      {t('departureTime')}: {itinerary.departure.time.date}&#32;
+                      {t('resultModal.at')}&#32;
                       {itinerary.departure.time.time}UTC
                     </p>
                   </div>
@@ -118,11 +137,17 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
                   <div>
                     <p className="font-semibold">{itinerary.arrival.airport}</p>
                     <p className="text-gray-400">
-                      {t('arrivalTime')}: {itinerary.arrival.time.date} {t('resultModal.at')}
+                      {t('arrivalTime')}: {itinerary.arrival.time.date}&#32;
+                      {t('resultModal.at')}&#32;
                       {itinerary.arrival.time.time}UTC
                     </p>
                   </div>
                   <div className="flex items-center">
+                    {/* <img 
+              src={flight.airline.logo} 
+              alt={`${flight.airline.name} logo`} 
+              className="h-12 w-12 mr-4"
+            /> */}
                     <span className="text-gray-300">
                       {t('resultModal.airline')} {flight.aeroline}
                     </span>
@@ -133,7 +158,9 @@ export default function FlightResultModal({ flight, isOpen, closeModal }) {
           </div>
 
           <div className="mt-6">
-            <h3 className="text-2xl font-bold mb-4">{t('resultModal.addNote')}</h3>
+            <h3 className="text-2xl font-bold mb-4">
+              {t('resultModal.addNote')}
+            </h3>
             <form onSubmit={handleSubmitNote}>
               <textarea
                 value={note}

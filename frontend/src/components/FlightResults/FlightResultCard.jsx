@@ -33,6 +33,8 @@ export default function FlightResultCard({ flight }) {
                 </span>
               </div>
               <div className="w-full sm:w-auto flex justify-center">
+                {/* aquí la lógica para que el botón se muestre solo si esta logeado */}
+
                 {user?.id ? (
                   <button
                     className="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors"
@@ -50,12 +52,16 @@ export default function FlightResultCard({ flight }) {
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-xl font-semibold">{flight.origin}</p>
-                <p className="text-gray-400">{t('resultCard.departureAirport')}</p>
+                <p className="text-gray-400">
+                  {t('resultCard.departureAirport')}
+                </p>
               </div>
               <div className="text-orange-500 text-2xl">→</div>
               <div>
                 <p className="text-xl font-semibold">{flight.destination}</p>
-                <p className="text-gray-400">{t('resultCard.arrivalAirport')}</p>
+                <p className="text-gray-400">
+                  {t('resultCard.arrivalAirport')}
+                </p>
               </div>
             </div>
             <p className="mt-2 text-gray-300">
@@ -63,7 +69,9 @@ export default function FlightResultCard({ flight }) {
             </p>
           </div>
           <div>
-            <h3 className="text-2xl font-bold mb-4">{t('resultCard.itineraryDetails')}</h3>
+            <h3 className="text-2xl font-bold mb-4">
+              {t('resultCard.itineraryDetails')}
+            </h3>
             {flight.details.itinerary.map((itinerary, index) => {
               return <FlightItinerary key={index} itinerary={itinerary} />;
             })}

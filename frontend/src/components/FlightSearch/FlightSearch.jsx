@@ -5,20 +5,31 @@ import { useAddParamsToSearch } from '../../hooks/api';
 import { useFlightSearchParams } from '../../context/FlightSearchParamsContext';
 import areObjValuesTruthy from '../../utils/areObjValuesTruthy';
 import { useNavigate } from 'react-router-dom';
+// lo de react router DOM
 import { useSearchParams } from 'react-router-dom';
+// toast
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
 
 function FlightSearch() {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
+  // lo del estado de react-router-dom
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [origin, setOrigin] = useState(searchParams.get('originCode') || '');
-  const [iataOriginCode, setIataOriginCode] = useState(searchParams.get('originCode') || '');
-  const [destination, setDestination] = useState(searchParams.get('destinationCode') || '');
-  const [iataDestinationCode, setIataDestinationCode] = useState(searchParams.get('destinationCode') || '');
-  const [departureDate, setDepartureDate] = useState(searchParams.get('departureDate') || '');
+  const [iataOriginCode, setIataOriginCode] = useState(
+    searchParams.get('originCode') || ''
+  );
+  const [destination, setDestination] = useState(
+    searchParams.get('destinationCode') || ''
+  );
+  const [iataDestinationCode, setIataDestinationCode] = useState(
+    searchParams.get('destinationCode') || ''
+  );
+  const [departureDate, setDepartureDate] = useState(
+    searchParams.get('departureDate') || ''
+  );
   const [adults, setAdults] = useState(searchParams.get('adults') || 1);
   const [originResults, setOriginResults] = useState([]);
   const [destinationResults, setDestinationResults] = useState([]);
@@ -27,6 +38,7 @@ function FlightSearch() {
 
   const [flightSearchParams] = useFlightSearchParams();
 
+  // no usar el contexto, vamos a pasar las cosas a la url
   useAddParamsToSearch({
     departureDate,
     iataOriginCode,
@@ -40,7 +52,9 @@ function FlightSearch() {
     if (searchTerm !== '') {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/city-and-airport-search/${searchTerm}`
+          `${
+            import.meta.env.VITE_API_URL
+          }/city-and-airport-search/${searchTerm}`
         );
         const data = await response.json();
 
@@ -89,6 +103,7 @@ function FlightSearch() {
         departureDate: departureDate,
         adults: adults,
       });
+      // console.log('queryparams to string', queryParams);
 
       setSearchParams(queryParams);
       navigate(`/search/results?${queryParams.toString()}`);
@@ -116,7 +131,7 @@ function FlightSearch() {
         style={{ zIndex: -1 }}
       />
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="max-w-5xl w-full mx-auto mt-10 px-4 py-8 bg-white rounded-lg shadow-lg">
+        <div className=" max-w-5xl w-full mx-auto mt-10 px-4 py-8 bg-white rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
             {t('search.searchFlights')}
           </h2>
@@ -164,7 +179,7 @@ function FlightSearch() {
                   placeholder={t('search.destination')}
                   className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black "
                 />
-                {showDestinationResults && destinationResults.length > 0 ? (
+                {showDestinationResults && originResults.length > 0 ? (
                   <FlightSearchDropdown
                     seter={setDestination}
                     results={destinationResults}
@@ -205,18 +220,16 @@ function FlightSearch() {
                   value={adults}
                   onChange={(e) => setAdults(e.target.value)}
                   min="1"
-                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-black"
+                  className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500  text-black"
                 />
               </div>
             </div>
-            <div className="text-center mt-6">
-              <button
-                type="submit"
-                className="bg-orange-500 text-white py-2 px-6  w-full rounded-lg shadow-lg hover:bg-orange-700"
-              >
-                {t('search.searchFlightsButton')}
-              </button>
-            </div>
+            <button
+              onClick={handleButtonClick}
+              className="w-full py-2 px-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mt-4"
+            >
+              {t('search.searchFlightsButton')}
+            </button>
           </form>
         </div>
       </div>
