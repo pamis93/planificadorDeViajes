@@ -1,4 +1,5 @@
-import { useTranslation } from 'react-i18next'; import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { useUser } from '../../context/UserContext';
 import { toast, ToastContainer } from 'react-toastify';
@@ -9,6 +10,7 @@ const CommentList = ({ comment, comments, setComments }) => {
   const [newComment, setNewComment] = useState(comment.comment);
   const [newRating, setNewRating] = useState(comment.rating);
   const [user] = useUser();
+
   const token = user?.token;
 
   // Función para guardar los cambios de un comentario
@@ -29,6 +31,11 @@ const CommentList = ({ comment, comments, setComments }) => {
       if (!res.ok) {
         throw new Error('No se pudo actualizar la valoración');
       }
+
+      const updatedComment = await res.json();
+      setComments((prev) =>
+        prev.map((c) => (c.id === comment.id ? updatedComment : c))
+      );
 
       // Actualizamos el comentario editado
       const updatedComments = comments.map((c) =>
@@ -98,13 +105,17 @@ const CommentList = ({ comment, comments, setComments }) => {
     ));
   };
 
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
   return (
     <div className="mt-8">
       <div className="mb-4 p-4 bg-white border rounded shadow w-full max-w-4xl mx-auto flex flex-col sm:flex-row items-center bg-zinc-200">
         <div className="flex-shrink-0 mb-4 sm:mb-0">
           <img
-            src={comment.avatar}
+            src={
+              comment.avatar
+                ? `http://localhost:3001/uploads/${comment.avatar}`
+                : '/default-avatar.png' // imagen predeterminada
+            }
             alt={`${comment.username}'s avatar`}
             className="w-20 h-20 m-5 rounded-full border-4 border-white shadow-md"
           />
@@ -122,8 +133,14 @@ const CommentList = ({ comment, comments, setComments }) => {
             <strong>💬 Comentario : </strong> {comment.comment}
           </p>
           <p>
-            <strong>📅 Fecha : </strong>
-            {new Date(comment.created_at).toLocaleString()}
+            <strong>📅 Fecha :</strong>{' '}
+            {new Date(
+              comment.updated_at || comment.created_at
+            ).toLocaleString()}
+            {comment.updated_at &&
+              comment.updated_at !== comment.created_at && (
+                <span className="text-sm text-gray-500 ml-2">(updated)</span>
+              )}
           </p>
         </div>
 
