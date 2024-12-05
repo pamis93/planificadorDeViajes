@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function PasswordReset() {
   const { code } = useParams();
+  const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -31,6 +32,11 @@ function PasswordReset() {
       if (response.ok) {
         const data = await response.json();
         toast.success(data.message || 'Contraseña actualizada con éxito.', { position: "bottom-right" });
+        
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
+        
       } else {
         const errorData = await response.json();
         toast.error(errorData.message || 'Error al actualizar la contraseña.', { position: "bottom-center" });
