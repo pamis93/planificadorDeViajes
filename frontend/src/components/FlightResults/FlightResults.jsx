@@ -106,7 +106,7 @@ export default function FlightResults() {
     return (
       <div className="flex justify-center h-screen ">
         <div className="mt-60 flex items-center justify-center sm:text-3xl font-bold bg-slate-100 w-[300px] sm:w-[600px] h-24 shadow-md rounded-md">
-          <h1 className="text-white">
+          <h1 className="text-black">
             {t('result.noFlightsFound')} - {error}
           </h1>
         </div>
