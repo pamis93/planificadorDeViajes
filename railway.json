@@ -1,0 +1,13 @@
+{
+    "build": {
+        "frontend": {
+            "builder": "npm",
+            "buildCommand": "cd frontend && npm install && npm run build",
+            "outputDirectory": "frontend/dist"
+        },
+        "backend": {
+            "builder": "npm",
+            "buildCommand": "cd backend && npm install && npm start"
+        }
+    }
+}
