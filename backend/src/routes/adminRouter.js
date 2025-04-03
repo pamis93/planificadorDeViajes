@@ -11,7 +11,7 @@ export const adminRouter = express.Router();
 // ruta de administrador para listar todos los usuarios que actualmente hay en la base de datos
 adminRouter.get('/admin/users', authUser, authAdmin, listAllUsersController);
 
-// ruta de administrador para toglear le estado de los usuarios de enable 1 a 0 y viceversa
+// ruta de administrador para toglear el estado de los usuarios de enable 1 a 0 y viceversa
 adminRouter.patch(
   '/admin/:id/status',
   authUser,
